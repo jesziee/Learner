@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: Dictionaries & Sets - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 8: Dictionaries & Sets</h1>
+            <p>Use key-value pairs and unique collections with dictionaries and sets</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Dictionaries?</h2>
+                <p>Dictionaries are collections of key-value pairs. Each key maps to a value, allowing you to store and retrieve data using meaningful names instead of numeric indices. Keys must be unique and immutable (like strings, numbers, or tuples).</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Dictionaries</h2>
+                <p>Create dictionaries using curly braces {} with key:value pairs, or the dict() constructor.</p>
+                
+                <div class="code-block">
+                    <h4>Dictionary Creation:</h4>
+<pre><code># Empty dictionary
+empty = {}
+also_empty = dict()
+
+# Dictionary with initial values
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+
+# Using dict() constructor
+person2 = dict(name="Bob", age=30, city="LA")
+
+# From list of tuples
+items = [("a", 1), ("b", 2)]
+d = dict(items)  # {'a': 1, 'b': 2}
+
+# Dictionary with different key types
+mixed_keys = {
+    "string": "value",
+    42: "number key",
+    (1, 2): "tuple key"
+}
+
+# Nested dictionaries
+company = {
+    "name": "TechCorp",
+    "employees": {
+        "count": 50,
+        "departments": ["Engineering", "Sales", "HR"]
+    }
+}
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(1, 6)}
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Two ways to create empty dictionaries.</p>
+                        <p><strong>Lines 6-10:</strong> Curly braces with key:value pairs is the most common syntax.</p>
+                        <p><strong>Lines 13-14:</strong> The dict() constructor can take keyword arguments.</p>
+                        <p><strong>Lines 17-22:</strong> Keys can be any immutable type: strings, numbers, tuples.</p>
+                        <p><strong>Lines 25-30:</strong> Dictionaries can contain other dictionaries as values.</p>
+                        <p><strong>Lines 33-34:</strong> Dictionary comprehension creates dictionaries from iterables.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Accessing Dictionary Values</h2>
+                <p>Access values using keys in square brackets or the get() method for safer access.</p>
+                
+                <div class="code-block">
+                    <h4>Value Access:</h4>
+<pre><code>person = {"name": "Alice", "age": 25, "city": "NYC"}
+
+# Access by key
+print(person["name"])  # Alice
+print(person["age"])   # 25
+
+# KeyError if key doesn't exist
+# print(person["email"])  # KeyError!
+
+# Safe access with get()
+print(person.get("name"))      # Alice
+print(person.get("email"))     # None (no error)
+print(person.get("email", "N/A"))  # N/A (default value)
+
+# Check if key exists
+print("name" in person)   # True
+print("email" in person)  # False
+
+# Access nested values
+company = {
+    "name": "TechCorp",
+    "employees": {"count": 50}
+}
+print(company["employees"]["count"])  # 50
+
+# Using .keys(), .values(), .items()
+print(person.keys())    # dict_keys(['name', 'age', 'city'])
+print(person.values())  # dict_values(['Alice', 25, 'NYC'])
+print(person.items())   # dict_items([('name', 'Alice'), ...])
+
+# Convert to lists
+keys_list = list(person.keys())
+values_list = list(person.values())</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-5:</strong> Use square brackets with key name to access values.</p>
+                        <p><strong>Line 8:</strong> Missing keys cause KeyError when using bracket notation.</p>
+                        <p><strong>Lines 11-13:</strong> <code>get()</code> returns None (or a default) for missing keys.</p>
+                        <p><strong>Lines 16-17:</strong> Use <code>in</code> to check if a key exists.</p>
+                        <p><strong>Lines 24-25:</strong> Access nested dictionary values with chained brackets.</p>
+                        <p><strong>Lines 28-33:</strong> View methods return all keys, values, or key-value pairs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Dictionaries</h2>
+                <p>Dictionaries are mutable. You can add, update, and delete key-value pairs.</p>
+                
+                <div class="code-block">
+                    <h4>Dictionary Modification:</h4>
+<pre><code>person = {"name": "Alice", "age": 25}
+
+# Add or update by assignment
+person["city"] = "NYC"      # Add new key
+person["age"] = 26          # Update existing
+print(person)  # {'name': 'Alice', 'age': 26, 'city': 'NYC'}
+
+# Update multiple pairs
+person.update({"email": "alice@example.com", "age": 27})
+print(person)
+
+# Update from keyword arguments
+person.update(country="USA", phone="555-1234")
+
+# Remove items
+removed = person.pop("phone")  # Remove and return value
+print(removed)  # 555-1234
+
+# Pop with default (avoids KeyError)
+email = person.pop("email", "no email")
+
+# Remove last inserted (Python 3.7+)
+last = person.popitem()
+print(last)  # ('city', 'NYC')
+
+# Delete key
+del person["age"]
+
+# Clear all
+person.clear()
+print(person)  # {}
+
+# Set default - add if doesn't exist
+counts = {}
+counts.setdefault("a", 0)  # Returns 0, sets counts["a"] = 0
+counts["a"] += 1</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-6:</strong> Assign to a key to add new or update existing entries.</p>
+                        <p><strong>Lines 9-12:</strong> <code>update()</code> merges another dictionary or keyword args.</p>
+                        <p><strong>Lines 15-16:</strong> <code>pop()</code> removes a key and returns its value.</p>
+                        <p><strong>Lines 19-20:</strong> <code>pop()</code> with default won't raise KeyError for missing keys.</p>
+                        <p><strong>Lines 23-24:</strong> <code>popitem()</code> removes and returns the last item (LIFO).</p>
+                        <p><strong>Lines 30-32:</strong> <code>setdefault()</code> sets a value only if the key doesn't exist.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Iterating Dictionaries</h2>
+                <p>Loop through dictionaries using various techniques depending on whether you need keys, values, or both.</p>
+                
+                <div class="code-block">
+                    <h4>Dictionary Iteration:</h4>
+<pre><code>person = {"name": "Alice", "age": 25, "city": "NYC"}
+
+# Iterate over keys (default)
+for key in person:
+    print(key)
+
+# Explicitly iterate keys
+for key in person.keys():
+    print(key)
+
+# Iterate over values
+for value in person.values():
+    print(value)
+
+# Iterate over key-value pairs
+for key, value in person.items():
+    print(f"{key}: {value}")
+
+# Get key and value with index
+for i, (key, value) in enumerate(person.items()):
+    print(f"{i}. {key} = {value}")
+
+# Build dictionary from two lists
+keys = ["name", "age", "city"]
+values = ["Bob", 30, "LA"]
+person = dict(zip(keys, values))
+print(person)  # {'name': 'Bob', 'age': 30, 'city': 'LA'}
+
+# Filter dictionary
+scores = {"Alice": 85, "Bob": 72, "Charlie": 90}
+passed = {k: v for k, v in scores.items() if v >= 75}
+print(passed)  # {'Alice': 85, 'Charlie': 90}</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-7:</strong> Iterating directly over a dict gives keys.</p>
+                        <p><strong>Lines 13-14:</strong> <code>.values()</code> lets you iterate over values only.</p>
+                        <p><strong>Lines 17-18:</strong> <code>.items()</code> gives key-value pairs as tuples.</p>
+                        <p><strong>Lines 21-22:</strong> Unpacking pairs in the loop header is clean and readable.</p>
+                        <p><strong>Lines 31-33:</strong> Dictionary comprehension can filter entries.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Introduction to Sets</h2>
+                <p>Sets are unordered collections of unique elements. They're useful for membership testing, removing duplicates, and mathematical operations like union and intersection.</p>
+                
+                <div class="code-block">
+                    <h4>Creating Sets:</h4>
+<pre><code># Empty set (note: {} creates an empty dict!)
+empty = set()
+
+# Set with values
+fruits = {"apple", "banana", "cherry"}
+numbers = set([1, 2, 2, 3, 3, 3])  # Deduplicates
+print(numbers)  # {1, 2, 3}
+
+# Set from string
+letters = set("hello")
+print(letters)  # {'h', 'e', 'l', 'o'} - order varies
+
+# Frozenset (immutable set)
+frozen = frozenset([1, 2, 3])
+# frozen.add(4)  # Error - can't modify
+
+# Set comprehension
+squares = {x**2 for x in range(5)}
+print(squares)  # {0, 1, 4, 9, 16}
+
+# Sets can only contain immutable (hashable) types
+valid = {1, "hello", (1, 2)}
+# invalid = {[1, 2]}  # TypeError - lists aren't hashable</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Line 2:</strong> Use <code>set()</code> for empty set. <code>{}</code> creates an empty dictionary!</p>
+                        <p><strong>Lines 5-7:</strong> Sets automatically remove duplicates.</p>
+                        <p><strong>Lines 10-11:</strong> Sets from iterables keep only unique elements.</p>
+                        <p><strong>Lines 14-16:</strong> <code>frozenset</code> is an immutable, hashable set.</p>
+                        <p><strong>Lines 22-23:</strong> Sets can only contain hashable (immutable) elements.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Set Operations</h2>
+                <p>Sets support mathematical operations like union, intersection, difference, and more. These are powerful tools for comparing collections.</p>
+                
+                <div class="code-block">
+                    <h4>Mathematical Set Operations:</h4>
+<pre><code>a = {1, 2, 3, 4, 5}
+b = {4, 5, 6, 7, 8}
+
+# Union (all elements from both)
+print(a | b)        # {1, 2, 3, 4, 5, 6, 7, 8}
+print(a.union(b))   # Same result
+
+# Intersection (elements in both)
+print(a & b)             # {4, 5}
+print(a.intersection(b)) # Same result
+
+# Difference (in a but not in b)
+print(a - b)          # {1, 2, 3}
+print(a.difference(b))# Same result
+
+# Symmetric difference (in either, but not both)
+print(a ^ b)                   # {1, 2, 3, 6, 7, 8}
+print(a.symmetric_difference(b)) # Same result
+
+# Subset and superset tests
+c = {1, 2}
+print(c.issubset(a))     # True
+print(a.issuperset(c))   # True
+print(c <= a)            # True (subset operator)
+print(a >= c)            # True (superset operator)
+
+# Disjoint (no common elements)
+d = {10, 11}
+print(a.isdisjoint(d))  # True
+
+# Membership testing (very fast!)
+print(3 in a)  # True
+print(10 in a) # False</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> Union (<code>|</code>) combines all unique elements from both sets.</p>
+                        <p><strong>Lines 9-10:</strong> Intersection (<code>&</code>) keeps only elements in both sets.</p>
+                        <p><strong>Lines 13-14:</strong> Difference (<code>-</code>) keeps elements in left set but not right.</p>
+                        <p><strong>Lines 17-18:</strong> Symmetric difference (<code>^</code>) keeps elements in either but not both.</p>
+                        <p><strong>Lines 21-25:</strong> Test subset/superset relationships.</p>
+                        <p><strong>Lines 31-32:</strong> Sets provide O(1) membership testing - much faster than lists!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Sets</h2>
+                <p>Sets are mutable and support various methods for adding and removing elements.</p>
+                
+                <div class="code-block">
+                    <h4>Set Modification:</h4>
+<pre><code>fruits = {"apple", "banana"}
+
+# Add single element
+fruits.add("cherry")
+print(fruits)  # {'apple', 'banana', 'cherry'}
+
+# Add multiple elements
+fruits.update(["date", "elderberry"])
+fruits.update({"fig", "grape"})  # Also works with sets
+
+# Remove element (raises KeyError if missing)
+fruits.remove("apple")
+
+# Discard element (no error if missing)
+fruits.discard("mango")  # No error even though not in set
+
+# Pop random element
+item = fruits.pop()
+print(f"Popped: {item}")
+
+# Clear all elements
+fruits.clear()
+
+# Update operations (modify in place)
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+a.update(b)         # a becomes {1, 2, 3, 4, 5}
+a.intersection_update({2, 3, 4})  # a becomes {2, 3, 4}
+a.difference_update({2})  # a becomes {3, 4}</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> <code>add()</code> inserts a single element.</p>
+                        <p><strong>Lines 9-10:</strong> <code>update()</code> adds multiple elements from any iterable.</p>
+                        <p><strong>Lines 13-14:</strong> <code>remove()</code> raises KeyError if element doesn't exist.</p>
+                        <p><strong>Lines 17-18:</strong> <code>discard()</code> silently ignores missing elements.</p>
+                        <p><strong>Lines 21-22:</strong> <code>pop()</code> removes an arbitrary element (sets are unordered).</p>
+                        <p><strong>Lines 28-32:</strong> In-place versions of set operations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Use Cases for Dictionaries and Sets</h2>
+                <p>Here are practical examples showing when to use dictionaries and sets effectively.</p>
+                
+                <div class="code-block">
+                    <h4>Practical Examples:</h4>
+<pre><code># Counting with dictionary
+text = "the quick brown fox jumps over the lazy dog"
+word_count = {}
+
+for word in text.split():
+    word_count[word] = word_count.get(word, 0) + 1
+
+print(word_count["the"])  # 2
+
+# Using Counter from collections
+from collections import Counter
+counts = Counter(text.split())
+print(counts.most_common(2))  # [('the', 2), ...]
+
+# Grouping with dictionary
+from collections import defaultdict
+students = [("Alice", "A"), ("Bob", "B"), ("Charlie", "A")]
+
+groups = defaultdict(list)
+for name, grade in students:
+    groups[grade].append(name)
+
+print(groups["A"])  # ['Alice', 'Charlie']
+
+# Remove duplicates while preserving order (Python 3.7+)
+items = [1, 2, 2, 3, 3, 3, 4]
+unique = list(dict.fromkeys(items))
+print(unique)  # [1, 2, 3, 4]
+
+# Find common elements
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+common = list(set(list1) & set(list2))
+print(common)  # [4, 5]
+
+# Cache/memoization with dictionary
+def fibonacci(n, cache={}):
+    if n in cache:
+        return cache[n]
+    if n <= 1:
+        return n
+    cache[n] = fibonacci(n-1) + fibonacci(n-2)
+    return cache[n]
+
+print(fibonacci(50))  # Fast due to caching!</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-9:</strong> Manual counting pattern with dictionary.</p>
+                        <p><strong>Lines 12-14:</strong> <code>Counter</code> is a specialized dictionary for counting.</p>
+                        <p><strong>Lines 17-22:</strong> <code>defaultdict</code> automatically creates default values for missing keys.</p>
+                        <p><strong>Lines 25-27:</strong> Deduplicate while preserving order using dict.</p>
+                        <p><strong>Lines 30-32:</strong> Set operations for finding common elements.</p>
+                        <p><strong>Lines 35-42:</strong> Dictionary as cache for memoization.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a simple contact book using dictionaries.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Contact book
+contacts = {}
+
+def add_contact(name, phone, email):
+    """Add a new contact."""
+    # Your code here
+
+def get_contact(name):
+    """Get contact info by name."""
+    # Your code here
+
+def delete_contact(name):
+    """Delete a contact by name."""
+    # Your code here
+
+def list_contacts():
+    """List all contacts."""
+    # Your code here
+
+def find_by_phone(phone):
+    """Find contacts by phone number."""
+    # Your code here (hint: iterate through items)
+
+# Test
+add_contact("Alice", "555-1234", "alice@email.com")
+add_contact("Bob", "555-5678", "bob@email.com")
+list_contacts()
+print(get_contact("Alice"))
+delete_contact("Bob")
+list_contacts()</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson7.html" class="nav-button prev">← Previous: Lists & Tuples</a>
+                <a href="lesson9.html" class="nav-button next">Next: String Manipulation →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

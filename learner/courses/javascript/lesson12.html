@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 12: Fetch & APIs - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 12: Fetch & APIs</h1>
+            <p>Learn to communicate with servers and work with APIs like a professional developer.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Understanding APIs</h2>
+                <p>An Application Programming Interface (API) is a set of rules that allows different software applications to communicate with each other. In web development, we commonly work with REST APIs that use HTTP methods to send and receive data. APIs let you fetch data from servers, submit forms, authenticate users, and interact with external services.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> REST (Representational State Transfer) APIs use standard HTTP methods: GET (retrieve), POST (create), PUT (update), DELETE (remove). Data is typically exchanged in JSON format.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The Fetch API</h2>
+                <p>The modern way to make HTTP requests in JavaScript:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic GET request
+fetch("https://api.example.com/users")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Error:", error));
+
+// With async/await
+async function getUsers() {
+    try {
+        const response = await fetch("https://api.example.com/users");
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+// Check response status
+async function fetchUser(id) {
+    const response = await fetch(`https://api.example.com/users/${id}`);
+    
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
+}</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Fetch Basics:</strong>
+                    <ul>
+                        <li><code>fetch()</code> returns a Promise that resolves to a Response object</li>
+                        <li><code>response.ok</code> is true for status 200-299</li>
+                        <li><code>response.json()</code> parses JSON response body</li>
+                        <li>Network errors go to catch, HTTP errors don't (check ok/status)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>HTTP Methods</h2>
+                <p>Perform different operations with HTTP verbs:</p>
+                
+                <div class="code-block">
+                    <pre><code>// GET - Retrieve data
+async function getUsers() {
+    const response = await fetch("/api/users");
+    return response.json();
+}
+
+// POST - Create new resource
+async function createUser(userData) {
+    const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData)
+    });
+    
+    return response.json();
+}
+
+// Usage
+const newUser = await createUser({
+    name: "Alice",
+    email: "alice@example.com"
+});
+
+// PUT - Update entire resource
+async function updateUser(id, userData) {
+    const response = await fetch(`/api/users/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData)
+    });
+    
+    return response.json();
+}
+
+// PATCH - Partial update
+async function patchUser(id, updates) {
+    const response = await fetch(`/api/users/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updates)
+    });
+    
+    return response.json();
+}
+
+// DELETE - Remove resource
+async function deleteUser(id) {
+    const response = await fetch(`/api/users/${id}`, {
+        method: "DELETE"
+    });
+    
+    return response.status === 204;  // No content
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Request Headers</h2>
+                <p>Send metadata with your requests:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Common headers
+fetch("/api/data", {
+    headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer your-token-here",
+        "X-API-Key": "your-api-key"
+    }
+});
+
+// Content types
+// JSON data
+headers: { "Content-Type": "application/json" }
+
+// Form data
+headers: { "Content-Type": "application/x-www-form-urlencoded" }
+
+// Multipart (file uploads)
+headers: { "Content-Type": "multipart/form-data" }  // Browser sets automatically
+
+// Working with authorization
+async function fetchWithAuth(url, options = {}) {
+    const token = localStorage.getItem("token");
+    
+    return fetch(url, {
+        ...options,
+        headers: {
+            ...options.headers,
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    });
+}
+
+// Handle different response types
+async function fetchData(url) {
+    const response = await fetch(url);
+    
+    // Check content type
+    const contentType = response.headers.get("Content-Type");
+    
+    if (contentType?.includes("application/json")) {
+        return response.json();
+    } else if (contentType?.includes("text/")) {
+        return response.text();
+    } else if (contentType?.includes("blob")) {
+        return response.blob();
+    }
+    
+    return response.arrayBuffer();
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Handling Responses</h2>
+                <p>Process different types of response data:</p>
+                
+                <div class="code-block">
+                    <pre><code>// JSON response
+const jsonResponse = await fetch("/api/users");
+const users = await jsonResponse.json();
+
+// Text response
+const textResponse = await fetch("/api/text");
+const text = await textResponse.text();
+
+// Blob (binary data) - images, files
+const imageResponse = await fetch("/api/image");
+const blob = await imageResponse.blob();
+const imageUrl = URL.createObjectURL(blob);
+
+// Display image
+const img = document.createElement("img");
+img.src = imageUrl;
+document.body.appendChild(img);
+
+// ArrayBuffer - raw binary data
+const bufferResponse = await fetch("/api/binary");
+const buffer = await bufferResponse.arrayBuffer();
+
+// Streaming response
+const streamResponse = await fetch("/api/stream");
+const reader = streamResponse.body.getReader();
+const decoder = new TextDecoder();
+
+while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    console.log(decoder.decode(value));
+}
+
+// Read response headers
+const response = await fetch("/api/data");
+const contentType = response.headers.get("Content-Type");
+const rateLimit = response.headers.get("X-RateLimit-Remaining");
+
+// Iterate all headers
+for (const [key, value] of response.headers) {
+    console.log(`${key}: ${value}`);
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>File Uploads</h2>
+                <p>Handle file uploads with FormData:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Single file upload
+async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("userId", "123");  // Additional data
+    
+    const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData  // Don't set Content-Type header!
+    });
+    
+    return response.json();
+}
+
+// Multiple files
+async function uploadFiles(files) {
+    const formData = new FormData();
+    
+    for (const file of files) {
+        formData.append("files", file);  // Same name for multiple
+    }
+    
+    const response = await fetch("/api/upload-multiple", {
+        method: "POST",
+        body: formData
+    });
+    
+    return response.json();
+}
+
+// With progress tracking
+function uploadWithProgress(file, onProgress) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        
+        xhr.upload.addEventListener("progress", (e) => {
+            if (e.lengthComputable) {
+                const percent = (e.loaded / e.total) * 100;
+                onProgress(percent);
+            }
+        });
+        
+        xhr.addEventListener("load", () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                resolve(JSON.parse(xhr.response));
+            } else {
+                reject(new Error(`Upload failed: ${xhr.status}`));
+            }
+        });
+        
+        xhr.addEventListener("error", () => reject(new Error("Upload failed")));
+        
+        const formData = new FormData();
+        formData.append("file", file);
+        
+        xhr.open("POST", "/api/upload");
+        xhr.send(formData);
+    });
+}
+
+// Usage
+const fileInput = document.querySelector("#file-input");
+fileInput.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    const result = await uploadWithProgress(file, (percent) => {
+        console.log(`Upload progress: ${percent.toFixed(1)}%`);
+    });
+    console.log("Upload complete:", result);
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Error Handling</h2>
+                <p>Robust error handling for API calls:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Comprehensive error handling
+class APIError extends Error {
+    constructor(message, status, data) {
+        super(message);
+        this.name = "APIError";
+        this.status = status;
+        this.data = data;
+    }
+}
+
+async function apiRequest(url, options = {}) {
+    try {
+        const response = await fetch(url, {
+            ...options,
+            headers: {
+                "Content-Type": "application/json",
+                ...options.headers
+            }
+        });
+        
+        // Parse response
+        const data = await response.json().catch(() => ({}));
+        
+        // Check for errors
+        if (!response.ok) {
+            throw new APIError(
+                data.message || "Request failed",
+                response.status,
+                data
+            );
+        }
+        
+        return data;
+        
+    } catch (error) {
+        if (error instanceof APIError) {
+            // API-specific errors
+            console.error(`API Error (${error.status}):`, error.message);
+        } else if (error.name === "TypeError") {
+            // Network errors
+            console.error("Network error:", error.message);
+        }
+        throw error;
+    }
+}
+
+// Handle specific status codes
+async function handleErrors(response) {
+    switch (response.status) {
+        case 400:
+            throw new Error("Bad request - check your data");
+        case 401:
+            // Redirect to login
+            window.location.href = "/login";
+            throw new Error("Unauthorized - please log in");
+        case 403:
+            throw new Error("Forbidden - you don't have permission");
+        case 404:
+            throw new Error("Not found");
+        case 429:
+            throw new Error("Too many requests - please slow down");
+        case 500:
+            throw new Error("Server error - try again later");
+        default:
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+    }
+    return response;
+}
+
+// Retry failed requests
+async function fetchWithRetry(url, options = {}, retries = 3) {
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(url, options);
+            if (response.ok) return response;
+        } catch (error) {
+            if (i === retries - 1) throw error;
+            await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+        }
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Building an API Client</h2>
+                <p>Create a reusable, organized API layer:</p>
+                
+                <div class="code-block">
+                    <pre><code>// API Client class
+class APIClient {
+    constructor(baseUrl, defaultOptions = {}) {
+        this.baseUrl = baseUrl;
+        this.defaultOptions = defaultOptions;
+    }
+    
+    async request(endpoint, options = {}) {
+        const url = this.baseUrl + endpoint;
+        const config = {
+            ...this.defaultOptions,
+            ...options,
+            headers: {
+                ...this.defaultOptions.headers,
+                ...options.headers
+            }
+        };
+        
+        const response = await fetch(url, config);
+        
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new APIError(error.message || "Request failed", response.status, error);
+        }
+        
+        // Handle empty responses
+        const text = await response.text();
+        return text ? JSON.parse(text) : null;
+    }
+    
+    get(endpoint, options = {}) {
+        return this.request(endpoint, { ...options, method: "GET" });
+    }
+    
+    post(endpoint, data, options = {}) {
+        return this.request(endpoint, {
+            ...options,
+            method: "POST",
+            body: JSON.stringify(data)
+        });
+    }
+    
+    put(endpoint, data, options = {}) {
+        return this.request(endpoint, {
+            ...options,
+            method: "PUT",
+            body: JSON.stringify(data)
+        });
+    }
+    
+    patch(endpoint, data, options = {}) {
+        return this.request(endpoint, {
+            ...options,
+            method: "PATCH",
+            body: JSON.stringify(data)
+        });
+    }
+    
+    delete(endpoint, options = {}) {
+        return this.request(endpoint, { ...options, method: "DELETE" });
+    }
+}
+
+// Usage
+const api = new APIClient("https://api.example.com", {
+    headers: {
+        "Authorization": "Bearer token",
+        "Content-Type": "application/json"
+    }
+});
+
+// Create resource-specific clients
+class UsersAPI {
+    constructor(client) {
+        this.client = client;
+        this.endpoint = "/users";
+    }
+    
+    list(params = {}) {
+        const query = new URLSearchParams(params).toString();
+        return this.client.get(`${this.endpoint}?${query}`);
+    }
+    
+    get(id) {
+        return this.client.get(`${this.endpoint}/${id}`);
+    }
+    
+    create(data) {
+        return this.client.post(this.endpoint, data);
+    }
+    
+    update(id, data) {
+        return this.client.put(`${this.endpoint}/${id}`, data);
+    }
+    
+    delete(id) {
+        return this.client.delete(`${this.endpoint}/${id}`);
+    }
+}
+
+const usersApi = new UsersAPI(api);
+const users = await usersApi.list({ page: 1, limit: 10 });
+const user = await usersApi.get(1);</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Working with Query Parameters</h2>
+                <p>Build and parse URL query strings:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Build query string
+const params = {
+    page: 1,
+    limit: 10,
+    search: "john",
+    active: true
+};
+
+// URLSearchParams
+const queryString = new URLSearchParams(params).toString();
+// "page=1&limit=10&search=john&active=true"
+
+const url = `/api/users?${queryString}`;
+
+// Append to existing URL
+const baseUrl = "https://api.example.com/users";
+const fullUrl = new URL(baseUrl);
+fullUrl.searchParams.set("page", 1);
+fullUrl.searchParams.set("limit", 10);
+console.log(fullUrl.toString());
+
+// Parse query string
+const searchParams = new URLSearchParams(window.location.search);
+const page = searchParams.get("page");        // "1"
+const search = searchParams.get("search");    // null if not present
+const hasPage = searchParams.has("page");     // true
+
+// Iterate parameters
+for (const [key, value] of searchParams) {
+    console.log(`${key}: ${value}`);
+}
+
+// Complex query building
+function buildQuery(params) {
+    const query = new URLSearchParams();
+    
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+            if (Array.isArray(value)) {
+                value.forEach(v => query.append(key, v));
+            } else {
+                query.set(key, value);
+            }
+        }
+    });
+    
+    return query.toString();
+}
+
+// Usage
+const query = buildQuery({
+    page: 1,
+    tags: ["javascript", "react"],  // tags=javascript&tags=react
+    active: true,
+    empty: ""  // Skipped
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>CORS and Proxy</h2>
+                <p>Handle cross-origin requests:</p>
+                
+                <div class="code-block">
+                    <pre><code>// CORS (Cross-Origin Resource Sharing)
+// Browsers block requests to different origins by default
+// Server must send appropriate headers:
+// Access-Control-Allow-Origin: *
+// Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+// Access-Control-Allow-Headers: Content-Type, Authorization
+
+// Simple request (no preflight)
+fetch("https://api.example.com/data", {
+    method: "GET",
+    headers: {
+        "Accept": "application/json"
+    }
+});
+
+// Preflight request (browser sends OPTIONS first)
+fetch("https://api.example.com/data", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer token"
+    },
+    body: JSON.stringify({ data: "value" })
+});
+
+// Development proxy (vite.config.js)
+// export default {
+//     server: {
+//         proxy: {
+//             "/api": {
+//                 target: "https://api.example.com",
+//                 changeOrigin: true,
+//                 rewrite: (path) => path.replace(/^\/api/, "")
+//             }
+//         }
+//     }
+// }
+
+// Runtime proxy function
+async function proxyFetch(url, options = {}) {
+    const proxyUrl = "/api/proxy";
+    return fetch(proxyUrl, {
+        ...options,
+        headers: {
+            ...options.headers,
+            "X-Target-URL": url
+        }
+    });
+}</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>CORS Tips:</strong>
+                    <ul>
+                        <li>During development, use a proxy server to avoid CORS</li>
+                        <li>In production, configure server headers properly</li>
+                        <li>Use credentials: "include" for cookies (requires specific server config)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Caching Strategies</h2>
+                <p>Implement caching for API responses:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Simple in-memory cache
+const cache = new Map();
+
+async function fetchWithCache(url, options = {}) {
+    const cacheKey = JSON.stringify({ url, options });
+    
+    if (cache.has(cacheKey)) {
+        const { data, timestamp } = cache.get(cacheKey);
+        const age = Date.now() - timestamp;
+        
+        // Return if still fresh (5 minutes)
+        if (age < 5 * 60 * 1000) {
+            return data;
+        }
+    }
+    
+    const response = await fetch(url, options);
+    const data = await response.json();
+    
+    cache.set(cacheKey, {
+        data,
+        timestamp: Date.now()
+    });
+    
+    return data;
+}
+
+// Cache with TTL (Time To Live)
+class CacheManager {
+    constructor(defaultTTL = 60000) {
+        this.cache = new Map();
+        this.defaultTTL = defaultTTL;
+    }
+    
+    set(key, value, ttl = this.defaultTTL) {
+        this.cache.set(key, {
+            value,
+            expiry: Date.now() + ttl
+        });
+    }
+    
+    get(key) {
+        const item = this.cache.get(key);
+        if (!item) return null;
+        
+        if (Date.now() > item.expiry) {
+            this.cache.delete(key);
+            return null;
+        }
+        
+        return item.value;
+    }
+    
+    delete(key) {
+        this.cache.delete(key);
+    }
+    
+    clear() {
+        this.cache.clear();
+    }
+}
+
+// Request deduplication
+const pendingRequests = new Map();
+
+async function deduplicatedFetch(url, options) {
+    if (pendingRequests.has(url)) {
+        return pendingRequests.get(url);
+    }
+    
+    const promise = fetch(url, options)
+        .then(r => r.json())
+        .finally(() => {
+            pendingRequests.delete(url);
+        });
+    
+    pendingRequests.set(url, promise);
+    return promise;
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Real-World API Integration</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Example: GitHub API client
+class GitHubAPI {
+    constructor(token) {
+        this.client = new APIClient("https://api.github.com", {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/vnd.github.v3+json"
+            }
+        });
+    }
+    
+    async getUser(username) {
+        return this.client.get(`/users/${username}`);
+    }
+    
+    async getRepos(username, options = {}) {
+        const query = new URLSearchParams(options).toString();
+        return this.client.get(`/users/${username}/repos?${query}`);
+    }
+    
+    async createRepo(data) {
+        return this.client.post("/user/repos", data);
+    }
+    
+    async getIssues(owner, repo, options = {}) {
+        const query = new URLSearchParams(options).toString();
+        return this.client.get(`/repos/${owner}/${repo}/issues?${query}`);
+    }
+    
+    async createIssue(owner, repo, data) {
+        return this.client.post(`/repos/${owner}/${repo}/issues`, data);
+    }
+}
+
+// Usage
+const github = new GitHubAPI("your-token");
+const user = await github.getUser("octocat");
+const repos = await github.getRepos("octocat", { sort: "updated" });
+
+// Example: Pagination helper
+async function* fetchPaginated(api, endpoint, params = {}) {
+    let page = 1;
+    const perPage = params.per_page || 30;
+    
+    while (true) {
+        const data = await api.get(endpoint, {
+            ...params,
+            page,
+            per_page: perPage
+        });
+        
+        if (data.length === 0) break;
+        
+        yield data;
+        
+        if (data.length < perPage) break;
+        page++;
+    }
+}
+
+// Get all repositories
+const allRepos = [];
+for await (const repos of fetchPaginated(github.client, "/user/repos")) {
+    allRepos.push(...repos);
+}
+
+// Example: Weather API
+class WeatherAPI {
+    constructor(apiKey) {
+        this.apiKey = apiKey;
+        this.baseUrl = "https://api.openweathermap.org/data/2.5";
+    }
+    
+    async getCurrentWeather(city) {
+        const response = await fetch(
+            `${this.baseUrl}/weather?q=${city}&appid=${this.apiKey}&units=metric`
+        );
+        return response.json();
+    }
+    
+    async getForecast(city) {
+        const response = await fetch(
+            `${this.baseUrl}/forecast?q=${city}&appid=${this.apiKey}&units=metric`
+        );
+        return response.json();
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a blog API client
+class BlogAPI {
+    constructor(baseUrl) {
+        this.baseUrl = baseUrl;
+        this.cache = new CacheManager(60000);  // 1 minute cache
+    }
+    
+    async request(endpoint, options = {}) {
+        const url = this.baseUrl + endpoint;
+        const cacheKey = options.method === "GET" ? url : null;
+        
+        // Check cache for GET requests
+        if (cacheKey) {
+            const cached = this.cache.get(cacheKey);
+            if (cached) return cached;
+        }
+        
+        const response = await fetch(url, {
+            ...options,
+            headers: {
+                "Content-Type": "application/json",
+                ...options.headers
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        
+        // Cache GET responses
+        if (cacheKey) {
+            this.cache.set(cacheKey, data);
+        }
+        
+        return data;
+    }
+    
+    // Posts
+    async getPosts(params = {}) {
+        const query = new URLSearchParams(params).toString();
+        return this.request(`/posts?${query}`);
+    }
+    
+    async getPost(id) {
+        return this.request(`/posts/${id}`);
+    }
+    
+    async createPost(post) {
+        const result = await this.request("/posts", {
+            method: "POST",
+            body: JSON.stringify(post)
+        });
+        this.cache.clear();  // Invalidate cache
+        return result;
+    }
+    
+    async updatePost(id, updates) {
+        const result = await this.request(`/posts/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(updates)
+        });
+        this.cache.clear();
+        return result;
+    }
+    
+    async deletePost(id) {
+        await this.request(`/posts/${id}`, { method: "DELETE" });
+        this.cache.clear();
+    }
+    
+    // Comments
+    async getComments(postId) {
+        return this.request(`/posts/${postId}/comments`);
+    }
+    
+    async addComment(postId, comment) {
+        return this.request(`/posts/${postId}/comments`, {
+            method: "POST",
+            body: JSON.stringify(comment)
+        });
+    }
+}
+
+// Test your implementation
+const blog = new BlogAPI("https://api.example.com");
+
+// Get all posts
+const posts = await blog.getPosts({ page: 1, limit: 10 });
+console.log(posts);
+
+// Create a post
+const newPost = await blog.createPost({
+    title: "My First Post",
+    content: "Hello, World!",
+    author: "John"
+});
+
+// Update a post
+await blog.updatePost(newPost.id, { title: "Updated Title" });
+
+// Add a comment
+await blog.addComment(newPost.id, {
+    text: "Great post!",
+    author: "Alice"
+});</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson11.html" class="btn btn-secondary">← Previous: Async JavaScript</a>
+                <a href="lesson13.html" class="btn btn-primary">Next: Error Handling →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

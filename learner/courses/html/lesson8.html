@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Attributes - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🏷️ Lesson 8: HTML Attributes</h1>
+            <p>Adding extra information to elements</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What are Attributes?</h2>
+                <p>Attributes provide additional information about HTML elements. They are always specified in the opening tag and come in name/value pairs.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Attribute syntax:</span>
+<<span class="keyword">element</span> <span class="variable">attribute</span>=<span class="string">"value"</span>>Content</<span class="keyword">element</span>>
+         ↑           ↑
+       name       value (in quotes)
+
+<span class="comment">// Example:</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span> <span class="variable">target</span>=<span class="string">"_blank"</span>>Link</<span class="keyword">a</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Global Attributes</h2>
+                <p>Global attributes can be used on any HTML element:</p>
+                
+                <h3>id</h3>
+                <p>Unique identifier for an element. Each ID should be unique on the page.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">h1</span> <span class="variable">id</span>=<span class="string">"main-title"</span>>Welcome</<span class="keyword">h1</span>>
+<<span class="keyword">div</span> <span class="variable">id</span>=<span class="string">"header"</span>>...</<span class="keyword">div</span>>
+
+<span class="comment">// Uses:</span>
+<span class="comment">// - Link anchors: <a href="#main-title"></span>
+<span class="comment">// - CSS styling: #main-title { }</span>
+<span class="comment">// - JavaScript: document.getElementById("main-title")</span></code></pre>
+                </div>
+                
+                <h3>class</h3>
+                <p>Used for styling and grouping elements. Multiple classes can be separated by spaces.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Single class</span>
+<<span class="keyword">p</span> <span class="variable">class</span>=<span class="string">"highlight"</span>>Important text</<span class="keyword">p</span>>
+
+<span class="comment">// Multiple classes</span>
+<<span class="keyword">p</span> <span class="variable">class</span>=<span class="string">"highlight important featured"</span>>Very important</<span class="keyword">p</span>>
+
+<span class="comment">// CSS styling:</span>
+<span class="comment">// .highlight { background: yellow; }</span>
+<span class="comment">// .important { font-weight: bold; }</span></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>id vs class:</strong> An id is unique (one per page), like a social security number. A class can be used multiple times, like a category. Use id for unique elements, class for groups.</p>
+                </div>
+                
+                <h3>style</h3>
+                <p>Inline CSS styling (avoid using - prefer external CSS).</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span> <span class="variable">style</span>=<span class="string">"color: purple; font-size: 18px;"</span>>Styled text</<span class="keyword">p</span>>
+
+<span class="comment">// Use sparingly - external CSS is better for maintainability</span></code></pre>
+                </div>
+                
+                <h3>title</h3>
+                <p>Tooltip text that appears when hovering over an element.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span> <span class="variable">title</span>=<span class="string">"This is a tooltip"</span>>Hover over me!</<span class="keyword">p</span>>
+
+<<span class="keyword">abbr</span> <span class="variable">title</span>=<span class="string">"HyperText Markup Language"</span>>HTML</<span class="keyword">abbr</span>></code></pre>
+                </div>
+                
+                <h3>data-* Attributes</h3>
+                <p>Store custom data for JavaScript use.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">div</span> <span class="variable">data-user-id</span>=<span class="string">"12345"</span> 
+     <span class="variable">data-role</span>=<span class="string">"admin"</span>>
+    User Profile
+</<span class="keyword">div</span>>
+
+<span class="comment">// Access with JavaScript:</span>
+<span class="comment">// element.dataset.userId  // "12345"</span>
+<span class="comment">// element.dataset.role    // "admin"</span></code></pre>
+                </div>
+                
+                <h3>hidden</h3>
+                <p>Hides the element from view.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span> <span class="variable">hidden</span>>This is not visible</<span class="keyword">p</span>>
+
+<span class="comment">// Boolean attribute - no value needed</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Boolean Attributes</h2>
+                <p>Some attributes are "boolean" - their presence means true, absence means false.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// These are all the same (true):</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">disabled</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">disabled</span>=<span class="string">"disabled"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">disabled</span>=<span class="string">""</span>>
+
+<span class="comment">// To make it false, remove the attribute:</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span>>  <span class="comment">// enabled</span>
+
+<span class="comment">// Common boolean attributes:</span>
+<span class="variable">disabled</span>   <span class="comment">// Disables input</span>
+<span class="variable">required</span>   <span class="comment">// Makes form field required</span>
+<span class="variable">checked</span>    <span class="comment">// Pre-checks checkbox/radio</span>
+<span class="variable">selected</span>   <span class="comment">// Pre-selects option</span>
+<span class="variable">readonly</span>   <span class="comment">// Makes input read-only</span>
+<span class="variable">autofocus</span>  <span class="comment">// Auto-focuses on page load</span>
+<span class="variable">multiple</span>   <span class="comment">// Allows multiple selections</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Specific Element Attributes</h2>
+                
+                <h3>Link Attributes (<a>)</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span>    <span class="comment">// Destination URL</span>
+   <span class="variable">target</span>=<span class="string">"_blank"</span>            <span class="comment">// Open in new tab</span>
+   <span class="variable">rel</span>=<span class="string">"noopener noreferrer"</span> <span class="comment">// Security for _blank</span>
+   <span class="variable">download</span>                   <span class="comment">// Download instead of navigate</span>
+   <span class="variable">hreflang</span>=<span class="string">"en"</span>             <span class="comment">// Language of linked page</span>
+   <span class="variable">type</span>=<span class="string">"text/html"</span>>         <span class="comment">// MIME type</span>
+   Link text
+</<span class="keyword">a</span>></code></pre>
+                </div>
+                
+                <h3>Image Attributes (<img>)</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"photo.jpg"</span>          <span class="comment">// Image source (required)</span>
+     <span class="variable">alt</span>=<span class="string">"Description"</span>         <span class="comment">// Alt text (required)</span>
+     <span class="variable">width</span>=<span class="string">"300"</span>              <span class="comment">// Width in pixels</span>
+     <span class="variable">height</span>=<span class="string">"200"</span>             <span class="comment">// Height in pixels</span>
+     <span class="variable">loading</span>=<span class="string">"lazy"</span>           <span class="comment">// Lazy load image</span>
+     <span class="variable">decoding</span>=<span class="string">"async"</span>>         <span class="comment">// Async decoding</span></code></pre>
+                </div>
+                
+                <h3>Form Input Attributes</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span>           <span class="comment">// Input type</span>
+       <span class="variable">name</span>=<span class="string">"username"</span>        <span class="comment">// Name for form submission</span>
+       <span class="variable">value</span>=<span class="string">"default"</span>        <span class="comment">// Default value</span>
+       <span class="variable">placeholder</span>=<span class="string">"Enter name"</span> <span class="comment">// Hint text</span>
+       <span class="variable">required</span>              <span class="comment">// Must be filled</span>
+       <span class="variable">disabled</span>              <span class="comment">// Disabled state</span>
+       <span class="variable">readonly</span>              <span class="comment">// Read-only</span>
+       <span class="variable">maxlength</span>=<span class="string">"20"</span>        <span class="comment">// Max characters</span>
+       <span class="variable">minlength</span>=<span class="string">"3"</span>         <span class="comment">// Min characters</span>
+       <span class="variable">pattern</span>=<span class="string">"[A-Za-z]+"</span>    <span class="comment">// Regex pattern</span>
+       <span class="variable">autocomplete</span>=<span class="string">"off"</span>>    <span class="comment">// Autocomplete behavior</span></code></pre>
+                </div>
+                
+                <h3>Form Attributes</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">form</span> <span class="variable">action</span>=<span class="string">"/submit"</span>        <span class="comment">// Submit URL</span>
+      <span class="variable">method</span>=<span class="string">"POST"</span>          <span class="comment">// HTTP method</span>
+      <span class="variable">enctype</span>=<span class="string">"multipart/form-data"</span> <span class="comment">// For file uploads</span>
+      <span class="variable">novalidate</span>>            <span class="comment">// Disable validation</span>
+</<span class="keyword">form</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Event Handler Attributes</h2>
+                <p>Attributes that execute JavaScript when events occur (inline event handlers - generally prefer using JavaScript event listeners):</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Common event attributes:</span>
+
+<span class="comment">// Mouse events</span>
+<<span class="keyword">button</span> <span class="variable">onclick</span>=<span class="string">"handleClick()"</span>>Click</<span class="keyword">button</span>>
+<<span class="keyword">div</span> <span class="variable">onmouseover</span>=<span class="string">"highlight()"</span> <span class="variable">onmouseout</span>=<span class="string">"unhighlight()"</span>>...</<span class="keyword">div</span>>
+
+<span class="comment">// Form events</span>
+<<span class="keyword">form</span> <span class="variable">onsubmit</span>=<span class="string">"validate()"</span>>...</<span class="keyword">form</span>>
+<<span class="keyword">input</span> <span class="variable">onchange</span>=<span class="string">"updateValue()"</span>>
+<<span class="keyword">input</span> <span class="variable">oninput</span>=<span class="string">"liveUpdate()"</span>>
+
+<span class="comment">// Keyboard events</span>
+<<span class="keyword">input</span> <span class="variable">onkeydown</span>=<span class="string">"handleKey()"</span>>
+
+<span class="comment">// Load events</span>
+<<span class="keyword">body</span> <span class="variable">onload</span>=<span class="string">"init()"</span>></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Best practice:</strong> Instead of inline event handlers, use JavaScript event listeners in your JS files. This keeps your HTML clean and your code maintainable.</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Accessibility Attributes</h2>
+                <p>ARIA attributes enhance accessibility for screen readers:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// ARIA role</span>
+<<span class="keyword">div</span> <span class="variable">role</span>=<span class="string">"navigation"</span>>...</<span class="keyword">div</span>>
+<<span class="keyword">button</span> <span class="variable">role</span>=<span class="string">"switch"</span>>...</<span class="keyword">button</span>>
+
+<span class="comment">// Labels and descriptions</span>
+<<span class="keyword">button</span> <span class="variable">aria-label</span>=<span class="string">"Close menu"</span>>X</<span class="keyword">button</span>>
+<<span class="keyword">input</span> <span class="variable">aria-describedby</span>=<span class="string">"password-hint"</span>>
+<<span class="keyword">p</span> <span class="variable">id</span>=<span class="string">"password-hint"</span>>Must be 8+ characters</<span class="keyword">p</span>>
+
+<span class="comment">// State attributes</span>
+<<span class="keyword">button</span> <span class="variable">aria-expanded</span>=<span class="string">"true"</span>>Menu</<span class="keyword">button</span>>
+<<span class="keyword">button</span> <span class="variable">aria-pressed</span>=<span class="string">"true"</span>>Toggle</<span class="keyword">button</span>>
+<<span class="keyword">div</span> <span class="variable">aria-hidden</span>=<span class="string">"true"</span>>Decorative only</<span class="keyword">div</span>>
+
+<span class="comment">// Live regions (announces changes)</span>
+<<span class="keyword">div</span> <span class="variable">aria-live</span>=<span class="string">"polite"</span>>Status message</<span class="keyword">div</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>Syntax:</strong> attribute="value" in opening tag</li>
+                            <li><strong>id:</strong> Unique identifier (one per page)</li>
+                            <li><strong>class:</strong> Reusable identifier (many per page)</li>
+                            <li><strong>style:</strong> Inline CSS (use sparingly)</li>
+                            <li><strong>data-*:</strong> Custom data for JavaScript</li>
+                            <li><strong>Boolean attributes:</strong> Present = true, absent = false</li>
+                            <li><strong>href/src:</strong> URL references</li>
+                            <li><strong>alt:</strong> Alternative text (accessibility)</li>
+                            <li><strong>ARIA:</strong> Accessibility enhancement</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson7.html" class="nav-btn prev">← Previous: Semantic HTML</a>
+                <a href="lesson9.html" class="nav-btn next">Next: HTML5 New Elements →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Internet and Web - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🌍 Lesson 7: The Internet and Web</h1>
+            <p>Understanding the connected world</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Internet vs World Wide Web</h2>
+                <p>Many people use these terms interchangeably, but they're different things!</p>
+                
+                <h3>The Internet</h3>
+                <p>The Internet is the physical infrastructure - millions of interconnected computers, cables, routers, and servers forming a global network. Think of it as the road system.</p>
+                
+                <h3>The World Wide Web (WWW)</h3>
+                <p>The Web is a service that runs ON the Internet - a collection of websites and web pages linked together. Think of it as the vehicles and destinations on the roads.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Simple comparison:</strong> The Internet is like the telephone network infrastructure. The Web is like one of the services that uses it (like calling a friend). Email, video streaming, and online gaming also use the Internet but aren't part of the Web.</p>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Key distinction:</strong> The Internet was created in the 1960s-70s. The World Wide Web was invented in 1989 by Tim Berners-Lee.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>How the Web Works</h2>
+                <p>When you visit a website, a complex process happens in seconds:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// The Web Request Process:</span>
+
+<span class="number">1.</span> <span class="variable">You type:</span> https://www.example.com
+    ↓
+<span class="number">2.</span> <span class="function">DNS Lookup:</span> Find the server's IP address
+    ↓
+<span class="number">3.</span> <span class="function">HTTP Request:</span> Browser sends request to server
+    ↓
+<span class="number">4.</span> <span class="function">Server Processing:</span> Server finds the webpage
+    ↓
+<span class="number">5.</span> <span class="function">HTTP Response:</span> Server sends files back
+    ↓
+<span class="number">6.</span> <span class="function">Rendering:</span> Browser displays the webpage</code></pre>
+                </div>
+                
+                <h3>Client-Server Model</h3>
+                <p>The web operates on a client-server model:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Client:</strong> Your web browser (Chrome, Firefox, Safari) - it requests and displays content</li>
+                    <li><strong>Server:</strong> A computer that stores websites and sends them to clients when requested</li>
+                </ul>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Web Technologies</h2>
+                
+                <h3>HTML (HyperText Markup Language)</h3>
+                <p>The structure of web pages. HTML defines what content appears on a page - headings, paragraphs, images, links.</p>
+                
+                <h3>CSS (Cascading Style Sheets)</h3>
+                <p>The styling of web pages. CSS controls how content looks - colors, fonts, layouts, animations.</p>
+                
+                <h3>JavaScript</h3>
+                <p>The behavior of web pages. JavaScript makes pages interactive - responding to clicks, loading new content, validating forms.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// How these technologies work together:</span>
+
+<span class="variable">HTML</span> → <span class="string">"What's on the page"</span>  <span class="comment">// Structure</span>
+<span class="variable">CSS</span>  → <span class="string">"How it looks"</span>      <span class="comment">// Presentation</span>
+<span class="variable">JS</span>   → <span class="string">"How it behaves"</span>    <span class="comment">// Behavior</span>
+
+<span class="comment">// Analogy:</span>
+<span class="comment">// HTML = skeleton (structure)</span>
+<span class="comment">// CSS = skin and clothes (appearance)</span>
+<span class="comment">// JavaScript = muscles and movement (behavior)</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>URLs Explained</h2>
+                <p>A URL (Uniform Resource Locator) is the address of a web resource. Let's break one down:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// URL Structure:</span>
+<span class="keyword">https</span>://<span class="variable">www</span>.<span class="function">example</span>.<span class="variable">com</span>/<span class="string">page</span>?<span class="variable">id</span>=<span class="number">123</span>#<span class="variable">section</span>
+
+<span class="comment">// Breakdown:</span>
+┌──────────────────────────────────────────────────────┐
+│ <span class="keyword">https</span>      → <span class="function">Protocol</span> (how to communicate)       │
+│ <span class="variable">www</span>        → <span class="function">Subdomain</span> (specific server)           │
+│ <span class="function">example</span>    → <span class="function">Domain name</span> (website identity)       │
+│ <span class="variable">com</span>        → <span class="function">Top-level domain</span> (TLD)              │
+│ <span class="string">/page</span>     → <span class="function">Path</span> (specific page)                   │
+│ <span class="variable">?id=123</span>   → <span class="function">Query parameters</span> (data sent to server)│
+│ <span class="variable">#section</span>  → <span class="function">Fragment</span> (jump to section on page)    │
+└──────────────────────────────────────────────────────┘</code></pre>
+                </div>
+                
+                <h3>Common TLDs</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>.com:</strong> Commercial (most common)</li>
+                    <li><strong>.org:</strong> Organizations</li>
+                    <li><strong>.edu:</strong> Educational institutions</li>
+                    <li><strong>.gov:</strong> Government</li>
+                    <li><strong>.io:</strong> Tech startups (originally British Indian Ocean Territory)</li>
+                    <li><strong>.country codes:</strong> .uk, .ca, .de, .jp, etc.</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>HTTP and HTTPS</h2>
+                
+                <h3>HTTP (HyperText Transfer Protocol)</h3>
+                <p>The rules for transferring web pages. It defines how clients and servers communicate.</p>
+                
+                <h3>HTTPS (HTTP Secure)</h3>
+                <p>Encrypted HTTP. It protects your data from being intercepted. Always look for the padlock icon in your browser!</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// HTTP Methods (types of requests):</span>
+
+<span class="keyword">GET</span>     → <span class="string">"Give me this page"</span>
+<span class="keyword">POST</span>    → <span class="string">"Here's data to process"</span>
+<span class="keyword">PUT</span>     → <span class="string">"Update this resource"</span>
+<span class="keyword">DELETE</span>  → <span class="string">"Remove this resource"</span>
+
+<span class="comment">// HTTP Status Codes:</span>
+<span class="number">200</span> → <span class="string">OK</span> (success)
+<span class="number">301</span> → <span class="string">Moved Permanently</span> (redirect)
+<span class="number">404</span> → <span class="string">Not Found</span> (page doesn't exist)
+<span class="number">500</span> → <span class="string">Internal Server Error</span> (server problem)</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Security Tip:</strong> Never enter passwords or credit card info on non-HTTPS sites. Look for the padlock icon and "https://" in the URL.</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Web Browsers</h2>
+                <p>Browsers are software that fetch, interpret, and display web pages. Popular browsers include:</p>
+                
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Google Chrome:</strong> Most popular, fast, great developer tools</li>
+                    <li><strong>Mozilla Firefox:</strong> Privacy-focused, open source</li>
+                    <li><strong>Safari:</strong> Apple's browser, optimized for macOS and iOS</li>
+                    <li><strong>Microsoft Edge:</strong> Built on Chromium, integrated with Windows</li>
+                </ul>
+                
+                <h3>What Browsers Do</h3>
+                <ol style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>Parse HTML to build the page structure</li>
+                    <li>Apply CSS to style elements</li>
+                    <li>Execute JavaScript for interactivity</li>
+                    <li>Handle user interactions (clicks, forms)</li>
+                    <li>Cache resources for faster loading</li>
+                </ol>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Frontend vs Backend</h2>
+                
+                <h3>Frontend (Client-side)</h3>
+                <p>Everything the user sees and interacts with in the browser. Built with HTML, CSS, and JavaScript.</p>
+                
+                <h3>Backend (Server-side)</h3>
+                <p>The server-side logic that powers applications. Handles databases, authentication, and business logic. Built with languages like Python, Node.js, PHP, Ruby, or Java.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Web Application Architecture:</span>
+
+┌─────────────────────────────────────────┐
+│              <span class="function">FRONTEND</span>                  │
+│  HTML + CSS + JavaScript (in browser)   │
+└─────────────────┬───────────────────────┘
+                  │ <span class="variable">HTTP requests</span>
+                  ↓
+┌─────────────────────────────────────────┐
+│              <span class="function">BACKEND</span>                   │
+│  Server (Python/Node.js/etc)            │
+│  ↓                                      │
+│  Database (MySQL/MongoDB/etc)           │
+└─────────────────────────────────────────┘</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>Internet:</strong> Global network infrastructure</li>
+                            <li><strong>Web:</strong> Service running on the Internet</li>
+                            <li><strong>HTML/CSS/JS:</strong> The three core web technologies</li>
+                            <li><strong>URL:</strong> Address that identifies web resources</li>
+                            <li><strong>HTTPS:</strong> Secure, encrypted web communication</li>
+                            <li><strong>Frontend:</strong> User-facing; Backend: Server-side</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson6.html" class="nav-btn prev">← Previous: Computer Networks</a>
+                <a href="lesson8.html" class="nav-btn next">Next: Security Basics →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

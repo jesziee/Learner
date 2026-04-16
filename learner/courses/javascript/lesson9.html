@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: DOM Manipulation - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 9: DOM Manipulation</h1>
+            <p>Learn to interact with web pages dynamically using the Document Object Model.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What is the DOM?</h2>
+                <p>The Document Object Model (DOM) is a programming interface for web documents. It represents the page as a tree of objects that JavaScript can manipulate. When a web page loads, the browser creates a DOM of the page, which allows JavaScript to access and change the HTML elements, attributes, and CSS styles dynamically.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Think of the DOM as a bridge between your HTML and JavaScript. HTML provides the structure, and through the DOM, JavaScript can read, modify, add, or delete elements and content.
+                </div>
+
+                <h3>DOM Tree Structure</h3>
+                <div class="code-block">
+                    <pre><code>// Consider this HTML:
+<html>
+  <head>
+    <title>My Page</title>
+  <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+  <body>
+    <div id="container">
+      <h1>Hello</h1>
+      <p class="text">World</p>
+    </div>
+  </body>
+</html>
+
+// The DOM represents this as a tree:
+// document
+//   └── html
+//        ├── head
+//        │    └── title
+//        │         └── "My Page" (text node)
+//        └── body
+//             └── div (id="container")
+//                  ├── h1
+//                  │    └── "Hello"
+//                  └── p (class="text")
+//                       └── "World"</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Selecting Elements</h2>
+                <p>Before manipulating elements, you need to select them:</p>
+                
+                <h3>Modern Methods (Preferred)</h3>
+                <div class="code-block">
+                    <pre><code>// querySelector - first matching element
+const header = document.querySelector("h1");
+const container = document.querySelector("#container");
+const text = document.querySelector(".text");
+const firstParagraph = document.querySelector("p.intro");
+
+// querySelectorAll - all matching elements (NodeList)
+const allParagraphs = document.querySelectorAll("p");
+const allItems = document.querySelectorAll(".list-item");
+
+// Iterate over NodeList
+allParagraphs.forEach(paragraph => {
+    console.log(paragraph.textContent);
+});
+
+// Convert NodeList to Array for more methods
+const paragraphsArray = Array.from(allParagraphs);
+const filtered = paragraphsArray.filter(p => p.textContent.length > 50);</code></pre>
+                </div>
+
+                <h3>Traditional Methods</h3>
+                <div class="code-block">
+                    <pre><code>// getElementById - fastest for IDs
+const element = document.getElementById("myId");
+
+// getElementsByClassName - returns HTMLCollection (live)
+const items = document.getElementsByClassName("item");
+
+// getElementsByTagName - returns HTMLCollection (live)
+const divs = document.getElementsByTagName("div");
+
+// Convert HTMLCollection to Array
+const itemsArray = Array.from(items);
+
+// Live collection updates automatically
+const liveList = document.getElementsByClassName("item");
+console.log(liveList.length);  // 3
+// Add new element with class "item"
+console.log(liveList.length);  // 4 (automatically updated)</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>querySelector vs getElementById:</strong>
+                    <ul>
+                        <li><code>querySelector</code> - More flexible, uses CSS selectors, returns first match</li>
+                        <li><code>getElementById</code> - Faster, only for IDs, single element</li>
+                        <li><code>querySelectorAll</code> - Returns static NodeList</li>
+                        <li><code>getElementsBy*</code> - Returns live HTMLCollection</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Traversing the DOM</h2>
+                <p>Navigate between related elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>const element = document.querySelector(".container");
+
+// Parent element
+const parent = element.parentElement;
+const closestParent = element.closest(".wrapper");  // Find ancestor
+
+// Children
+const children = element.children;        // HTMLCollection of child elements
+const firstChild = element.firstElementChild;
+const lastChild = element.lastElementChild;
+
+// Siblings
+const nextSibling = element.nextElementSibling;
+const previousSibling = element.previousElementSibling;
+
+// Check if element has children
+const hasChildren = element.hasChildNodes();
+
+// Example: Get all siblings
+function getAllSiblings(element) {
+    const siblings = [];
+    let sibling = element.parentElement.firstElementChild;
+    
+    while (sibling) {
+        if (sibling !== element) {
+            siblings.push(sibling);
+        }
+        sibling = sibling.nextElementSibling;
+    }
+    
+    return siblings;
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Element Content</h2>
+                <p>Change what's inside elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>const element = document.querySelector("#content");
+
+// textContent - gets/sets text only
+console.log(element.textContent);   // Get text
+element.textContent = "New text";   // Set text (safe from XSS)
+
+// innerHTML - gets/sets HTML
+console.log(element.innerHTML);     // Get HTML including tags
+element.innerHTML = "<strong>Bold text</strong>";  // Parses HTML
+
+// outerHTML - includes the element itself
+console.log(element.outerHTML);     // Includes the element tag
+element.outerHTML = "<div>Replaced</div>";  // Replaces element
+
+// innerText - similar to textContent but respects CSS styling
+console.log(element.innerText);     // Respects visibility: hidden
+
+// Differences in action
+const div = document.querySelector("#example");
+div.innerHTML = "<span style='display:none'>Hidden</span>";
+
+console.log(div.textContent);  // "Hidden" (includes hidden text)
+console.log(div.innerText);    // "" (respects display:none)</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Security Warning:</strong> Never use <code>innerHTML</code> with user input! It can lead to XSS (Cross-Site Scripting) attacks. Use <code>textContent</code> for user-provided content.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Attributes</h2>
+                <p>Work with element attributes:</p>
+                
+                <div class="code-block">
+                    <pre><code>const link = document.querySelector("a");
+
+// Get attribute
+const href = link.getAttribute("href");
+const target = link.getAttribute("target");
+
+// Set attribute
+link.setAttribute("href", "https://example.com");
+link.setAttribute("target", "_blank");
+
+// Remove attribute
+link.removeAttribute("target");
+
+// Check if attribute exists
+const hasTarget = link.hasAttribute("target");  // true/false
+
+// Get all attributes
+const attrs = link.attributes;
+for (let attr of attrs) {
+    console.log(attr.name, attr.value);
+}
+
+// Special attributes have direct properties
+const input = document.querySelector("input");
+input.value = "New value";        // Value property
+input.disabled = true;            // Boolean attribute
+input.checked = true;             // For checkboxes
+input.id = "newId";               // ID property
+
+// data-* attributes
+const card = document.querySelector(".card");
+card.dataset.userId = "123";       // Sets data-user-id="123"
+card.dataset.userName = "Alice";   // Sets data-user-name="Alice"
+console.log(card.dataset.userId);  // "123"
+console.log(card.dataset.userName); // "Alice"</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Classes</h2>
+                <p>Manipulate CSS classes:</p>
+                
+                <div class="code-block">
+                    <pre><code>const element = document.querySelector(".box");
+
+// classList methods (preferred)
+element.classList.add("active");           // Add class
+element.classList.remove("hidden");        // Remove class
+element.classList.toggle("expanded");      // Toggle class
+element.classList.replace("old", "new");   // Replace class
+
+// Multiple classes
+element.classList.add("class1", "class2", "class3");
+element.classList.remove("class1", "class2");
+
+// Check if has class
+const isActive = element.classList.contains("active");  // true/false
+
+// className property (gets/sets all classes)
+element.className = "box active expanded";
+console.log(element.className);  // "box active expanded"
+
+// Example: Toggle menu
+const menu = document.querySelector(".menu");
+const button = document.querySelector(".menu-toggle");
+
+button.addEventListener("click", () => {
+    menu.classList.toggle("open");
+});
+
+// Example: Add class based on condition
+const score = 85;
+const resultElement = document.querySelector(".result");
+
+if (score >= 70) {
+    resultElement.classList.add("pass");
+} else {
+    resultElement.classList.add("fail");
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Styles</h2>
+                <p>Change CSS styles directly:</p>
+                
+                <div class="code-block">
+                    <pre><code>const element = document.querySelector(".box");
+
+// Inline styles via style property
+element.style.color = "red";
+element.style.backgroundColor = "blue";  // camelCase, not kebab-case
+element.style.fontSize = "20px";
+element.style.padding = "10px 20px";
+
+// Remove inline style
+element.style.color = "";  // Empty string removes it
+
+// Multiple styles
+Object.assign(element.style, {
+    color: "white",
+    backgroundColor: "navy",
+    padding: "20px",
+    borderRadius: "5px"
+});
+
+// Get computed style (actual applied styles)
+const computed = window.getComputedStyle(element);
+console.log(computed.color);           // Actual color
+console.log(computed.backgroundColor); // Actual background
+
+// CSS custom properties (variables)
+element.style.setProperty("--main-color", "purple");
+const mainColor = element.style.getPropertyValue("--main-color");
+
+// cssText - set all styles at once
+element.style.cssText = "color: white; background: navy; padding: 10px;";
+
+// Toggle visibility
+element.style.display = "none";        // Hide
+element.style.display = "block";       // Show
+element.style.visibility = "hidden";   // Hide (keeps space)
+element.style.visibility = "visible";  // Show
+
+// Better approach: Use classes for styles
+// CSS: .hidden { display: none; }
+element.classList.add("hidden");
+element.classList.remove("hidden");</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Best Practice:</strong> Prefer CSS classes over inline styles for maintainability. Use inline styles only for dynamic values that can't be in CSS.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Elements</h2>
+                <p>Create new elements dynamically:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Create element
+const newDiv = document.createElement("div");
+const newParagraph = document.createElement("p");
+const newText = document.createTextNode("Hello World");
+
+// Set content and attributes
+newDiv.id = "new-element";
+newDiv.className = "card";
+newDiv.textContent = "I'm a new div!";
+
+// Create with all properties
+const link = document.createElement("a");
+link.href = "https://example.com";
+link.textContent = "Click here";
+link.target = "_blank";
+link.classList.add("btn", "btn-primary");
+
+// Create list items from array
+const fruits = ["Apple", "Banana", "Orange"];
+const list = document.createElement("ul");
+
+fruits.forEach(fruit => {
+    const li = document.createElement("li");
+    li.textContent = fruit;
+    list.appendChild(li);
+});
+
+// Create element with HTML string
+const template = `
+    <div class="card">
+        <h2>Title</h2>
+        <p>Description</p>
+    </div>
+`;</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Inserting Elements</h2>
+                <p>Add elements to the DOM:</p>
+                
+                <div class="code-block">
+                    <pre><code>const parent = document.querySelector(".container");
+const newElement = document.createElement("div");
+newElement.textContent = "New Element";
+
+// appendChild - add as last child
+parent.appendChild(newElement);
+
+// append - add multiple elements at end (newer)
+parent.append(newElement, "Some text", anotherElement);
+
+// prepend - add at beginning
+parent.prepend(newElement);
+
+// insertBefore - insert before specific element
+const reference = document.querySelector(".reference");
+parent.insertBefore(newElement, reference);
+
+// Modern insertion methods
+const box = document.querySelector(".box");
+
+// Insert relative to element
+box.before(newElement);           // Before the element
+box.after(newElement);            // After the element
+box.prepend(newElement);          // Inside, at beginning
+box.append(newElement);           // Inside, at end
+
+// replaceWith - replace element
+box.replaceWith(newElement);
+
+// insertAdjacentHTML - insert HTML string
+const container = document.querySelector(".container");
+container.insertAdjacentHTML("beforebegin", "<p>Before container</p>");
+container.insertAdjacentHTML("afterbegin", "<p>First child</p>");
+container.insertAdjacentHTML("beforeend", "<p>Last child</p>");
+container.insertAdjacentHTML("afterend", "<p>After container</p>");
+
+// insertAdjacentElement - insert element
+container.insertAdjacentElement("beforeend", newElement);</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Insertion Positions:</strong>
+                    <ul>
+                        <li><code>beforebegin</code> - Before the element itself</li>
+                        <li><code>afterbegin</code> - Inside, before first child</li>
+                        <li><code>beforeend</code> - Inside, after last child</li>
+                        <li><code>afterend</code> - After the element itself</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Removing Elements</h2>
+                <p>Delete elements from the DOM:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Modern method - remove element itself
+const element = document.querySelector(".element-to-remove");
+element.remove();
+
+// Traditional method - remove from parent
+const parent = document.querySelector(".parent");
+const child = document.querySelector(".child");
+parent.removeChild(child);
+
+// Remove all children
+const container = document.querySelector(".container");
+container.innerHTML = "";  // Simple but not ideal
+
+// Better: Remove each child
+while (container.firstChild) {
+    container.removeChild(container.firstChild);
+}
+
+// Even better: replaceChildren (modern)
+container.replaceChildren();  // Removes all children
+
+// Remove with condition
+const items = document.querySelectorAll(".item");
+items.forEach(item => {
+    if (item.classList.contains("expired")) {
+        item.remove();
+    }
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Cloning Elements</h2>
+                <p>Copy elements with all their content:</p>
+                
+                <div class="code-block">
+                    <pre><code>const original = document.querySelector(".card");
+
+// Clone element (shallow - no children)
+const shallowClone = original.cloneNode();
+
+// Clone element and all children (deep)
+const deepClone = original.cloneNode(true);
+
+// Add clone to document
+document.querySelector(".container").appendChild(deepClone);
+
+// Clone and modify
+const template = document.querySelector(".template");
+const newItem = template.cloneNode(true);
+newItem.classList.remove("template");
+newItem.classList.add("active");
+newItem.querySelector(".title").textContent = "New Title";
+document.querySelector(".list").appendChild(newItem);</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Element Properties and Dimensions</h2>
+                <p>Get information about elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>const element = document.querySelector(".box");
+
+// Basic properties
+console.log(element.id);           // ID attribute
+console.log(element.tagName);      // Tag name (uppercase: "DIV")
+console.log(element.className);    // All classes as string
+
+// Dimensions (including content only)
+console.log(element.offsetWidth);   // Width including padding, border
+console.log(element.offsetHeight);  // Height including padding, border
+console.log(element.clientWidth);   // Width including padding (no border)
+console.log(element.clientHeight);  // Height including padding (no border)
+
+// Scroll dimensions
+console.log(element.scrollWidth);   // Full scrollable width
+console.log(element.scrollHeight);  // Full scrollable height
+console.log(element.scrollTop);     // Current scroll position
+console.log(element.scrollLeft);    // Current horizontal scroll
+
+// Position
+console.log(element.offsetLeft);    // Distance from left of offsetParent
+console.log(element.offsetTop);     // Distance from top of offsetParent
+
+// Position relative to viewport
+const rect = element.getBoundingClientRect();
+console.log(rect.top, rect.right, rect.bottom, rect.left);
+console.log(rect.width, rect.height);
+
+// Check if element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
+    );
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Form Handling</h2>
+                <p>Work with form elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>const form = document.querySelector("form");
+const input = document.querySelector("input[name='email']");
+
+// Get/set input values
+console.log(input.value);           // Current value
+input.value = "new@example.com";    // Set value
+
+// Check input types
+const checkbox = document.querySelector("input[type='checkbox']");
+console.log(checkbox.checked);      // true/false
+checkbox.checked = true;            // Check it
+
+const select = document.querySelector("select");
+console.log(select.value);          // Selected value
+console.log(select.selectedIndex);  // Index of selected option
+select.value = "option2";           // Set selection
+
+// Form submission
+form.addEventListener("submit", (event) => {
+    event.preventDefault();         // Stop page refresh
+    
+    // Get all form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+    
+    // Or manually
+    const email = form.querySelector("input[name='email']").value;
+    const password = form.querySelector("input[name='password']").value;
+    
+    // Validate and submit
+    if (validateForm(email, password)) {
+        submitForm(data);
+    }
+});
+
+// Real-time validation
+input.addEventListener("input", (event) => {
+    const value = event.target.value;
+    if (value.length < 3) {
+        event.target.setCustomValidity("At least 3 characters");
+    } else {
+        event.target.setCustomValidity("");
+    }
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Examples</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Example 1: Dynamic todo list
+function createTodoList() {
+    const input = document.querySelector("#todo-input");
+    const list = document.querySelector("#todo-list");
+    const button = document.querySelector("#add-todo");
+    
+    button.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (!text) return;
+        
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <span>${text}</span>
+            <button class="delete">Delete</button>
+        `;
+        
+        li.querySelector(".delete").addEventListener("click", () => {
+            li.remove();
+        });
+        
+        list.appendChild(li);
+        input.value = "";
+    });
+}
+
+// Example 2: Modal window
+function createModal(content) {
+    const modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.innerHTML = `
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">${content}</div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    const closeModal = () => modal.remove();
+    modal.querySelector(".modal-close").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+    
+    return modal;
+}
+
+// Example 3: Infinite scroll
+function setupInfiniteScroll(callback) {
+    const sentinel = document.querySelector("#sentinel");
+    
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            callback();
+        }
+    });
+    
+    observer.observe(sentinel);
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a dynamic product list
+const products = [
+    { id: 1, name: "Laptop", price: 999, category: "Electronics" },
+    { id: 2, name: "Phone", price: 699, category: "Electronics" },
+    { id: 3, name: "Shirt", price: 29, category: "Clothing" },
+    { id: 4, name: "Book", price: 15, category: "Books" }
+];
+
+// Create product card
+function createProductCard(product) {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.dataset.id = product.id;
+    
+    card.innerHTML = `
+        <h3>${product.name}</h3>
+        <p class="price">$${product.price}</p>
+        <p class="category">${product.category}</p>
+        <button class="add-to-cart">Add to Cart</button>
+    `;
+    
+    return card;
+}
+
+// Render all products
+function renderProducts(products) {
+    const container = document.querySelector("#products");
+    container.innerHTML = "";
+    
+    products.forEach(product => {
+        const card = createProductCard(product);
+        container.appendChild(card);
+    });
+}
+
+// Filter by category
+function filterProducts(category) {
+    if (category === "all") return products;
+    return products.filter(p => p.category === category);
+}
+
+// Sort products
+function sortProducts(products, sortBy) {
+    const sorted = [...products];
+    switch(sortBy) {
+        case "price-asc":
+            return sorted.sort((a, b) => a.price - b.price);
+        case "price-desc":
+            return sorted.sort((a, b) => b.price - a.price);
+        case "name":
+            return sorted.sort((a, b) => a.name.localeCompare(b.name));
+        default:
+            return sorted;
+    }
+}
+
+// Initialize
+renderProducts(products);
+
+// Event listeners for filters
+document.querySelector("#category-filter").addEventListener("change", (e) => {
+    const filtered = filterProducts(e.target.value);
+    const sortBy = document.querySelector("#sort-filter").value;
+    renderProducts(sortProducts(filtered, sortBy));
+});
+
+document.querySelector("#sort-filter").addEventListener("change", (e) => {
+    const category = document.querySelector("#category-filter").value;
+    const filtered = filterProducts(category);
+    renderProducts(sortProducts(filtered, e.target.value));
+});</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson8.html" class="btn btn-secondary">← Previous: Objects</a>
+                <a href="lesson10.html" class="btn btn-primary">Next: Events →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

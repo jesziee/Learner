@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: String Manipulation - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 9: String Manipulation</h1>
+            <p>Master string methods, formatting, and text processing techniques</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Strings in Depth</h2>
+                <p>Strings are sequences of characters and one of Python's most commonly used data types. Python provides rich functionality for creating, formatting, and manipulating text. Understanding strings deeply will help you work with user input, files, APIs, and more.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>String Creation and Basics</h2>
+                <p>Strings can be created with single, double, or triple quotes. Triple quotes allow multi-line strings.</p>
+                
+                <div class="code-block">
+                    <h4>Creating Strings:</h4>
+<pre><code># Single and double quotes (identical behavior)
+single = 'Hello'
+double = "Hello"
+print(single == double)  # True
+
+# Escape characters
+escaped = "He said \"Hello\""
+print(escaped)  # He said "Hello"
+path = "C:\\Users\\Documents"  # Backslash escape
+line_break = "Line 1\nLine 2"  # Newline
+
+# Raw strings (ignore escapes)
+raw_path = r"C:\Users\Documents"
+print(raw_path)  # C:\Users\Documents
+
+# Multi-line strings
+multi = """
+This is a
+multi-line string
+"""
+
+# Triple quotes preserve formatting
+html = """
+<div class="container">
+    <h1>Title</h1>
+</div>
+"""
+
+# String length
+text = "Python"
+print(len(text))  # 6
+
+# Concatenation
+full = "Hello" + " " + "World"
+repeated = "Hi" * 3  # "HiHiHi"</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-4:</strong> Single and double quotes work identically in Python.</p>
+                        <p><strong>Lines 7-10:</strong> Use backslash for escape sequences: \", \\, \n, \t.</p>
+                        <p><strong>Lines 13-14:</strong> Raw strings (r"...") treat backslashes literally.</p>
+                        <p><strong>Lines 17-26:</strong> Triple quotes create multi-line strings preserving whitespace.</p>
+                        <p><strong>Lines 29-33:</strong> Strings support len(), +, and * operations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>String Indexing and Slicing</h2>
+                <p>Strings are sequences, so you can access individual characters or extract substrings using indexing and slicing.</p>
+                
+                <div class="code-block">
+                    <h4>Accessing String Parts:</h4>
+<pre><code>text = "Python"
+
+# Indexing
+print(text[0])    # 'P' (first character)
+print(text[-1])   # 'n' (last character)
+print(text[-2])   # 'o' (second to last)
+
+# Slicing: [start:end:step]
+print(text[0:3])  # 'Pyt' (characters 0, 1, 2)
+print(text[:3])   # 'Pyt' (from start to index 2)
+print(text[2:])   # 'thon' (from index 2 to end)
+print(text[::2])  # 'Pto' (every second character)
+
+# Reverse a string
+print(text[::-1])  # 'nohtyP'
+
+# Get last 3 characters
+print(text[-3:])   # 'hon'
+
+# Strings are immutable
+# text[0] = 'J'  # TypeError!
+
+# To "modify", create new string
+new_text = 'J' + text[1:]
+print(new_text)  # 'Jython'</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-7:</strong> Positive index from start, negative from end (-1 is last).</p>
+                        <p><strong>Lines 10-13:</strong> Slice syntax [start:end:step]. End is exclusive.</p>
+                        <p><strong>Line 16:</strong> <code>[::-1]</code> is the Pythonic way to reverse a string.</p>
+                        <p><strong>Lines 22-23:</strong> Strings are immutable - create new strings instead of modifying.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>String Methods</h2>
+                <p>Python strings have many built-in methods for transformation, searching, and testing.</p>
+                
+                <div class="code-block">
+                    <h4>Case Methods:</h4>
+<pre><code>text = "Hello World"
+
+# Case transformations
+print(text.upper())      # "HELLO WORLD"
+print(text.lower())      # "hello world"
+print(text.title())      # "Hello World"
+print(text.capitalize()) # "Hello world"
+print(text.swapcase())   # "hELLO wORLD"
+
+# Whitespace handling
+messy = "  Hello World  "
+print(messy.strip())     # "Hello World" (both ends)
+print(messy.lstrip())    # "Hello World  " (left only)
+print(messy.rstrip())    # "  Hello World" (right only)
+
+# Strip specific characters
+chars = "xxHelloxx"
+print(chars.strip('x'))  # "Hello"
+
+# Center, left, right align
+print("Hi".center(10))      # "    Hi    "
+print("Hi".ljust(10, '-'))  # "Hi--------"
+print("Hi".rjust(10, '-'))  # "--------Hi"</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-9:</strong> Various case conversion methods.</p>
+                        <p><strong>Lines 12-17:</strong> <code>strip()</code>, <code>lstrip()</code>, <code>rstrip()</code> remove whitespace.</p>
+                        <p><strong>Lines 20-21:</strong> Can specify characters to strip instead of whitespace.</p>
+                        <p><strong>Lines 24-26:</strong> Alignment methods for text formatting.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4>Search and Replace:</h4>
+<pre><code>text = "Hello World World"
+
+# Find substring position
+print(text.find("World"))     # 6 (first occurrence)
+print(text.find("Python"))    # -1 (not found)
+print(text.rfind("World"))    # 12 (last occurrence)
+
+# Find with index (raises error if not found)
+print(text.index("World"))    # 6
+# text.index("Python")        # ValueError
+
+# Count occurrences
+print(text.count("World"))    # 2
+print(text.count("o"))        # 3
+
+# Replace
+print(text.replace("World", "Python"))
+# "Hello Python Python"
+
+# Replace with count limit
+print(text.replace("World", "Python", 1))
+# "Hello Python World"
+
+# Check start/end
+print(text.startswith("Hello"))  # True
+print(text.endswith("World"))    # True</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-7:</strong> <code>find()</code> returns -1 if not found, <code>rfind()</code> searches from end.</p>
+                        <p><strong>Lines 10-11:</strong> <code>index()</code> is like find but raises ValueError if not found.</p>
+                        <p><strong>Lines 14-15:</strong> <code>count()</code> returns the number of occurrences.</p>
+                        <p><strong>Lines 18-22:</strong> <code>replace()</code> can limit number of replacements.</p>
+                        <p><strong>Lines 25-26:</strong> Check what string starts or ends with.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4>Splitting and Joining:</h4>
+<pre><code># Split string into list
+sentence = "Hello World Python"
+words = sentence.split()  # Default: whitespace
+print(words)  # ['Hello', 'World', 'Python']
+
+# Split with delimiter
+csv = "apple,banana,cherry"
+fruits = csv.split(',')
+print(fruits)  # ['apple', 'banana', 'cherry']
+
+# Limit splits
+data = "a:b:c:d"
+print(data.split(':', 2))  # ['a', 'b', 'c:d']
+
+# Partition (splits into 3 parts)
+text = "user@example.com"
+before, sep, after = text.partition('@')
+print(before, after)  # user example.com
+
+# Join list into string
+words = ['Hello', 'World']
+print(' '.join(words))   # "Hello World"
+print('-'.join(words))   # "Hello-World"
+print(''.join(words))    # "HelloWorld"
+
+# Join with path separator
+import os
+paths = ['folder', 'subfolder', 'file.txt']
+full_path = os.path.join(*paths)
+
+# Split lines
+multi = "Line 1\nLine 2\nLine 3"
+lines = multi.splitlines()
+print(lines)  # ['Line 1', 'Line 2', 'Line 3']</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-5:</strong> <code>split()</code> without argument splits on any whitespace.</p>
+                        <p><strong>Lines 8-10:</strong> Specify delimiter for custom splitting.</p>
+                        <p><strong>Lines 17-19:</strong> <code>partition()</code> always returns 3 parts: before, separator, after.</p>
+                        <p><strong>Lines 22-25:</strong> <code>join()</code> is the reverse of split - combines list elements.</p>
+                        <p><strong>Lines 33-35:</strong> <code>splitlines()</code> handles different line ending styles.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>String Testing Methods</h2>
+                <p>Python provides methods to test string content, useful for validation.</p>
+                
+                <div class="code-block">
+                    <h4>Validation Methods:</h4>
+<pre><code># Character type tests
+print("hello".isalpha())     # True (letters only)
+print("hello123".isalnum())  # True (letters and numbers)
+print("12345".isdigit())     # True (digits only)
+print("123.45".isnumeric())  # False (not purely numeric)
+print("   ".isspace())       # True (whitespace only)
+
+# Case tests
+print("hello".islower())     # True
+print("HELLO".isupper())     # True
+print("Hello World".istitle())  # True
+
+# Check if printable
+print("Hello!".isprintable())  # True
+print("Hello\n".isprintable()) # False
+
+# Practical validation
+def validate_username(username):
+    if not username:
+        return False, "Username cannot be empty"
+    if not username.isalnum():
+        return False, "Username must be alphanumeric"
+    if len(username) < 3:
+        return False, "Username too short"
+    return True, "Valid username"
+
+print(validate_username("user123"))  # (True, "Valid username")
+
+# Check for valid identifier
+print("my_var".isidentifier())   # True
+print("123var".isidentifier())   # False (starts with number)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-7:</strong> Test what characters the string contains.</p>
+                        <p><strong>Lines 10-12:</strong> Check case of string content.</p>
+                        <p><strong>Lines 19-27:</strong> Combining tests for input validation.</p>
+                        <p><strong>Lines 30-31:</strong> <code>isidentifier()</code> checks if string is a valid Python identifier.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>String Formatting</h2>
+                <p>Python offers multiple ways to format strings with dynamic values. F-strings are the modern, recommended approach.</p>
+                
+                <div class="code-block">
+                    <h4>F-Strings (Python 3.6+):</h4>
+<pre><code>name = "Alice"
+age = 25
+score = 95.6789
+
+# Basic f-string
+print(f"Hello, {name}!")
+
+# Expressions inside braces
+print(f"Next year you'll be {age + 1}")
+
+# Format specifications
+print(f"Score: {score:.2f}")      # "Score: 95.68"
+print(f"Score: {score:.0f}")      # "Score: 96" (no decimals)
+print(f"Number: {42:05d}")        # "Number: 00042"
+print(f"Percent: {0.856:.1%}")    # "Percent: 85.6%"
+
+# Alignment and width
+print(f"|{name:<10}|")  # |Alice     | (left)
+print(f"|{name:>10}|")  # |     Alice| (right)
+print(f"|{name:^10}|")  # |  Alice   | (center)
+
+# Number formatting
+big_num = 1234567.89
+print(f"{big_num:,.2f}")   # "1,234,567.89"
+print(f"{big_num:_,.2f}")  # "1_234_567.89" (underscore separator)
+
+# Date formatting
+from datetime import datetime
+now = datetime.now()
+print(f"Date: {now:%Y-%m-%d %H:%M}")
+
+# Debug mode (Python 3.8+)
+x = 10
+y = 20
+print(f"{x=}, {y=}")  # "x=10, y=20"
+print(f"{x + y =}")   # "x + y =30"</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 7-8:</strong> F-strings evaluate expressions inside curly braces.</p>
+                        <p><strong>Lines 11-15:</strong> Format specifiers after colon: .Nf for decimals, :Nd for width.</p>
+                        <p><strong>Lines 18-20:</strong> Alignment: < for left, > for right, ^ for center.</p>
+                        <p><strong>Lines 23-25:</strong> Number formatting with comma or underscore separators.</p>
+                        <p><strong>Lines 34-36:</strong> Debug mode shows variable name and value.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4>Alternative Formatting Methods:</h4>
+<pre><code>name = "Alice"
+age = 25
+
+# format() method
+print("Hello, {}".format(name))
+print("Hello, {name}, age {age}".format(name=name, age=age))
+
+# Positional and named arguments
+print("{0} is {1} years old. {0} likes Python.".format(name, age))
+
+# %-formatting (old style)
+print("Hello, %s" % name)
+print("Age: %d, Score: %.2f" % (age, 95.67))
+
+# Template strings (for user-provided format strings)
+from string import Template
+t = Template("Hello, $name!")
+print(t.substitute(name="Alice"))
+
+# Safe substitution (doesn't fail on missing)
+t = Template("Hello, $name, your score is $score")
+result = t.safe_substitute(name="Alice")
+print(result)  # "Hello, Alice, your score is $score"</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> <code>format()</code> method is flexible but more verbose than f-strings.</p>
+                        <p><strong>Line 9:</strong> Can reference arguments by position multiple times.</p>
+                        <p><strong>Lines 12-13:</strong> %-formatting is older but still seen in legacy code.</p>
+                        <p><strong>Lines 16-22:</strong> Template strings are safer for user-provided format strings.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Regular Expressions</h2>
+                <p>For complex pattern matching, Python's re module provides regular expression support.</p>
+                
+                <div class="code-block">
+                    <h4>Pattern Matching:</h4>
+<pre><code>import re
+
+text = "My phone is 555-1234 and email is user@example.com"
+
+# Search for pattern
+match = re.search(r'\d{3}-\d{4}', text)
+if match:
+    print(match.group())  # "555-1234"
+    print(match.start())  # 12 (start position)
+
+# Find all matches
+emails = re.findall(r'\w+@\w+\.\w+', text)
+print(emails)  # ['user@example.com']
+
+# Find all with groups
+text = "John: 25, Jane: 30, Bob: 35"
+matches = re.findall(r'(\w+): (\d+)', text)
+print(matches)  # [('John', '25'), ('Jane', '30'), ('Bob', '35')]
+
+# Replace with pattern
+result = re.sub(r'\d{3}-\d{4}', 'XXX-XXXX', text)
+print(result)  # Phone number replaced
+
+# Split by pattern
+words = re.split(r'[,\s]+', "apple, banana, cherry")
+print(words)  # ['apple', 'banana', 'cherry']
+
+# Common patterns
+patterns = {
+    'email': r'^[\w\.-]+@[\w\.-]+\.\w+$',
+    'phone': r'^\d{3}-\d{3}-\d{4}$',
+    'url': r'^https?://[\w\.-]+\.\w+',
+    'date': r'^\d{4}-\d{2}-\d{2}$'
+}
+
+def validate(pattern_name, text):
+    return bool(re.match(patterns[pattern_name], text))
+
+print(validate('email', 'user@example.com'))  # True</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-8:</strong> <code>re.search()</code> finds first match, returns a Match object.</p>
+                        <p><strong>Lines 11-12:</strong> <code>re.findall()</code> returns all matches as a list.</p>
+                        <p><strong>Lines 15-17:</strong> Groups with parentheses return tuples.</p>
+                        <p><strong>Lines 20-21:</strong> <code>re.sub()</code> replaces pattern matches.</p>
+                        <p><strong>Lines 24-35:</strong> Common regex patterns for validation.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Regex Tip</h4>
+                    <p>Use raw strings (r"...") for regex patterns to avoid escaping backslashes. Regular expressions are powerful but complex - start simple and test incrementally.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a function that validates and formats a phone number.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code>import re
+
+def format_phone(phone):
+    """
+    Format a phone number to (XXX) XXX-XXXX.
+    Accepts formats: 5551234567, 555-123-4567, 
+    (555) 123-4567, etc.
+    
+    Returns formatted string or None if invalid.
+    """
+    # Remove all non-digit characters
+    digits = re.sub(r'\D', '', phone)
+    
+    # Check if valid (10 digits)
+    if len(digits) != 10:
+        return None
+    
+    # Format: (XXX) XXX-XXXX
+    # Your code here...
+    return formatted
+
+# Test cases
+print(format_phone("555-123-4567"))    # (555) 123-4567
+print(format_phone("(555) 123-4567"))  # (555) 123-4567
+print(format_phone("5551234567"))      # (555) 123-4567
+print(format_phone("123-456-789"))     # None (too few digits)
+print(format_phone("123-456-78901"))   # None (too many digits)</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Solution Hint</h4>
+                    <p>Use string slicing or f-strings: <code>f"({digits[:3]}) {digits[3:6]}-{digits[6:]}"</code></p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson8.html" class="nav-button prev">← Previous: Dictionaries & Sets</a>
+                <a href="lesson10.html" class="nav-button next">Next: File Handling →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

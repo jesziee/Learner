@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lists and Tables - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>📋 Lesson 5: Lists and Tables</h1>
+            <p>Organizing data with lists and tables</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Ordered Lists</h2>
+                <p>Use <ol> for numbered lists where order matters:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">ol</span>>
+    <<span class="keyword">li</span>>First item</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>Second item</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>Third item</<span class="keyword">li</span>>
+</<span class="keyword">ol</span>>
+
+<span class="comment">// Output:</span>
+<span class="number">1.</span> First item
+<span class="number">2.</span> Second item
+<span class="number">3.</span> Third item
+
+<span class="comment">// Each item is wrapped in <li> (list item)</span></code></pre>
+                </div>
+                
+                <h3>Ordered List Attributes</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Change numbering type</span>
+<<span class="keyword">ol</span> <span class="variable">type</span>=<span class="string">"A"</span>>        <span class="comment">// A, B, C...</span>
+<<span class="keyword">ol</span> <span class="variable">type</span>=<span class="string">"a"</span>>        <span class="comment">// a, b, c...</span>
+<<span class="keyword">ol</span> <span class="variable">type</span>=<span class="string">"I"</span>>        <span class="comment">// I, II, III...</span>
+<<span class="keyword">ol</span> <span class="variable">type</span>=<span class="string">"i"</span>>        <span class="comment">// i, ii, iii...</span>
+<<span class="keyword">ol</span> <span class="variable">type</span>=<span class="string">"1"</span>>        <span class="comment">// 1, 2, 3... (default)</span>
+
+<span class="comment">// Start from a different number</span>
+<<span class="keyword">ol</span> <span class="variable">start</span>=<span class="string">"5"</span>>
+    <<span class="keyword">li</span>>This is item 5</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>This is item 6</<span class="keyword">li</span>>
+</<span class="keyword">ol</span>>
+
+<span class="comment">// Reverse the order</span>
+<<span class="keyword">ol</span> <span class="variable">reversed</span>>
+    <<span class="keyword">li</span>>Third</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>Second</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>First</<span class="keyword">li</span>>
+</<span class="keyword">ol</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Unordered Lists</h2>
+                <p>Use <ul> for bullet-point lists where order doesn't matter:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">ul</span>>
+    <<span class="keyword">li</span>>Apples</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>Oranges</<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>Bananas</<span class="keyword">li</span>>
+</<span class="keyword">ul</span>>
+
+<span class="comment">// Output:</span>
+• Apples
+• Oranges
+• Bananas</code></pre>
+                </div>
+                
+                <h3>Changing Bullet Style (with CSS)</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// CSS controls bullet style:</span>
+<<span class="keyword">ul</span> <span class="variable">style</span>=<span class="string">"list-style-type: disc;"</span>>    <span class="comment">// • (default)</span>
+<<span class="keyword">ul</span> <span class="variable">style</span>=<span class="string">"list-style-type: circle;"</span>>  <span class="comment">// ○</span>
+<<span class="keyword">ul</span> <span class="variable">style</span>=<span class="string">"list-style-type: square;"</span>>  <span class="comment">// ■</span>
+<<span class="keyword">ul</span> <span class="variable">style</span>=<span class="string">"list-style-type: none;"</span>>    <span class="comment">// No bullets</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Nested Lists</h2>
+                <p>Lists can be nested inside other lists:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">ul</span>>
+    <<span class="keyword">li</span>>Fruits
+        <<span class="keyword">ul</span>>
+            <<span class="keyword">li</span>>Apples</<span class="keyword">li</span>>
+            <<span class="keyword">li</span>>Oranges</<span class="keyword">li</span>>
+        </<span class="keyword">ul</span>>
+    </<span class="keyword">li</span>>
+    <<span class="keyword">li</span>>Vegetables
+        <<span class="keyword">ul</span>>
+            <<span class="keyword">li</span>>Carrots</<span class="keyword">li</span>>
+            <<span class="keyword">li</span>>Broccoli</<span class="keyword">li</span>>
+        </<span class="keyword">ul</span>>
+    </<span class="keyword">li</span>>
+</<span class="keyword">ul</span>>
+
+<span class="comment">// Output:</span>
+• Fruits
+    ○ Apples
+    ○ Oranges
+• Vegetables
+    ○ Carrots
+    ○ Broccoli</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Important:</strong> Nested lists must be inside an <li> element, not directly inside another list element.</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Description Lists</h2>
+                <p>Use <dl> for lists with terms and descriptions:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">dl</span>>
+    <<span class="keyword">dt</span>>HTML</<span class="keyword">dt</span>>
+    <<span class="keyword">dd</span>>HyperText Markup Language - the structure of web pages</<span class="keyword">dd</span>>
+    
+    <<span class="keyword">dt</span>>CSS</<span class="keyword">dt</span>>
+    <<span class="keyword">dd</span>>Cascading Style Sheets - styling for web pages</<span class="keyword">dd</span>>
+    
+    <<span class="keyword">dt</span>>JavaScript</<span class="keyword">dt</span>>
+    <<span class="keyword">dd</span>>A programming language for interactive web pages</<span class="keyword">dd</span>>
+</<span class="keyword">dl</span>>
+
+<span class="comment">// dt = description term</span>
+<span class="comment">// dd = description details</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Basic Table Structure</h2>
+                <p>Tables organize data in rows and columns:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">table</span>>
+    <<span class="keyword">tr</span>>                          <span class="comment">// Table row</span>
+        <<span class="keyword">th</span>>Name</<span class="keyword">th</span>>              <span class="comment">// Table header cell</span>
+        <<span class="keyword">th</span>>Age</<span class="keyword">th</span>>
+        <<span class="keyword">th</span>>City</<span class="keyword">th</span>>
+    </<span class="keyword">tr</span>>
+    <<span class="keyword">tr</span>>
+        <<span class="keyword">td</span>>John</<span class="keyword">td</span>>             <span class="comment">// Table data cell</span>
+        <<span class="keyword">td</span>>25</<span class="keyword">td</span>>
+        <<span class="keyword">td</span>>New York</<span class="keyword">td</span>>
+    </<span class="keyword">tr</span>>
+    <<span class="keyword">tr</span>>
+        <<span class="keyword">td</span>>Jane</<span class="keyword">td</span>>
+        <<span class="keyword">td</span>>30</<span class="keyword">td</span>>
+        <<span class="keyword">td</span>>Los Angeles</<span class="keyword">td</span>>
+    </<span class="keyword">tr</span>>
+</<span class="keyword">table</span>></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Table elements:</strong><br>
+                    <table> - Container for the entire table<br>
+                    <tr> - Table row<br>
+                    <th> - Table header (bold, centered by default)<br>
+                    <td> - Table data (regular cell)</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Table Sections</h2>
+                <p>Organize tables into logical sections:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">table</span>>
+    <<span class="keyword">thead</span>>                      <span class="comment">// Table head section</span>
+        <<span class="keyword">tr</span>>
+            <<span class="keyword">th</span>>Name</<span class="keyword">th</span>>
+            <<span class="keyword">th</span>>Score</<span class="keyword">th</span>>
+        </<span class="keyword">tr</span>>
+    </<span class="keyword">thead</span>>
+    <<span class="keyword">tbody</span>>                      <span class="comment">// Table body section</span>
+        <<span class="keyword">tr</span>>
+            <<span class="keyword">td</span>>Alice</<span class="keyword">td</span>>
+            <<span class="keyword">td</span>>95</<span class="keyword">td</span>>
+        </<span class="keyword">tr</span>>
+        <<span class="keyword">tr</span>>
+            <<span class="keyword">td</span>>Bob</<span class="keyword">td</span>>
+            <<span class="keyword">td</span>>87</<span class="keyword">td</span>>
+        </<span class="keyword">tr</span>>
+    </<span class="keyword">tbody</span>>
+    <<span class="keyword">tfoot</span>>                      <span class="comment">// Table footer section</span>
+        <<span class="keyword">tr</span>>
+            <<span class="keyword">td</span>>Average</<span class="keyword">td</span>>
+            <<span class="keyword">td</span>>91</<span class="keyword">td</span>>
+        </<span class="keyword">tr</span>>
+    </<span class="keyword">tfoot</span>>
+</<span class="keyword">table</span>></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Why use sections?</strong> They improve accessibility, help with printing (header repeats on each page), and make styling easier with CSS.</p>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Spanning Rows and Columns</h2>
+                <p>Cells can span multiple rows or columns:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">table</span>>
+    <<span class="keyword">tr</span>>
+        <<span class="keyword">th</span> <span class="variable">colspan</span>=<span class="string">"3"</span>>Quarterly Report</<span class="keyword">th</span>>  <span class="comment">// Spans 3 columns</span>
+    </<span class="keyword">tr</span>>
+    <<span class="keyword">tr</span>>
+        <<span class="keyword">th</span>>Q1</<span class="keyword">th</span>>
+        <<span class="keyword">th</span>>Q2</<span class="keyword">th</span>>
+        <<span class="keyword">th</span>>Q3</<span class="keyword">th</span>>
+    </<span class="keyword">tr</span>>
+    <<span class="keyword">tr</span>>
+        <<span class="keyword">td</span> <span class="variable">rowspan</span>=<span class="string">"2"</span>>Sales</<span class="keyword">td</span>>    <span class="comment">// Spans 2 rows</span>
+        <<span class="keyword">td</span>>$1000</<span class="keyword">td</span>>
+        <<span class="keyword">td</span>>$1200</<span class="keyword">td</span>>
+    </<span class="keyword">tr</span>>
+    <<span class="keyword">tr</span>>
+        <<span class="keyword">td</span>>$1100</<span class="keyword">td</span>>
+        <<span class="keyword">td</span>>$1300</<span class="keyword">td</span>>
+    </<span class="keyword">tr</span>>
+</<span class="keyword">table</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 8 -->
+            <section class="lesson-section">
+                <h2>Table Caption</h2>
+                <p>Add a title to your table:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">table</span>>
+    <<span class="keyword">caption</span>>Monthly Sales Report</<span class="keyword">caption</span>>
+    <<span class="keyword">thead</span>>
+        <<span class="keyword">tr</span>>
+            <<span class="keyword">th</span>>Month</<span class="keyword">th</span>>
+            <<span class="keyword">th</span>>Sales</<span class="keyword">th</span>>
+        </<span class="keyword">tr</span>>
+    </<span class="keyword">thead</span>>
+    <span class="comment">// ... more rows</span>
+</<span class="keyword">table</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><ol>:</strong> Ordered (numbered) lists</li>
+                            <li><strong><ul>:</strong> Unordered (bulleted) lists</li>
+                            <li><strong><li>:</strong> List item (inside ol or ul)</li>
+                            <li><strong><dl>/<dt>/<dd>:</strong> Description lists</li>
+                            <li><strong><table>:</strong> Container for tables</li>
+                            <li><strong><tr>:</strong> Table row</li>
+                            <li><strong><th>:</strong> Table header cell</li>
+                            <li><strong><td>:</strong> Table data cell</li>
+                            <li><strong>colspan/rowspan:</strong> Merge cells across columns/rows</li>
+                            <li><strong><thead>/<tbody>/<tfoot>:</strong> Logical table sections</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson4.html" class="nav-btn prev">← Previous: Links and Images</a>
+                <a href="lesson6.html" class="nav-btn next">Next: Forms and Input →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

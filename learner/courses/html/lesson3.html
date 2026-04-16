@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Elements - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>📝 Lesson 3: Text Elements</h1>
+            <p>Headings, paragraphs, and text formatting</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Headings</h2>
+                <p>HTML has six levels of headings, from <h1> (most important) to <h6> (least important). Headings create a hierarchy for your content.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// All six heading levels:</span>
+<<span class="keyword">h1</span>>Heading 1 - Main Title</<span class="keyword">h1</span>>
+<<span class="keyword">h2</span>>Heading 2 - Sections</<span class="keyword">h2</span>>
+<<span class="keyword">h3</span>>Heading 3 - Subsections</<span class="keyword">h3</span>>
+<<span class="keyword">h4</span>>Heading 4 - Minor Sections</<span class="keyword">h4</span>>
+<<span class="keyword">h5</span>>Heading 5 - Small Headings</<span class="keyword">h5</span>>
+<<span class="keyword">h6</span>>Heading 6 - Smallest</<span class="keyword">h6</span>></code></pre>
+                </div>
+                
+                <h3>Heading Best Practices</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>Use only <strong>one <h1></strong> per page (the main title)</li>
+                    <li>Maintain proper hierarchy (don't skip from h1 to h3)</li>
+                    <li>Use headings for structure, not just to make text bigger</li>
+                    <li>Search engines use headings to understand page content</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Semantic meaning:</strong> Headings aren't just about size - they tell screen readers and search engines what's important. A proper heading structure improves accessibility and SEO.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Paragraphs</h2>
+                <p>The <p> element defines a paragraph of text. Browsers automatically add space above and below paragraphs.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>>This is a paragraph. It contains text that will wrap 
+automatically when it reaches the edge of its container.</<span class="keyword">p</span>>
+
+<<span class="keyword">p</span>>This is another paragraph. Each paragraph gets its own 
+spacing from the one above and below it.</<span class="keyword">p</span>>
+
+<span class="comment">// Output:</span>
+<span class="comment">// Two separate blocks of text with space between them</span></code></pre>
+                </div>
+                
+                <h3>White Space in HTML</h3>
+                <p>HTML collapses multiple spaces and line breaks into a single space:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// This HTML:</span>
+<<span class="keyword">p</span>>This    has    multiple    spaces</<span class="keyword">p</span>>
+
+<span class="comment">// Displays as:</span>
+This has multiple spaces
+
+<span class="comment">// Multiple lines also collapse:</span>
+<<span class="keyword">p</span>>Line one
+Line two
+Line three</<span class="keyword">p</span>>
+
+<span class="comment">// Displays as:</span>
+Line one Line two Line three</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Why?</strong> HTML was designed for structure, not formatting. Use CSS to control spacing and layout, not multiple spaces or empty paragraphs.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Line Breaks</h2>
+                <p>Use <br> to create a line break within a paragraph without starting a new paragraph.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>>First line<<span class="keyword">br</span>>
+Second line<<span class="keyword">br</span>>
+Third line</<span class="keyword">p</span>>
+
+<span class="comment">// Use case: addresses, poems, lyrics</span>
+<<span class="keyword">p</span>>
+    123 Main Street<<span class="keyword">br</span>>
+    Anytown, USA 12345<<span class="keyword">br</span>>
+    Phone: (555) 123-4567
+</<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Don't overuse <br>:</strong> It's meant for line breaks within content, not for creating spacing between elements. Use CSS margins for spacing.</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Text Formatting Elements</h2>
+                <p>HTML provides elements to format text with semantic meaning:</p>
+                
+                <h3>Strong and Emphasis</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Strong importance (typically displays bold)</span>
+<<span class="keyword">strong</span>>Important text</<span class="keyword">strong</span>>
+
+<span class="comment">// Emphasis (typically displays italic)</span>
+<<span class="keyword">em</span>>Emphasized text</<span class="keyword">em</span>>
+
+<span class="comment">// Example sentence:</span>
+<<span class="keyword">p</span>>This is <<span class="keyword">strong</span>>very important</<span class="keyword">strong</span>> information.</<span class="keyword">p</span>>
+<<span class="keyword">p</span>>I <<span class="keyword">em</span>>really</<span class="keyword">em</span>> want to go!</<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <h3>Presentation Elements (Use Sparingly)</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Bold text (no semantic meaning)</span>
+<<span class="keyword">b</span>>Bold text</<span class="keyword">b</span>>
+
+<span class="comment">// Italic text (no semantic meaning)</span>
+<<span class="keyword">i</span>>Italic text</<span class="keyword">i</span>>
+
+<span class="comment">// Underlined text</span>
+<<span class="keyword">u</span>>Underlined text</<span class="keyword">u</span>>
+
+<span class="comment">// Strikethrough</span>
+<<span class="keyword">s</span>>Strikethrough text</<span class="keyword">s</span>></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Strong vs Bold:</strong> <strong> means "this is important" (semantic). <b> just means "make this bold" (presentational). Use <strong> for accessibility - screen readers may announce it differently.</p>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Other Text Elements</h2>
+                
+                <h3>Mark (Highlight)</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>>This is <<span class="keyword">mark</span>>highlighted text</<span class="keyword">mark</span>>.</<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <h3>Small</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>><<span class="keyword">small</span>>Terms and conditions apply.</<span class="keyword">small</span>></<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <h3>Subscript and Superscript</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Subscript (below baseline)</span>
+H<<span class="keyword">sub</span>>2</<span class="keyword">sub</span>>O    <span class="comment">// Water formula</span>
+
+<span class="comment">// Superscript (above baseline)</span>
+E = mc<<span class="keyword">sup</span>>2</<span class="keyword">sup</span>>    <span class="comment">// Einstein's equation</span>
+1<<span class="keyword">sup</span>>st</<span class="keyword">sup</span> 2<<span class="keyword">sup</span>>nd</<span class="keyword">sup</span>> 3<<span class="keyword">sup</span>>rd</<span class="keyword">sup</span>>    <span class="comment">// Ordinal numbers</span></code></pre>
+                </div>
+                
+                <h3>Code Elements</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Inline code</span>
+<<span class="keyword">p</span>>Use the <<span class="keyword">code</span>>console.log()</<span class="keyword">code</span>> function.</<span class="keyword">p</span>>
+
+<span class="comment">// Preformatted text (preserves spaces and line breaks)</span>
+<<span class="keyword">pre</span>>
+function greet() {
+    console.log("Hello!");
+}
+</<span class="keyword">pre</span>>
+
+<span class="comment">// Keyboard input</span>
+<<span class="keyword">p</span>>Press <<span class="keyword">kbd</span>>Ctrl</<span class="keyword">kbd</span>> + <<span class="keyword">kbd</span>>C</<span class="keyword">kbd</span>> to copy.</<span class="keyword">p</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Blockquote and Quote</h2>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Blockquote (for longer quotes)</span>
+<<span class="keyword">blockquote</span>>
+    <<span class="keyword">p</span>>The only way to do great work is to love what you do.</<span class="keyword">p</span>>
+    <<span class="keyword">footer</span>>— Steve Jobs</<span class="keyword">footer</span>>
+</<span class="keyword">blockquote</span>>
+
+<span class="comment">// Inline quote</span>
+<<span class="keyword">p</span>>He said, <<span class="keyword">q</span>>Hello, world!</<span class="keyword">q</span>> and smiled.</<span class="keyword">p</span>>
+
+<span class="comment">// With citation</span>
+<<span class="keyword">blockquote</span> <span class="variable">cite</span>=<span class="string">"https://example.com/quote-source"</span>>
+    <<span class="keyword">p</span>>A famous quote here.</<span class="keyword">p</span>>
+</<span class="keyword">blockquote</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Horizontal Rule</h2>
+                <p>The <hr> element creates a thematic break between sections.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">h2</span>>Chapter 1</<span class="keyword">h2</span>>
+<<span class="keyword">p</span>>Content of chapter 1...</<span class="keyword">p</span>>
+
+<<span class="keyword">hr</span>>
+
+<<span class="keyword">h2</span>>Chapter 2</<span class="keyword">h2</span>>
+<<span class="keyword">p</span>>Content of chapter 2...</<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Semantic meaning:</strong> <hr> isn't just a visual line - it represents a thematic change in content, like a scene change in a story or a transition to a new topic.</p>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><h1>-<h6>:</strong> Use for headings, only one h1 per page</li>
+                            <li><strong><p>:</strong> For paragraphs of text</li>
+                            <li><strong><br>:</strong> Line break within text</li>
+                            <li><strong><strong>:</strong> Important text (semantic)</li>
+                            <li><strong><em>:</strong> Emphasized text (semantic)</li>
+                            <li><strong><code>:</strong> Inline code snippets</li>
+                            <li><strong><pre>:</strong> Preserves formatting and whitespace</li>
+                            <li><strong>Semantic elements:</strong> Add meaning, not just style</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson2.html" class="nav-btn prev">← Previous: Document Structure</a>
+                <a href="lesson4.html" class="nav-btn next">Next: Links and Images →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

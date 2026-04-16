@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Display Property - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Intermediate Level</span>
+            <h1>Lesson 5: Display Property</h1>
+            <p>Control how elements behave in the layout</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 42%;"></div>
+            </div>
+            <span class="progress-text">Lesson 5 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>Understanding the Display Property</h2>
+                <p>The display property is one of the most important CSS properties. It determines how an element is treated in the layout — whether it starts on a new line, how width and height work, and how it interacts with other elements. Mastering display is essential for creating any layout.</p>
+            </section>
+            
+            <section>
+                <h2>1. Block Display</h2>
+                <p>Block elements take up the full width available and always start on a new line.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Block elements */
+div, p, h1-h6, section, article, header, footer, nav {
+  display: block;    /* Default for these elements */
+}
+
+/* Making an element block */
+span {
+  display: block;
+}
+
+/* Block element characteristics: */
+.block-box {
+  display: block;
+  
+  /* ✓ Starts on a new line */
+  /* ✓ Takes full width available (width: auto) */
+  /* ✓ Width and height properties work */
+  /* ✓ Padding, margin, border work on all sides */
+  /* ✓ Can contain other block or inline elements */
+}
+
+/* Example: Three divs stacked vertically */
+.container div {
+  display: block;
+  margin-bottom: 10px;
+}
+/* Result:
+   ┌─────────────────┐
+   │     Div 1       │
+   └─────────────────┘
+   ┌─────────────────┐
+   │     Div 2       │
+   └─────────────────┘
+   ┌─────────────────┐
+   │     Div 3       │
+   └─────────────────┘
+*/</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Block elements:</strong>
+                    <ul>
+                        <li>Always start on a new line</li>
+                        <li>Expand to fill container width</li>
+                        <li>Can set width, height, margins</li>
+                        <li>Examples: div, p, h1, section, article</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Inline Display</h2>
+                <p>Inline elements flow within text and only take up as much width as necessary.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Inline elements */
+span, a, strong, em, b, i {
+  display: inline;    /* Default for these elements */
+}
+
+/* Making an element inline */
+div {
+  display: inline;
+}
+
+/* Inline element characteristics: */
+.inline-element {
+  display: inline;
+  
+  /* ✗ Does NOT start on a new line */
+  /* ✓ Flows with text */
+  /* ✗ Width and height properties are IGNORED */
+  /* ✗ Vertical margins/padding don't push other elements */
+  /* ✓ Horizontal margins/padding work */
+}
+
+/* Example: Links within text */
+p {
+  font-size: 16px;
+}
+
+p a {
+  display: inline;    /* Links flow with text */
+  color: #7C3AED;
+  padding: 0 5px;     /* Horizontal padding works */
+  background: #f0e6ff;
+}
+
+/* HTML: */
+<p>This is a paragraph with <a href="#">a link</a> inside it.</p></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Inline elements:</strong>
+                    <ul>
+                        <li>Don't break the flow of text</li>
+                        <li>Width/height determined by content</li>
+                        <li>Can't set width or height</li>
+                        <li>Examples: span, a, strong, em</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Important:</strong> Vertical padding and margins on inline elements don't affect surrounding content — they visually overflow but don't push other elements.
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Inline-Block Display</h2>
+                <p>Inline-block combines the flow of inline with the box model of block.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Inline-block: Best of both worlds */
+.button {
+  display: inline-block;
+  
+  /* ✓ Flows like inline (doesn't break line) */
+  /* ✓ Width and height work like block */
+  /* ✓ Padding, margin, border work on all sides */
+  /* ✓ Can set vertical alignment */
+}
+
+/* Example: Navigation links */
+.nav-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #7C3AED;
+  color: white;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+/* Result: Buttons sit side-by-side */
+/* [Home] [About] [Contact] */
+
+/* Example: Buttons in a row */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #7C3AED;
+  color: white;
+}
+
+/* HTML: */
+<button class="btn btn-primary">Save</button>
+<button class="btn btn-secondary">Cancel</button>
+/* Buttons appear side by side, not stacked */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Inline-block elements:</strong>
+                    <ul>
+                        <li>Flow inline but can have dimensions</li>
+                        <li>Width and height can be set</li>
+                        <li>Respects vertical-align property</li>
+                        <li>Commonly used for buttons, navigation</li>
+                    </ul>
+                </div>
+                
+                <h3>The Inline-Block Gap Issue</h3>
+                <div class="code-block">
+                    <pre><code>/* Inline-block elements have a small gap between them */
+/* This is due to whitespace in HTML */
+
+/* The gap appears here: */
+<div class="box"></div>
+<div class="box"></div>
+/* Gap between boxes! */
+
+/* Solutions: */
+
+/* 1. Remove HTML whitespace */
+<div class="box"></div><div class="box"></div>
+
+/* 2. Negative margin */
+.box {
+  display: inline-block;
+  margin-right: -4px;
+}
+
+/* 3. Parent font-size: 0 */
+.parent {
+  font-size: 0;
+}
+.parent .box {
+  font-size: 16px;    /* Restore font size */
+}
+
+/* 4. Use Flexbox instead (modern solution) */
+.parent {
+  display: flex;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. None Display</h2>
+                <p>Display none completely removes the element from the layout.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Hide element completely */
+.hidden {
+  display: none;
+  /* - Element is removed from document flow */
+  /* - Takes up no space */
+  /* - Not visible, not accessible to screen readers */
+  /* - Children are also hidden */
+}
+
+/* Contrast with visibility */
+.invisible {
+  visibility: hidden;
+  /* - Element is invisible */
+  /* - STILL takes up space */
+  /* - Layout is preserved */
+}
+
+/* Contrast with opacity */
+.transparent {
+  opacity: 0;
+  /* - Element is transparent */
+  /* - STILL takes up space */
+  /* - Can still be interacted with */
+  /* - Transition-able */
+}
+
+/* Toggle pattern with JavaScript */
+.modal {
+  display: none;    /* Hidden by default */
+}
+
+.modal.active {
+  display: block;   /* Shown when active */
+}
+
+/* Mobile menu pattern */
+.nav-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-menu.open {
+    display: block;
+  }
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Hiding methods comparison:</strong>
+                    <ul>
+                        <li><code>display: none</code> — Removed from layout, no space</li>
+                        <li><code>visibility: hidden</code> — Invisible, space preserved</li>
+                        <li><code>opacity: 0</code> — Transparent, space preserved, interactive</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Modern Display Values</h2>
+                <p>CSS has many more display values for specific use cases.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Flexbox - modern layout */
+.container {
+  display: flex;
+  /* Children become flex items */
+}
+
+.item {
+  flex: 1;    /* Grow to fill space */
+}
+
+/* Grid - two-dimensional layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Table display values */
+.table-container {
+  display: table;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+}
+
+/* List item */
+.custom-list-item {
+  display: list-item;
+  list-style-type: disc;
+}
+
+/* Flow-root - creates block formatting context */
+.bfc {
+  display: flow-root;
+  /* Contains floats, prevents margin collapse */
+}
+
+/* Contents - element acts like it doesn't exist */
+.wrapper {
+  display: contents;
+  /* Element itself doesn't generate a box */
+  /* Only its children are rendered */
+}
+
+/* Useful for styling without extra wrapper */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-wrapper {
+  display: contents;    /* Doesn't create extra grid cell */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Two-Value Display Syntax</h2>
+                <p>Modern CSS uses two values: outer and inner display type.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Two-value syntax: display: outer inner; */
+
+/* Outer: how element behaves in layout */
+/* Inner: how children are laid out */
+
+/* Traditional vs Modern */
+.container {
+  /* Traditional */
+  display: flex;
+  
+  /* Modern equivalent */
+  display: block flex;   /* Block-level flex container */
+}
+
+.inline-flex-container {
+  /* Traditional */
+  display: inline-flex;
+  
+  /* Modern equivalent */
+  display: inline flex;  /* Inline-level flex container */
+}
+
+.grid-container {
+  display: block grid;   /* Block-level grid container */
+}
+
+.inline-grid-container {
+  display: inline grid;  /* Inline-level grid container */
+}
+
+/* Why two values? */
+/* More explicit and flexible */
+/* Separates outer and inner behavior */
+/* Better describes what's happening */</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Note:</strong> Two-value syntax is well-supported in modern browsers. Using the single-value shorthand (flex, grid) is still perfectly fine and widely used.
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Practical Examples</h2>
+                
+                <h3>Navigation Menu</h3>
+                <div class="code-block">
+                    <pre><code>/* Horizontal navigation with inline-block */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  display: inline-block;    /* List items side by side */
+}
+
+nav a {
+  display: inline-block;    /* Clickable area larger than text */
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav a:hover {
+  background-color: #7C3AED;
+  color: white;
+}</code></pre>
+                </div>
+                
+                <h3>Card Grid with inline-block</h3>
+                <div class="code-block">
+                    <pre><code>/* Cards in a grid pattern */
+.card-grid {
+  text-align: center;       /* Center the cards */
+}
+
+.card {
+  display: inline-block;
+  width: 300px;
+  margin: 10px;
+  padding: 20px;
+  text-align: left;         /* Reset text alignment */
+  vertical-align: top;      /* Align tops of cards */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}</code></pre>
+                </div>
+                
+                <h3>Show/Hide Content</h3>
+                <div class="code-block">
+                    <pre><code>/* Accordion pattern */
+.accordion-content {
+  display: none;
+}
+
+.accordion-item.active .accordion-content {
+  display: block;
+}
+
+/* Tab content */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Responsive hiding */
+.sidebar {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;    /* Hide on mobile */
+  }
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Converting Elements</h2>
+                <p>You can change the natural display type of any element.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Link as button */
+a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #7C3AED;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Span as block container */
+span.block-style {
+  display: block;
+  width: 200px;
+  padding: 20px;
+}
+
+/* List as horizontal nav */
+ul.horizontal-nav {
+  list-style: none;
+}
+
+ul.horizontal-nav li {
+  display: inline-block;
+}
+
+/* Div as inline element */
+div.inline-box {
+  display: inline;
+  /* Now flows with text */
+}
+
+/* Paragraph as inline code */
+p.code-line {
+  display: inline;
+  font-family: monospace;
+  background: #f5f5f5;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create this layout using display properties:</p>
+                <div class="code-block">
+                    <pre><code>/* Create:
+   1. A horizontal navigation bar
+   2. Buttons that sit side by side
+   3. A hidden message that shows on hover
+   4. Cards that arrange in a row
+*/
+
+/* Use: inline, block, inline-block, none */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Block elements start on new lines and take full width</li>
+                    <li>Inline elements flow with text, can't have width/height</li>
+                    <li>Inline-block flows inline but respects width/height</li>
+                    <li>display: none removes element from layout completely</li>
+                    <li>visibility: hidden hides but preserves space</li>
+                    <li>Modern display uses flex and grid for layouts</li>
+                    <li>Two-value syntax separates outer and inner display</li>
+                    <li>Any element's display type can be changed</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson4.html" class="btn-secondary">← Previous: Box Model</a>
+            <a href="lesson6.html" class="btn-primary">Next: Positioning →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

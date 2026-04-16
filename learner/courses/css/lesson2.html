@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Selectors - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Beginner Level</span>
+            <h1>Lesson 2: Selectors</h1>
+            <p>Learn how to target HTML elements for styling</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 17%;"></div>
+            </div>
+            <span class="progress-text">Lesson 2 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>What are Selectors?</h2>
+                <p>Selectors are patterns that tell CSS which HTML elements to style. Without selectors, CSS wouldn't know what to apply styles to. Mastering selectors is essential for writing efficient, targeted CSS. Think of selectors as the "address" that tells CSS where to deliver the styles.</p>
+            </section>
+            
+            <section>
+                <h2>1. Element (Type) Selectors</h2>
+                <p>The simplest selector — targets all elements of a specific type.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Element Selector: targets all paragraphs */
+p {
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Targets all headings */
+h1 {
+  font-size: 32px;
+  color: #7C3AED;
+}
+
+/* Targets all links */
+a {
+  color: purple;
+  text-decoration: none;
+}
+
+/* Targets all images */
+img {
+  max-width: 100%;
+  height: auto;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>How it works:</strong>
+                    <ul>
+                        <li>Use the HTML tag name without brackets: <code>p</code>, <code>h1</code>, <code>div</code></li>
+                        <li>Styles apply to ALL elements of that type on the page</li>
+                        <li>Good for base styles that should be consistent</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Class Selectors</h2>
+                <p>Target elements with a specific class attribute. Classes are the most versatile selectors.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* HTML */
+<p class="highlight">This paragraph is highlighted.</p>
+<p>This paragraph is normal.</p>
+<p class="highlight">Another highlighted paragraph.</p>
+
+/* CSS */
+/* Class selector uses a dot (.) before the class name */
+.highlight {
+  background-color: yellow;
+  padding: 2px 5px;
+}
+
+/* Multiple classes on one element */
+<button class="btn btn-primary btn-large">Submit</button>
+
+/* Target specific combination */
+.btn-primary {
+  background-color: #7C3AED;
+  color: white;
+}
+
+.btn-large {
+  padding: 15px 30px;
+  font-size: 18px;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Class selector rules:</strong>
+                    <ul>
+                        <li><strong>Syntax:</strong> Dot followed by class name: <code>.classname</code></li>
+                        <li><strong>Reusable:</strong> Same class can be used on multiple elements</li>
+                        <li><strong>Multiple classes:</strong> Elements can have multiple classes (space-separated)</li>
+                        <li><strong>Naming:</strong> Use lowercase, hyphens for spaces: <code>.btn-primary</code></li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Class naming best practices:</strong>
+                    <ul>
+                        <li>Use descriptive names: <code>.error-message</code> not <code>.red-text</code></li>
+                        <li>Use lowercase with hyphens: <code>.nav-link</code></li>
+                        <li>Avoid starting with numbers: <code>.1button</code> is invalid</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. ID Selectors</h2>
+                <p>Target a single element with a unique ID. IDs should be unique per page.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* HTML */
+<header id="main-header">
+  <nav id="primary-nav">...</nav>
+</header>
+
+<main id="content">
+  <article id="featured-post">...</article>
+</main>
+
+/* CSS */
+/* ID selector uses a hash (#) before the ID name */
+#main-header {
+  background-color: #7C3AED;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}
+
+#primary-nav {
+  display: flex;
+  gap: 20px;
+}
+
+#featured-post {
+  border: 2px solid #7C3AED;
+  padding: 20px;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>ID selector characteristics:</strong>
+                    <ul>
+                        <li><strong>Syntax:</strong> Hash followed by ID name: <code>#idname</code></li>
+                        <li><strong>Unique:</strong> Only one element per page should have each ID</li>
+                        <li><strong>High specificity:</strong> ID selectors override class selectors</li>
+                        <li><strong>Use for:</strong> Landmarks, skip link targets, JavaScript hooks</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>ID vs Class:</strong> Prefer classes for styling. IDs are better for JavaScript and page landmarks. ID's high specificity can make CSS harder to maintain.
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Attribute Selectors</h2>
+                <p>Target elements based on their attributes or attribute values.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Target elements with a specific attribute */
+[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Target elements with specific attribute value */
+[type="email"] {
+  background-image: url('email-icon.svg');
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+}
+
+[type="password"] {
+  letter-spacing: 2px;
+}
+
+/* Target links that start with "https" */
+[href^="https"] {
+  color: green;
+}
+
+/* Target links ending with ".pdf" */
+[href$=".pdf"] {
+  padding-right: 20px;
+  background-image: url('pdf-icon.svg');
+  background-repeat: no-repeat;
+}
+
+/* Target links containing "example" */
+[href*="example"] {
+  font-weight: bold;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Attribute selector patterns:</strong>
+                    <ul>
+                        <li><code>[attr]</code> — Has the attribute</li>
+                        <li><code>[attr="value"]</code> — Attribute equals value exactly</li>
+                        <li><code>[attr^="value"]</code> — Attribute starts with value</li>
+                        <li><code>[attr$="value"]</code> — Attribute ends with value</li>
+                        <li><code>[attr*="value"]</code> — Attribute contains value</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Descendant and Child Selectors</h2>
+                <p>Target elements based on their relationship to other elements.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* HTML structure */
+<nav class="main-nav">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+
+<article>
+  <p>Paragraph with <a href="#">a link</a> inside.</p>
+</article>
+
+/* Descendant selector (space) - any nested element */
+.main-nav a {
+  color: white;
+  text-decoration: none;
+}
+/* Targets ALL links inside .main-nav, at any depth */
+
+/* Child selector (>) - direct children only */
+.main-nav > ul {
+  list-style: none;
+}
+/* Targets only ul that is a DIRECT child of .main-nav */
+
+/* Combined selectors */
+article p a {
+  color: #7C3AED;
+  border-bottom: 1px dotted #7C3AED;
+}
+/* Links inside paragraphs inside articles */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Combinator comparison:</strong>
+                    <ul>
+                        <li><code>.parent .child</code> (space) — Any descendant at any level</li>
+                        <li><code>.parent > .child</code> — Direct child only</li>
+                        <li>Descendant is more flexible but can be slower</li>
+                        <li>Child is more specific and performs better</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Pseudo-Class Selectors</h2>
+                <p>Target elements based on state or position. Use a single colon (:).</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Mouse interaction states */
+a:link {
+  color: blue;              /* Unvisited link */
+}
+
+a:visited {
+  color: purple;            /* Visited link */
+}
+
+a:hover {
+  color: #7C3AED;           /* Mouse over */
+  text-decoration: underline;
+}
+
+a:active {
+  color: red;               /* Being clicked */
+}
+
+a:focus {
+  outline: 2px solid #7C3AED; /* Keyboard focus */
+}
+
+/* Form states */
+input:focus {
+  border-color: #7C3AED;
+  box-shadow: 0 0 5px rgba(124, 58, 237, 0.3);
+}
+
+input:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+input:valid {
+  border-color: green;
+}
+
+input:invalid {
+  border-color: red;
+}
+
+/* Position-based */
+li:first-child {
+  font-weight: bold;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+li:nth-child(3) {
+  color: purple;            /* Third item only */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Common pseudo-classes:</strong>
+                    <ul>
+                        <li><code>:hover</code> — Mouse is over element</li>
+                        <li><code>:focus</code> — Element has keyboard focus</li>
+                        <li><code>:active</code> — Element is being activated (clicked)</li>
+                        <li><code>:first-child</code> — First element among siblings</li>
+                        <li><code>:last-child</code> — Last element among siblings</li>
+                        <li><code>:nth-child(n)</code> — nth element (odd, even, 3, 2n+1)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Pseudo-Element Selectors</h2>
+                <p>Target specific parts of an element. Use double colon (::).</p>
+                
+                <div class="code-block">
+                    <pre><code>/* First letter of text */
+p::first-letter {
+  font-size: 2em;
+  font-weight: bold;
+  color: #7C3AED;
+  float: left;
+  margin-right: 5px;
+}
+
+/* First line of text */
+p::first-line {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Insert content before an element */
+.required::before {
+  content: "* ";
+  color: red;
+}
+
+/* Insert content after an element */
+.new-link::after {
+  content: " (new)";
+  color: #7C3AED;
+  font-size: 0.8em;
+}
+
+/* Style placeholder text */
+input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Style selected text */
+::selection {
+  background-color: #7C3AED;
+  color: white;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Pseudo-element uses:</strong>
+                    <ul>
+                        <li><code>::before</code> / <code>::after</code> — Add decorative content</li>
+                        <li><code>::first-letter</code> — Drop caps, styling initials</li>
+                        <li><code>::first-line</code> — Style first line differently</li>
+                        <li><code>::placeholder</code> — Style form placeholders</li>
+                        <li><code>::selection</code> — Style highlighted text</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Grouping Selectors</h2>
+                <p>Apply the same styles to multiple selectors using commas.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Group multiple selectors with commas */
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  font-family: 'Georgia', serif;
+  margin-top: 0;
+}
+
+/* Mix different selector types */
+.highlight, .featured, #top-story {
+  border-left: 4px solid #7C3AED;
+  padding-left: 15px;
+}
+
+/* Group pseudo-classes */
+a:hover, a:focus {
+  color: #9333EA;
+  text-decoration: underline;
+}
+
+/* Combine with descendant selectors */
+.main-nav a, .footer-nav a, .sidebar a {
+  text-decoration: none;
+}</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Tip:</strong> Grouping selectors reduces code duplication and keeps your CSS DRY (Don't Repeat Yourself).
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Specificity: Which Selector Wins?</h2>
+                <p>When multiple selectors target the same element, specificity determines which styles apply.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Specificity ranking (lowest to highest): */
+
+/* 1. Element selectors (specificity: 0-0-1) */
+p { color: black; }
+
+/* 2. Class selectors (specificity: 0-1-0) */
+.text { color: blue; }
+
+/* 3. ID selectors (specificity: 1-0-0) */
+#intro { color: green; }
+
+/* 4. Inline styles (specificity: 1-0-0-0) */
+<p style="color: red;">Text</p>
+
+/* Calculating specificity */
+p { }                    /* 0-0-1 = 1 point */
+.text { }                /* 0-1-0 = 10 points */
+p.text { }               /* 0-1-1 = 11 points */
+#intro { }               /* 1-0-0 = 100 points */
+#intro.text { }          /* 1-1-0 = 110 points */
+
+/* Example conflict */
+p { color: black; }      /* Loses to class */
+.text { color: blue; }   /* Wins */
+<p class="text">I'm blue!</p></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Specificity rules:</strong>
+                    <ul>
+                        <li>Inline styles beat ID selectors</li>
+                        <li>ID selectors beat class selectors</li>
+                        <li>Class selectors beat element selectors</li>
+                        <li>More specific selectors override less specific ones</li>
+                        <li>When equal specificity, last declared wins</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Write selectors for these scenarios:</p>
+                <div class="code-block">
+                    <pre><code>/* Challenge: Write selectors for: */
+
+/* 1. All paragraphs on the page */
+/* Your selector: */
+
+/* 2. Elements with class "button" */
+/* Your selector: */
+
+/* 3. The element with id "header" */
+/* Your selector: */
+
+/* 4. Links inside the navigation */
+/* Your selector: */
+
+/* 5. The first item in a list */
+/* Your selector: */
+
+/* 6. Links when mouse hovers */
+/* Your selector: */
+
+/* 7. All h1, h2, and h3 headings */
+/* Your selector: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Element selectors target all elements of a type (p, h1, div)</li>
+                    <li>Class selectors (.class) are reusable and versatile</li>
+                    <li>ID selectors (#id) should be unique per page</li>
+                    <li>Attribute selectors target elements by attributes</li>
+                    <li>Descendant (space) and child (>) selectors target nested elements</li>
+                    <li>Pseudo-classes (:) target states (:hover, :focus)</li>
+                    <li>Pseudo-elements (::) target parts of elements (::before, ::after)</li>
+                    <li>Specificity determines which styles win when conflicts occur</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson1.html" class="btn-secondary">← Previous: Introduction to CSS</a>
+            <a href="lesson3.html" class="btn-primary">Next: Colors and Text →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

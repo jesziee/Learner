@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 15: Best Practices & Final Project - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 15: Best Practices & Final Project</h1>
+            <p>Learn Python best practices and build a complete application</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Why Best Practices Matter</h2>
+                <p>Writing clean, maintainable Python code is crucial for professional development. Good practices make your code easier to read, debug, and scale. They help teams collaborate effectively and reduce technical debt. Following the Python community's conventions ensures your code is accessible to other developers.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>PEP 8: Python Style Guide</h2>
+                <p>PEP 8 is the official Python style guide. Following it makes your code consistent with the broader Python community.</p>
+                
+                <div class="code-block">
+                    <h4>Key Style Guidelines:</h4>
+<pre><code># Naming Conventions
+my_variable = "snake_case"        # Variables and functions
+MyClass = "PascalCase"            # Classes
+MY_CONSTANT = "UPPER_SNAKE_CASE"  # Constants
+_private_var = "leading_underscore"  # Internal use
+
+def my_function(param_one, param_two):
+    """Function with descriptive name and docstring."""
+    pass
+
+# Indentation: 4 spaces (not tabs)
+def example():
+    if True:
+        do_something()  # 4 spaces
+
+# Line length: 79 characters max
+# Long lines can be broken with parentheses
+result = some_function(
+    arg_one,
+    arg_two,
+    arg_three
+)
+
+# Blank lines
+# 2 blank lines before top-level functions/classes
+# 1 blank line between methods
+
+def function_one():
+    pass
+
+
+def function_two():
+    pass
+
+
+class MyClass:
+    def method_one(self):
+        pass
+    
+    def method_two(self):
+        pass
+
+# Imports: one per line, grouped
+import os
+import sys
+from collections import defaultdict, Counter
+from mypackage import mymodule
+
+# Whitespace
+spam(ham[1], {eggs: 2})  # No space inside brackets
+if x == 4:               # Space around operators
+    print(x, y)          # No space before colon in slices
+my_list[1:9:3]           # No spaces in slice expressions
+
+# Comparison operators
+if x is None:            # Compare to None with 'is'
+if x is not None:
+if my_list:              # Check empty collections truthiness
+if not my_list:</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-6:</strong> Use snake_case for variables/functions, PascalCase for classes.</p>
+                        <p><strong>Lines 14-19:</strong> Use 4 spaces for indentation and break long lines with parentheses.</p>
+                        <p><strong>Lines 22-38:</strong> Use appropriate blank lines to separate code sections.</p>
+                        <p><strong>Lines 41-44:</strong> Group imports: standard library, third-party, local.</p>
+                        <p><strong>Lines 47-50:</strong> Avoid extraneous whitespace inside brackets.</p>
+                        <p><strong>Lines 56-58:</strong> Use <code>is</code> for None comparisons, not <code>==</code>.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Automatic Formatting</h4>
+                    <p>Use tools like <code>black</code> (formatter), <code>flake8</code> (linter), and <code>isort</code> (import sorter) to automatically format and check your code.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Writing Clean Functions</h2>
+                <p>Functions should do one thing, do it well, and have clear names. This makes code testable and reusable.</p>
+                
+                <div class="code-block">
+                    <h4>Function Best Practices:</h4>
+<pre><code># Good: Single responsibility
+def calculate_discount(price, discount_rate):
+    """Calculate the discounted price."""
+    return price * (1 - discount_rate)
+
+def format_price(price):
+    """Format price as currency string."""
+    return f"${price:.2f}"
+
+# Bad: Multiple responsibilities
+def calculate_and_print_discount(price, discount_rate):
+    total = price * (1 - discount_rate)
+    print(f"Discounted price: ${total:.2f}")
+    # Mixing calculation and output is bad
+
+# Good: Type hints for clarity
+def get_user_age(user_id: int) -> int:
+    """Get user age by ID.
+    
+    Args:
+        user_id: The user's unique identifier
+        
+    Returns:
+        The user's age in years
+        
+    Raises:
+        UserNotFoundError: If user doesn't exist
+    """
+    user = database.get_user(user_id)
+    return user.age
+
+# Good: Default arguments for flexibility
+def create_user(
+    name: str,
+    email: str,
+    role: str = "user",
+    active: bool = True
+) -> dict:
+    return {
+        "name": name,
+        "email": email,
+        "role": role,
+        "active": active
+    }
+
+# Avoid mutable default arguments!
+# Bad - the list is shared across all calls
+def add_item(item, items=[]):
+    items.append(item)
+    return items
+
+# Good - use None and create inside function
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+
+# Keep functions small (under 20-30 lines)
+# Extract complex logic into helper functions</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-9:</strong> Each function should do one thing.</p>
+                        <p><strong>Lines 12-16:</strong> Avoid mixing calculations with I/O operations.</p>
+                        <p><strong>Lines 19-32:</strong> Use type hints and thorough docstrings.</p>
+                        <p><strong>Lines 35-47:</strong> Default arguments make functions more flexible.</p>
+                        <p><strong>Lines 50-59:</strong> Never use mutable default arguments - use None instead.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Error Handling Patterns</h2>
+                <p>Good error handling makes your code robust and helps with debugging. Follow these patterns for professional code.</p>
+                
+                <div class="code-block">
+                    <h4>Error Handling Best Practices:</h4>
+<pre><code># Be specific about exceptions
+# Bad
+try:
+    do_something()
+except Exception:  # Too broad
+    pass
+
+# Good
+try:
+    do_something()
+except (ValueError, KeyError) as e:
+    logger.error(f"Operation failed: {e}")
+    raise
+
+# Use custom exceptions for domain errors
+class PaymentError(Exception):
+    """Base exception for payment errors."""
+    pass
+
+class InsufficientFundsError(PaymentError):
+    """Account has insufficient funds."""
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+        super().__init__(
+            f"Insufficient funds: {balance} available, "
+            f"{amount} required"
+        )
+
+# Handle at the right level
+def process_payment(user_id, amount):
+    # Low-level: let exceptions propagate
+    user = get_user(user_id)
+    if user.balance < amount:
+        raise InsufficientFundsError(user.balance, amount)
+    return charge_user(user, amount)
+
+def checkout(user_id, cart_total):
+    # High-level: handle and present to user
+    try:
+        receipt = process_payment(user_id, cart_total)
+        return {"success": True, "receipt": receipt}
+    except InsufficientFundsError as e:
+        return {
+            "success": False,
+            "error": "insufficient_funds",
+            "message": str(e)
+        }
+    except PaymentError as e:
+        logger.error(f"Payment failed: {e}")
+        return {"success": False, "error": "payment_failed"}
+
+# Use context managers for cleanup
+from contextlib import contextmanager
+
+@contextmanager
+def database_transaction():
+    conn = get_connection()
+    try:
+        yield conn
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+# Usage
+with database_transaction() as conn:
+    conn.execute("INSERT INTO users VALUES (?)", (user,))</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-11:</strong> Catch specific exceptions, not broad Exception.</p>
+                        <p><strong>Lines 14-27:</strong> Create custom exceptions with meaningful information.</p>
+                        <p><strong>Lines 30-47:</strong> Let exceptions propagate from low-level, handle at high-level.</p>
+                        <p><strong>Lines 50-66:</strong> Use context managers for automatic cleanup.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Testing Your Code</h2>
+                <p>Writing tests ensures your code works correctly and helps prevent regressions. Use pytest for clean, readable tests.</p>
+                
+                <div class="code-block">
+                    <h4>Testing with pytest:</h4>
+<pre><code># test_calculator.py
+import pytest
+from calculator import add, divide, Calculator
+
+# Simple test
+def test_add():
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+    assert add(0, 0) == 0
+
+# Test with exception
+def test_divide_by_zero():
+    with pytest.raises(ValueError):
+        divide(10, 0)
+
+# Parameterized tests
+@pytest.mark.parametrize("a,b,expected", [
+    (2, 3, 5),
+    (0, 0, 0),
+    (-1, 1, 0),
+    (100, 200, 300),
+])
+def test_add_parameterized(a, b, expected):
+    assert add(a, b) == expected
+
+# Test class for related tests
+class TestCalculator:
+    @pytest.fixture
+    def calculator(self):
+        """Create a calculator instance for tests."""
+        return Calculator()
+    
+    def test_add(self, calculator):
+        assert calculator.add(2, 3) == 5
+    
+    def test_subtract(self, calculator):
+        assert calculator.subtract(5, 3) == 2
+    
+    def test_multiply(self, calculator):
+        assert calculator.multiply(3, 4) == 12
+
+# Mock external dependencies
+from unittest.mock import Mock, patch
+
+def test_api_call():
+    with patch('requests.get') as mock_get:
+        mock_get.return_value.json.return_value = {"key": "value"}
+        
+        result = fetch_data("http://example.com")
+        
+        assert result == {"key": "value"}
+        mock_get.assert_called_once_with("http://example.com")
+
+# Run tests: pytest test_calculator.py -v</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-10:</strong> Basic tests use assert statements.</p>
+                        <p><strong>Lines 13-15:</strong> Use <code>pytest.raises</code> to test exceptions.</p>
+                        <p><strong>Lines 18-26:</strong> Parameterized tests run the same test with multiple inputs.</p>
+                        <p><strong>Lines 29-42:</strong> Test classes group related tests; fixtures provide setup.</p>
+                        <p><strong>Lines 45-53:</strong> Mock external dependencies to isolate tests.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Documentation</h2>
+                <p>Good documentation helps others (and future you) understand your code. Python has built-in support for documentation.</p>
+                
+                <div class="code-block">
+                    <h4>Documenting Code:</h4>
+<pre><code>"""
+Module-level docstring.
+Describe what this module does.
+"""
+
+class UserService:
+    """Service for managing user operations.
+    
+    This class provides methods for creating, updating,
+    and deleting users in the system.
+    
+    Attributes:
+        db: Database connection instance
+        cache: Optional cache for user data
+    
+    Example:
+        >>> service = UserService(database)
+        >>> user = service.get_user(1)
+        >>> print(user.name)
+        'Alice'
+    """
+    
+    def __init__(self, db, cache=None):
+        """Initialize the user service.
+        
+        Args:
+            db: Database connection
+            cache: Optional cache backend (default: None)
+        """
+        self.db = db
+        self.cache = cache
+    
+    def get_user(self, user_id: int) -> dict:
+        """Retrieve a user by ID.
+        
+        Args:
+            user_id: The unique identifier for the user
+        
+        Returns:
+            Dictionary containing user data
+        
+        Raises:
+            UserNotFoundError: If user with given ID doesn't exist
+            DatabaseError: If database operation fails
+        
+        Example:
+            >>> user = service.get_user(1)
+            >>> user['name']
+            'Alice'
+        """
+        if self.cache:
+            cached = self.cache.get(f"user:{user_id}")
+            if cached:
+                return cached
+        
+        user = self.db.query(
+            "SELECT * FROM users WHERE id = ?",
+            (user_id,)
+        )
+        
+        if not user:
+            raise UserNotFoundError(user_id)
+        
+        return user
+
+
+# README.md for projects
+"""
+# My Project
+
+## Installation
+pip install myproject
+
+## Usage
+from myproject import Client
+client = Client()
+result = client.do_something()
+
+## Contributing
+Pull requests welcome!
+
+## License
+MIT
+"""</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Module docstrings describe the entire module.</p>
+                        <p><strong>Lines 8-26:</strong> Class docstrings include attributes and usage examples.</p>
+                        <p><strong>Lines 34-36:</strong> <code>__init__</code> docstrings describe initialization.</p>
+                        <p><strong>Lines 40-68:</strong> Method docstrings follow Google style with Args, Returns, Raises.</p>
+                        <p><strong>Lines 72-88:</strong> README.md provides project overview and quick start.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Final Project: Task Manager CLI</h2>
+                <p>Let's build a complete task manager application that demonstrates all the concepts we've learned.</p>
+                
+                <div class="code-block">
+                    <h4>Project Structure:</h4>
+<pre><code># task_manager/
+# ├── __init__.py
+# ├── models.py
+# ├── storage.py
+# ├── manager.py
+# └── cli.py
+
+# models.py
+"""Data models for the task manager."""
+from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Optional
+from enum import Enum
+
+class Priority(Enum):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+
+class Status(Enum):
+    PENDING = "pending"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+
+@dataclass
+class Task:
+    """Represents a task in the system."""
+    title: str
+    description: str = ""
+    priority: Priority = Priority.MEDIUM
+    status: Status = Status.PENDING
+    id: Optional[int] = None
+    created_at: datetime = field(default_factory=datetime.now)
+    completed_at: Optional[datetime] = None
+    
+    def mark_complete(self):
+        """Mark the task as completed."""
+        self.status = Status.COMPLETED
+        self.completed_at = datetime.now()
+    
+    def __str__(self):
+        status_icon = "✓" if self.status == Status.COMPLETED else "○"
+        return f"[{status_icon}] {self.id}. {self.title} ({self.priority.value})"</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Storage and Manager:</h4>
+<pre><code># storage.py
+"""Persistent storage for tasks."""
+import json
+from pathlib import Path
+from typing import List, Optional
+from .models import Task, Priority, Status
+
+class TaskStorage:
+    """Handle persistent storage of tasks."""
+    
+    def __init__(self, filepath: str = "tasks.json"):
+        self.filepath = Path(filepath)
+    
+    def load_all(self) -> List[Task]:
+        """Load all tasks from storage."""
+        if not self.filepath.exists():
+            return []
+        
+        with open(self.filepath) as f:
+            data = json.load(f)
+        
+        return [self._deserialize(item) for item in data]
+    
+    def save_all(self, tasks: List[Task]):
+        """Save all tasks to storage."""
+        data = [self._serialize(task) for task in tasks]
+        with open(self.filepath, "w") as f:
+            json.dump(data, f, indent=2, default=str)
+    
+    def _serialize(self, task: Task) -> dict:
+        """Convert Task to dictionary."""
+        return {
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "priority": task.priority.value,
+            "status": task.status.value,
+            "created_at": task.created_at.isoformat(),
+            "completed_at": task.completed_at.isoformat() if task.completed_at else None
+        }
+    
+    def _deserialize(self, data: dict) -> Task:
+        """Convert dictionary to Task."""
+        return Task(
+            id=data["id"],
+            title=data["title"],
+            description=data["description"],
+            priority=Priority(data["priority"]),
+            status=Status(data["status"]),
+            created_at=datetime.fromisoformat(data["created_at"]),
+            completed_at=datetime.fromisoformat(data["completed_at"]) if data["completed_at"] else None
+        )
+
+# manager.py
+"""Task management logic."""
+from typing import List, Optional
+from .models import Task, Priority, Status
+from .storage import TaskStorage
+
+class TaskManager:
+    """Manage task operations."""
+    
+    def __init__(self, storage: TaskStorage):
+        self.storage = storage
+        self._tasks: List[Task] = []
+        self._load_tasks()
+    
+    def _load_tasks(self):
+        """Load tasks from storage."""
+        self._tasks = self.storage.load_all()
+    
+    def _save_tasks(self):
+        """Save tasks to storage."""
+        self.storage.save_all(self._tasks)
+    
+    def _next_id(self) -> int:
+        """Get the next available ID."""
+        if not self._tasks:
+            return 1
+        return max(t.id for t in self._tasks if t.id) + 1
+    
+    def add_task(
+        self,
+        title: str,
+        description: str = "",
+        priority: Priority = Priority.MEDIUM
+    ) -> Task:
+        """Add a new task."""
+        task = Task(
+            id=self._next_id(),
+            title=title,
+            description=description,
+            priority=priority
+        )
+        self._tasks.append(task)
+        self._save_tasks()
+        return task
+    
+    def get_task(self, task_id: int) -> Optional[Task]:
+        """Get a task by ID."""
+        for task in self._tasks:
+            if task.id == task_id:
+                return task
+        return None
+    
+    def complete_task(self, task_id: int) -> Optional[Task]:
+        """Mark a task as completed."""
+        task = self.get_task(task_id)
+        if task:
+            task.mark_complete()
+            self._save_tasks()
+        return task
+    
+    def delete_task(self, task_id: int) -> bool:
+        """Delete a task by ID."""
+        task = self.get_task(task_id)
+        if task:
+            self._tasks.remove(task)
+            self._save_tasks()
+            return True
+        return False
+    
+    def list_tasks(
+        self,
+        status: Optional[Status] = None,
+        priority: Optional[Priority] = None
+    ) -> List[Task]:
+        """List tasks with optional filters."""
+        tasks = self._tasks
+        if status:
+            tasks = [t for t in tasks if t.status == status]
+        if priority:
+            tasks = [t for t in tasks if t.priority == priority]
+        return sorted(tasks, key=lambda t: t.id)</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>CLI Interface:</h4>
+<pre><code># cli.py
+"""Command-line interface for task manager."""
+import argparse
+import sys
+from .manager import TaskManager
+from .storage import TaskStorage
+from .models import Priority, Status
+
+class TaskCLI:
+    """Command-line interface for task management."""
+    
+    def __init__(self):
+        storage = TaskStorage()
+        self.manager = TaskManager(storage)
+    
+    def run(self, args=None):
+        """Run the CLI."""
+        parser = self._create_parser()
+        parsed = parser.parse_args(args)
+        
+        if parsed.command is None:
+            parser.print_help()
+            return
+        
+        command = getattr(self, f"cmd_{parsed.command}")
+        command(parsed)
+    
+    def _create_parser(self):
+        """Create argument parser."""
+        parser = argparse.ArgumentParser(
+            description="Task Manager CLI"
+        )
+        subparsers = parser.add_subparsers(dest="command")
+        
+        # Add command
+        add_parser = subparsers.add_parser("add", help="Add a task")
+        add_parser.add_argument("title", help="Task title")
+        add_parser.add_argument("-d", "--description", default="")
+        add_parser.add_argument("-p", "--priority", 
+            choices=["low", "medium", "high"], default="medium")
+        
+        # List command
+        list_parser = subparsers.add_parser("list", help="List tasks")
+        list_parser.add_argument("-s", "--status",
+            choices=["pending", "in_progress", "completed"])
+        list_parser.add_argument("-p", "--priority",
+            choices=["low", "medium", "high"])
+        
+        # Complete command
+        complete_parser = subparsers.add_parser("complete", help="Complete task")
+        complete_parser.add_argument("id", type=int, help="Task ID")
+        
+        # Delete command
+        delete_parser = subparsers.add_parser("delete", help="Delete task")
+        delete_parser.add_argument("id", type=int, help="Task ID")
+        
+        return parser
+    
+    def cmd_add(self, args):
+        """Add a new task."""
+        priority = Priority(args.priority)
+        task = self.manager.add_task(
+            title=args.title,
+            description=args.description,
+            priority=priority
+        )
+        print(f"Added task {task.id}: {task.title}")
+    
+    def cmd_list(self, args):
+        """List tasks."""
+        status = Status(args.status) if args.status else None
+        priority = Priority(args.priority) if args.priority else None
+        
+        tasks = self.manager.list_tasks(status, priority)
+        
+        if not tasks:
+            print("No tasks found.")
+            return
+        
+        for task in tasks:
+            print(task)
+    
+    def cmd_complete(self, args):
+        """Complete a task."""
+        task = self.manager.complete_task(args.id)
+        if task:
+            print(f"Completed task {task.id}: {task.title}")
+        else:
+            print(f"Task {args.id} not found.")
+    
+    def cmd_delete(self, args):
+        """Delete a task."""
+        if self.manager.delete_task(args.id):
+            print(f"Deleted task {args.id}")
+        else:
+            print(f"Task {args.id} not found.")
+
+def main():
+    """Entry point for the CLI."""
+    cli = TaskCLI()
+    cli.run()
+
+if __name__ == "__main__":
+    main()
+
+# Usage examples:
+# python -m task_manager add "Learn Python" -p high
+# python -m task_manager list
+# python -m task_manager complete 1
+# python -m task_manager delete 1</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-28:</strong> Data models using dataclasses with enums for type safety.</p>
+                        <p><strong>Lines 31-55:</strong> Storage class handles JSON serialization and deserialization.</p>
+                        <p><strong>Lines 58-105:</strong> TaskManager class encapsulates all business logic.</p>
+                        <p><strong>Lines 108-187:</strong> CLI class uses argparse for command parsing.</p>
+                        <p><strong>Lines 190-195:</strong> Entry point makes the module executable.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Course Complete! 🎉</h2>
+                <p>Congratulations on completing the Python course! You've learned everything from basic syntax and data types to advanced concepts like object-oriented programming, error handling, and working with APIs. The task manager project demonstrates how to structure a real Python application using best practices.</p>
+                
+                <div class="tip-box">
+                    <h4>🚀 Next Steps</h4>
+                    <p>Continue your Python journey by exploring web development with Django or Flask, data science with Pandas and NumPy, machine learning with TensorFlow or PyTorch, or automation and scripting. The possibilities are endless!</p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson14.html" class="nav-button prev">← Previous: Working with APIs</a>
+                <a href="index.html" class="nav-button next">Course Overview →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: Introduction to Python - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 1: Introduction to Python</h1>
+            <p>Learn what Python is, why it's popular, and write your first Python program</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What is Python?</h2>
+                <p>Python is a high-level, interpreted programming language known for its simplicity and readability. Created by Guido van Rossum in 1991, Python has become one of the most popular programming languages in the world. Its clean syntax and emphasis on readability make it an excellent choice for beginners while remaining powerful enough for experts.</p>
+                <p>Python is used in web development, data science, artificial intelligence, automation, scientific computing, and much more. Companies like Google, Netflix, Instagram, and Spotify use Python extensively in their technology stacks.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Why Learn Python?</h2>
+                <p>Python offers several advantages that make it an excellent first programming language. Its syntax resembles natural English, making it easier to read and write. The extensive standard library provides pre-built modules for countless tasks, and the active community means help is always available. Python's versatility allows you to build almost anything, from simple scripts to complex machine learning models.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Installing Python</h2>
+                <p>Before we start coding, you need to install Python on your computer. Python comes pre-installed on most Linux and macOS systems. On Windows, you'll need to download it from the official Python website.</p>
+                
+                <div class="code-block">
+                    <h4>Checking if Python is installed:</h4>
+<pre><code># Open your terminal or command prompt and type:
+python --version
+
+# Or on some systems:
+python3 --version
+
+# Output should be something like:
+# Python 3.11.0</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Line 2:</strong> This command checks the default Python version on your system.</p>
+                        <p><strong>Line 5:</strong> On many systems, Python 3 is installed as <code>python3</code> to distinguish from older Python 2.</p>
+                        <p><strong>Line 8:</strong> The output shows your installed Python version. Make sure you have Python 3.6 or newer.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Tip: Python Virtual Environments</h4>
+                    <p>When working on Python projects, it's best practice to create virtual environments to isolate dependencies. Use <code>python -m venv myenv</code> to create one.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Your First Python Program</h2>
+                <p>Let's write the traditional "Hello, World!" program. This simple program introduces you to Python's print function, which displays output to the screen.</p>
+                
+                <div class="code-block">
+                    <h4>Hello World:</h4>
+<pre><code># This is a comment - Python ignores everything after #
+# Comments help explain what your code does
+
+print("Hello, World!")
+
+# You can also use single quotes
+print('Welcome to Python!')
+
+# Multiple items are separated by spaces
+print("Hello", "Python", "Learner!")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 1-2:</strong> Comments start with <code>#</code>. They're ignored by Python but help humans understand the code.</p>
+                        <p><strong>Line 4:</strong> The <code>print()</code> function displays text to the screen. Text (strings) must be in quotes.</p>
+                        <p><strong>Line 7:</strong> Python accepts both single (<code>'</code>) and double (<code>"</code>) quotes for strings.</p>
+                        <p><strong>Line 10:</strong> Multiple arguments to print are separated by spaces by default.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The Python Interpreter</h2>
+                <p>Python is an interpreted language, meaning you can run code line by line in an interactive mode called the REPL (Read-Eval-Print Loop). This is great for testing and learning.</p>
+                
+                <div class="code-block">
+                    <h4>Using the Python REPL:</h4>
+<pre><code># Start the REPL by typing python or python3 in your terminal
+# You'll see >>> which means Python is waiting for input
+
+>>> 2 + 2
+4
+
+>>> "Hello" + " " + "World"
+'Hello World'
+
+>>> name = "Alice"
+>>> print(f"Hello, {name}!")
+Hello, Alice!
+
+>>> exit()  # Type this to exit the REPL</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Line 1:</strong> The <code>>>></code> prompt indicates interactive mode is active.</p>
+                        <p><strong>Line 4:</strong> Python evaluates expressions immediately and shows the result.</p>
+                        <p><strong>Line 7:</strong> Strings can be concatenated with the <code>+</code> operator.</p>
+                        <p><strong>Line 10:</strong> Variables are created with assignment (<code>=</code>).</p>
+                        <p><strong>Line 11:</strong> f-strings allow embedding expressions in strings using curly braces.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Running Python Files</h2>
+                <p>While the REPL is great for quick tests, most Python code is written in files with the <code>.py</code> extension. You can create these files in any text editor or IDE.</p>
+                
+                <div class="code-block">
+                    <h4>Running a Python file:</h4>
+<pre><code># Save this as hello.py
+name = input("What is your name? ")
+print(f"Nice to meet you, {name}!")
+
+# Run it from terminal:
+# python hello.py</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Line 2:</strong> <code>input()</code> prompts the user for text input and returns what they type.</p>
+                        <p><strong>Line 3:</strong> The f-string inserts the variable value into the string.</p>
+                        <p><strong>Line 6:</strong> Run Python files by passing the filename to the python command.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a Python program that asks for the user's name and favorite color, then prints a personalized message.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Ask for the user's name
+name = input("Enter your name: ")
+
+# Ask for their favorite color
+color = input("What's your favorite color? ")
+
+# Print a personalized message
+# Your code here...</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Solution</h4>
+                    <p>Try to solve it yourself first! One solution is: <code>print(f"{name}'s favorite color is {color}!")</code></p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="index.html" class="nav-button prev">← Course Overview</a>
+                <a href="lesson2.html" class="nav-button next">Next: Variables & Data Types →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

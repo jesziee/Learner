@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Data is Stored - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>💾 Lesson 3: How Data is Stored</h1>
+            <p>Binary, bits, and bytes explained</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>The Language of Computers: Binary</h2>
+                <p>Computers don't understand letters, numbers, or pictures the way humans do. They only understand two states: ON or OFF, represented as 1 or 0. This is called the binary system.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Binary = Base 2</strong><br>
+                    Humans use decimal (base 10): 0, 1, 2, 3, 4, 5, 6, 7, 8, 9<br>
+                    Computers use binary (base 2): 0, 1</p>
+                </div>
+                
+                <h3>Why Binary?</h3>
+                <p>Electronic components can easily represent two states:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>Electrical signal present = 1 (ON)</li>
+                    <li>No electrical signal = 0 (OFF)</li>
+                </ul>
+                <p>It's reliable and simple - there's no ambiguity between these two states.</p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Bits and Bytes</h2>
+                
+                <h3>What is a Bit?</h3>
+                <p>A bit (short for "binary digit") is the smallest unit of data in a computer. It can be either 0 or 1.</p>
+                
+                <h3>What is a Byte?</h3>
+                <p>A byte is a group of 8 bits. With 8 bits, you can create 256 different combinations (2⁸ = 256), which is enough to represent all letters, numbers, and symbols.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Example: The letter 'A' in binary</span>
+<span class="variable">A</span> = <span class="number">01000001</span> <span class="comment">// 8 bits = 1 byte</span>
+
+<span class="comment">// The word "Hello" in binary:</span>
+<span class="variable">H</span> = <span class="number">01001000</span>
+<span class="variable">e</span> = <span class="number">01100101</span>
+<span class="variable">l</span> = <span class="number">01101100</span>
+<span class="variable">l</span> = <span class="number">01101100</span>
+<span class="variable">o</span> = <span class="number">01101111</span>
+<span class="comment">// Total: 5 bytes (40 bits)</span></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Remember:</strong> 1 Byte = 8 Bits. This is the fundamental unit computers use to store characters and small amounts of data.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Data Size Units</h2>
+                <p>As data grows larger, we use bigger units to measure it:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Data Size Units:</span>
+<span class="number">1 Byte</span>    = <span class="number">8 bits</span>
+<span class="number">1 Kilobyte (KB)</span>  = <span class="number">1,024 Bytes</span>    <span class="comment">// ~1 thousand bytes</span>
+<span class="number">1 Megabyte (MB)</span>  = <span class="number">1,024 KB</span>       <span class="comment">// ~1 million bytes</span>
+<span class="number">1 Gigabyte (GB)</span>  = <span class="number">1,024 MB</span>       <span class="comment">// ~1 billion bytes</span>
+<span class="number">1 Terabyte (TB)</span>  = <span class="number">1,024 GB</span>       <span class="comment">// ~1 trillion bytes</span>
+<span class="number">1 Petabyte (PB)</span>  = <span class="number">1,024 TB</span>       <span class="comment">// ~1 quadrillion bytes</span></code></pre>
+                </div>
+                
+                <h3>Real-World Examples</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>1 KB:</strong> A short paragraph of text</li>
+                    <li><strong>1 MB:</strong> A small photo or a minute of MP3 audio</li>
+                    <li><strong>1 GB:</strong> About 200 songs or a short video</li>
+                    <li><strong>1 TB:</strong> About 250,000 photos or 500 hours of HD video</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Why 1,024 and not 1,000?</strong> Computers work in binary, so they use powers of 2. 2¹⁰ = 1,024, which is close to 1,000. This is why we call it a "kilo"byte.</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Character Encoding</h2>
+                <p>Computers need a way to represent text using numbers. Character encoding is the system that maps characters to numbers.</p>
+                
+                <h3>ASCII (American Standard Code for Information Interchange)</h3>
+                <p>An older standard that uses 7 bits to represent 128 characters - enough for English letters, numbers, and basic symbols.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// ASCII Examples:</span>
+<span class="variable">A</span> = <span class="number">65</span>    <span class="variable">a</span> = <span class="number">97</span>    <span class="variable">0</span> = <span class="number">48</span>
+<span class="variable">B</span> = <span class="number">66</span>    <span class="variable">b</span> = <span class="number">98</span>    <span class="variable">1</span> = <span class="number">49</span>
+<span class="variable">Z</span> = <span class="number">90</span>    <span class="variable">z</span> = <span class="number">122</span>  <span class="variable">9</span> = <span class="number">57</span>
+<span class="variable">Space</span> = <span class="number">32</span>  <span class="variable">!</span> = <span class="number">33</span>   <span class="variable">@</span> = <span class="number">64</span></code></pre>
+                </div>
+                
+                <h3>Unicode (UTF-8)</h3>
+                <p>The modern standard that can represent virtually any character from any language. UTF-8 is the most common encoding on the web today.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Fun Fact:</strong> Emojis are also characters! 😊 has a Unicode value of U+1F60A. UTF-8 can represent over 1 million different characters!</p>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>How Numbers are Stored</h2>
+                <p>Numbers can be stored in different ways depending on their type:</p>
+                
+                <h3>Integers (Whole Numbers)</h3>
+                <p>Stored directly in binary format. An integer typically uses 4 bytes (32 bits).</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Example: Storing the number 42</span>
+<span class="variable">Decimal</span>: <span class="number">42</span>
+<span class="variable">Binary</span>:  <span class="number">00101010</span>
+
+<span class="comment">// How it's calculated:</span>
+<span class="number">42</span> = <span class="number">32</span> + <span class="number">8</span> + <span class="number">2</span>
+    = (<span class="number">1</span>×2⁵) + (<span class="number">1</span>×2³) + (<span class="number">1</span>×2¹)
+    = <span class="number">00101010</span></code></pre>
+                </div>
+                
+                <h3>Floating-Point Numbers (Decimals)</h3>
+                <p>Numbers with decimal points (like 3.14159) use a special format called floating-point. They're more complex to store and can have slight precision issues.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Important:</strong> When programming, be careful with floating-point comparisons. 0.1 + 0.2 might not exactly equal 0.3 due to how decimals are stored!</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>How Images are Stored</h2>
+                <p>Images are stored as a grid of tiny dots called pixels. Each pixel has a color, represented by numbers.</p>
+                
+                <h3>RGB Color Model</h3>
+                <p>Most digital images use RGB (Red, Green, Blue). Each color is represented by a number from 0-255 (8 bits per color, 24 bits total).</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// RGB Color Examples:</span>
+<span class="variable">Red</span>   = (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>)     <span class="comment">// Full red, no green, no blue</span>
+<span class="variable">Green</span> = (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>)     <span class="comment">// No red, full green, no blue</span>
+<span class="variable">Blue</span>  = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>)     <span class="comment">// No red, no green, full blue</span>
+<span class="variable">White</span> = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>) <span class="comment">// All colors at maximum</span>
+<span class="variable">Black</span> = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)       <span class="comment">// No color</span>
+<span class="variable">Yellow</span> = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>)  <span class="comment">// Red + Green = Yellow</span>
+<span class="variable">Purple</span> = (<span class="number">128</span>, <span class="number">0</span>, <span class="number">128</span>) <span class="comment">// Medium red + medium blue</span></code></pre>
+                </div>
+                
+                <h3>Image Resolution</h3>
+                <p>The number of pixels determines the image quality:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>720p HD:</strong> 1280 × 720 = ~922,000 pixels</li>
+                    <li><strong>1080p Full HD:</strong> 1920 × 1080 = ~2 million pixels</li>
+                    <li><strong>4K Ultra HD:</strong> 3840 × 2160 = ~8 million pixels</li>
+                </ul>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>Binary:</strong> Computers use 0s and 1s to represent all data</li>
+                            <li><strong>Bit:</strong> Smallest unit (0 or 1)</li>
+                            <li><strong>Byte:</strong> 8 bits, can represent 256 different values</li>
+                            <li><strong>Character Encoding:</strong> ASCII and Unicode map characters to numbers</li>
+                            <li><strong>Images:</strong> Stored as pixels with RGB color values</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson2.html" class="nav-btn prev">← Previous: Hardware Components</a>
+                <a href="lesson4.html" class="nav-btn next">Next: Operating Systems →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

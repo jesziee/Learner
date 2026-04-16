@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Software Works - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>📦 Lesson 5: How Software Works</h1>
+            <p>Applications, programs, and execution</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is Software?</h2>
+                <p>Software is a collection of instructions that tells the computer what to do. Unlike hardware (physical components), software is intangible - it's the code that makes hardware useful.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Simple definition:</strong> Hardware = the physical machine. Software = the instructions that tell the machine what to do.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Types of Software</h2>
+                
+                <h3>System Software</h3>
+                <p>Software that manages computer hardware and provides a platform for running applications.</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Operating Systems:</strong> Windows, macOS, Linux</li>
+                    <li><strong>Device Drivers:</strong> Software that controls hardware devices</li>
+                    <li><strong>Utilities:</strong> Antivirus, disk cleanup, backup tools</li>
+                </ul>
+                
+                <h3>Application Software</h3>
+                <p>Programs designed for end-users to perform specific tasks.</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Productivity:</strong> Microsoft Word, Excel, Google Docs</li>
+                    <li><strong>Communication:</strong> Email clients, messaging apps</li>
+                    <li><strong>Entertainment:</strong> Games, media players</li>
+                    <li><strong>Creative:</strong> Photoshop, video editors</li>
+                </ul>
+                
+                <h3>Programming Software</h3>
+                <p>Tools used to create other software.</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>IDEs:</strong> Integrated Development Environments (VS Code, PyCharm)</li>
+                    <li><strong>Compilers:</strong> Convert source code to machine code</li>
+                    <li><strong>Debuggers:</strong> Help find and fix errors in code</li>
+                </ul>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>How Programs are Created</h2>
+                <p>Software development involves writing code in programming languages that humans can understand, then converting it to a form computers can execute.</p>
+                
+                <h3>The Programming Process</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Software Development Process:</span>
+
+<span class="number">1.</span> <span class="function">Write Source Code</span>
+    ↓   <span class="comment">// Human-readable instructions</span>
+    
+<span class="number">2.</span> <span class="function">Compile/Interpret</span>
+    ↓   <span class="comment">// Convert to machine-readable format</span>
+    
+<span class="number">3.</span> <span class="function">Execute</span>
+    ↓   <span class="comment">// Computer runs the instructions</span>
+    
+<span class="number">4.</span> <span class="function">Output</span>
+        <span class="comment">// Results shown to user</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Source Code vs Machine Code</h2>
+                
+                <h3>Source Code</h3>
+                <p>Instructions written by programmers in a programming language like Python, JavaScript, or C++. It's human-readable but computers can't understand it directly.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Example source code in Python:</span>
+<span class="keyword">def</span> <span class="function">greet</span>(<span class="variable">name</span>):
+    <span class="keyword">return</span> <span class="string">f"Hello, {name}!"</span>
+
+<span class="variable">message</span> = <span class="function">greet</span>(<span class="string">"World"</span>)
+<span class="keyword">print</span>(<span class="variable">message</span>)</code></pre>
+                </div>
+                
+                <h3>Machine Code</h3>
+                <p>The binary instructions that the CPU actually executes. Each CPU architecture has its own machine code format.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Same program in machine code (simplified):</span>
+<span class="number">10110000</span> <span class="number">01100001</span>
+<span class="number">10111000</span> <span class="number">00000100</span>
+<span class="number">11000110</span> <span class="number">00000111</span>
+<span class="number">01010110</span> <span class="number">10111000</span>
+<span class="comment">// ... many more lines of binary</span></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Imagine:</strong> If programmers had to write machine code directly, even simple programs would take months and be nearly impossible to debug!</p>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Compilers vs Interpreters</h2>
+                <p>There are two main ways to convert source code to machine code:</p>
+                
+                <h3>Compiled Languages</h3>
+                <p>A compiler translates the entire program into machine code before execution. The result is a standalone executable file.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Compiled Language Workflow:</span>
+<span class="variable">Source Code</span> → [<span class="function">Compiler</span>] → <span class="variable">Executable</span> → [<span class="function">Run</span>]
+
+<span class="comment">// Examples: C, C++, Rust, Go</span>
+<span class="comment">// Pros: Fast execution, optimized code</span>
+<span class="comment">// Cons: Must recompile after changes, platform-specific</span></code></pre>
+                </div>
+                
+                <h3>Interpreted Languages</h3>
+                <p>An interpreter reads and executes code line by line, translating on the fly.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Interpreted Language Workflow:</span>
+<span class="variable">Source Code</span> → [<span class="function">Interpreter</span>] → <span class="variable">Direct Execution</span>
+
+<span class="comment">// Examples: Python, JavaScript, Ruby</span>
+<span class="comment">// Pros: Easier to test, platform-independent</span>
+<span class="comment">// Cons: Slower execution, needs interpreter installed</span></code></pre>
+                </div>
+                
+                <h3>Hybrid Approach (JIT)</h3>
+                <p>Modern languages often use Just-In-Time compilation, combining benefits of both approaches. The code is interpreted initially but frequently-used parts are compiled for speed.</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>JavaScript in modern browsers</li>
+                    <li>Java (compiles to bytecode, then JIT)</li>
+                    <li>Python with PyPy</li>
+                </ul>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>How Programs Use Memory</h2>
+                <p>When a program runs, it uses different types of memory:</p>
+                
+                <h3>Stack Memory</h3>
+                <p>Fast, organized memory for function calls and local variables. Automatically managed - variables are "popped off" when functions end.</p>
+                
+                <h3>Heap Memory</h3>
+                <p>Larger, flexible memory for dynamic data. Must be managed (manually in some languages, automatically with garbage collection in others).</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Memory usage example (Python):</span>
+
+<span class="keyword">def</span> <span class="function">calculate</span>():
+    <span class="variable">x</span> = <span class="number">10</span>        <span class="comment">// Stored on stack</span>
+    <span class="variable">y</span> = <span class="number">20</span>        <span class="comment">// Stored on stack</span>
+    <span class="keyword">return</span> <span class="variable">x</span> + <span class="variable">y</span>
+
+<span class="comment">// When function ends, x and y are removed from stack</span>
+
+<span class="variable">data</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]  <span class="comment">// List stored on heap</span>
+<span class="comment">// List persists until no longer needed, then garbage collected</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>APIs and Libraries</h2>
+                <p>Programmers don't write everything from scratch. They use pre-built code:</p>
+                
+                <h3>Libraries</h3>
+                <p>Collections of pre-written code that you can use in your programs. They provide common functionality so you don't have to reinvent the wheel.</p>
+                
+                <h3>APIs (Application Programming Interfaces)</h3>
+                <p>Defined ways for software components to communicate. APIs let you use functionality from other programs or services.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Example: Using a library in Python</span>
+<span class="keyword">import</span> <span class="variable">random</span>  <span class="comment">// Import the random library</span>
+
+<span class="comment">// Use a function from the library</span>
+<span class="variable">number</span> = <span class="variable">random</span>.<span class="function">randint</span>(<span class="number">1</span>, <span class="number">100</span>)
+<span class="keyword">print</span>(<span class="variable">number</span>)  <span class="comment">// Prints random number 1-100</span>
+
+<span class="comment">// Without the library, you'd have to write</span>
+<span class="comment">// all the random number generation code yourself!</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>Software:</strong> Instructions that tell hardware what to do</li>
+                            <li><strong>Source Code:</strong> Human-readable programming instructions</li>
+                            <li><strong>Machine Code:</strong> Binary instructions CPUs understand</li>
+                            <li><strong>Compilers:</strong> Convert entire programs before execution</li>
+                            <li><strong>Interpreters:</strong> Execute code line by line</li>
+                            <li><strong>Libraries/APIs:</strong> Pre-built code you can reuse</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson4.html" class="nav-btn prev">← Previous: Operating Systems</a>
+                <a href="lesson6.html" class="nav-btn next">Next: Computer Networks →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

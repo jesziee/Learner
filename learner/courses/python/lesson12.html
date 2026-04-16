@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 12: Error Handling - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 12: Error Handling</h1>
+            <p>Handle exceptions gracefully with try, except, and custom exceptions</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Understanding Exceptions</h2>
+                <p>Exceptions are errors that occur during program execution. Python uses exceptions to signal that something unexpected happened. Proper error handling makes your programs robust and user-friendly by gracefully handling problems instead of crashing.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Try-Except Basics</h2>
+                <p>The try-except block lets you catch and handle exceptions. Code that might raise an exception goes in the try block, and handling code goes in except blocks.</p>
+                
+                <div class="code-block">
+                    <h4>Basic Exception Handling:</h4>
+<pre><code># Basic try-except
+try:
+    number = int(input("Enter a number: "))
+    print(f"You entered: {number}")
+except ValueError:
+    print("That's not a valid number!")
+
+# Catching multiple exceptions
+try:
+    value = int(input("Enter a number: "))
+    result = 10 / value
+    print(f"Result: {result}")
+except ValueError:
+    print("Invalid number!")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+
+# Catching multiple exceptions together
+try:
+    file = open("nonexistent.txt", "r")
+    content = file.read()
+except (FileNotFoundError, PermissionError) as e:
+    print(f"Error: {e}")
+
+# Catch all exceptions (use sparingly!)
+try:
+    risky_operation()
+except Exception as e:
+    print(f"An error occurred: {e}")
+    # Better to catch specific exceptions
+
+# The 'as' keyword captures the exception object
+try:
+    result = 10 / 0
+except ZeroDivisionError as error:
+    print(f"Error: {error}")
+    print(f"Error type: {type(error).__name__}")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-6:</strong> The try block contains code that might fail. Except catches specific exceptions.</p>
+                        <p><strong>Lines 9-16:</strong> Multiple except blocks handle different types of exceptions.</p>
+                        <p><strong>Lines 19-22:</strong> Group related exceptions in a tuple to handle them the same way.</p>
+                        <p><strong>Lines 25-28:</strong> Catching Exception catches everything but should be used sparingly.</p>
+                        <p><strong>Lines 31-35:</strong> The <code>as</code> keyword captures the exception object for inspection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The Full Try-Except Structure</h2>
+                <p>Python's try statement can include else and finally blocks for complete control over execution flow.</p>
+                
+                <div class="code-block">
+                    <h4>Complete Try Statement:</h4>
+<pre><code>def divide_numbers(a, b):
+    try:
+        result = a / b
+    except ZeroDivisionError:
+        print("Cannot divide by zero!")
+        return None
+    except TypeError:
+        print("Both arguments must be numbers!")
+        return None
+    else:
+        # Runs if no exception occurred
+        print("Division successful!")
+        return result
+    finally:
+        # Always runs, regardless of exceptions
+        print("Operation complete.")
+
+# Test cases
+print(divide_numbers(10, 2))
+# Division successful.
+# Operation complete.
+# 5.0
+
+print(divide_numbers(10, 0))
+# Cannot divide by zero!
+# Operation complete.
+# None
+
+# Practical example with file handling
+def read_config(filename):
+    config = {}
+    try:
+        with open(filename) as f:
+            config = parse_config(f)
+    except FileNotFoundError:
+        print(f"Config file not found: {filename}")
+    except PermissionError:
+        print(f"Permission denied: {filename}")
+    else:
+        print("Config loaded successfully")
+    finally:
+        print("Config loading complete")
+    return config
+
+# While-else and for-else with exceptions
+def find_item(items, target):
+    for item in items:
+        if item == target:
+            return item
+    else:
+        # Runs if loop completed without finding
+        raise ValueError(f"{target} not found in items")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-12:</strong> The else block runs only if no exception occurred.</p>
+                        <p><strong>Lines 13-15:</strong> The finally block always runs, used for cleanup.</p>
+                        <p><strong>Lines 22-28:</strong> Even with early return, finally still executes.</p>
+                        <p><strong>Lines 31-42:</strong> Real-world pattern for file handling with multiple exception types.</p>
+                        <p><strong>Lines 45-52:</strong> The else clause in loops runs if no break occurred.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 When to Use Each Block</h4>
+                    <p>Use <strong>try</strong> for risky code, <strong>except</strong> for handling errors, <strong>else</strong> for code that runs on success, and <strong>finally</strong> for cleanup that must always happen (closing files, releasing resources).</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Raising Exceptions</h2>
+                <p>You can raise exceptions using the <code>raise</code> keyword. This is useful for validating inputs or signaling error conditions in your code.</p>
+                
+                <div class="code-block">
+                    <h4>Raising Exceptions:</h4>
+<pre><code># Raise a simple exception
+def set_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+    return age
+
+try:
+    set_age(-5)
+except ValueError as e:
+    print(e)  # Age cannot be negative
+
+# Re-raising exceptions
+def process_data(data):
+    try:
+        result = parse(data)
+    except ValueError:
+        print("Logging error...")
+        raise  # Re-raise the same exception
+
+# Raise with custom message
+def withdraw(balance, amount):
+    if amount > balance:
+        raise ValueError(
+            f"Insufficient funds: {balance} available, "
+            f"{amount} requested"
+        )
+    return balance - amount
+
+# Raise different exception types
+def validate_user(user):
+    if not user:
+        raise TypeError("User cannot be None")
+    if not user.get("name"):
+        raise ValueError("User must have a name")
+    if user.get("age", 0) < 0:
+        raise ValueError("Age cannot be negative")
+
+# Chaining exceptions (Python 3+)
+try:
+    try:
+        value = int("not a number")
+    except ValueError as e:
+        raise RuntimeError("Processing failed") from e
+
+# Exception chaining shows the original cause
+# RuntimeError: Processing failed
+# The above exception was the direct cause of...</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-8:</strong> Use <code>raise</code> to signal error conditions in your functions.</p>
+                        <p><strong>Lines 11-15:</strong> Use bare <code>raise</code> to re-raise the current exception after logging.</p>
+                        <p><strong>Lines 18-24:</strong> Provide descriptive error messages with context.</p>
+                        <p><strong>Lines 27-33:</strong> Raise different exception types for different error conditions.</p>
+                        <p><strong>Lines 36-42:</strong> Use <code>raise ... from e</code> to chain exceptions and preserve context.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Custom Exceptions</h2>
+                <p>Create your own exception classes for domain-specific errors. Custom exceptions make your code more expressive and easier to handle.</p>
+                
+                <div class="code-block">
+                    <h4>Creating Custom Exceptions:</h4>
+<pre><code># Basic custom exception
+class InsufficientFundsError(Exception):
+    """Raised when account has insufficient funds."""
+    pass
+
+# Custom exception with attributes
+class BankError(Exception):
+    """Base exception for bank operations."""
+    def __init__(self, message, code=None):
+        self.message = message
+        self.code = code
+        super().__init__(self.message)
+
+class InsufficientFundsError(BankError):
+    """Raised when withdrawal exceeds balance."""
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+        super().__init__(
+            f"Insufficient funds: {balance} available, "
+            f"{amount} requested",
+            code="INSUFFICIENT_FUNDS"
+        )
+
+# Using custom exceptions
+class BankAccount:
+    def __init__(self, balance=0):
+        self.balance = balance
+    
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientFundsError(self.balance, amount)
+        self.balance -= amount
+        return amount
+
+# Handling custom exceptions
+try:
+    account = BankAccount(100)
+    account.withdraw(150)
+except InsufficientFundsError as e:
+    print(f"Error: {e}")
+    print(f"Balance: {e.balance}")
+    print(f"Code: {e.code}")
+
+# Exception hierarchy
+class AppError(Exception):
+    """Base exception for the application."""
+
+class DatabaseError(AppError):
+    """Database-related errors."""
+
+class ConnectionError(DatabaseError):
+    """Connection failures."""
+
+class QueryError(DatabaseError):
+    """Query execution failures."""
+
+# Catch by hierarchy
+try:
+    raise ConnectionError("Failed to connect")
+except DatabaseError:  # Catches any DatabaseError subclass
+    print("Database operation failed")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-5:</strong> Simple custom exception inheriting from Exception.</p>
+                        <p><strong>Lines 8-12:</strong> Custom exception with additional attributes.</p>
+                        <p><strong>Lines 15-24:</strong> Specialized exception with contextual attributes.</p>
+                        <p><strong>Lines 27-34:</strong> Use custom exceptions in your classes.</p>
+                        <p><strong>Lines 37-41:</strong> Access custom attributes when handling the exception.</p>
+                        <p><strong>Lines 44-57:</strong> Create a hierarchy of exceptions for organized error handling.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Common Built-in Exceptions</h2>
+                <p>Python has many built-in exceptions. Understanding them helps you write better error handling code.</p>
+                
+                <div class="code-block">
+                    <h4>Common Exceptions:</h4>
+<pre><code># ValueError - right type, inappropriate value
+int("abc")  # ValueError
+
+# TypeError - wrong type for operation
+"hello" + 5  # TypeError
+
+# IndexError - list index out of range
+[1, 2, 3][10]  # IndexError
+
+# KeyError - dictionary key not found
+{"a": 1}["b"]  # KeyError
+
+# FileNotFoundError - file doesn't exist
+open("missing.txt")  # FileNotFoundError
+
+# ZeroDivisionError - division by zero
+10 / 0  # ZeroDivisionError
+
+# AttributeError - object lacks attribute
+"hello".unknown_method()  # AttributeError
+
+# NameError - variable not defined
+print(undefined_var)  # NameError
+
+# Handle specific exceptions appropriately
+def safe_get(dictionary, key, default=None):
+    try:
+        return dictionary[key]
+    except KeyError:
+        return default
+
+def safe_divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return float('inf')
+
+def safe_index(lst, index):
+    try:
+        return lst[index]
+    except IndexError:
+        return None</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> ValueError occurs when value is inappropriate for the operation.</p>
+                        <p><strong>Lines 5-6:</strong> TypeError occurs when types are incompatible.</p>
+                        <p><strong>Lines 8-9:</strong> IndexError occurs when accessing non-existent list index.</p>
+                        <p><strong>Lines 11-12:</strong> KeyError occurs when dictionary key doesn't exist.</p>
+                        <p><strong>Lines 20-25:</strong> Create safe wrapper functions for common operations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Context Managers</h2>
+                <p>Context managers handle setup and cleanup automatically using the <code>with</code> statement. They're perfect for resource management like files, connections, and locks.</p>
+                
+                <div class="code-block">
+                    <h4>Creating Context Managers:</h4>
+<pre><code># Using context manager with files
+with open("file.txt", "w") as f:
+    f.write("Hello")
+# File automatically closed
+
+# Creating context manager with class
+class Timer:
+    def __enter__(self):
+        import time
+        self.start = time.time()
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.end = time.time()
+        self.elapsed = self.end - self.start
+        print(f"Elapsed time: {self.elapsed:.2f}s")
+        return False  # Don't suppress exceptions
+
+# Using the custom context manager
+with Timer() as t:
+    sum(range(1000000))
+# Elapsed time: 0.05s
+
+# Creating context manager with decorator
+from contextlib import contextmanager
+
+@contextmanager
+def open_file(filename, mode="r"):
+    f = open(filename, mode)
+    try:
+        yield f
+    finally:
+        f.close()
+
+with open_file("file.txt") as f:
+    content = f.read()
+
+# Database connection context manager
+@contextmanager
+def database_connection(host):
+    conn = connect_to_db(host)
+    try:
+        yield conn
+    finally:
+        conn.close()
+
+# Suppress specific exceptions
+from contextlib import suppress
+
+with suppress(FileNotFoundError):
+    os.remove("file.txt")  # Won't raise if file doesn't exist</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-4:</strong> Files are the most common use of context managers.</p>
+                        <p><strong>Lines 7-17:</strong> Class-based context manager with <code>__enter__</code> and <code>__exit__</code>.</p>
+                        <p><strong>Lines 15-16:</strong> <code>__exit__</code> receives exception info; return True to suppress.</p>
+                        <p><strong>Lines 24-32:</strong> Use <code>@contextmanager</code> decorator for simpler creation.</p>
+                        <p><strong>Line 28:</strong> <code>yield</code> provides the value to the <code>as</code> variable.</p>
+                        <p><strong>Lines 43-45:</strong> <code>suppress</code> context manager ignores specific exceptions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Best Practices</h2>
+                <p>Follow these best practices for effective error handling.</p>
+                
+                <div class="code-block">
+                    <h4>Error Handling Guidelines:</h4>
+<pre><code># 1. Be specific about exceptions
+# Bad
+try:
+    do_something()
+except:  # Catches everything, including KeyboardInterrupt
+    pass
+
+# Good
+try:
+    do_something()
+except (ValueError, TypeError) as e:
+    handle_error(e)
+
+# 2. Don't use exceptions for flow control
+# Bad
+try:
+    item = my_list[index]
+except IndexError:
+    item = None
+
+# Good
+if index < len(my_list):
+    item = my_list[index]
+else:
+    item = None
+
+# 3. Clean up resources properly
+# Good - use context managers
+with open("file.txt") as f:
+    process(f)
+
+# 4. Provide helpful error messages
+# Bad
+if value < 0:
+    raise ValueError("Invalid value")
+
+# Good
+if value < 0:
+    raise ValueError(
+        f"Value must be non-negative, got {value}"
+    )
+
+# 5. Log exceptions before re-raising
+import logging
+logger = logging.getLogger(__name__)
+
+def process(data):
+    try:
+        return transform(data)
+    except ValueError as e:
+        logger.error(f"Processing failed: {e}")
+        raise
+
+# 6. Use custom exceptions for domain errors
+class ValidationError(Exception):
+    """Input validation failed."""
+    pass</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-10:</strong> Never use bare <code>except:</code> - it catches system exceptions too.</p>
+                        <p><strong>Lines 13-22:</strong> Use conditional checks instead of exceptions for expected conditions.</p>
+                        <p><strong>Lines 25-27:</strong> Always clean up resources with context managers.</p>
+                        <p><strong>Lines 30-38:</strong> Include relevant information in error messages.</p>
+                        <p><strong>Lines 41-48:</strong> Log exceptions for debugging before re-raising.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a simple calculator with robust error handling.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code>class CalculatorError(Exception):
+    """Base exception for calculator errors."""
+    pass
+
+class InvalidOperationError(CalculatorError):
+    """Invalid operation requested."""
+    pass
+
+class DivisionByZeroError(CalculatorError):
+    """Attempted division by zero."""
+    pass
+
+def calculate(a: float, b: float, operation: str) -> float:
+    """
+    Perform a calculation on two numbers.
+    
+    Args:
+        a: First number
+        b: Second number
+        operation: One of '+', '-', '*', '/'
+    
+    Returns:
+        Result of the calculation
+    
+    Raises:
+        InvalidOperationError: If operation is not supported
+        DivisionByZeroError: If dividing by zero
+    """
+    # Your code here
+    # Use a dictionary of operations or if-elif-else
+    pass
+
+def safe_calculate(a, b, operation):
+    """Wrapper that handles errors and returns None on failure."""
+    try:
+        return calculate(a, b, operation)
+    except CalculatorError as e:
+        print(f"Error: {e}")
+        return None
+
+# Test
+print(safe_calculate(10, 5, "+"))   # 15
+print(safe_calculate(10, 0, "/"))   # Error: Division by zero
+print(safe_calculate(10, 5, "^"))   # Error: Invalid operation</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson11.html" class="nav-button prev">← Previous: Object-Oriented Programming</a>
+                <a href="lesson13.html" class="nav-button next">Next: Modules & Packages →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

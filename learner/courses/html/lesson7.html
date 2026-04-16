@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic HTML - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🏗️ Lesson 7: Semantic HTML</h1>
+            <p>Meaningful elements for better structure</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is Semantic HTML?</h2>
+                <p>Semantic HTML uses elements that convey <strong>meaning</strong> about the content they contain. Instead of using generic containers like <div> and <span> for everything, semantic elements describe what the content is.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Non-semantic (doesn't describe content):</span>
+<<span class="keyword">div</span> <span class="variable">class</span>=<span class="string">"header"</span>>...</<span class="keyword">div</span>>
+<<span class="keyword">div</span> <span class="variable">class</span>=<span class="string">"nav"</span>>...</<span class="keyword">div</span>>
+<<span class="keyword">div</span> <span class="variable">class</span>=<span class="string">"article"</span>>...</<span class="keyword">div</span>>
+<<span class="keyword">div</span> <span class="variable">class</span>=<span class="string">"footer"</span>>...</<span class="keyword">div</span>>
+
+<span class="comment">// Semantic (describes content):</span>
+<<span class="keyword">header</span>>...</<span class="keyword">header</span>>
+<<span class="keyword">nav</span>>...</<span class="keyword">nav</span>>
+<<span class="keyword">article</span>>...</<span class="keyword">article</span>>
+<<span class="keyword">footer</span>>...</<span class="keyword">footer</span>></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Why semantics matter:</strong> They improve accessibility (screen readers understand the page structure), help SEO (search engines better understand content), and make code more readable and maintainable.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Page Structure Elements</h2>
+                
+                <h3><header></h3>
+                <p>Represents introductory content or navigational aids. Can be used for the page header or section headers.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Page header</span>
+<<span class="keyword">header</span>>
+    <<span class="keyword">h1</span>>My Website</<span class="keyword">h1</span>>
+    <<span class="keyword">nav</span>>...</<span class="keyword">nav</span>>
+</<span class="keyword">header</span>>
+
+<span class="comment">// Article header</span>
+<<span class="keyword">article</span>>
+    <<span class="keyword">header</span>>
+        <<span class="keyword">h2</span>>Article Title</<span class="keyword">h2</span>>
+        <<span class="keyword">time</span> <span class="variable">datetime</span>=<span class="string">"2024-01-15"</span>>January 15, 2024</<span class="keyword">time</span>>
+    </<span class="keyword">header</span>>
+    <<span class="keyword">p</span>>Article content...</<span class="keyword">p</span>>
+</<span class="keyword">article</span>></code></pre>
+                </div>
+                
+                <h3><nav></h3>
+                <p>Contains navigation links. Use for primary navigation, not for all link groups.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">nav</span>>
+    <<span class="keyword">ul</span>>
+        <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/"</span>>Home</<span class="keyword">a</span>></<span class="keyword">li</span>>
+        <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/about"</span>>About</<span class="keyword">a</span>></<span class="keyword">li</span>>
+        <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/contact"</span>>Contact</<span class="keyword">a</span>></<span class="keyword">li</span>>
+    </<span class="keyword">ul</span>>
+</<span class="keyword">nav</span>></code></pre>
+                </div>
+                
+                <h3><main></h3>
+                <p>Contains the main content of the page. There should be only one <main> per page.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">main</span>>
+    <<span class="keyword">h1</span>>Welcome to My Site</<span class="keyword">h1</span>>
+    <<span class="keyword">p</span>>Main content goes here...</<span class="keyword">p</span>>
+</<span class="keyword">main</span>>
+
+<span class="comment">// Excludes: header, footer, nav, sidebars</span></code></pre>
+                </div>
+                
+                <h3><footer></h3>
+                <p>Contains footer content like copyright, contact info, or related links.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">footer</span>>
+    <<span class="keyword">p</span>>&copy; 2024 My Website. All rights reserved.</<span class="keyword">p</span>>
+    <<span class="keyword">nav</span>>
+        <<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/privacy"</span>>Privacy Policy</<span class="keyword">a</span>>
+        <<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/terms"</span>>Terms of Service</<span class="keyword">a</span>>
+    </<span class="keyword">nav</span>>
+</<span class="keyword">footer</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Content Sectioning Elements</h2>
+                
+                <h3><section></h3>
+                <p>A thematic grouping of content, typically with a heading.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">section</span>>
+    <<span class="keyword">h2</span>>Our Services</<span class="keyword">h2</span>>
+    <<span class="keyword">p</span>>We offer web development, design, and consulting.</<span class="keyword">p</span>>
+</<span class="keyword">section</span>>
+
+<<span class="keyword">section</span>>
+    <<span class="keyword">h2</span>>Contact Us</<span class="keyword">h2</span>>
+    <<span class="keyword">p</span>>Email: hello@example.com</<span class="keyword">p</span>>
+</<span class="keyword">section</span>></code></pre>
+                </div>
+                
+                <h3><article></h3>
+                <p>Self-contained content that could stand alone (blog post, news article, comment).</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">article</span>>
+    <<span class="keyword">header</span>>
+        <<span class="keyword">h2</span>>How to Learn HTML</<span class="keyword">h2</span>>
+        <<span class="keyword">p</span>>Posted on <<span class="keyword">time</span> <span class="variable">datetime</span>=<span class="string">"2024-01-10"</span>>January 10</<span class="keyword">time</span>></<span class="keyword">p</span>>
+    </<span class="keyword">header</span>>
+    <<span class="keyword">p</span>>HTML is the foundation of the web...</<span class="keyword">p</span>>
+    <<span class="keyword">footer</span>>
+        <<span class="keyword">p</span>>Written by John Doe</<span class="keyword">p</span>>
+    </<span class="keyword">footer</span>>
+</<span class="keyword">article</span>></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Section vs Article:</strong> An article is self-contained and could be syndicated (like a blog post). A section is a thematic grouping within a page. Both typically have headings.</p>
+                </div>
+                
+                <h3><aside></h3>
+                <p>Content tangentially related to the main content (sidebars, pull quotes).</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">aside</span>>
+    <<span class="keyword">h3</span>>Related Articles</<span class="keyword">h3</span>>
+    <<span class="keyword">ul</span>>
+        <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"#"</span>>CSS Basics</<span class="keyword">a</span>></<span class="keyword">li</span>>
+        <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"#"</span>>JavaScript Introduction</<span class="keyword">a</span>></<span class="keyword">li</span>>
+    </<span class="keyword">ul</span>>
+</<span class="keyword">aside</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Complete Page Layout Example</h2>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">body</span>>
+    <<span class="keyword">header</span>>
+        <<span class="keyword">h1</span>>My Blog</<span class="keyword">h1</span>>
+        <<span class="keyword">nav</span>>
+            <<span class="keyword">ul</span>>
+                <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/"</span>>Home</<span class="keyword">a</span>></<span class="keyword">li</span>>
+                <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/blog"</span>>Blog</<span class="keyword">a</span>></<span class="keyword">li</span>>
+                <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/about"</span>>About</<span class="keyword">a</span>></<span class="keyword">li</span>>
+            </<span class="keyword">ul</span>>
+        </<span class="keyword">nav</span>>
+    </<span class="keyword">header</span>>
+
+    <<span class="keyword">main</span>>
+        <<span class="keyword">article</span>>
+            <<span class="keyword">header</span>>
+                <<span class="keyword">h2</span>>My First Blog Post</<span class="keyword">h2</span>>
+                <<span class="keyword">time</span> <span class="variable">datetime</span>=<span class="string">"2024-01-15"</span>>January 15, 2024</<span class="keyword">time</span>>
+            </<span class="keyword">header</span>>
+            <<span class="keyword">p</span>>This is my blog post content...</<span class="keyword">p</span>>
+        </<span class="keyword">article</span>>
+        
+        <<span class="keyword">aside</span>>
+            <<span class="keyword">h3</span>>Recent Posts</<span class="keyword">h3</span>>
+            <<span class="keyword">ul</span>>
+                <<span class="keyword">li</span>><<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"#"</span>>First Post</<span class="keyword">a</span>></<span class="keyword">li</span>>
+            </<span class="keyword">ul</span>>
+        </<span class="keyword">aside</span>>
+    </<span class="keyword">main</span>>
+
+    <<span class="keyword">footer</span>>
+        <<span class="keyword">p</span>>&copy; 2024 My Blog</<span class="keyword">p</span>>
+    </<span class="keyword">footer</span>>
+</<span class="keyword">body</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Other Semantic Elements</h2>
+                
+                <h3><figure> and <figcaption></h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">figure</span>>
+    <<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"chart.png"</span> <span class="variable">alt</span>=<span class="string">"Sales chart"</span>>
+    <<span class="keyword">figcaption</span>>Figure 1: Monthly sales for 2024</<span class="keyword">figcaption</span>>
+</<span class="keyword">figure</span>></code></pre>
+                </div>
+                
+                <h3><time></h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Machine-readable datetime</span>
+<<span class="keyword">time</span> <span class="variable">datetime</span>=<span class="string">"2024-01-15"</span>>January 15, 2024</<span class="keyword">time</span>>
+
+<spanspan class="comment">// Time with timezone</span>
+<<span class="keyword">time</span> <span class="variable">datetime</span>=<span class="string">"2024-01-15T14:30-05:00"</span>>2:30 PM EST</<span class="keyword">time</span>>
+
+<span class="comment">// Duration</span>
+<<span class="keyword">time</span> <span class="variable">datetime</span>=<span class="string">"PT2H30M"</span>>2 hours 30 minutes</<span class="keyword">time</span>></code></pre>
+                </div>
+                
+                <h3><address></h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">address</span>>
+    Written by <<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"mailto:john@example.com"</span>>John Doe</<span class="keyword">a</span>><<span class="keyword">br</span>>
+    Visit us at: <<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span>>example.com</<span class="keyword">a</span>><<span class="keyword">br</span>>
+    123 Main Street, New York, NY
+</<span class="keyword">address</span>></code></pre>
+                </div>
+                
+                <h3><details> and <summary></h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">details</span>>
+    <<span class="keyword">summary</span>>Click to expand</<span class="keyword">summary</span>>
+    <<span class="keyword">p</span>>This content is hidden until the summary is clicked.</<span class="keyword">p</span>>
+</<span class="keyword">details</span>>
+
+<span class="comment">// Open by default</span>
+<<span class="keyword">details</span> <span class="variable">open</span>>
+    <<span class="keyword">summary</span>>FAQ: What is HTML?</<span class="keyword">summary</span>>
+    <<span class="keyword">p</span>>HTML stands for HyperText Markup Language...</<span class="keyword">p</span>>
+</<span class="keyword">details</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Text-Level Semantics</h2>
+                
+                <h3><mark></h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>>Search results for "HTML": <<span class="keyword">mark</span>>HTML</<span class="keyword">mark</span>> is the standard markup language...</<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <h3><cite></h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>><<span class="keyword">cite</span>>The Art of Programming</<span class="keyword">cite</span>> by John Smith is a great book.</<span class="keyword">p</span>></code></pre>
+                </div>
+                
+                <h3><abbr></h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">p</span>>I work with <<span class="keyword">abbr</span> <span class="variable">title</span>=<span class="string">"HyperText Markup Language"</span>>HTML</<span class="keyword">abbr</span>> every day.</<span class="keyword">p</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><header>:</strong> Introductory content or navigation</li>
+                            <li><strong><nav>:</strong> Navigation links</li>
+                            <li><strong><main>:</strong> Main content (one per page)</li>
+                            <li><strong><article>:</strong> Self-contained content</li>
+                            <li><strong><section>:</strong> Thematic grouping of content</li>
+                            <li><strong><aside>:</strong> Related but separate content</li>
+                            <li><strong><footer>:</strong> Footer content</li>
+                            <li><strong><figure>:</strong> Self-contained content like images</li>
+                            <li><strong><time>:</strong> Machine-readable dates/times</li>
+                            <li><strong>Benefits:</strong> Better accessibility, SEO, and code readability</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson6.html" class="nav-btn prev">← Previous: Forms and Input</a>
+                <a href="lesson8.html" class="nav-btn next">Next: HTML Attributes →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

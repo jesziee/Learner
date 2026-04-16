@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: Introduction to CSS - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Beginner Level</span>
+            <h1>Lesson 1: Introduction to CSS</h1>
+            <p>Understanding what CSS is and how it styles the web</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 8%;"></div>
+            </div>
+            <span class="progress-text">Lesson 1 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>What is CSS?</h2>
+                <p>CSS (Cascading Style Sheets) is the language used to style and layout web pages. While HTML provides the structure and content, CSS controls how that content looks — colors, fonts, spacing, layouts, and even animations. Think of HTML as the skeleton of a webpage and CSS as the skin and clothing that makes it look good.</p>
+            </section>
+            
+            <section>
+                <h2>CSS vs HTML: Understanding the Difference</h2>
+                <p>HTML and CSS work together but serve different purposes:</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- HTML: Structure and Content -->
+<h1>Welcome to My Website</h1>
+<p>This is a paragraph of text.</p>
+<button>Click Me</button>
+
+<!-- CSS: Presentation and Style -->
+<style>
+  h1 {
+    color: purple;
+    font-size: 32px;
+  }
+  
+  p {
+    color: gray;
+    line-height: 1.6;
+  }
+  
+  button {
+    background-color: #7C3AED;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  }
+</style></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>HTML does:</strong>
+                    <ul>
+                        <li>Define what elements are on the page (headings, paragraphs, buttons)</li>
+                        <li>Provide structure and meaning (semantics)</li>
+                        <li>Contain the actual content (text, images)</li>
+                    </ul>
+                    <strong>CSS does:</strong>
+                    <ul>
+                        <li>Control visual appearance (colors, fonts, sizes)</li>
+                        <li>Manage layout and positioning</li>
+                        <li>Add visual effects (shadows, animations)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>The Three Ways to Add CSS</h2>
+                <p>There are three methods to apply CSS to your HTML, each with different use cases.</p>
+                
+                <h3>1. Inline CSS</h3>
+                <p>Write CSS directly in an HTML element's style attribute. Use this sparingly — it's hard to maintain.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- Inline CSS: Styles directly on the element -->
+<p style="color: purple; font-size: 18px;">
+  This paragraph has inline styles.
+</p>
+
+<button style="background: purple; color: white; padding: 10px;">
+  Styled Button
+</button></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Line by line:</strong>
+                    <ul>
+                        <li><code>style="..."</code> — The style attribute holds CSS declarations</li>
+                        <li><code>color: purple;</code> — Sets text color to purple</li>
+                        <li><code>font-size: 18px;</code> — Sets text size to 18 pixels</li>
+                        <li>Multiple declarations separated by semicolons</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>When to use inline CSS:</strong> Quick tests, email HTML, dynamic styles from JavaScript. Avoid for regular styling — it's hard to maintain and override.
+                </div>
+                
+                <h3>2. Internal CSS</h3>
+                <p>Write CSS inside a <style> tag in the HTML document's head. Good for single-page styles.</p>
+                
+                <div class="code-block">
+                    <pre><code><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+  
+  <!-- Internal CSS: Styles for this page only -->
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      color: #7C3AED;
+      text-align: center;
+    }
+    
+    .highlight {
+      background-color: yellow;
+      padding: 2px 5px;
+    }
+  </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <h1>Welcome</h1>
+  <p>This is <span class="highlight">highlighted text</span>.</p>
+</body>
+</html></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Line by line:</strong>
+                    <ul>
+                        <li><code><style></code> — Contains CSS rules for this document</li>
+                        <li><code>body { ... }</code> — Selects the body element</li>
+                        <li><code>background-color: #f5f5f5;</code> — Light gray background</li>
+                        <li><code>.highlight { ... }</code> — Selects elements with class "highlight"</li>
+                    </ul>
+                </div>
+                
+                <h3>3. External CSS (Recommended)</h3>
+                <p>Write CSS in a separate .css file and link it. This is the best practice for most projects.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- HTML file (index.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+  
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <h1>Welcome</h1>
+  <p class="intro">Hello, world!</p>
+</body>
+</html></code></pre>
+                </div>
+                
+                <div class="code-block">
+                    <pre><code>/* CSS file (styles.css) */
+/* This is a separate file containing all styles */
+
+body {
+  background-color: white;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #7C3AED;
+  font-size: 2.5rem;
+}
+
+.intro {
+  color: #666;
+  font-size: 1.1rem;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Line by line:</strong>
+                    <ul>
+                        <li><code><link rel="stylesheet"></code> — Tells browser this is a stylesheet</li>
+                        <li><code>href="styles.css"</code> — Path to the CSS file</li>
+                        <li><code>/* comment */</code> — CSS comments (not visible in browser)</li>
+                        <li>Each rule follows: selector { property: value; }</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Why external CSS is best:</strong>
+                    <ul>
+                        <li>Separation of concerns (HTML for structure, CSS for style)</li>
+                        <li>One CSS file can style multiple HTML pages</li>
+                        <li>Browsers cache CSS files for faster loading</li>
+                        <li>Easier to maintain and collaborate on</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>CSS Syntax Explained</h2>
+                <p>Understanding the basic building blocks of CSS rules.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* CSS Rule Structure */
+selector {
+  property: value;
+  another-property: another-value;
+}
+
+/* Real Example */
+h1 {
+  color: purple;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Breaking it down: */
+/*
+  h1        → Selector (what to style)
+  { }       → Declaration block (contains all styles)
+  color     → Property name (what aspect to change)
+  purple    → Property value (how to change it)
+  ;         → Semicolon (ends each declaration)
+*/</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>CSS terminology:</strong>
+                    <ul>
+                        <li><strong>Selector:</strong> Points to the HTML element(s) to style</li>
+                        <li><strong>Declaration block:</strong> Contains one or more declarations</li>
+                        <li><strong>Declaration:</strong> A property-value pair</li>
+                        <li><strong>Property:</strong> The aspect to style (color, size, margin)</li>
+                        <li><strong>Value:</strong> The setting for that property</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Cascading: The "C" in CSS</h2>
+                <p>The "Cascading" part means styles can come from multiple sources and the browser determines which styles win.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- Multiple sources of styles -->
+
+<!-- 1. Browser defaults (user agent stylesheet) -->
+<!-- Every browser has default styles for elements -->
+
+<!-- 2. External CSS -->
+<link rel="stylesheet" href="styles.css">
+<!-- styles.css: p { color: blue; } -->
+
+<!-- 3. Internal CSS -->
+<style>
+  p { color: green; }
+</style>
+
+<!-- 4. Inline CSS -->
+<p style="color: red;">What color am I?</p>
+
+<!-- Result: Red! Inline has highest priority -->
+<!-- Priority: Inline > Internal > External > Browser defaults --></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Cascade order (lowest to highest priority):</strong>
+                    <ol>
+                        <li><strong>Browser defaults:</strong> Built-in styles</li>
+                        <li><strong>External CSS:</strong> Linked stylesheets</li>
+                        <li><strong>Internal CSS:</strong> Style tags in head</li>
+                        <li><strong>Inline CSS:</strong> Style attribute on element</li>
+                        <li><strong>!important:</strong> Overrides everything (use sparingly!)</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Your First CSS Styles</h2>
+                <p>Let's write some basic CSS to style a simple webpage:</p>
+                
+                <div class="code-block">
+                    <pre><code>/* styles.css - Your first stylesheet */
+
+/* Style the whole page */
+body {
+  background-color: #ffffff;        /* White background */
+  color: #333333;                   /* Dark gray text */
+  font-family: Arial, sans-serif;   /* Clean, readable font */
+  margin: 0;                        /* Remove default margin */
+  padding: 20px;                    /* Add space inside */
+}
+
+/* Style headings */
+h1 {
+  color: #7C3AED;                   /* Purple color */
+  font-size: 32px;                  /* Larger text */
+  margin-bottom: 10px;              /* Space below */
+}
+
+h2 {
+  color: #9333EA;                   /* Darker purple */
+  font-size: 24px;
+}
+
+/* Style paragraphs */
+p {
+  font-size: 16px;
+  line-height: 1.6;                 /* Better readability */
+  margin-bottom: 15px;
+}
+
+/* Style links */
+a {
+  color: #7C3AED;
+  text-decoration: none;            /* Remove underline */
+}
+
+a:hover {
+  text-decoration: underline;       /* Underline on hover */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Common CSS properties used:</strong>
+                    <ul>
+                        <li><code>background-color</code> — Background color of element</li>
+                        <li><code>color</code> — Text color</li>
+                        <li><code>font-family</code> — Type of font</li>
+                        <li><code>font-size</code> — Size of text</li>
+                        <li><code>margin</code> — Space outside element</li>
+                        <li><code>padding</code> — Space inside element</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create a simple HTML page and style it with an external CSS file:</p>
+                <div class="code-block">
+                    <pre><code><!-- Create index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My First Styled Page</title>
+  <link rel="stylesheet" href="styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <h1>Hello, CSS!</h1>
+  <p>This is my first styled paragraph.</p>
+  <a href="#">Click me</a>
+</body>
+</html>
+
+/* Create styles.css */
+/* Try styling: */
+/* - Purple background for the body */
+/* - White text for the heading */
+/* - Yellow links */
+/* - Large font size for the paragraph */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>CSS (Cascading Style Sheets) controls how HTML looks</li>
+                    <li>Three ways to add CSS: inline, internal, external (recommended)</li>
+                    <li>CSS syntax: selector { property: value; }</li>
+                    <li>The cascade determines which styles take priority</li>
+                    <li>External CSS is best for maintainability and caching</li>
+                    <li>Always use semicolons after each declaration</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="index.html" class="btn-secondary">← Course Overview</a>
+            <a href="lesson2.html" class="btn-primary">Next: Selectors →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

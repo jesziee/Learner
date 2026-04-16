@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: Responsive Design - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Pro Level</span>
+            <h1>Lesson 9: Responsive Design</h1>
+            <p>Create websites that work on all screen sizes</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 75%;"></div>
+            </div>
+            <span class="progress-text">Lesson 9 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>What is Responsive Design?</h2>
+                <p>Responsive web design ensures your website looks and works well on all devices — from tiny phones to large desktop monitors. With mobile traffic exceeding desktop, responsive design is essential. The key ingredients are fluid layouts, flexible images, media queries, and a mobile-first approach.</p>
+            </section>
+            
+            <section>
+                <h2>1. The Viewport Meta Tag</h2>
+                <p>Essential for mobile browsers to render pages correctly.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Always include this in your HTML head */
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+/* What it does:
+   - width=device-width: Page width matches device width
+   - initial-scale=1.0: Start at 100% zoom (no zooming)
+
+/* Without this tag:
+   - Mobile browsers assume desktop width (980px)
+   - Everything is tiny and requires zooming
+   - User experience is poor
+
+/* Additional options */
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+/* Be careful with: */
+/* user-scalable=no - Prevents zooming (accessibility issue!) */
+/* maximum-scale=1 - Prevents zooming (accessibility issue!) */</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Accessibility note:</strong> Never disable user zooming. People with low vision need to zoom to read content.
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Media Queries</h2>
+                <p>Media queries apply different styles based on device characteristics.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Basic media query syntax */
+@media (condition) {
+  /* Styles that apply when condition is true */
+}
+
+/* Common breakpoint: screen width */
+@media (max-width: 768px) {
+  /* Styles for screens 768px and narrower */
+  .container {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Styles for screens wider than 768px */
+  .container {
+    padding: 20px;
+  }
+}
+
+/* Multiple conditions */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Styles for tablets */
+}
+
+/* Orientation */
+@media (orientation: landscape) {
+  /* Styles for landscape orientation */
+}
+
+@media (orientation: portrait) {
+  /* Styles for portrait orientation */
+}
+
+/* Screen type */
+@media screen {
+  /* Only for screens (not print) */
+}
+
+@media print {
+  /* Only for printing */
+}
+
+/* Combining with not */
+@media not print {
+  /* Everything except print */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Common breakpoints:</strong>
+                    <ul>
+                        <li><code>max-width: 576px</code> — Extra small phones</li>
+                        <li><code>max-width: 768px</code> — Tablets portrait</li>
+                        <li><code>max-width: 992px</code> — Tablets landscape, small laptops</li>
+                        <li><code>max-width: 1200px</code> — Desktops</li>
+                        <li><code>min-width: 1201px</code> — Large desktops</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Mobile-First Approach</h2>
+                <p>Start with mobile styles, then add complexity for larger screens.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Mobile-first: Base styles for mobile */
+.container {
+  width: 100%;
+  padding: 15px;
+}
+
+/* Progressive enhancement for larger screens */
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+    padding: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Benefits of mobile-first:
+   ✓ Simpler CSS (less code)
+   ✓ Better performance on mobile
+   ✓ Forces focus on essential content
+   ✓ Uses min-width queries (more intuitive)
+*/
+
+/* Desktop-first approach (not recommended) */
+.container {
+  max-width: 1140px;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+}
+/* More overrides needed, harder to maintain */</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Why mobile-first:</strong> Mobile styles are simpler and more constrained. Adding complexity for larger screens is easier than removing it for smaller screens.
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Fluid Layouts</h2>
+                <p>Use relative units so layouts adapt to any screen size.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Percentages for widths */
+.container {
+  width: 90%;           /* 90% of parent */
+  max-width: 1200px;    /* But never wider than 1200px */
+  margin: 0 auto;       /* Center it */
+}
+
+/* Fluid grid */
+.column {
+  width: 33.333%;       /* One third */
+}
+
+/* Two columns: 25% + 75% */
+.sidebar {
+  width: 25%;
+}
+
+.main {
+  width: 75%;
+}
+
+/* Fluid typography with clamp() */
+h1 {
+  /* min, preferred, max */
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  /* Minimum: 1.5rem
+     Preferred: 4% of viewport width
+     Maximum: 3rem */
+}
+
+/* Fluid padding */
+.section {
+  padding: clamp(1rem, 5vw, 3rem);
+}
+
+/* Fluid gap */
+.grid {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Viewport-based units */
+.hero {
+  height: 100vh;        /* Full viewport height */
+  min-height: 50vh;     /* At least half viewport */
+}
+
+.sidebar {
+  width: 20vw;          /* 20% of viewport width */
+}
+
+.font-size {
+  font-size: 2vmin;     /* 2% of smaller viewport dimension */
+  font-size: 2vmax;     /* 2% of larger viewport dimension */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Viewport units:</strong>
+                    <ul>
+                        <li><code>vw</code> — 1% of viewport width</li>
+                        <li><code>vh</code> — 1% of viewport height</li>
+                        <li><code>vmin</code> — 1% of smaller dimension</li>
+                        <li><code>vmax</code> — 1% of larger dimension</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Flexible Images</h2>
+                <p>Make images responsive so they never overflow their containers.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Basic responsive image */
+img {
+  max-width: 100%;      /* Never wider than container */
+  height: auto;         /* Maintain aspect ratio */
+}
+
+/* Images in content */
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+/* Background images */
+.hero {
+  background-image: url('hero.jpg');
+  background-size: cover;       /* Cover entire area */
+  background-position: center;  /* Center the image */
+  background-repeat: no-repeat;
+}
+
+/* Different images for different screens */
+.hero {
+  background-image: url('hero-mobile.jpg');
+}
+
+@media (min-width: 768px) {
+  .hero {
+    background-image: url('hero-tablet.jpg');
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    background-image: url('hero-desktop.jpg');
+  }
+}
+
+/* Art direction with picture element */
+<picture>
+  <source media="(min-width: 800px)" srcset="large.jpg">
+  <source media="(min-width: 400px)" srcset="medium.jpg">
+  <img src="small.jpg" alt="Description">
+</picture>
+
+/* Responsive images with srcset */
+<img src="small.jpg"
+     srcset="small.jpg 400w,
+             medium.jpg 800w,
+             large.jpg 1200w"
+     sizes="(max-width: 600px) 100vw,
+            (max-width: 1200px) 50vw,
+            400px"
+     alt="Description">
+
+/* Object-fit for fixed-size containers */
+.thumbnail {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;      /* Crop to fill */
+}
+
+.banner {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;    /* Fit without cropping */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Responsive Navigation</h2>
+                <p>Navigation patterns that work on all screen sizes.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Desktop: horizontal nav, Mobile: hamburger menu */
+
+/* HTML */
+<nav class="nav">
+  <button class="nav-toggle" aria-label="Toggle menu">
+    ☰
+  </button>
+  <ul class="nav-menu">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+/* CSS - Mobile First */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.nav-toggle {
+  display: block;      /* Show hamburger on mobile */
+}
+
+.nav-menu {
+  display: none;       /* Hide menu by default on mobile */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.nav-menu.active {
+  display: flex;       /* Show when toggled */
+}
+
+.nav-menu li {
+  margin: 0.5rem 0;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;     /* Hide hamburger on desktop */
+  }
+  
+  .nav-menu {
+    display: flex;     /* Always show on desktop */
+    position: static;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .nav-menu li {
+    margin: 0;
+  }
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Responsive Grid and Flexbox</h2>
+                <p>Modern CSS makes responsive layouts easier than ever.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Responsive grid without media queries */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+/* Automatically adjusts columns based on available space */
+
+/* Responsive flexbox */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.flex-item {
+  flex: 1 1 300px;    /* Grow, shrink, minimum 300px */
+  max-width: 100%;
+}
+
+/* With media queries for more control */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 250px 1fr 200px;
+  }
+}
+
+/* Responsive font sizes */
+.text {
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .text {
+    font-size: 1.125rem;
+  }
+}
+
+/* Or use clamp for automatic scaling */
+.text {
+  font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem);
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Responsive Tables</h2>
+                <p>Tables need special handling on small screens.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Option 1: Horizontal scroll */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Option 2: Stack table cells */
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead {
+    display: none;    /* Hide headers on mobile */
+  }
+  
+  tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+  }
+  
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
+
+/* HTML */
+<table>
+  <tr>
+    <td data-label="Name">John Doe</td>
+    <td data-label="Email">john@example.com</td>
+  </tr>
+</table>
+
+/* Option 3: Card view on mobile */
+@media (max-width: 600px) {
+  .data-table {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .data-table tr {
+    display: block;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Testing Responsive Design</h2>
+                <p>How to test your responsive designs effectively.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Browser DevTools */
+/* 1. Open DevTools (F12) */
+/* 2. Click device toolbar icon (or Ctrl+Shift+M) */
+/* 3. Select device or enter custom dimensions */
+/* 4. Test different breakpoints */
+
+/* Common device sizes to test: */
+/* - iPhone SE: 375 x 667 */
+/* - iPhone 12: 390 x 844 */
+/* - iPad Mini: 768 x 1024 */
+/* - iPad Pro: 1024 x 1366 */
+/* - Desktop: 1920 x 1080 */
+
+/* Responsive testing tips: */
+/* 1. Test at actual breakpoints */
+/* 2. Test BETWEEN breakpoints */
+/* 3. Test extreme sizes */
+/* 4. Test real devices when possible */
+/* 5. Check touch targets (minimum 44px) */
+
+/* Resize browser window */
+/* Drag browser edge to test fluid layouts */
+
+/* Online tools: */
+/* - Responsively App */
+/* - BrowserStack */
+/* - LambdaTest */</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>10. Responsive Design Checklist</h2>
+                
+                <div class="code-block">
+                    <pre><code>/* ✓ Viewport meta tag included */
+/* ✓ Mobile-first CSS approach */
+/* ✓ Fluid layouts with percentages */
+/* ✓ Flexible images (max-width: 100%) */
+/* ✓ Readable text at all sizes */
+/* ✓ Touch targets large enough (44px minimum) */
+/* ✓ Navigation works on mobile */
+/* ✓ Tables handled on small screens */
+/* ✓ No horizontal scroll at any size */
+/* ✓ Content not cut off */
+/* ✓ Forms usable on mobile */
+/* ✓ Adequate contrast on all backgrounds */</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Make this layout responsive:</p>
+                <div class="code-block">
+                    <pre><code>/* Start with this desktop-only layout: */
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Make it work on mobile: */
+/* - Single column on mobile */
+/* - Cards stack 2 per row on tablet */
+/* - 4 columns only on desktop */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Always include the viewport meta tag</li>
+                    <li>Use mobile-first approach with min-width media queries</li>
+                    <li>Make layouts fluid with percentages and fr units</li>
+                    <li>Use clamp() for fluid typography and spacing</li>
+                    <li>max-width: 100% makes images responsive</li>
+                    <li>Test on real devices and various screen sizes</li>
+                    <li>Modern CSS (Grid, Flexbox) reduces media query needs</li>
+                    <li>Consider touch targets and usability on mobile</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson8.html" class="btn-secondary">← Previous: CSS Grid</a>
+            <a href="lesson10.html" class="btn-primary">Next: Transitions & Animations →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

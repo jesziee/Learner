@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links and Images - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🔗 Lesson 4: Links and Images</h1>
+            <p>Adding hyperlinks and images to pages</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Anchor Tags (Links)</h2>
+                <p>The <a> element creates hyperlinks that let users navigate to other pages, files, or locations within a page.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Basic link syntax:</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span>>Click here</<span class="keyword">a</span>>
+     ↑                      ↑
+   attribute            link text (clickable)
+   (destination)
+
+<span class="comment">// The href attribute specifies the destination URL</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Types of Links</h2>
+                
+                <h3>Absolute URLs</h3>
+                <p>Full web addresses to external sites:</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Link to another website</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://www.google.com"</span>>Go to Google</<span class="keyword">a</span>>
+
+<span class="comment">// Link to a specific page</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com/about"</span>>About Us</<span class="keyword">a</span>></code></pre>
+                </div>
+                
+                <h3>Relative URLs</h3>
+                <p>Links to pages within your own website:</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Same folder</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"about.html"</span>>About</<span class="keyword">a</span>>
+
+<span class="comment">// Subfolder</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"products/item.html"</span>>Product</<span class="keyword">a</span>>
+
+<span class="comment">// Parent folder (go up one level)</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"../index.html"</span>>Home</<span class="keyword">a</span>>
+
+<span class="comment">// Root-relative (starts from website root)</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"/contact.html"</span>>Contact</<span class="keyword">a</span>></code></pre>
+                </div>
+                
+                <h3>Page Anchors</h3>
+                <p>Link to specific sections within the same page:</p>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Create a target with an id:</span>
+<<span class="keyword">h2</span> <span class="variable">id</span>=<span class="string">"section1"</span>>Section 1</<span class="keyword">h2</span>>
+
+<span class="comment">// Link to that section:</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"#section1"</span>>Jump to Section 1</<span class="keyword">a</span>>
+
+<span class="comment">// Link to a section on another page:</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"page.html#section1"</span>>Section 1 on another page</<span class="keyword">a</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Link Targets</h2>
+                <p>The <code>target</code> attribute controls where the link opens:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Open in same tab (default)</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span>>Same tab</<span class="keyword">a</span>>
+
+<span class="comment">// Open in new tab/window</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span> <span class="variable">target</span>=<span class="string">"_blank"</span>>New tab</<span class="keyword">a</span>>
+
+<span class="comment">// Security best practice for external links:</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span> 
+   <span class="variable">target</span>=<span class="string">"_blank"</span> 
+   <span class="variable">rel</span>=<span class="string">"noopener noreferrer"</span>>
+    Safe external link
+</<span class="keyword">a</span>></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Security tip:</strong> Always add <code>rel="noopener noreferrer"</code> to external links with <code>target="_blank"</code>. This prevents the linked page from accessing your page's window object.</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Other Link Types</h2>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Email link (opens email client)</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"mailto:someone@example.com"</span>>Send Email</<span class="keyword">a</span>>
+
+<span class="comment">// Email with subject and body</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"mailto:someone@example.com?subject=Hello&body=Hi there"</span>>
+    Send Email
+</<span class="keyword">a</span>>
+
+<span class="comment">// Phone number (useful on mobile)</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"tel:+1234567890"</span>>Call Us</<span class="keyword">a</span>>
+
+<span class="comment">// Download link</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"files/document.pdf"</span> <span class="variable">download</span>>Download PDF</<span class="keyword">a</span>>
+
+<span class="comment">// Download with custom filename</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"files/doc.pdf"</span> <span class="variable">download</span>=<span class="string">"my-document.pdf"</span>>Download</<span class="keyword">a</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Images</h2>
+                <p>The <img> element embeds images in your page. It's a self-closing tag.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Basic image syntax:</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"photo.jpg"</span> <span class="variable">alt</span>=<span class="string">"Description of image"</span>>
+     ↑                ↑
+   source          alternative text
+   (required)      (required for accessibility)</code></pre>
+                </div>
+                
+                <h3>Required Attributes</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>src:</strong> The path to the image file (URL or file path)</li>
+                    <li><strong>alt:</strong> Alternative text describing the image (for accessibility and when image fails to load)</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Alt text is crucial!</strong> Screen readers use it to describe images to visually impaired users. It also displays if the image fails to load and helps search engines understand the image content.</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Image Sizing</h2>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Set width and height (in pixels)</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"photo.jpg"</span> 
+     <span class="variable">alt</span>=<span class="string">"A sunset"</span> 
+     <span class="variable">width</span>=<span class="string">"300"</span> 
+     <span class="variable">height</span>=<span class="string">"200"</span>>
+
+<span class="comment">// Or use CSS for responsive images</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"photo.jpg"</span> 
+     <span class="variable">alt</span>=<span class="string">"A sunset"</span> 
+     <span class="variable">style</span>=<span class="string">"width: 100%; max-width: 500px;"</span>></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <p><strong>Best practice:</strong> Always specify width and height attributes to prevent layout shift while the image loads. Use CSS for responsive sizing.</p>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Image Paths</h2>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Image in same folder as HTML file</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"photo.jpg"</span> <span class="variable">alt</span>=<span class="string">"Photo"</span>>
+
+<span class="comment">// Image in a subfolder</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"images/photo.jpg"</span> <span class="variable">alt</span>=<span class="string">"Photo"</span>>
+
+<span class="comment">// Image in parent folder</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"../photo.jpg"</span> <span class="variable">alt</span>=<span class="string">"Photo"</span>>
+
+<span class="comment">// Image from another website (absolute URL)</span>
+<<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"https://example.com/images/photo.jpg"</span> <span class="variable">alt</span>=<span class="string">"Photo"</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 8 -->
+            <section class="lesson-section">
+                <h2>Image Formats</h2>
+                <p>Common image formats for the web:</p>
+                
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>JPEG (.jpg):</strong> Photos and complex images with many colors</li>
+                    <li><strong>PNG (.png):</strong> Images with transparency, logos, icons</li>
+                    <li><strong>GIF (.gif):</strong> Simple animations, limited colors</li>
+                    <li><strong>WebP (.webp):</strong> Modern format with better compression</li>
+                    <li><strong>SVG (.svg):</strong> Vector graphics, logos, icons (scales perfectly)</li>
+                </ul>
+            </section>
+
+            <!-- Section 9 -->
+            <section class="lesson-section">
+                <h2>Images as Links</h2>
+                <p>Wrap an image in an anchor tag to make it clickable:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Clickable image</span>
+<<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span>>
+    <<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"logo.png"</span> <span class="variable">alt</span>=<span class="string">"Company Logo"</span>>
+</<span class="keyword">a</span>>
+
+<span class="comment">// Common for logos that link to homepage</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 10 -->
+            <section class="lesson-section">
+                <h2>Figure and Figcaption</h2>
+                <p>Semantic elements for images with captions:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">figure</span>>
+    <<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"sunset.jpg"</span> <span class="variable">alt</span>=<span class="string">"A beautiful sunset over the ocean"</span>>
+    <<span class="keyword">figcaption</span>>Photo taken at Malibu Beach, California</<span class="keyword">figcaption</span>>
+</<span class="keyword">figure</span>>
+
+<span class="comment">// <figure>: Container for self-contained content</span>
+<span class="comment">// <figcaption>: Caption or description for the figure</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><a href="">:</strong> Creates links to other pages or resources</li>
+                            <li><strong>Relative URLs:</strong> For internal links within your site</li>
+                            <li><strong>Absolute URLs:</strong> For external links to other websites</li>
+                            <li><strong>target="_blank":</strong> Opens link in new tab</li>
+                            <li><strong><img src="" alt="">:</strong> Embeds images</li>
+                            <li><strong>alt attribute:</strong> Essential for accessibility</li>
+                            <li><strong>width/height:</strong> Prevents layout shift</li>
+                            <li><strong><figure>/<figcaption>:</strong> Semantic image with caption</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson3.html" class="nav-btn prev">← Previous: Text Elements</a>
+                <a href="lesson5.html" class="nav-btn next">Next: Lists and Tables →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

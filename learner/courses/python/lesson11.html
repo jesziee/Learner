@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: Object-Oriented Programming - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 11: Object-Oriented Programming</h1>
+            <p>Understand classes, objects, inheritance, and encapsulation</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What is OOP?</h2>
+                <p>Object-Oriented Programming (OOP) is a programming paradigm that organizes code into objects containing data (attributes) and behavior (methods). Python is a multi-paradigm language that fully supports OOP. OOP helps create modular, reusable, and maintainable code by modeling real-world entities as objects.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Classes and Objects</h2>
+                <p>A class is a blueprint for creating objects. An object is an instance of a class with specific attribute values.</p>
+                
+                <div class="code-block">
+                    <h4>Creating Classes:</h4>
+<pre><code># Basic class definition
+class Dog:
+    """A simple Dog class."""
+    
+    # Class attribute (shared by all instances)
+    species = "Canis familiaris"
+    
+    # Constructor (initializer)
+    def __init__(self, name, age):
+        # Instance attributes (unique to each instance)
+        self.name = name
+        self.age = age
+    
+    # Instance method
+    def bark(self):
+        return f"{self.name} says Woof!"
+    
+    # Method with parameter
+    def birthday(self):
+        self.age += 1
+        return f"{self.name} is now {age}!"
+
+# Create objects (instances)
+dog1 = Dog("Buddy", 3)
+dog2 = Dog("Max", 5)
+
+# Access attributes
+print(dog1.name)        # Buddy
+print(dog2.age)         # 5
+print(dog1.species)     # Canis familiaris
+
+# Call methods
+print(dog1.bark())      # Buddy says Woof!
+
+# Modify attributes
+dog1.age = 4
+print(dog1.age)         # 4
+
+# Check class and instance
+print(type(dog1))       # <class '__main__.Dog'>
+print(isinstance(dog1, Dog))  # True</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-4:</strong> Use <code>class</code> keyword. Docstrings describe the class.</p>
+                        <p><strong>Lines 7-8:</strong> Class attributes are shared by all instances of the class.</p>
+                        <p><strong>Lines 11-14:</strong> <code>__init__</code> is the constructor. <code>self</code> refers to the instance being created.</p>
+                        <p><strong>Lines 17-18:</strong> Instance methods take <code>self</code> as the first parameter.</p>
+                        <p><strong>Lines 24-25:</strong> Create objects by calling the class like a function.</p>
+                        <p><strong>Lines 28-30:</strong> Access attributes using dot notation.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Understanding 'self'</h4>
+                    <p><code>self</code> is a convention (not a keyword) that refers to the current instance. It's automatically passed as the first argument to instance methods. You can name it differently, but <code>self</code> is the standard convention.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Class Attributes vs Instance Attributes</h2>
+                <p>Understanding the difference between class and instance attributes is crucial for proper OOP design.</p>
+                
+                <div class="code-block">
+                    <h4>Attribute Types:</h4>
+<pre><code>class Counter:
+    # Class attribute - shared by all instances
+    total_count = 0
+    
+    def __init__(self, name):
+        # Instance attribute - unique to each instance
+        self.name = name
+        self.count = 0
+        # Modify class attribute
+        Counter.total_count += 1
+    
+    def increment(self):
+        self.count += 1
+    
+    @classmethod
+    def get_total(cls):
+        """Class method - works with class, not instance."""
+        return cls.total_count
+
+# Create instances
+c1 = Counter("First")
+c2 = Counter("Second")
+
+print(Counter.total_count)  # 2 (class attribute)
+print(c1.count)             # 0 (instance attribute)
+print(c2.count)             # 0 (instance attribute)
+
+c1.increment()
+print(c1.count)             # 1
+print(c2.count)             # 0 (unchanged)
+
+# Be careful with mutable class attributes!
+class Buggy:
+    items = []  # Shared by all instances!
+
+a = Buggy()
+b = Buggy()
+a.items.append("x")
+print(b.items)  # ['x'] - Not what you might expect!
+
+# Better approach
+class Fixed:
+    def __init__(self):
+        self.items = []  # Each instance has its own list</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-4:</strong> Class attributes are defined outside methods and shared.</p>
+                        <p><strong>Lines 7-10:</strong> Instance attributes are defined in <code>__init__</code> with <code>self</code>.</p>
+                        <p><strong>Lines 15-17:</strong> <code>@classmethod</code> creates methods that work with the class.</p>
+                        <p><strong>Lines 28-31:</strong> Modifying one instance doesn't affect others' instance attributes.</p>
+                        <p><strong>Lines 34-42:</strong> Mutable class attributes can cause unexpected sharing - avoid them!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Special Methods (Dunder Methods)</h2>
+                <p>Special methods with double underscores (dunder methods) let you define how objects behave with built-in operations.</p>
+                
+                <div class="code-block">
+                    <h4>Common Special Methods:</h4>
+<pre><code>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    # String representation (for users)
+    def __str__(self):
+        return f"Vector({self.x}, {self.y})"
+    
+    # Representation (for developers)
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y})"
+    
+    # Addition: v1 + v2
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+    
+    # Subtraction: v1 - v2
+    def __sub__(self, other):
+        return Vector(self.x - other.x, self.y - other.y)
+    
+    # Multiplication: v * scalar
+    def __mul__(self, scalar):
+        return Vector(self.x * scalar, self.y * scalar)
+    
+    # Length: len(v)
+    def __len__(self):
+        return int((self.x**2 + self.y**2) ** 0.5)
+    
+    # Equality: v1 == v2
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    # Hash for use in sets and dicts
+    def __hash__(self):
+        return hash((self.x, self.y))
+    
+    # Boolean conversion: bool(v)
+    def __bool__(self):
+        return self.x != 0 or self.y != 0
+
+# Usage
+v1 = Vector(3, 4)
+v2 = Vector(1, 2)
+
+print(v1)           # Vector(3, 4) - uses __str__
+print(v1 + v2)      # Vector(4, 6)
+print(v1 * 2)       # Vector(6, 8)
+print(len(v1))      # 5 (magnitude)
+print(v1 == v2)     # False</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 8-9:</strong> <code>__str__</code> defines how the object appears in print().</p>
+                        <p><strong>Lines 12-13:</strong> <code>__repr__</code> should return a valid Python expression.</p>
+                        <p><strong>Lines 16-18:</strong> <code>__add__</code> enables the <code>+</code> operator.</p>
+                        <p><strong>Lines 25-27:</strong> <code>__mul__</code> enables multiplication.</p>
+                        <p><strong>Lines 36-37:</strong> <code>__eq__</code> defines equality comparison.</p>
+                        <p><strong>Lines 48-53:</strong> These special methods make custom objects work naturally with Python syntax.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Inheritance</h2>
+                <p>Inheritance allows a class to inherit attributes and methods from another class. This promotes code reuse and establishes relationships between classes.</p>
+                
+                <div class="code-block">
+                    <h4>Class Inheritance:</h4>
+<pre><code># Base class (parent)
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        raise NotImplementedError("Subclass must implement")
+    
+    def info(self):
+        return f"I am {self.name}"
+
+# Derived class (child)
+class Dog(Animal):
+    def __init__(self, name, breed):
+        # Call parent constructor
+        super().__init__(name)
+        self.breed = breed
+    
+    # Override parent method
+    def speak(self):
+        return f"{self.name} says Woof!"
+    
+    # Add new method
+    def fetch(self):
+        return f"{self.name} fetches the ball!"
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+# Create instances
+dog = Dog("Buddy", "Golden Retriever")
+cat = Cat("Whiskers")
+
+print(dog.speak())      # Buddy says Woof!
+print(cat.speak())      # Whiskers says Meow!
+print(dog.info())       # I am Buddy (inherited)
+print(dog.breed)        # Golden Retriever
+
+# Check inheritance
+print(isinstance(dog, Dog))     # True
+print(isinstance(dog, Animal))  # True
+print(issubclass(Dog, Animal))  # True
+
+# Multiple inheritance
+class Flying:
+    def fly(self):
+        return "I can fly!"
+
+class Swimming:
+    def swim(self):
+        return "I can swim!"
+
+class Duck(Animal, Flying, Swimming):
+    def speak(self):
+        return f"{self.name} says Quack!"
+
+donald = Duck("Donald")
+print(donald.fly())   # I can fly!
+print(donald.swim())  # I can swim!</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-10:</strong> Base class defines common interface. Abstract methods raise NotImplementedError.</p>
+                        <p><strong>Lines 13-22:</strong> Child class inherits from parent (in parentheses). Use <code>super()</code> to call parent methods.</p>
+                        <p><strong>Lines 17-18:</strong> Override parent methods by redefining them.</p>
+                        <p><strong>Lines 37-39:</strong> <code>isinstance()</code> and <code>issubclass()</code> check inheritance relationships.</p>
+                        <p><strong>Lines 42-57:</strong> Python supports multiple inheritance - class inherits from multiple parents.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Encapsulation and Access Control</h2>
+                <p>Encapsulation hides internal details and protects data. Python uses conventions rather than strict access control.</p>
+                
+                <div class="code-block">
+                    <h4>Access Control:</h4>
+<pre><code>class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner           # Public
+        self._balance = balance      # Protected (convention)
+        self.__id = id(self)         # Name mangled (private-ish)
+    
+    # Public method
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+            return True
+        return False
+    
+    def withdraw(self, amount):
+        if 0 < amount <= self._balance:
+            self._balance -= amount
+            return True
+        return False
+    
+    # Property for controlled access
+    @property
+    def balance(self):
+        """Read-only access to balance."""
+        return self._balance
+    
+    # Setter with validation
+    @balance.setter
+    def balance(self, value):
+        if value >= 0:
+            self._balance = value
+        else:
+            raise ValueError("Balance cannot be negative")
+
+# Usage
+account = BankAccount("Alice", 1000)
+
+print(account.owner)       # Alice (public)
+print(account.balance)     # 1000 (via property)
+
+# Can access "protected" (but shouldn't)
+print(account._balance)    # 1000 (accessible but discouraged)
+
+# Name mangled attribute
+# print(account.__id)      # AttributeError
+print(account._BankAccount__id)  # Accessible but very discouraged
+
+# Use methods for operations
+account.deposit(500)
+print(account.balance)     # 1500</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-6:</strong> Public (no prefix), protected (<code>_</code>), private (<code>__</code>).</p>
+                        <p><strong>Lines 9-19:</strong> Public methods provide controlled access to internal data.</p>
+                        <p><strong>Lines 22-24:</strong> <code>@property</code> creates read-only attributes.</p>
+                        <p><strong>Lines 27-31:</strong> Property setters allow validation on assignment.</p>
+                        <p><strong>Lines 38-39:</strong> Protected attributes can be accessed but convention says don't.</p>
+                        <p><strong>Lines 42-43:</strong> Name mangling makes private attributes harder to access.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Python's Philosophy</h4>
+                    <p>Python trusts developers. Unlike other languages, it doesn't enforce strict access control. The convention is: use a single underscore for "internal use" and double underscore for name mangling. True privacy doesn't exist in Python!</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Class Methods and Static Methods</h2>
+                <p>Besides instance methods, Python supports class methods (that receive the class) and static methods (that receive neither class nor instance).</p>
+                
+                <div class="code-block">
+                    <h4>Method Types:</h4>
+<pre><code>class Person:
+    population = 0
+    
+    def __init__(self, name):
+        self.name = name
+        Person.population += 1
+    
+    # Instance method - receives self
+    def greet(self):
+        return f"Hello, I'm {self.name}"
+    
+    # Class method - receives cls
+    @classmethod
+    def from_string(cls, string):
+        """Alternative constructor from string."""
+        name = string.split("-")[0]
+        return cls(name)
+    
+    @classmethod
+    def get_population(cls):
+        return f"Population: {cls.population}"
+    
+    # Static method - receives nothing
+    @staticmethod
+    def is_valid_name(name):
+        """Utility function related to Person."""
+        return len(name) >= 2 and name.isalpha()
+
+# Instance method
+p1 = Person("Alice")
+print(p1.greet())  # Hello, I'm Alice
+
+# Class method as alternative constructor
+p2 = Person.from_string("Bob-Smith")
+print(p2.name)     # Bob
+
+# Class method on class or instance
+print(Person.get_population())  # Population: 2
+print(p1.get_population())      # Also works
+
+# Static method - no self or cls needed
+print(Person.is_valid_name("Alice"))  # True
+print(Person.is_valid_name("A"))      # False</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 9-10:</strong> Instance methods take <code>self</code> and can access instance attributes.</p>
+                        <p><strong>Lines 13-18:</strong> <code>@classmethod</code> methods take <code>cls</code> and can access class attributes.</p>
+                        <p><strong>Lines 15-17:</strong> Class methods are often used as alternative constructors.</p>
+                        <p><strong>Lines 24-26:</strong> <code>@staticmethod</code> methods don't take <code>self</code> or <code>cls</code>.</p>
+                        <p><strong>Lines 32-33:</strong> Static methods are utility functions logically related to the class.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Data Classes</h2>
+                <p>Python 3.7+ introduced data classes, which automatically generate common methods like <code>__init__</code>, <code>__repr__</code>, and <code>__eq__</code>.</p>
+                
+                <div class="code-block">
+                    <h4>Data Classes:</h4>
+<pre><code>from dataclasses import dataclass, field
+from typing import List
+
+@dataclass
+class Product:
+    name: str
+    price: float
+    quantity: int = 1
+    tags: List[str] = field(default_factory=list)
+    
+    def total_cost(self) -> float:
+        return self.price * self.quantity
+
+# Create instances
+p1 = Product("Widget", 9.99)
+p2 = Product("Gadget", 19.99, quantity=3)
+
+print(p1)  # Product(name='Widget', price=9.99, quantity=1, tags=[])
+
+# Auto-generated __eq__
+print(p1 == Product("Widget", 9.99))  # True
+
+# Access methods
+print(p2.total_cost())  # 59.97
+
+# Frozen dataclass (immutable)
+@dataclass(frozen=True)
+class Point:
+    x: float
+    y: float
+
+p = Point(3.0, 4.0)
+# p.x = 5.0  # FrozenInstanceError
+
+# Post-init processing
+@dataclass
+class Rectangle:
+    width: float
+    height: float
+    area: float = field(init=False)
+    
+    def __post_init__(self):
+        self.area = self.width * self.height
+
+r = Rectangle(5, 3)
+print(r.area)  # 15.0</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-8:</strong> Type annotations define attributes. Default values are supported.</p>
+                        <p><strong>Line 8:</strong> Use <code>field(default_factory=list)</code> for mutable defaults.</p>
+                        <p><strong>Lines 10-11:</strong> Data classes can have regular methods too.</p>
+                        <p><strong>Lines 22-26:</strong> <code>frozen=True</code> makes the dataclass immutable.</p>
+                        <p><strong>Lines 29-37:</strong> <code>__post_init__</code> runs after initialization for computed fields.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a Library system with Book and Member classes.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code>from dataclasses import dataclass
+from typing import Optional
+from datetime import date
+
+@dataclass
+class Book:
+    title: str
+    author: str
+    isbn: str
+    available: bool = True
+
+class Member:
+    def __init__(self, name: str, member_id: str):
+        self.name = name
+        self.member_id = member_id
+        self.borrowed_books: list[Book] = []
+    
+    def borrow_book(self, book: Book) -> bool:
+        """Borrow a book if available."""
+        # Your code here
+        pass
+    
+    def return_book(self, book: Book) -> bool:
+        """Return a borrowed book."""
+        # Your code here
+        pass
+    
+    def __str__(self):
+        return f"Member: {self.name} (ID: {self.member_id})"
+
+class Library:
+    def __init__(self, name: str):
+        self.name = name
+        self.books: dict[str, Book] = {}
+        self.members: dict[str, Member] = {}
+    
+    def add_book(self, book: Book):
+        """Add a book to the library."""
+        # Your code here
+        pass
+    
+    def add_member(self, member: Member):
+        """Add a member to the library."""
+        # Your code here
+        pass
+    
+    def find_book(self, isbn: str) -> Optional[Book]:
+        """Find a book by ISBN."""
+        # Your code here
+        pass
+
+# Test your classes
+library = Library("City Library")
+library.add_book(Book("Python Basics", "Author", "123"))
+library.add_member(Member("Alice", "M001"))
+
+book = library.find_book("123")
+member = library.members["M001"]
+member.borrow_book(book)</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson10.html" class="nav-button prev">← Previous: File Handling</a>
+                <a href="lesson12.html" class="nav-button next">Next: Error Handling →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

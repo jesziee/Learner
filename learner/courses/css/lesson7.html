@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: Flexbox - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Intermediate Level</span>
+            <h1>Lesson 7: Flexbox</h1>
+            <p>Master one-dimensional layouts with Flexbox</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 58%;"></div>
+            </div>
+            <span class="progress-text">Lesson 7 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>What is Flexbox?</h2>
+                <p>Flexbox (Flexible Box Layout) is a CSS layout mode designed for creating flexible, responsive layouts in one dimension — either a row or a column. It makes it easy to align and distribute space among items, even when their size is unknown or dynamic. Flexbox solves common layout problems that were difficult with older CSS methods.</p>
+            </section>
+            
+            <section>
+                <h2>1. Flex Container and Flex Items</h2>
+                <p>Flexbox involves a parent container and its direct children (flex items).</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Enable Flexbox on a container */
+.container {
+  display: flex;
+}
+
+/* The container becomes a flex container */
+/* All direct children become flex items */
+
+/* HTML structure */
+<div class="container">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+</div>
+
+/* Container = flex container */
+/* Items 1, 2, 3 = flex items */
+
+/* Default behavior: */
+/* - Items arrange in a ROW */
+/* - Items don't wrap */
+/* - Items stretch to fill container height */
+/* - Items start at the left (main-start) */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Flexbox terminology:</strong>
+                    <ul>
+                        <li><strong>Flex container:</strong> Parent element with display: flex</li>
+                        <li><strong>Flex items:</strong> Direct children of the container</li>
+                        <li><strong>Main axis:</strong> Primary direction (row or column)</li>
+                        <li><strong>Cross axis:</strong> Perpendicular to main axis</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Flex Direction</h2>
+                <p>flex-direction sets the main axis direction.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* flex-direction: row | row-reverse | column | column-reverse */
+
+.container {
+  display: flex;
+}
+
+/* Row (default): Left to right */
+.row {
+  flex-direction: row;
+}
+/* [1] [2] [3] → */
+
+/* Row reverse: Right to left */
+.row-reverse {
+  flex-direction: row-reverse;
+}
+/* ← [3] [2] [1] */
+
+/* Column: Top to bottom */
+.column {
+  flex-direction: column;
+}
+/* [1]
+   [2]
+   [3]
+   ↓ */
+
+/* Column reverse: Bottom to top */
+.column-reverse {
+  flex-direction: column-reverse;
+}
+/* ↑
+   [3]
+   [2]
+   [1] */
+
+/* Practical example: Vertical navigation */
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Practical example: Reversed order */
+.reverse-order {
+  display: flex;
+  flex-direction: row-reverse;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Flex Wrap</h2>
+                <p>flex-wrap controls whether items wrap to new lines.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* flex-wrap: nowrap | wrap | wrap-reverse */
+
+/* No wrap (default): Items shrink to fit on one line */
+.nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+/* [1][2][3][4][5] - items shrink */
+
+/* Wrap: Items wrap to next line when needed */
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* [1] [2] [3]
+   [4] [5]      */
+
+/* Wrap reverse: Wrap in reverse order */
+.wrap-reverse {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+/* [4] [5]
+   [1] [2] [3]  */
+
+/* Shorthand: flex-flow */
+.container {
+  display: flex;
+  flex-flow: row wrap;    /* direction + wrap together */
+}
+
+/* Practical example: Responsive cards */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  flex: 1 1 300px;    /* Grow, shrink, base width */
+  /* Cards will wrap when container is narrow */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Justify Content (Main Axis)</h2>
+                <p>justify-content aligns items along the main axis and distributes extra space.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* justify-content controls main axis alignment */
+
+.container {
+  display: flex;
+}
+
+/* Flex start (default): Items at the start */
+.justify-start {
+  justify-content: flex-start;
+}
+/* |[1][2][3]          | */
+
+/* Flex end: Items at the end */
+.justify-end {
+  justify-content: flex-end;
+}
+/* |          [1][2][3]| */
+
+/* Center: Items in the center */
+.justify-center {
+  justify-content: center;
+}
+/* |      [1][2][3]    | */
+
+/* Space between: First/last at edges, equal space between */
+.space-between {
+  justify-content: space-between;
+}
+/* |[1]    [2]    [3]  | */
+
+/* Space around: Equal space around each item */
+.space-around {
+  justify-content: space-around;
+}
+/* | [1]   [2]   [3]   | */
+
+/* Space evenly: Equal space everywhere */
+.space-evenly {
+  justify-content: space-evenly;
+}
+/* |  [1]  [2]  [3]  | */
+
+/* Practical examples */
+
+/* Center a single element */
+.center-me {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Navigation with logo left, links right */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Card footer with buttons on opposite sides */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Align Items (Cross Axis)</h2>
+                <p>align-items aligns items along the cross axis.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* align-items controls cross axis alignment */
+
+.container {
+  display: flex;
+  height: 200px;
+}
+
+/* Stretch (default): Items stretch to fill container */
+.align-stretch {
+  align-items: stretch;
+}
+/* |┌───┐┌───┐┌───┐|
+   |│ 1 ││ 2 ││ 3 │|
+   |└───┘└───┘└───┘| */
+
+/* Flex start: Items at the start */
+.align-start {
+  align-items: flex-start;
+}
+/* |┌───┐┌───┐┌───┐|
+   |│ 1 ││ 2 ││ 3 │|
+   |               | */
+
+/* Flex end: Items at the end */
+.align-end {
+  align-items: flex-end;
+}
+/* |               |
+   |┌───┐┌───┐┌───┐|
+   |│ 1 ││ 2 ││ 3 │| */
+
+/* Center: Items in the center */
+.align-center {
+  align-items: center;
+}
+/* |               |
+   |┌───┐┌───┐┌───┐|
+   |│ 1 ││ 2 ││ 3 │|
+   |               | */
+
+/* Baseline: Align to text baseline */
+.align-baseline {
+  align-items: baseline;
+}
+
+/* Practical: Vertically center content */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Practical: Navigation with centered links */
+.nav {
+  display: flex;
+  align-items: center;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Gap (Spacing Between Items)</h2>
+                <p>The gap property adds consistent spacing between flex items.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* gap: spacing between items */
+.container {
+  display: flex;
+  gap: 20px;          /* Gap between all items */
+}
+
+/* Separate row and column gaps */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;      /* Gap between rows */
+  column-gap: 15px;   /* Gap between columns */
+  /* Shorthand: gap: 20px 15px; */
+}
+
+/* Before gap, we used margins */
+.old-way {
+  display: flex;
+  margin: -10px;      /* Negative margin on container */
+}
+
+.old-way .item {
+  margin: 10px;       /* Margin on each item */
+}
+
+/* Now with gap (much cleaner) */
+.new-way {
+  display: flex;
+  gap: 20px;
+}
+
+/* Practical: Card grid */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.card {
+  flex: 1 1 300px;
+}</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Why gap is better:</strong> Unlike margins, gap only adds space between items — not at the edges. No negative margins needed!
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Flex Properties on Items</h2>
+                <p>Individual flex items can have their own sizing behavior.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* flex-grow: How much item should grow */
+.item {
+  flex-grow: 0;    /* Default: don't grow */
+}
+
+.grow-item {
+  flex-grow: 1;    /* Grow to fill available space */
+}
+
+/* Example: Sidebar + Main content */
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  flex-grow: 0;
+  width: 250px;    /* Fixed width */
+}
+
+.main-content {
+  flex-grow: 1;    /* Takes remaining space */
+}
+
+/* flex-shrink: How much item should shrink */
+.item {
+  flex-shrink: 1;    /* Default: can shrink */
+}
+
+.no-shrink {
+  flex-shrink: 0;    /* Don't shrink */
+}
+
+/* flex-basis: Initial size before growing/shrinking */
+.item {
+  flex-basis: auto;    /* Default: use content size */
+  flex-basis: 300px;   /* Start at 300px */
+  flex-basis: 25%;     /* Start at 25% of container */
+}
+
+/* Shorthand: flex: grow shrink basis */
+.item {
+  flex: 0 1 auto;     /* Default: don't grow, can shrink, auto size */
+  flex: 1;            /* flex: 1 1 0 (grow, shrink, 0 base) */
+  flex: auto;         /* flex: 1 1 auto */
+  flex: none;         /* flex: 0 0 auto (fixed size) */
+}
+
+/* Common patterns */
+
+/* Equal width columns */
+.equal-columns {
+  display: flex;
+}
+.equal-columns > * {
+  flex: 1;    /* All children equal width */
+}
+
+/* Responsive card grid */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.card {
+  flex: 1 1 300px;    /* Grow, shrink, minimum 300px */
+  max-width: 100%;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Understanding flex shorthand:</strong>
+                    <ul>
+                        <li><code>flex: 1</code> = <code>flex: 1 1 0</code> — Item can grow/shrink, starts at 0</li>
+                        <li><code>flex: auto</code> = <code>flex: 1 1 auto</code> — Item can grow/shrink, starts at content size</li>
+                        <li><code>flex: none</code> = <code>flex: 0 0 auto</code> — Fixed at content size</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Align Self and Order</h2>
+                <p>Individual items can override container alignment and change order.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* align-self: Override align-items for one item */
+.container {
+  display: flex;
+  align-items: center;    /* Default for all items */
+}
+
+.tall-item {
+  align-self: stretch;    /* This item stretches */
+}
+
+.top-item {
+  align-self: flex-start;    /* This item at top */
+}
+
+/* order: Change visual order of items */
+.container {
+  display: flex;
+}
+
+.item-1 { order: 3; }    /* Appears last */
+.item-2 { order: 1; }    /* Appears first */
+.item-3 { order: 2; }    /* Appears middle */
+
+/* Useful for responsive layouts */
+.sidebar {
+  order: 2;    /* Mobile: sidebar after main */
+}
+
+.main-content {
+  order: 1;    /* Mobile: main content first */
+}
+
+@media (min-width: 768px) {
+  .sidebar { order: 1; }
+  .main-content { order: 2; }
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Common Flexbox Patterns</h2>
+                
+                <h3>Perfect Centering</h3>
+                <div class="code-block">
+                    <pre><code>/* Center any element perfectly */
+.perfect-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* One-liner for centering */
+.center {
+  display: grid;
+  place-items: center;
+}</code></pre>
+                </div>
+                
+                <h3>Sticky Footer</h3>
+                <div class="code-block">
+                    <pre><code>/* Footer stays at bottom even with little content */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;    /* Takes all available space */
+}
+
+footer {
+  /* Stays at bottom */
+}
+
+/* Structure: */
+/* [header]     */
+/* [main    ]   ← grows */
+/* [footer]     */</code></pre>
+                </div>
+                
+                <h3>Navigation Pattern</h3>
+                <div class="code-block">
+                    <pre><code>/* Logo left, links right */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Logo left, centered nav, actions right */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}</code></pre>
+                </div>
+                
+                <h3>Split Layout</h3>
+                <div class="code-block">
+                    <pre><code>/* 50/50 split */
+.split {
+  display: flex;
+}
+
+.split > * {
+  flex: 1;
+}
+
+/* Sidebar + Main (fixed + fluid) */
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.main {
+  flex: 1;
+}
+
+/* Holy Grail Layout */
+.holy-grail {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.holy-grail-body {
+  display: flex;
+  flex: 1;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.sidebar-left,
+.sidebar-right {
+  flex: 0 0 200px;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create these layouts using Flexbox:</p>
+                <div class="code-block">
+                    <pre><code>/* Challenge: Create these patterns */
+
+/* 1. A navigation bar with logo on left, links on right */
+/* 2. Three equal-width columns */
+/* 3. A sidebar (fixed 250px) + main content (fluid) */
+/* 4. Cards that wrap to new rows */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Flexbox is for one-dimensional layouts (row OR column)</li>
+                    <li>display: flex makes container, children become items</li>
+                    <li>flex-direction sets main axis (row, column)</li>
+                    <li>justify-content aligns on main axis</li>
+                    <li>align-items aligns on cross axis</li>
+                    <li>gap adds consistent spacing between items</li>
+                    <li>flex: grow shrink basis controls item sizing</li>
+                    <li>Use flex: 1 for equal-width flexible items</li>
+                    <li>Common uses: navigation, card grids, centering, layouts</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson6.html" class="btn-secondary">← Previous: Positioning</a>
+            <a href="lesson8.html" class="btn-primary">Next: CSS Grid →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

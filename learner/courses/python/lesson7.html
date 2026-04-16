@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: Lists & Tuples - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 7: Lists & Tuples</h1>
+            <p>Work with ordered collections of items using lists and tuples</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Lists?</h2>
+                <p>Lists are ordered, mutable collections that can hold items of any type. They're one of Python's most versatile data structures, perfect for storing sequences of related items. Lists can grow and shrink dynamically.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Lists</h2>
+                <p>Create lists using square brackets or the list() constructor. Lists can contain any type of data, including other lists.</p>
+                
+                <div class="code-block">
+                    <h4>List Creation:</h4>
+<pre><code># Empty list
+empty = []
+also_empty = list()
+
+# List with items
+numbers = [1, 2, 3, 4, 5]
+fruits = ["apple", "banana", "cherry"]
+
+# Mixed types (allowed but usually avoid)
+mixed = [1, "hello", 3.14, True, None]
+
+# List from other iterables
+from_string = list("hello")  # ['h', 'e', 'l', 'l', 'o']
+from_range = list(range(5))  # [0, 1, 2, 3, 4]
+
+# Nested lists (2D list)
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print(matrix[1][2])  # 6 (row 1, column 2)
+
+# List repetition
+zeros = [0] * 5
+print(zeros)  # [0, 0, 0, 0, 0]
+
+# List concatenation
+combined = [1, 2] + [3, 4]
+print(combined)  # [1, 2, 3, 4]</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Two ways to create empty lists.</p>
+                        <p><strong>Lines 6-7:</strong> Lists with initial values using square brackets.</p>
+                        <p><strong>Lines 10-11:</strong> Lists can contain mixed types, but this is usually not recommended.</p>
+                        <p><strong>Lines 14-15:</strong> Convert other iterables to lists using <code>list()</code>.</p>
+                        <p><strong>Lines 18-24:</strong> Nested lists create multi-dimensional structures.</p>
+                        <p><strong>Lines 27-31:</strong> Lists support <code>*</code> for repetition and <code>+</code> for concatenation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Accessing List Elements</h2>
+                <p>Access list items using indices (0-based) or slices. Negative indices count from the end of the list.</p>
+                
+                <div class="code-block">
+                    <h4>Indexing and Slicing:</h4>
+<pre><code>fruits = ["apple", "banana", "cherry", "date", "elderberry"]
+
+# Positive indexing (starts at 0)
+print(fruits[0])   # apple (first item)
+print(fruits[2])   # cherry (third item)
+
+# Negative indexing (starts at -1)
+print(fruits[-1])  # elderberry (last item)
+print(fruits[-2])  # date (second to last)
+
+# Slicing: list[start:end:step]
+print(fruits[1:3])    # ['banana', 'cherry']
+print(fruits[:3])     # ['apple', 'banana', 'cherry']
+print(fruits[2:])     # ['cherry', 'date', 'elderberry']
+print(fruits[::2])    # ['apple', 'cherry', 'elderberry']
+print(fruits[::-1])   # Reversed list!
+
+# Slicing creates new lists (copies)
+copy_fruits = fruits[:]
+print(copy_fruits is fruits)  # False (different objects)
+
+# Index out of range error
+# print(fruits[10])  # IndexError!
+
+# Safe access with default
+def get_item(lst, index, default=None):
+    if 0 <= index < len(lst):
+        return lst[index]
+    return default
+
+print(get_item(fruits, 10, "Not found"))  # Not found</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-5:</strong> Positive indices start at 0 from the beginning.</p>
+                        <p><strong>Lines 8-9:</strong> Negative indices count backward from the end (-1 is last).</p>
+                        <p><strong>Lines 12-16:</strong> Slicing extracts a portion: [start:end:step]. End is exclusive.</p>
+                        <p><strong>Line 17:</strong> <code>[::-1]</code> creates a reversed copy of the list.</p>
+                        <p><strong>Lines 20-21:</strong> Slicing always creates a new list object.</p>
+                        <p><strong>Lines 27-31:</strong> Handle index errors gracefully with bounds checking.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Lists</h2>
+                <p>Lists are mutable, meaning you can change their contents without creating a new list. You can modify, add, and remove elements.</p>
+                
+                <div class="code-block">
+                    <h4>List Modification:</h4>
+<pre><code>numbers = [1, 2, 3, 4, 5]
+
+# Modify by index
+numbers[0] = 10
+print(numbers)  # [10, 2, 3, 4, 5]
+
+# Modify with slice
+numbers[1:3] = [20, 30]
+print(numbers)  # [10, 20, 30, 4, 5]
+
+# Append to end
+numbers.append(6)
+print(numbers)  # [10, 20, 30, 4, 5, 6]
+
+# Insert at position
+numbers.insert(0, 0)
+print(numbers)  # [0, 10, 20, 30, 4, 5, 6]
+
+# Extend with another iterable
+numbers.extend([7, 8, 9])
+print(numbers)  # [0, 10, 20, 30, 4, 5, 6, 7, 8, 9]
+
+# Remove by value
+fruits = ["apple", "banana", "cherry", "banana"]
+fruits.remove("banana")  # Removes first occurrence
+print(fruits)  # ['apple', 'cherry', 'banana']
+
+# Remove by index with pop
+last = fruits.pop()  # Removes and returns last
+print(last)     # banana
+print(fruits)   # ['apple', 'cherry']
+
+item = fruits.pop(0)  # Remove at index
+print(item)     # apple
+
+# Delete with del keyword
+nums = [1, 2, 3, 4, 5]
+del nums[2]     # Delete at index
+del nums[0:2]   # Delete slice
+
+# Clear all elements
+nums.clear()
+print(nums)  # []</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-5:</strong> Assign to an index to change that element.</p>
+                        <p><strong>Lines 8-9:</strong> Assign to a slice to replace multiple elements at once.</p>
+                        <p><strong>Lines 12-13:</strong> <code>append()</code> adds to the end.</p>
+                        <p><strong>Lines 16-17:</strong> <code>insert(index, value)</code> adds at a specific position.</p>
+                        <p><strong>Lines 20-21:</strong> <code>extend()</code> adds all items from another iterable.</p>
+                        <p><strong>Lines 24-26:</strong> <code>remove()</code> deletes the first matching value.</p>
+                        <p><strong>Lines 29-35:</strong> <code>pop()</code> removes by index and returns the value.</p>
+                        <p><strong>Lines 38-40:</strong> <code>del</code> can delete items or slices.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>List Methods</h2>
+                <p>Python provides many built-in methods for working with lists efficiently.</p>
+                
+                <div class="code-block">
+                    <h4>Useful List Methods:</h4>
+<pre><code># Sorting
+numbers = [3, 1, 4, 1, 5, 9, 2, 6]
+
+# sort() modifies in place
+numbers.sort()
+print(numbers)  # [1, 1, 2, 3, 4, 5, 6, 9]
+
+# sort reverse
+numbers.sort(reverse=True)
+print(numbers)  # [9, 6, 5, 4, 3, 2, 1, 1]
+
+# sorted() returns new list
+original = [3, 1, 4, 1, 5]
+sorted_copy = sorted(original)
+print(original)     # [3, 1, 4, 1, 5] (unchanged)
+print(sorted_copy)  # [1, 1, 3, 4, 5]
+
+# Sorting with key function
+words = ["apple", "pie", "a", "longer"]
+words.sort(key=len)  # Sort by length
+print(words)  # ['a', 'pie', 'apple', 'longer']
+
+# Reversing
+numbers = [1, 2, 3, 4, 5]
+numbers.reverse()  # In place
+print(numbers)  # [5, 4, 3, 2, 1]
+
+# Counting occurrences
+letters = ['a', 'b', 'a', 'c', 'a', 'b']
+print(letters.count('a'))  # 3
+
+# Finding index
+print(letters.index('b'))    # 1 (first occurrence)
+print(letters.index('b', 2)) # 5 (start searching from index 2)
+
+# Copy
+original = [1, 2, 3]
+copy1 = original.copy()
+copy2 = original[:]
+copy3 = list(original)
+# All create shallow copies</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-7:</strong> <code>sort()</code> sorts the list in place (modifies original).</p>
+                        <p><strong>Lines 13-16:</strong> <code>sorted()</code> returns a new sorted list, leaving original unchanged.</p>
+                        <p><strong>Lines 19-21:</strong> The <code>key</code> parameter accepts a function for custom sorting.</p>
+                        <p><strong>Lines 24-26:</strong> <code>reverse()</code> reverses in place, or use slicing <code>[::-1]</code>.</p>
+                        <p><strong>Lines 29-30:</strong> <code>count()</code> returns how many times an item appears.</p>
+                        <p><strong>Lines 33-34:</strong> <code>index()</code> finds the position of an item.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Introduction to Tuples</h2>
+                <p>Tuples are ordered, immutable sequences. Once created, they cannot be modified. Use tuples for data that shouldn't change, like coordinates or configuration values.</p>
+                
+                <div class="code-block">
+                    <h4>Creating and Using Tuples:</h4>
+<pre><code># Creating tuples
+point = (3, 4)
+single = (1,)       # Note the comma for single item!
+empty = ()
+coordinates = tuple([1, 2])  # From iterable
+
+# Tuple packing and unpacking
+person = ("Alice", 25, "Engineer")
+name, age, job = person  # Unpacking
+
+# Accessing elements (like lists)
+print(point[0])    # 3
+print(point[-1])   # 4
+
+# Slicing (returns new tuple)
+print(point[:1])   # (3,)
+
+# Tuples are immutable
+# point[0] = 5  # TypeError!
+
+# But can contain mutable objects
+data = ([1, 2], [3, 4])
+data[0].append(3)  # This works!
+print(data)  # ([1, 2, 3], [3, 4])
+
+# Tuple methods
+letters = ('a', 'b', 'a', 'c')
+print(letters.count('a'))  # 2
+print(letters.index('b'))  # 1
+
+# Named tuples for readable code
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(3, 4)
+print(p.x, p.y)  # 3 4
+print(p[0], p[1])  # 3 4 (still works like tuple)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Create tuples with parentheses or <code>tuple()</code>. Single item needs trailing comma.</p>
+                        <p><strong>Lines 8-9:</strong> Tuple packing creates a tuple; unpacking extracts values to variables.</p>
+                        <p><strong>Lines 12-15:</strong> Tuples support indexing and slicing like lists.</p>
+                        <p><strong>Lines 18-19:</strong> Tuples themselves can't be modified, but mutable contents can.</p>
+                        <p><strong>Lines 26-28:</strong> Tuples only have <code>count()</code> and <code>index()</code> methods.</p>
+                        <p><strong>Lines 31-35:</strong> Named tuples provide named access while being immutable.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 When to Use Tuples vs Lists</h4>
+                    <p>Use tuples for fixed data that shouldn't change (coordinates, RGB colors, database records). Use lists for collections that need to grow or change.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Common List Operations</h2>
+                <p>Python provides built-in functions and techniques for common list operations like searching, filtering, and combining.</p>
+                
+                <div class="code-block">
+                    <h4>Practical Operations:</h4>
+<pre><code># Checking membership
+fruits = ["apple", "banana", "cherry"]
+print("apple" in fruits)    # True
+print("grape" in fruits)    # False
+
+# Finding min, max, sum
+numbers = [3, 1, 4, 1, 5, 9, 2, 6]
+print(min(numbers))   # 1
+print(max(numbers))   # 9
+print(sum(numbers))   # 31
+print(len(numbers))   # 8
+
+# List concatenation alternatives
+a = [1, 2, 3]
+b = [4, 5, 6]
+
+# Using + (creates new list)
+c = a + b  # [1, 2, 3, 4, 5, 6]
+
+# Using extend (modifies a)
+a_copy = a.copy()
+a_copy.extend(b)
+
+# Using unpacking (Python 3.5+)
+c = [*a, *b]  # [1, 2, 3, 4, 5, 6]
+
+# Flatten nested lists
+nested = [[1, 2], [3, 4], [5, 6]]
+flat = [item for sublist in nested for item in sublist]
+print(flat)  # [1, 2, 3, 4, 5, 6]
+
+# Zip lists together
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 35]
+pairs = list(zip(names, ages))
+print(pairs)  # [('Alice', 25), ('Bob', 30), ('Charlie', 35)]
+
+# Unzip
+names_again, ages_again = zip(*pairs)
+
+# Enumerate for index and value
+for i, fruit in enumerate(fruits):
+    print(f"{i}: {fruit}")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-4:</strong> Use <code>in</code> to check if an item exists in a list.</p>
+                        <p><strong>Lines 7-10:</strong> Built-in functions: min, max, sum, len.</p>
+                        <p><strong>Lines 19-20:</strong> Unpacking with <code>*</code> in list literal for combining.</p>
+                        <p><strong>Lines 23-25:</strong> Flatten 2D lists with nested comprehension.</p>
+                        <p><strong>Lines 28-30:</strong> <code>zip()</code> combines multiple lists element by element.</p>
+                        <p><strong>Lines 36-37:</strong> <code>enumerate()</code> gives both index and value in loops.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Copying Lists</h2>
+                <p>Understanding the difference between shallow and deep copies is crucial when working with nested lists or objects.</p>
+                
+                <div class="code-block">
+                    <h4>Copy vs Reference:</h4>
+<pre><code># Reference (not a copy!)
+original = [1, 2, 3]
+reference = original
+reference.append(4)
+print(original)  # [1, 2, 3, 4] - original changed!
+
+# Shallow copy
+original = [1, 2, [3, 4]]
+shallow = original.copy()  # or original[:] or list(original)
+
+# Modify top level - OK
+shallow.append(5)
+print(original)  # [1, 2, [3, 4]] - unchanged
+
+# Modify nested - Problem!
+shallow[2].append(5)
+print(original)  # [1, 2, [3, 4, 5]] - changed!
+
+# Deep copy (for nested structures)
+import copy
+original = [1, 2, [3, 4]]
+deep = copy.deepcopy(original)
+deep[2].append(5)
+print(original)  # [1, 2, [3, 4]] - unchanged
+
+# When you need a truly independent copy
+matrix = [[1, 2], [3, 4]]
+matrix_copy = [row[:] for row in matrix]  # Manual deep copy for 2D</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-6:</strong> Assigning a list to a new variable just creates another reference.</p>
+                        <p><strong>Lines 9-10:</strong> <code>copy()</code>, <code>[:]</code>, or <code>list()</code> create shallow copies.</p>
+                        <p><strong>Lines 13-14:</strong> Shallow copies share nested objects with the original.</p>
+                        <p><strong>Lines 17-19:</strong> Modifying nested items affects both the copy and original.</p>
+                        <p><strong>Lines 22-25:</strong> <code>copy.deepcopy()</code> creates completely independent copies.</p>
+                        <p><strong>Lines 28-29:</strong> For 2D lists, manually copy each row for efficiency.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a program that manages a to-do list using list operations.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Simple to-do list manager
+todos = []
+
+def add_todo(task):
+    """Add a new task to the list."""
+    # Your code here
+
+def remove_todo(index):
+    """Remove a task by index."""
+    # Your code here
+
+def mark_complete(index):
+    """Mark a task as complete by appending '(done)'."""
+    # Your code here
+
+def show_todos():
+    """Display all tasks with their indices."""
+    # Your code here
+
+# Test your functions
+add_todo("Learn Python")
+add_todo("Build a project")
+add_todo("Write documentation")
+show_todos()
+# 0: Learn Python
+# 1: Build a project
+# 2: Write documentation
+
+mark_complete(0)
+show_todos()
+# 0: Learn Python (done)
+# 1: Build a project
+# 2: Write documentation
+
+remove_todo(2)
+show_todos()
+# 0: Learn Python (done)
+# 1: Build a project</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson6.html" class="nav-button prev">← Previous: Functions</a>
+                <a href="lesson8.html" class="nav-button next">Next: Dictionaries & Sets →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

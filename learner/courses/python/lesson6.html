@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6: Functions - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 6: Functions</h1>
+            <p>Create reusable code blocks with functions, parameters, and return values</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Functions?</h2>
+                <p>Functions are reusable blocks of code that perform specific tasks. They help organize code, avoid repetition, and make programs easier to understand and maintain. A function takes inputs (parameters), processes them, and optionally returns an output.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Defining Functions</h2>
+                <p>Use the <code>def</code> keyword to define a function. The function body is indented, and functions are called using their name followed by parentheses.</p>
+                
+                <div class="code-block">
+                    <h4>Basic Function Definition:</h4>
+<pre><code># Simple function with no parameters
+def greet():
+    print("Hello, World!")
+
+# Call the function
+greet()  # Hello, World!
+
+# Function with parameters
+def greet_person(name):
+    print(f"Hello, {name}!")
+
+greet_person("Alice")  # Hello, Alice!
+greet_person("Bob")    # Hello, Bob!
+
+# Function with return value
+def add(a, b):
+    return a + b
+
+result = add(3, 5)
+print(result)  # 8
+
+# Return multiple values (actually a tuple)
+def get_info():
+    name = "Alice"
+    age = 25
+    return name, age
+
+person_name, person_age = get_info()
+print(f"{person_name} is {person_age}")  # Alice is 25
+
+# Function that returns nothing (implicitly returns None)
+def say_hi():
+    print("Hi!")
+
+result = say_hi()
+print(result)  # None</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Basic function with no parameters. Call it with empty parentheses.</p>
+                        <p><strong>Lines 9-12:</strong> Parameters let you pass data into functions. Arguments are the actual values passed.</p>
+                        <p><strong>Lines 15-18:</strong> <code>return</code> sends a value back to the caller and exits the function.</p>
+                        <p><strong>Lines 21-27:</strong> Multiple values are returned as a tuple and can be unpacked.</p>
+                        <p><strong>Lines 30-34:</strong> Functions without <code>return</code> return <code>None</code> by default.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Parameters and Arguments</h2>
+                <p>Python offers flexible ways to pass data to functions: positional arguments, keyword arguments, default values, and variable-length arguments.</p>
+                
+                <div class="code-block">
+                    <h4>Types of Arguments:</h4>
+<pre><code># Positional arguments (order matters)
+def describe_pet(animal, name):
+    print(f"{name} is a {animal}")
+
+describe_pet("dog", "Rex")      # Rex is a dog
+describe_pet("Rex", "dog")      # dog is a Rex (wrong!)
+
+# Keyword arguments (order doesn't matter)
+describe_pet(name="Rex", animal="dog")  # Rex is a dog
+
+# Default values
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet("Alice")              # Hello, Alice!
+greet("Bob", "Hi")          # Hi, Bob!
+greet(name="Charlie")       # Hello, Charlie!
+
+# Default values must come after non-default
+def power(base, exponent=2):
+    return base ** exponent
+
+print(power(3))      # 9 (3 squared)
+print(power(2, 3))   # 8 (2 cubed)
+
+# *args - variable positional arguments
+def sum_all(*numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+print(sum_all(1, 2, 3))      # 6
+print(sum_all(1, 2, 3, 4, 5)) # 15
+
+# **kwargs - variable keyword arguments
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="Alice", age=25, city="NYC")
+# name: Alice
+# age: 25
+# city: NYC</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-6:</strong> Positional arguments are matched by position order.</p>
+                        <p><strong>Line 9:</strong> Keyword arguments explicitly name each parameter.</p>
+                        <p><strong>Lines 12-16:</strong> Default values allow omitting arguments. Parameters with defaults must come last.</p>
+                        <p><strong>Lines 24-30:</strong> <code>*args</code> collects any number of positional arguments into a tuple.</p>
+                        <p><strong>Lines 33-38:</strong> <code>**kwargs</code> collects keyword arguments into a dictionary.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Argument Order Rule</h4>
+                    <p>When defining functions, the order must be: regular parameters, *args, default parameters, **kwargs. Example: <code>def func(a, b, *args, c=1, **kwargs)</code></p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Docstrings</h2>
+                <p>Docstrings are documentation strings that explain what a function does. They're placed right after the function definition and are accessible via the <code>help()</code> function.</p>
+                
+                <div class="code-block">
+                    <h4>Documenting Functions:</h4>
+<pre><code>def calculate_area(length, width):
+    """
+    Calculate the area of a rectangle.
+    
+    Args:
+        length: The length of the rectangle
+        width: The width of the rectangle
+    
+    Returns:
+        The area (length * width)
+    
+    Raises:
+        ValueError: If length or width is negative
+    """
+    if length < 0 or width < 0:
+        raise ValueError("Dimensions must be non-negative")
+    return length * width
+
+# Access docstring
+print(calculate_area.__doc__)
+help(calculate_area)
+
+# One-line docstring for simple functions
+def add(a, b):
+    """Return the sum of a and b."""
+    return a + b</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-16:</strong> Multi-line docstring with Args, Returns, and Raises sections.</p>
+                        <p><strong>Lines 19-20:</strong> Access docstrings with <code>.__doc__</code> or <code>help()</code>.</p>
+                        <p><strong>Lines 23-25:</strong> Simple functions can use one-line docstrings.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Scope and Namespaces</h2>
+                <p>Scope determines where variables are accessible. Python has local scope (inside functions), enclosing scope (nested functions), global scope (module level), and built-in scope.</p>
+                
+                <div class="code-block">
+                    <h4>Understanding Scope:</h4>
+<pre><code># Global variable
+message = "Global"
+
+def show_message():
+    # Local variable (shadows global)
+    message = "Local"
+    print(message)  # Local
+
+show_message()
+print(message)  # Global (unchanged)
+
+# Accessing global variables
+counter = 0
+
+def increment():
+    global counter  # Required to modify global
+    counter += 1
+
+increment()
+print(counter)  # 1
+
+# LEGB Rule: Local, Enclosing, Global, Built-in
+x = "global"
+
+def outer():
+    x = "enclosing"
+    
+    def inner():
+        x = "local"
+        print(x)  # local
+    
+    inner()
+    print(x)  # enclosing
+
+outer()
+print(x)  # global
+
+# nonlocal for enclosing scope
+def counter_func():
+    count = 0
+    
+    def increment():
+        nonlocal count  # Modify enclosing scope
+        count += 1
+        return count
+    
+    return increment
+
+my_counter = counter_func()
+print(my_counter())  # 1
+print(my_counter())  # 2
+print(my_counter())  # 3</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-9:</strong> Local variables shadow global ones with the same name.</p>
+                        <p><strong>Lines 13-18:</strong> Use <code>global</code> keyword to modify a global variable inside a function.</p>
+                        <p><strong>Lines 21-33:</strong> LEGB rule: Python looks for variables in Local, Enclosing, Global, Built-in order.</p>
+                        <p><strong>Lines 36-48:</strong> Use <code>nonlocal</code> to modify variables in enclosing function scope.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Lambda Functions</h2>
+                <p>Lambda functions are small anonymous functions defined with the <code>lambda</code> keyword. They're useful for short, one-time operations.</p>
+                
+                <div class="code-block">
+                    <h4>Anonymous Functions:</h4>
+<pre><code># Basic lambda
+square = lambda x: x ** 2
+print(square(5))  # 25
+
+# Lambda with multiple arguments
+add = lambda a, b: a + b
+print(add(3, 5))  # 8
+
+# Immediately invoked lambda
+result = (lambda x, y: x * y)(4, 5)
+print(result)  # 20
+
+# Common use: with sorted()
+students = [("Alice", 85), ("Bob", 90), ("Charlie", 78)]
+sorted_students = sorted(students, key=lambda x: x[1])
+print(sorted_students)
+# [('Charlie', 78), ('Alice', 85), ('Bob', 90)]
+
+# With map()
+numbers = [1, 2, 3, 4, 5]
+squares = list(map(lambda x: x ** 2, numbers))
+print(squares)  # [1, 4, 9, 16, 25]
+
+# With filter()
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # [2, 4, 6, 8, 10]
+
+# With reduce()
+from functools import reduce
+numbers = [1, 2, 3, 4, 5]
+total = reduce(lambda x, y: x + y, numbers)
+print(total)  # 15</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Lambda syntax: <code>lambda arguments: expression</code>.</p>
+                        <p><strong>Lines 6-7:</strong> Lambda can take multiple arguments.</p>
+                        <p><strong>Lines 14-16:</strong> Perfect for sorting with custom key functions.</p>
+                        <p><strong>Lines 19-20:</strong> <code>map()</code> applies a function to all items in an iterable.</p>
+                        <p><strong>Lines 23-24:</strong> <code>filter()</code> keeps items where the function returns True.</p>
+                        <p><strong>Lines 27-29:</strong> <code>reduce()</code> combines items cumulatively (needs import).</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 When to Use Lambda</h4>
+                    <p>Use lambda for short, simple functions. If the logic is complex or needs documentation, define a regular function instead. Readability first!</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Higher-Order Functions</h2>
+                <p>Functions that take other functions as arguments or return functions are called higher-order functions. This is a powerful functional programming concept.</p>
+                
+                <div class="code-block">
+                    <h4>Functions as First-Class Objects:</h4>
+<pre><code># Functions can be assigned to variables
+def greet(name):
+    return f"Hello, {name}!"
+
+say_hello = greet
+print(say_hello("Alice"))  # Hello, Alice!
+
+# Functions can be passed as arguments
+def apply_operation(x, y, operation):
+    return operation(x, y)
+
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+print(apply_operation(5, 3, add))      # 8
+print(apply_operation(5, 3, multiply)) # 15
+
+# Functions can return functions
+def get_multiplier(factor):
+    def multiplier(x):
+        return x * factor
+    return multiplier
+
+double = get_multiplier(2)
+triple = get_multiplier(3)
+
+print(double(5))  # 10
+print(triple(5))  # 15
+
+# Decorator pattern
+def log_call(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"Result: {result}")
+        return result
+    return wrapper
+
+@log_call
+def add(a, b):
+    return a + b
+
+add(3, 5)
+# Calling add
+# Result: 8</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-6:</strong> Functions are objects and can be assigned to variables.</p>
+                        <p><strong>Lines 9-20:</strong> Passing functions as arguments enables flexible, reusable code.</p>
+                        <p><strong>Lines 23-32:</strong> Functions can create and return other functions (closures).</p>
+                        <p><strong>Lines 35-49:</strong> Decorators are higher-order functions that modify other functions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Type Hints</h2>
+                <p>Python 3.5+ supports optional type hints that indicate expected types for function parameters and return values. They improve code documentation and enable static analysis.</p>
+                
+                <div class="code-block">
+                    <h4>Adding Type Annotations:</h4>
+<pre><code># Basic type hints
+def greet(name: str) -> str:
+    return f"Hello, {name}"
+
+# Multiple types with Union
+from typing import Union
+
+def process(value: Union[int, float]) -> float:
+    return value * 1.5
+
+# Optional type (can be None)
+from typing import Optional
+
+def find_user(user_id: int) -> Optional[str]:
+    if user_id > 0:
+        return "User found"
+    return None
+
+# List and dictionary types
+from typing import List, Dict
+
+def sum_numbers(numbers: List[int]) -> int:
+    return sum(numbers)
+
+def get_config() -> Dict[str, str]:
+    return {"host": "localhost", "port": "8080"}
+
+# Callable type for functions
+from typing import Callable
+
+def apply_func(x: int, func: Callable[[int], int]) -> int:
+    return func(x)
+
+# Modern Python 3.10+ syntax
+def modern_greet(name: str | None = None) -> str:
+    if name is None:
+        return "Hello, stranger"
+    return f"Hello, {name}"</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Parameter types follow the name with colon, return type uses <code>-></code>.</p>
+                        <p><strong>Lines 6-8:</strong> <code>Union</code> allows multiple possible types.</p>
+                        <p><strong>Lines 12-16:</strong> <code>Optional</code> means the value can be None.</p>
+                        <p><strong>Lines 19-24:</strong> Use types from <code>typing</code> module for collections.</p>
+                        <p><strong>Lines 27-29:</strong> <code>Callable</code> describes function parameters.</p>
+                        <p><strong>Lines 32-36:</strong> Python 3.10+ uses <code>|</code> instead of Union.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a function that calculates a letter grade from a numerical score, with optional bonus points.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code>def calculate_grade(score: float, bonus: float = 0) -> str:
+    """
+    Calculate a letter grade from a score.
+    
+    Args:
+        score: The numerical score (0-100)
+        bonus: Optional bonus points to add
+    
+    Returns:
+        A letter grade: A, B, C, D, or F
+    """
+    # Add bonus to score
+    final_score = score + bonus
+    
+    # Cap at 100
+    if final_score > 100:
+        final_score = 100
+    
+    # Determine letter grade
+    # Your code here...
+    # 90+ = A, 80-89 = B, 70-79 = C, 60-69 = D, below 60 = F
+    
+    return grade
+
+# Test cases
+print(calculate_grade(85))      # B
+print(calculate_grade(92, 5))   # A (97)
+print(calculate_grade(88, 10))  # A (98, capped)</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Solution Hint</h4>
+                    <p>Use if-elif-else to check score ranges: <code>if final_score >= 90:</code> etc.</p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson5.html" class="nav-button prev">← Previous: Loops</a>
+                <a href="lesson7.html" class="nav-button next">Next: Lists & Tuples →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

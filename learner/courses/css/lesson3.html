@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Colors and Text - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Beginner Level</span>
+            <h1>Lesson 3: Colors and Text</h1>
+            <p>Master the art of working with colors and typography in CSS</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 25%;"></div>
+            </div>
+            <span class="progress-text">Lesson 3 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>Colors and Text in CSS</h2>
+                <p>Colors and typography are fundamental to web design. They set the mood, improve readability, and create visual hierarchy. This lesson covers all the ways to specify colors and control text appearance in CSS.</p>
+            </section>
+            
+            <section>
+                <h2>1. Color Formats in CSS</h2>
+                <p>CSS provides multiple ways to specify colors. Understanding each format gives you flexibility and control.</p>
+                
+                <h3>Named Colors</h3>
+                <div class="code-block">
+                    <pre><code>/* CSS has 147 named colors */
+p {
+  color: red;
+  color: blue;
+  color: purple;
+  color: crimson;
+  color: tomato;
+  color: steelblue;
+  color: mediumseagreen;
+}
+
+/* Common named colors */
+/* red, orange, yellow, green, blue, purple */
+/* black, white, gray, silver */
+/* transparent (fully transparent) */</code></pre>
+                </div>
+                
+                <h3>Hexadecimal (Hex) Colors</h3>
+                <div class="code-block">
+                    <pre><code>/* Hex format: #RRGGBB (Red, Green, Blue) */
+h1 {
+  color: #7C3AED;    /* Purple */
+}
+
+/* Two characters per color channel (00 to FF) */
+/* 00 = 0 (none), FF = 255 (full) */
+
+/* #RRGGBBAA - includes alpha (opacity) */
+.overlay {
+  background-color: #00000080;  /* Black at 50% opacity */
+}
+
+/* Shorthand: #RGB when pairs repeat */
+p {
+  color: #333;       /* Same as #333333 */
+  color: #FFF;       /* Same as #FFFFFF */
+  color: #7A3;       /* Same as #77AA33 */
+}
+
+/* Shorthand with alpha: #RGBA */
+.box {
+  background-color: #0008;  /* Black at 50% opacity */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Understanding hex:</strong>
+                    <ul>
+                        <li><code>#RRGGBB</code> — Six characters: Red, Green, Blue values</li>
+                        <li><code>00</code> = none, <code>FF</code> = maximum</li>
+                        <li><code>#7C3AED</code> — 7C (red), 3A (green), ED (blue) = purple</li>
+                        <li>Add two more characters for opacity: <code>#RRGGBBAA</code></li>
+                      </ul>
+                </div>
+                
+                <h3>RGB and RGBA</h3>
+                <div class="code-block">
+                    <pre><code>/* RGB format: rgb(red, green, blue) */
+/* Values: 0-255 for each channel */
+
+h1 {
+  color: rgb(124, 58, 237);     /* Purple */
+}
+
+/* RGBA adds alpha (opacity): 0 (transparent) to 1 (opaque) */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);    /* Black, 50% transparent */
+}
+
+.button {
+  background-color: rgba(124, 58, 237, 0.8);  /* Purple, 80% opaque */
+}
+
+/* Useful for overlays and hover effects */
+.card:hover {
+  background-color: rgba(124, 58, 237, 0.1);
+}</code></pre>
+                </div>
+                
+                <h3>HSL and HSLA</h3>
+                <div class="code-block">
+                    <pre><code>/* HSL: Hue, Saturation, Lightness */
+/* More intuitive for adjusting colors */
+
+/* Hue: 0-360 (color wheel position) */
+/*   0 = red, 120 = green, 240 = blue, 270 = purple */
+/* Saturation: 0-100% (gray to vivid) */
+/* Lightness: 0-100% (black to white) */
+
+h1 {
+  color: hsl(258, 83%, 58%);    /* Purple */
+}
+
+/* HSLA adds alpha */
+.overlay {
+  background-color: hsla(258, 83%, 58%, 0.5);
+}
+
+/* Easy to create variations */
+.primary { color: hsl(258, 83%, 58%); }      /* Base */
+.primary-light { color: hsl(258, 83%, 78%); } /* Lighter */
+.primary-dark { color: hsl(258, 83%, 38%); }  /* Darker */
+
+/* Easy to create grayscale */
+.gray-1 { color: hsl(0, 0%, 10%); }   /* Very dark gray */
+.gray-2 { color: hsl(0, 0%, 50%); }   /* Medium gray */
+.gray-3 { color: hsl(0, 0%, 90%); }   /* Light gray */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Why HSL is useful:</strong>
+                    <ul>
+                        <li><strong>Hue:</strong> Position on color wheel (0-360°)</li>
+                        <li><strong>Saturation:</strong> How vivid the color is</li>
+                        <li><strong>Lightness:</strong> How light or dark</li>
+                        <li>Easy to create color variations by changing one value</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Which format to use?</strong>
+                    <ul>
+                        <li><strong>Hex:</strong> Most common, great for copying from design tools</li>
+                        <li><strong>RGB/RGBA:</strong> When you need transparency</li>
+                        <li><strong>HSL:</strong> When creating color variations or palettes</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. CSS Color Properties</h2>
+                <p>Several properties control colors in different contexts.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Text color */
+p {
+  color: #333333;              /* Sets text color */
+}
+
+/* Background color */
+body {
+  background-color: #ffffff;   /* Page background */
+}
+
+.header {
+  background-color: #7C3AED;   /* Element background */
+}
+
+/* Border color */
+.box {
+  border: 2px solid #7C3AED;   /* Border in one declaration */
+  /* OR */
+  border-width: 2px;
+  border-style: solid;
+  border-color: #7C3AED;
+}
+
+/* Accent color (form controls) */
+input:focus {
+  accent-color: #7C3AED;       /* Checkbox, radio, range color */
+}
+
+/* Caret color (text cursor) */
+input {
+  caret-color: #7C3AED;        /* Blinking cursor color */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Typography Basics</h2>
+                <p>Good typography makes your content readable and visually appealing.</p>
+                
+                <h3>Font Family</h3>
+                <div class="code-block">
+                    <pre><code>/* Set the font for text */
+body {
+  /* List fonts in order of preference */
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+h1 {
+  /* Serif fonts have decorative strokes */
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.code {
+  /* Monospace fonts - each character same width */
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* Generic font families (fallbacks): */
+/* serif - Times New Roman, Georgia */
+/* sans-serif - Arial, Helvetica, Verdana */
+/* monospace - Courier, Consolas */
+/* cursive - Decorative, script-like */
+/* fantasy - Decorative, playful */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Font stack explained:</strong>
+                    <ul>
+                        <li>Browser tries first font, falls back if not available</li>
+                        <li>Always end with a generic family (serif, sans-serif, monospace)</li>
+                        <li>Font names with spaces need quotes</li>
+                      </ul>
+                </div>
+                
+                <h3>Font Size</h3>
+                <div class="code-block">
+                    <pre><code>/* Absolute sizes */
+h1 {
+  font-size: 32px;      /* Pixels - fixed size */
+  font-size: 2rem;      /* Relative to root (html) */
+  font-size: 2em;       /* Relative to parent element */
+  font-size: 200%;      /* Percentage of parent */
+}
+
+/* Relative sizes (recommended) */
+p {
+  font-size: 1rem;      /* Base paragraph size */
+}
+
+small {
+  font-size: 0.875rem;  /* 14px if base is 16px */
+}
+
+/* Keywords */
+.large { font-size: large; }
+.medium { font-size: medium; }
+.small { font-size: small; }
+.x-small { font-size: x-small; }
+
+/* Viewport-based (responsive) */
+.hero-title {
+  font-size: 5vw;       /* 5% of viewport width */
+  /* Caution: Can become too small/large */
+}
+
+/* Best practice: Use clamp() for responsive text */
+.hero-title {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  /* Min: 1.5rem, Preferred: 4vw, Max: 3rem */
+}</code></pre>
+                </div>
+                
+                <h3>Font Weight</h3>
+                <div class="code-block">
+                    <pre><code>/* Control how bold text appears */
+p {
+  font-weight: normal;    /* 400 - default */
+  font-weight: bold;      /* 700 */
+}
+
+/* Numeric values (100-900) */
+.light { font-weight: 300; }
+.regular { font-weight: 400; }
+.medium { font-weight: 500; }
+.semibold { font-weight: 600; }
+.bold { font-weight: 700; }
+.extrabold { font-weight: 800; }
+
+/* Relative values */
+p {
+  font-weight: normal;
+}
+
+strong {
+  font-weight: bolder;    /* Bolder than parent */
+}</code></pre>
+                </div>
+                
+                <h3>Font Style</h3>
+                <div class="code-block">
+                    <pre><code>/* Italic and oblique text */
+p {
+  font-style: normal;     /* Upright text */
+}
+
+em, i {
+  font-style: italic;     /* Italic text */
+}
+
+.oblique {
+  font-style: oblique;    /* Slanted text */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Text Properties</h2>
+                <p>CSS provides many properties for fine-tuning text appearance.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Line Height - spacing between lines */
+p {
+  line-height: 1.6;       /* Unitless: multiplied by font-size */
+  line-height: 24px;      /* Fixed value */
+  line-height: 150%;      /* Percentage */
+}
+
+/* Unitless is recommended - inherits better */
+body {
+  line-height: 1.5;       /* Good for readability */
+}
+
+/* Text Alignment */
+h1 {
+  text-align: center;     /* Center the text */
+}
+
+p {
+  text-align: left;       /* Left aligned (default for LTR) */
+  text-align: right;      /* Right aligned */
+  text-align: justify;    /* Full width, newspaper style */
+}
+
+/* Text Decoration */
+a {
+  text-decoration: none;              /* Remove underline */
+}
+
+a:hover {
+  text-decoration: underline;         /* Add underline */
+}
+
+.deleted {
+  text-decoration: line-through;      /* Strikethrough */
+}
+
+.fancy {
+  text-decoration: underline wavy purple;  /* Style, line style, color */
+}
+
+/* Text Transform */
+h1 {
+  text-transform: uppercase;    /* ALL CAPS */
+}
+
+h2 {
+  text-transform: lowercase;    /* all lowercase */
+}
+
+.title {
+  text-transform: capitalize;   /* First Letter Of Each Word */
+}
+
+/* Letter Spacing */
+h1 {
+  letter-spacing: 2px;          /* Spread out letters */
+}
+
+.condensed {
+  letter-spacing: -1px;         /* Tighter letters */
+}
+
+/* Word Spacing */
+p {
+  word-spacing: 5px;            /* Space between words */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Text Indent and Overflow</h2>
+                <div class="code-block">
+                    <pre><code>/* Text Indent - first line indent */
+p {
+  text-indent: 2em;             /* Indent first line */
+}
+
+/* Text Overflow - handling overflow */
+.truncate {
+  white-space: nowrap;          /* Prevent wrapping */
+  overflow: hidden;             /* Hide overflow */
+  text-overflow: ellipsis;      /* Show ... for overflow */
+}
+
+/* Word Wrap and Break */
+.long-url {
+  word-wrap: break-word;        /* Break long words */
+  overflow-wrap: break-word;    /* Modern property */
+}
+
+.no-wrap {
+  white-space: nowrap;          /* Never wrap */
+}
+
+.pre {
+  white-space: pre;             /* Preserve spaces and line breaks */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Text Shadow</h2>
+                <p>Add shadows to text for visual effects.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* text-shadow: horizontal vertical blur color */
+h1 {
+  /* Simple shadow */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* Breakdown: */
+  /* 2px - horizontal offset (right) */
+  /* 2px - vertical offset (down) */
+  /* 4px - blur radius (softness) */
+  /* rgba(...) - shadow color */
+}
+
+/* Multiple shadows */
+.fancy {
+  text-shadow: 
+    1px 1px 0 #fff,
+    2px 2px 0 #7C3AED;
+}
+
+/* Glow effect */
+.glow {
+  color: #fff;
+  text-shadow: 0 0 10px #7C3AED, 0 0 20px #7C3AED;
+}
+
+/* Embossed effect */
+.embossed {
+  color: #666;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #333;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Custom Fonts (Web Fonts)</h2>
+                <p>Use custom fonts beyond what's installed on users' computers.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Using Google Fonts */
+/* Step 1: Add link in HTML head */
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+/* Step 2: Use in CSS */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Using @font-face (self-hosted) */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('fonts/custom-font.woff2') format('woff2'),
+       url('fonts/custom-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-family: 'CustomFont', serif;
+}
+
+/* Font-display options */
+@font-face {
+  font-family: 'MyFont';
+  src: url('my-font.woff2') format('woff2');
+  font-display: swap;  /* Show fallback font immediately, swap when loaded */
+  /* Other options: auto, block, swap, fallback, optional */
+}</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Font performance tips:</strong>
+                    <ul>
+                        <li>Use <code>font-display: swap</code> to avoid invisible text</li>
+                        <li>Limit the number of font weights you load</li>
+                        <li>Preload critical fonts: <code><link rel="preload" href="font.woff2" as="font" crossorigin></code></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Creating a Typography Scale</h2>
+                <p>A consistent scale creates visual harmony.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Base styles */
+:root {
+  --font-size-base: 1rem;      /* 16px */
+  --line-height-base: 1.5;
+  --font-family-base: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Type scale (1.25 ratio) */
+h1 { font-size: 2.441rem; }    /* ~39px */
+h2 { font-size: 1.953rem; }    /* ~31px */
+h3 { font-size: 1.563rem; }    /* ~25px */
+h4 { font-size: 1.25rem; }     /* ~20px */
+p  { font-size: 1rem; }        /* 16px */
+small { font-size: 0.8rem; }   /* ~13px */
+
+/* Using CSS custom properties */
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+}
+
+.heading-1 { font-size: var(--text-4xl); }
+.body-text { font-size: var(--text-base); }
+.small-text { font-size: var(--text-sm); }</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create a styled text component:</p>
+                <div class="code-block">
+                    <pre><code>/* Create these styles for a blog post: */
+
+/* 1. Body text: dark gray, 1rem, 1.6 line-height */
+/* 2. Headings: purple, bold */
+/* 3. Links: purple, no underline, underline on hover */
+/* 4. Blockquotes: italic, gray, left border purple */
+/* 5. Code: monospace, light gray background */
+
+/* Your CSS here: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Color formats: named, hex (#RRGGBB), RGB, HSL</li>
+                    <li>Use HSL for easy color variations</li>
+                    <li>font-family uses fallback fonts ending with generic family</li>
+                    <li>Relative units (rem, em) are preferred for accessibility</li>
+                    <li>line-height improves readability (1.5-1.8 for body text)</li>
+                    <li>text-transform, text-decoration, letter-spacing fine-tune text</li>
+                    <li>Web fonts expand your typography options</li>
+                    <li>A consistent type scale creates visual harmony</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson2.html" class="btn-secondary">← Previous: Selectors</a>
+            <a href="lesson4.html" class="btn-primary">Next: Box Model →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson ata time.</p>
+    </footer>
+</body>
+</html>

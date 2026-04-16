@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10: File Handling - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 10: File Handling</h1>
+            <p>Read from and write to files, handle different file formats</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Working with Files</h2>
+                <p>File handling is essential for most real-world applications. Python makes it easy to read, write, and manipulate files of various types. Understanding file operations allows you to save data, process logs, work with configurations, and more.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Opening Files</h2>
+                <p>Use the <code>open()</code> function to open files. The <code>with</code> statement ensures files are properly closed, even if errors occur.</p>
+                
+                <div class="code-block">
+                    <h4>File Opening Basics:</h4>
+<pre><code># Basic file opening
+file = open("example.txt", "r")  # Open for reading
+content = file.read()
+file.close()  # Always close the file!
+
+# Better: Using 'with' statement (auto-closes)
+with open("example.txt", "r") as file:
+    content = file.read()
+# File is automatically closed here
+
+# File modes:
+# 'r' - read (default)
+# 'w' - write (overwrites existing)
+# 'a' - append (adds to end)
+# 'x' - exclusive creation (fails if exists)
+# 'b' - binary mode
+# 't' - text mode (default)
+# '+' - read and write
+
+# Common combinations
+with open("file.txt", "w") as f:    # Write text
+with open("file.txt", "a") as f:    # Append text
+with open("file.bin", "wb") as f:   # Write binary
+with open("file.txt", "r+") as f:   # Read and write
+
+# Specify encoding for text files
+with open("file.txt", "r", encoding="utf-8") as f:
+    content = f.read()</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Manual file opening requires explicit close().</p>
+                        <p><strong>Lines 8-11:</strong> The <code>with</code> statement automatically closes the file - always prefer this!</p>
+                        <p><strong>Lines 14-22:</strong> File modes control how the file is opened.</p>
+                        <p><strong>Lines 30-31:</strong> Always specify encoding for text files to avoid issues.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Always Use 'with'</h4>
+                    <p>The <code>with</code> statement is called a context manager. It guarantees the file is closed even if an exception occurs, preventing resource leaks and file corruption.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Reading Files</h2>
+                <p>Python provides multiple ways to read file content depending on your needs.</p>
+                
+                <div class="code-block">
+                    <h4>Reading Methods:</h4>
+<pre><code># Read entire file as string
+with open("example.txt", "r") as f:
+    content = f.read()
+    print(content)
+
+# Read specific number of characters
+with open("example.txt", "r") as f:
+    first_10 = f.read(10)  # Read 10 characters
+    rest = f.read()        # Read remaining
+
+# Read one line at a time
+with open("example.txt", "r") as f:
+    line = f.readline()
+    while line:
+        print(line, end='')  # line already has \n
+        line = f.readline()
+
+# Read all lines into list
+with open("example.txt", "r") as f:
+    lines = f.readlines()
+    # Returns ['line1\n', 'line2\n', ...]
+
+# Iterate over lines (memory efficient)
+with open("example.txt", "r") as f:
+    for line in f:
+        print(line, end='')
+
+# Check if file exists before reading
+import os
+if os.path.exists("example.txt"):
+    with open("example.txt", "r") as f:
+        content = f.read()
+
+# Using pathlib (modern approach)
+from pathlib import Path
+file_path = Path("example.txt")
+if file_path.exists():
+    content = file_path.read_text()</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> <code>read()</code> loads the entire file into memory.</p>
+                        <p><strong>Lines 8-10:</strong> <code>read(n)</code> reads n characters; subsequent reads continue from there.</p>
+                        <p><strong>Lines 13-17:</strong> <code>readline()</code> reads one line at a time.</p>
+                        <p><strong>Lines 20-22:</strong> <code>readlines()</code> returns a list of all lines.</p>
+                        <p><strong>Lines 25-27:</strong> Iterating over the file object is memory-efficient for large files.</p>
+                        <p><strong>Lines 36-38:</strong> <code>pathlib</code> provides an object-oriented, cleaner approach.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Writing Files</h2>
+                <p>Write content to files using write mode or append mode.</p>
+                
+                <div class="code-block">
+                    <h4>Writing Methods:</h4>
+<pre><code># Write string to file (overwrites)
+with open("output.txt", "w") as f:
+    f.write("Hello, World!\n")
+    f.write("Second line\n")
+
+# Write multiple lines
+lines = ["Line 1\n", "Line 2\n", "Line 3\n"]
+with open("output.txt", "w") as f:
+    f.writelines(lines)  # Note: no automatic newlines
+
+# Append to file
+with open("log.txt", "a") as f:
+    f.write("New log entry\n")
+
+# Write with print function
+with open("output.txt", "w") as f:
+    print("Hello", "World", file=f, sep=", ")
+
+# Create directory if needed
+from pathlib import Path
+Path("subdir/nested").mkdir(parents=True, exist_ok=True)
+Path("subdir/nested/file.txt").write_text("Content")
+
+# Write numbers (convert to string first)
+numbers = [1, 2, 3, 4, 5]
+with open("numbers.txt", "w") as f:
+    for num in numbers:
+        f.write(f"{num}\n")
+
+# Write and read same file
+with open("file.txt", "r+") as f:
+    content = f.read()
+    f.write("\nAppended content")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> <code>write()</code> writes strings; doesn't add newlines automatically.</p>
+                        <p><strong>Lines 8-10:</strong> <code>writelines()</code> writes a list of strings.</p>
+                        <p><strong>Lines 13-15:</strong> Use append mode (<code>'a'</code>) to add to existing file.</p>
+                        <p><strong>Lines 18-19:</strong> The <code>print()</code> function can write to files.</p>
+                        <p><strong>Lines 22-24:</strong> <code>pathlib</code> makes file operations cleaner.</p>
+                        <p><strong>Lines 32-34:</strong> <code>r+</code> mode allows both reading and writing.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Working with CSV Files</h2>
+                <p>CSV (Comma-Separated Values) is a common format for tabular data. Python's csv module makes working with CSV files easy.</p>
+                
+                <div class="code-block">
+                    <h4>CSV Operations:</h4>
+<pre><code>import csv
+
+# Writing CSV
+data = [
+    ["Name", "Age", "City"],
+    ["Alice", 25, "NYC"],
+    ["Bob", 30, "LA"],
+    ["Charlie", 35, "Chicago"]
+]
+
+with open("people.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerows(data)
+
+# Reading CSV
+with open("people.csv", "r") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+
+# CSV with dictionaries
+with open("people.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["Name"], row["Age"])
+
+# Write with DictWriter
+with open("output.csv", "w", newline="") as f:
+    fieldnames = ["name", "age", "city"]
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerow({"name": "Alice", "age": 25, "city": "NYC"})
+
+# Custom delimiter
+with open("data.tsv", "w", newline="") as f:
+    writer = csv.writer(f, delimiter="\t")
+    writer.writerows(data)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-13:</strong> <code>csv.writer()</code> writes lists as CSV rows.</p>
+                        <p><strong>Lines 16-19:</strong> <code>csv.reader()</code> reads CSV rows as lists.</p>
+                        <p><strong>Lines 22-25:</strong> <code>DictReader</code> reads rows as dictionaries using header row.</p>
+                        <p><strong>Lines 28-32:</strong> <code>DictWriter</code> writes dictionaries with named fields.</p>
+                        <p><strong>Lines 35-37:</strong> Use <code>delimiter</code> for different separators (TSV, etc.).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Working with JSON Files</h2>
+                <p>JSON (JavaScript Object Notation) is perfect for structured data and APIs. Python's json module handles serialization seamlessly.</p>
+                
+                <div class="code-block">
+                    <h4>JSON Operations:</h4>
+<pre><code>import json
+
+# Python dict to JSON string
+data = {"name": "Alice", "age": 25, "skills": ["Python", "JavaScript"]}
+json_string = json.dumps(data, indent=2)
+print(json_string)
+
+# JSON string to Python dict
+parsed = json.loads(json_string)
+print(parsed["name"])
+
+# Write JSON to file
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=2)
+
+# Read JSON from file
+with open("data.json", "r") as f:
+    loaded = json.load(f)
+
+# Handle datetime (not natively JSON serializable)
+from datetime import datetime
+
+def json_serializer(obj):
+    if isinstance(obj, datetime):
+        return obj.isoformat()
+    raise TypeError(f"Type {type(obj)} not serializable")
+
+data = {"timestamp": datetime.now()}
+json_str = json.dumps(data, default=json_serializer)
+
+# Pretty print with sorting
+json.dumps(data, indent=2, sort_keys=True)
+
+# Handle file not found
+try:
+    with open("config.json", "r") as f:
+        config = json.load(f)
+except FileNotFoundError:
+    config = {"default": True}</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> <code>json.dumps()</code> converts Python objects to JSON string.</p>
+                        <p><strong>Lines 9-10:</strong> <code>json.loads()</code> parses JSON string to Python objects.</p>
+                        <p><strong>Lines 13-14:</strong> <code>json.dump()</code> writes JSON directly to file.</p>
+                        <p><strong>Lines 17-18:</strong> <code>json.load()</code> reads JSON directly from file.</p>
+                        <p><strong>Lines 22-26:</strong> Custom serializer for types not natively supported.</p>
+                        <p><strong>Lines 33-37:</strong> Handle missing files gracefully.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>File Path Operations</h2>
+                <p>The pathlib module provides an object-oriented approach to working with file paths.</p>
+                
+                <div class="code-block">
+                    <h4>Using pathlib:</h4>
+<pre><code>from pathlib import Path
+
+# Create path objects
+current = Path.cwd()  # Current working directory
+home = Path.home()    # User's home directory
+file_path = Path("folder/subfolder/file.txt")
+
+# Path components
+print(file_path.name)      # "file.txt"
+print(file_path.stem)      # "file"
+print(file_path.suffix)    # ".txt"
+print(file_path.parent)    # Path("folder/subfolder")
+
+# Check existence and type
+print(file_path.exists())  # False (not created yet)
+print(file_path.is_file())
+print(file_path.is_dir())
+
+# Create directories
+Path("new/dir").mkdir(parents=True, exist_ok=True)
+
+# List directory contents
+for item in Path(".").iterdir():
+    print(item.name, item.is_dir())
+
+# Glob pattern matching
+for py_file in Path(".").glob("**/*.py"):
+    print(py_file)
+
+# Read/write files
+Path("file.txt").write_text("Hello!")
+content = Path("file.txt").read_text()
+
+# Path operations
+path1 = Path("folder")
+path2 = "subfolder/file.txt"
+full = path1 / path2  # Path("folder/subfolder/file.txt")
+
+# Resolve to absolute path
+absolute = Path("file.txt").resolve()</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-6:</strong> Create Path objects for different locations.</p>
+                        <p><strong>Lines 9-13:</strong> Extract path components easily.</p>
+                        <p><strong>Lines 16-18:</strong> Check if path exists and its type.</p>
+                        <p><strong>Lines 25-27:</strong> <code>iterdir()</code> iterates over directory contents.</p>
+                        <p><strong>Lines 30-31:</strong> <code>glob()</code> finds files matching patterns.</p>
+                        <p><strong>Lines 38-39:</strong> The <code>/</code> operator joins paths elegantly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Binary Files</h2>
+                <p>Binary mode is used for non-text files like images, PDFs, and serialized Python objects.</p>
+                
+                <div class="code-block">
+                    <h4>Binary Operations:</h4>
+<pre><code># Read binary file
+with open("image.png", "rb") as f:
+    data = f.read()
+    print(len(data))  # Size in bytes
+
+# Write binary file
+with open("copy.png", "wb") as f:
+    f.write(data)
+
+# Pickle: Save Python objects
+import pickle
+
+data = {"name": "Alice", "scores": [85, 90, 88]}
+
+# Save to file
+with open("data.pkl", "wb") as f:
+    pickle.dump(data, f)
+
+# Load from file
+with open("data.pkl", "rb") as f:
+    loaded = pickle.load(f)
+
+# Shelve: Persistent dictionary-like storage
+import shelve
+
+with shelve.open("mydb") as db:
+    db["key1"] = {"name": "Alice"}
+    db["key2"] = [1, 2, 3]
+    
+with shelve.open("mydb") as db:
+    print(db["key1"])
+
+# Read file in chunks (memory efficient for large files)
+def read_in_chunks(filename, chunk_size=8192):
+    with open(filename, "rb") as f:
+        while chunk := f.read(chunk_size):
+            yield chunk
+
+for chunk in read_in_chunks("large_file.bin"):
+    process(chunk)  # Process each chunk</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-7:</strong> Binary mode (<code>'rb'</code>, <code>'wb'</code>) for non-text files.</p>
+                        <p><strong>Lines 10-21:</strong> <code>pickle</code> serializes Python objects to disk.</p>
+                        <p><strong>Lines 24-30:</strong> <code>shelve</code> provides persistent dictionary storage.</p>
+                        <p><strong>Lines 33-38:</strong> Reading in chunks is memory-efficient for large files.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>⚠️ Security Warning</h4>
+                    <p>Never unpickle data from untrusted sources! Pickle can execute arbitrary code. Use JSON for untrusted data.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a simple contact manager that saves contacts to a JSON file.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code>import json
+from pathlib import Path
+
+CONTACTS_FILE = Path("contacts.json")
+
+def load_contacts():
+    """Load contacts from JSON file."""
+    # Your code here
+    # Return empty dict if file doesn't exist
+    pass
+
+def save_contacts(contacts):
+    """Save contacts to JSON file."""
+    # Your code here
+    pass
+
+def add_contact(name, phone, email):
+    """Add a new contact."""
+    contacts = load_contacts()
+    contacts[name] = {"phone": phone, "email": email}
+    save_contacts(contacts)
+    print(f"Added contact: {name}")
+
+def get_contact(name):
+    """Get contact by name."""
+    # Your code here
+    pass
+
+def list_contacts():
+    """List all contacts."""
+    # Your code here
+    pass
+
+# Test your functions
+add_contact("Alice", "555-1234", "alice@email.com")
+add_contact("Bob", "555-5678", "bob@email.com")
+list_contacts()
+print(get_contact("Alice"))</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson9.html" class="nav-button prev">← Previous: String Manipulation</a>
+                <a href="lesson11.html" class="nav-button next">Next: Object-Oriented Programming →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

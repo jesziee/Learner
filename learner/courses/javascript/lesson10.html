@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10: Events - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 10: Events</h1>
+            <p>Learn how to respond to user interactions and create dynamic, interactive web pages.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Events?</h2>
+                <p>Events are actions or occurrences that happen in the browser, which you can respond to with JavaScript. When a user clicks a button, submits a form, presses a key, or loads a page - these are all events. Event handling is what makes web pages interactive and responsive to user actions.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> JavaScript uses an event-driven model. Instead of constantly checking for changes, you register functions (event handlers) that are called when specific events occur.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Adding Event Listeners</h2>
+                <p>The modern way to handle events:</p>
+                
+                <div class="code-block">
+                    <pre><code>const button = document.querySelector("button");
+
+// addEventListener(event, function)
+button.addEventListener("click", function() {
+    console.log("Button clicked!");
+});
+
+// Arrow function syntax
+button.addEventListener("click", () => {
+    console.log("Button clicked!");
+});
+
+// Named function (can be reused and removed)
+function handleClick(event) {
+    console.log("Button clicked!", event);
+}
+
+button.addEventListener("click", handleClick);
+
+// Remove event listener
+button.removeEventListener("click", handleClick);
+
+// Multiple events on same element
+const input = document.querySelector("input");
+input.addEventListener("focus", () => console.log("Focused"));
+input.addEventListener("blur", () => console.log("Blurred"));
+input.addEventListener("input", () => console.log("Input changed"));</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>addEventListener Parameters:</strong>
+                    <ul>
+                        <li><code>event</code> - Event type string (e.g., "click", "input")</li>
+                        <li><code>function</code> - Callback function to execute</li>
+                        <li><code>options</code> - Optional configuration object</li>
+                    </ul>
+                </div>
+
+                <h3>Event Options</h3>
+                <div class="code-block">
+                    <pre><code>// Run once and automatically remove
+button.addEventListener("click", () => {
+    console.log("This only runs once!");
+}, { once: true });
+
+// Capture phase (runs on parent first)
+parent.addEventListener("click", handler, { capture: true });
+
+// Passive event (won't call preventDefault)
+document.addEventListener("touchstart", handler, { passive: true });
+
+// Multiple options
+button.addEventListener("click", handler, {
+    once: true,
+    capture: true,
+    passive: true
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The Event Object</h2>
+                <p>Every event handler receives an event object with useful information:</p>
+                
+                <div class="code-block">
+                    <pre><code>button.addEventListener("click", (event) => {
+    // Event properties
+    console.log(event.type);          // "click"
+    console.log(event.target);        // Element that triggered event
+    console.log(event.currentTarget); // Element with listener
+    console.log(event.timeStamp);     // When event occurred
+    
+    // Mouse events
+    console.log(event.clientX, event.clientY);  // Position relative to viewport
+    console.log(event.pageX, event.pageY);      // Position relative to document
+    console.log(event.button);       // Which mouse button
+    
+    // Keyboard events
+    console.log(event.key);          // "Enter", "a", "ArrowUp"
+    console.log(event.code);         // "Enter", "KeyA", "ArrowUp"
+    console.log(event.ctrlKey);      // Was Ctrl pressed?
+    console.log(event.shiftKey);     // Was Shift pressed?
+    console.log(event.altKey);       // Was Alt pressed?
+});
+
+// Prevent default behavior
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+    event.preventDefault();  // Stop form submission
+    console.log("Form submission prevented");
+});
+
+// Stop event from bubbling
+document.querySelector(".child").addEventListener("click", (event) => {
+    event.stopPropagation();  // Don't notify parent elements
+});</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Common Event Properties:</strong>
+                    <ul>
+                        <li><code>target</code> - The element that triggered the event</li>
+                        <li><code>currentTarget</code> - The element the listener is attached to</li>
+                        <li><code>preventDefault()</code> - Stop the default action</li>
+                        <li><code>stopPropagation()</code> - Stop event from bubbling</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Common Event Types</h2>
+                
+                <h3>Mouse Events</h3>
+                <div class="code-block">
+                    <pre><code>const box = document.querySelector(".box");
+
+box.addEventListener("click", (e) => {
+    console.log("Clicked!");
+});
+
+box.addEventListener("dblclick", (e) => {
+    console.log("Double clicked!");
+});
+
+box.addEventListener("mouseenter", (e) => {
+    console.log("Mouse entered");
+    box.classList.add("hovered");
+});
+
+box.addEventListener("mouseleave", (e) => {
+    console.log("Mouse left");
+    box.classList.remove("hovered");
+});
+
+box.addEventListener("mousemove", (e) => {
+    // Fires continuously while mouse moves over element
+    console.log(`Mouse position: ${e.offsetX}, ${e.offsetY}`);
+});
+
+box.addEventListener("mousedown", (e) => {
+    console.log("Mouse button pressed");
+});
+
+box.addEventListener("mouseup", (e) => {
+    console.log("Mouse button released");
+});
+
+// Context menu (right-click)
+box.addEventListener("contextmenu", (e) => {
+    e.preventDefault();  // Disable right-click menu
+    console.log("Right-clicked");
+});</code></pre>
+                </div>
+
+                <h3>Keyboard Events</h3>
+                <div class="code-block">
+                    <pre><code>const input = document.querySelector("input");
+
+input.addEventListener("keydown", (e) => {
+    console.log(`Key pressed: ${e.key}`);
+    
+    // Check specific keys
+    if (e.key === "Enter") {
+        console.log("Enter pressed!");
+    }
+    
+    // Check key combinations
+    if (e.ctrlKey && e.key === "s") {
+        e.preventDefault();
+        console.log("Ctrl+S pressed - Save!");
+    }
+});
+
+input.addEventListener("keyup", (e) => {
+    console.log(`Key released: ${e.key}`);
+});
+
+input.addEventListener("keypress", (e) => {
+    // Deprecated - use keydown instead
+    console.log(`Character: ${e.key}`);
+});
+
+// Global keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeModal();
+    }
+});</code></pre>
+                </div>
+
+                <h3>Form Events</h3>
+                <div class="code-block">
+                    <pre><code>const form = document.querySelector("form");
+const input = document.querySelector("input");
+
+// Input event - fires on every change
+input.addEventListener("input", (e) => {
+    console.log("Current value:", e.target.value);
+});
+
+// Change event - fires when value is committed
+input.addEventListener("change", (e) => {
+    console.log("Value changed to:", e.target.value);
+});
+
+// Form submission
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    console.log("Form data:", data);
+});
+
+// Focus events
+input.addEventListener("focus", (e) => {
+    console.log("Input focused");
+    e.target.classList.add("focused");
+});
+
+input.addEventListener("blur", (e) => {
+    console.log("Input lost focus");
+    e.target.classList.remove("focused");
+});
+
+// Select event (when text is selected)
+input.addEventListener("select", (e) => {
+    const start = e.target.selectionStart;
+    const end = e.target.selectionEnd;
+    console.log(`Selected: ${e.target.value.substring(start, end)}`);
+});</code></pre>
+                </div>
+
+                <h3>Document/Window Events</h3>
+                <div class="code-block">
+                    <pre><code>// DOM loaded
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded");
+    initializeApp();
+});
+
+// Page fully loaded (including images)
+window.addEventListener("load", () => {
+    console.log("Page fully loaded");
+});
+
+// Before leaving page
+window.addEventListener("beforeunload", (e) => {
+    if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = "";  // Show confirmation dialog
+    }
+});
+
+// Scroll event
+window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    console.log(`Scrolled: ${scrollY}px`);
+});
+
+// Resize event
+window.addEventListener("resize", () => {
+    console.log(`Window size: ${window.innerWidth}x${window.innerHeight}`);
+});
+
+// Online/offline status
+window.addEventListener("online", () => {
+    console.log("Back online!");
+});
+
+window.addEventListener("offline", () => {
+    console.log("Gone offline!");
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Event Bubbling and Capturing</h2>
+                <p>Understand how events propagate through the DOM:</p>
+                
+                <div class="code-block">
+                    <pre><code>// HTML structure:
+// <div id="grandparent">
+//     <div id="parent">
+//         <div id="child">Click me</div>
+//     </div>
+// </div>
+
+const grandparent = document.querySelector("#grandparent");
+const parent = document.querySelector("#parent");
+const child = document.querySelector("#child");
+
+// Bubbling phase (default) - child to parent
+grandparent.addEventListener("click", () => console.log("Grandparent"));
+parent.addEventListener("click", () => console.log("Parent"));
+child.addEventListener("click", () => console.log("Child"));
+
+// Clicking child outputs: Child → Parent → Grandparent
+
+// Capturing phase - parent to child
+grandparent.addEventListener("click", () => console.log("Grandparent (capture)"), true);
+parent.addEventListener("click", () => console.log("Parent (capture)"), true);
+child.addEventListener("click", () => console.log("Child (capture)"), true);
+
+// Clicking child outputs:
+// Grandparent (capture) → Parent (capture) → Child (capture)
+// Child → Parent → Grandparent (bubbling)
+
+// Stop propagation
+child.addEventListener("click", (e) => {
+    e.stopPropagation();  // Event stops here
+    console.log("Child only");
+});</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Event Propagation Phases:</strong>
+                    <ul>
+                        <li><strong>Capturing:</strong> Event travels from window to target element</li>
+                        <li><strong>Target:</strong> Event reaches the target element</li>
+                        <li><strong>Bubbling:</strong> Event travels back up from target to window</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Event Delegation</h2>
+                <p>Handle events on parent instead of many children:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Instead of adding listeners to each button:
+// Bad approach (creates many listeners)
+document.querySelectorAll(".delete-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.target.closest(".item").remove();
+    });
+});
+
+// Use event delegation (one listener on parent)
+// Good approach
+document.querySelector(".item-list").addEventListener("click", (e) => {
+    // Check if clicked element matches selector
+    if (e.target.matches(".delete-btn")) {
+        e.target.closest(".item").remove();
+    }
+});
+
+// Works for dynamically added elements too!
+function addItem(text) {
+    const item = document.createElement("li");
+    item.className = "item";
+    item.innerHTML = `
+        ${text}
+        <button class="delete-btn">Delete</button>
+    `;
+    document.querySelector(".item-list").appendChild(item);
+}
+
+// The delete button works immediately - no new listener needed!
+
+// Multiple handlers with delegation
+document.querySelector(".toolbar").addEventListener("click", (e) => {
+    const action = e.target.dataset.action;
+    
+    switch(action) {
+        case "bold":
+            document.execCommand("bold");
+            break;
+        case "italic":
+            document.execCommand("italic");
+            break;
+        case "underline":
+            document.execCommand("underline");
+            break;
+    }
+});</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Benefits of Event Delegation:</strong>
+                    <ul>
+                        <li>Less memory (one listener instead of many)</li>
+                        <li>Works for dynamically added elements</li>
+                        <li>Less code to manage</li>
+                        <li>Easier to clean up</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Custom Events</h2>
+                <p>Create and dispatch your own events:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Create custom event
+const customEvent = new CustomEvent("userLoggedIn", {
+    detail: {
+        username: "alice",
+        userId: 123
+    },
+    bubbles: true,
+    cancelable: true
+});
+
+// Listen for custom event
+document.addEventListener("userLoggedIn", (e) => {
+    console.log("User logged in:", e.detail.username);
+    updateUserUI(e.detail);
+});
+
+// Dispatch (trigger) the event
+document.dispatchEvent(customEvent);
+
+// Example: Form validation system
+class FormValidator {
+    constructor(form) {
+        this.form = form;
+        this.setupListeners();
+    }
+    
+    setupListeners() {
+        this.form.addEventListener("validate", (e) => {
+            const isValid = this.validateAll();
+            
+            this.form.dispatchEvent(new CustomEvent("validationComplete", {
+                detail: { isValid, errors: this.errors }
+            }));
+        });
+    }
+    
+    validateAll() {
+        // Validation logic
+        return true;
+    }
+}
+
+// Usage
+const validator = new FormValidator(document.querySelector("form"));
+
+document.querySelector("form").addEventListener("validationComplete", (e) => {
+    if (e.detail.isValid) {
+        submitForm();
+    } else {
+        showErrors(e.detail.errors);
+    }
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Drag and Drop Events</h2>
+                <p>Create drag and drop interfaces:</p>
+                
+                <div class="code-block">
+                    <pre><code>const draggable = document.querySelector(".draggable");
+const dropzone = document.querySelector(".dropzone");
+
+// Make element draggable
+draggable.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", e.target.id);
+    e.target.classList.add("dragging");
+});
+
+draggable.addEventListener("dragend", (e) => {
+    e.target.classList.remove("dragging");
+});
+
+// Dropzone events
+dropzone.addEventListener("dragover", (e) => {
+    e.preventDefault();  // Allow drop
+    dropzone.classList.add("drag-over");
+});
+
+dropzone.addEventListener("dragleave", (e) => {
+    dropzone.classList.remove("drag-over");
+});
+
+dropzone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropzone.classList.remove("drag-over");
+    
+    const id = e.dataTransfer.getData("text/plain");
+    const element = document.getElementById(id);
+    dropzone.appendChild(element);
+});
+
+// Example: Sortable list
+const list = document.querySelector(".sortable");
+
+list.addEventListener("dragstart", (e) => {
+    if (e.target.matches("li")) {
+        e.dataTransfer.setData("text/plain", "");
+        e.target.classList.add("dragging");
+    }
+});
+
+list.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const dragging = document.querySelector(".dragging");
+    const afterElement = getDragAfterElement(list, e.clientY);
+    
+    if (afterElement) {
+        list.insertBefore(dragging, afterElement);
+    } else {
+        list.appendChild(dragging);
+    }
+});
+
+function getDragAfterElement(container, y) {
+    const elements = [...container.querySelectorAll("li:not(.dragging)")];
+    
+    return elements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        
+        if (offset < 0 && offset > closest.offset) {
+            return { offset, element: child };
+        }
+        return closest;
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Touch Events</h2>
+                <p>Handle touch interactions for mobile devices:</p>
+                
+                <div class="code-block">
+                    <pre><code>const touchArea = document.querySelector(".touch-area");
+
+touchArea.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    console.log(`Touch started at: ${touch.clientX}, ${touch.clientY}`);
+});
+
+touchArea.addEventListener("touchmove", (e) => {
+    e.preventDefault();  // Prevent scrolling while touching
+    const touch = e.touches[0];
+    console.log(`Touch moved to: ${touch.clientX}, ${touch.clientY}`);
+});
+
+touchArea.addEventListener("touchend", (e) => {
+    console.log("Touch ended");
+});
+
+// Multi-touch
+touchArea.addEventListener("touchstart", (e) => {
+    console.log(`Number of touches: ${e.touches.length}`);
+    
+    for (let touch of e.touches) {
+        console.log(`Touch ${touch.identifier}: ${touch.clientX}, ${touch.clientY}`);
+    }
+});
+
+// Swipe detection
+let startX, startY;
+
+touchArea.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+
+touchArea.addEventListener("touchend", (e) => {
+    if (!startX || !startY) return;
+    
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+    
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 50) {
+            console.log("Swiped right");
+        } else if (diffX < -50) {
+            console.log("Swiped left");
+        }
+    } else {
+        // Vertical swipe
+        if (diffY > 50) {
+            console.log("Swiped down");
+        } else if (diffY < -50) {
+            console.log("Swiped up");
+        }
+    }
+    
+    startX = null;
+    startY = null;
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Performance: Debouncing and Throttling</h2>
+                <p>Optimize frequently firing events:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Debounce - wait until events stop firing
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle - limit how often function can run
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Usage: Debounced search
+const searchInput = document.querySelector("#search");
+searchInput.addEventListener("input", debounce((e) => {
+    performSearch(e.target.value);
+}, 300));  // Wait 300ms after typing stops
+
+// Usage: Throttled scroll handler
+window.addEventListener("scroll", throttle(() => {
+    updateScrollIndicator();
+}, 100));  // Run at most every 100ms
+
+// Usage: Window resize
+window.addEventListener("resize", debounce(() => {
+    recalculateLayout();
+}, 250));</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>When to Use:</strong>
+                    <ul>
+                        <li><strong>Debounce:</strong> Search input, resize, validation after typing</li>
+                        <li><strong>Throttle:</strong> Scroll events, mousemove, game loops</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Intersection Observer</h2>
+                <p>Efficiently detect element visibility:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Create observer
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            console.log("Element is visible:", entry.target);
+            entry.target.classList.add("visible");
+            
+            // For one-time animations
+            // observer.unobserve(entry.target);
+        } else {
+            entry.target.classList.remove("visible");
+        }
+    });
+}, {
+    root: null,           // Viewport as root
+    rootMargin: "0px",    // Margin around root
+    threshold: 0.5        // Trigger when 50% visible
+});
+
+// Observe elements
+document.querySelectorAll(".animate-on-scroll").forEach(el => {
+    observer.observe(el);
+});
+
+// Lazy loading images
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;  // Load image
+            img.classList.remove("lazy");
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+document.querySelectorAll("img.lazy").forEach(img => {
+    imageObserver.observe(img);
+});
+
+// Infinite scroll
+const sentinel = document.querySelector("#sentinel");
+const infiniteObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        loadMoreContent();
+    }
+}, {
+    rootMargin: "100px"  // Load before reaching
+});
+
+infiniteObserver.observe(sentinel);</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Examples</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Example 1: Accordion
+function setupAccordion() {
+    document.querySelector(".accordion").addEventListener("click", (e) => {
+        const header = e.target.closest(".accordion-header");
+        if (!header) return;
+        
+        const item = header.parentElement;
+        const content = item.querySelector(".accordion-content");
+        const isOpen = item.classList.contains("open");
+        
+        // Close all others
+        document.querySelectorAll(".accordion-item.open").forEach(openItem => {
+            openItem.classList.remove("open");
+            openItem.querySelector(".accordion-content").style.maxHeight = null;
+        });
+        
+        // Toggle current
+        if (!isOpen) {
+            item.classList.add("open");
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+}
+
+// Example 2: Keyboard navigation
+function setupKeyboardNav() {
+    const items = document.querySelectorAll(".nav-item");
+    let currentIndex = 0;
+    
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowDown") {
+            currentIndex = (currentIndex + 1) % items.length;
+            items[currentIndex].focus();
+        } else if (e.key === "ArrowUp") {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            items[currentIndex].focus();
+        } else if (e.key === "Enter") {
+            items[currentIndex].click();
+        }
+    });
+}
+
+// Example 3: Form validation
+function setupFormValidation() {
+    const form = document.querySelector("form");
+    
+    const validators = {
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        password: (value) => value.length >= 8,
+        required: (value) => value.trim() !== ""
+    };
+    
+    form.addEventListener("input", (e) => {
+        const input = e.target;
+        const rule = input.dataset.validate;
+        
+        if (validators[rule]) {
+            const isValid = validators[rule](input.value);
+            input.classList.toggle("valid", isValid);
+            input.classList.toggle("invalid", !isValid);
+        }
+    });
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build an interactive image gallery
+class ImageGallery {
+    constructor(container) {
+        this.container = container;
+        this.images = container.querySelectorAll(".gallery-image");
+        this.currentIndex = 0;
+        this.modal = null;
+        
+        this.setupListeners();
+    }
+    
+    setupListeners() {
+        // Click to open modal
+        this.container.addEventListener("click", (e) => {
+            const image = e.target.closest(".gallery-image");
+            if (image) {
+                this.currentIndex = [...this.images].indexOf(image);
+                this.openModal();
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+            if (!this.modal) return;
+            
+            switch(e.key) {
+                case "ArrowLeft":
+                    this.previous();
+                    break;
+                case "ArrowRight":
+                    this.next();
+                    break;
+                case "Escape":
+                    this.closeModal();
+                    break;
+            }
+        });
+    }
+    
+    openModal() {
+        this.modal = document.createElement("div");
+        this.modal.className = "gallery-modal";
+        this.modal.innerHTML = `
+            <button class="modal-close">&times;</button>
+            <button class="modal-prev">‹</button>
+            <img src="" alt="" class="modal-image">
+            <button class="modal-next">›</button>
+            <div class="modal-counter"></div>
+        `;
+        
+        this.modal.addEventListener("click", (e) => {
+            if (e.target.matches(".modal-close") || 
+                e.target === this.modal) {
+                this.closeModal();
+            } else if (e.target.matches(".modal-prev")) {
+                this.previous();
+            } else if (e.target.matches(".modal-next")) {
+                this.next();
+            }
+        });
+        
+        document.body.appendChild(this.modal);
+        this.updateImage();
+    }
+    
+    closeModal() {
+        this.modal.remove();
+        this.modal = null;
+    }
+    
+    previous() {
+        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        this.updateImage();
+    }
+    
+    next() {
+        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        this.updateImage();
+    }
+    
+    updateImage() {
+        const image = this.images[this.currentIndex];
+        this.modal.querySelector(".modal-image").src = image.src;
+        this.modal.querySelector(".modal-counter").textContent = 
+            `${this.currentIndex + 1} / ${this.images.length}`;
+    }
+}
+
+// Initialize
+new ImageGallery(document.querySelector(".gallery"));</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson9.html" class="btn btn-secondary">← Previous: DOM Manipulation</a>
+                <a href="lesson11.html" class="btn btn-primary">Next: Async JavaScript →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

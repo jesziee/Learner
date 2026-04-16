@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: Async JavaScript - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 11: Async JavaScript</h1>
+            <p>Master asynchronous programming with callbacks, promises, and async/await.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Understanding Asynchronous JavaScript</h2>
+                <p>JavaScript is single-threaded, meaning it can only do one thing at a time. However, many operations take time (like fetching data from a server). Asynchronous programming allows JavaScript to start a long-running task and continue executing other code while waiting for the result. This is essential for creating responsive applications.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Synchronous code runs line by line, blocking until complete. Asynchronous code starts an operation and continues, handling the result later when it's ready.
+                </div>
+
+                <h3>Synchronous vs Asynchronous</h3>
+                <div class="code-block">
+                    <pre><code>// Synchronous (blocking)
+console.log("Start");
+console.log("Middle");
+console.log("End");
+// Output: Start, Middle, End (in order, immediately)
+
+// Asynchronous (non-blocking)
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Middle");
+}, 1000);
+
+console.log("End");
+// Output: Start, End, Middle (Middle comes after 1 second)</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Callbacks</h2>
+                <p>The traditional way to handle async operations:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic callback pattern
+function fetchData(callback) {
+    setTimeout(() => {
+        const data = { name: "John", age: 30 };
+        callback(data);
+    }, 1000);
+}
+
+fetchData((data) => {
+    console.log("Received:", data);
+});
+
+// Callback with error handling
+function fetchUser(id, onSuccess, onError) {
+    setTimeout(() => {
+        if (id > 0) {
+            onSuccess({ id, name: `User ${id}` });
+        } else {
+            onError("Invalid user ID");
+        }
+    }, 1000);
+}
+
+fetchUser(
+    1,
+    (user) => console.log("Success:", user),
+    (error) => console.log("Error:", error)
+);
+
+// Callback hell (pyramid of doom)
+getUser(userId, (user) => {
+    getPosts(user.id, (posts) => {
+        getComments(posts[0].id, (comments) => {
+            getAuthor(comments[0].authorId, (author) => {
+                console.log(author.name);
+                // Deeper and deeper nesting...
+            });
+        });
+    });
+});</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Callback Issues:</strong>
+                    <ul>
+                        <li>Deeply nested code becomes hard to read ("callback hell")</li>
+                        <li>Error handling must be done at every level</li>
+                        <li>Difficult to coordinate multiple async operations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Promises</h2>
+                <p>A cleaner way to handle async operations:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Creating a Promise
+const myPromise = new Promise((resolve, reject) => {
+    // Async operation
+    setTimeout(() => {
+        const success = true;
+        
+        if (success) {
+            resolve("Operation completed!");
+        } else {
+            reject("Operation failed!");
+        }
+    }, 1000);
+});
+
+// Using a Promise
+myPromise
+    .then(result => {
+        console.log("Success:", result);
+        return result.toUpperCase();
+    })
+    .then(upperResult => {
+        console.log("Uppercase:", upperResult);
+    })
+    .catch(error => {
+        console.log("Error:", error);
+    })
+    .finally(() => {
+        console.log("Cleanup (runs always)");
+    });
+
+// Practical example: Fetch wrapper
+function fetchUser(id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (id > 0) {
+                resolve({ id, name: `User ${id}` });
+            } else {
+                reject(new Error("Invalid user ID"));
+            }
+        }, 1000);
+    });
+}
+
+fetchUser(1)
+    .then(user => {
+        console.log("Found user:", user);
+        return fetchUser(2);  // Chain promises
+    })
+    .then(user2 => {
+        console.log("Found another user:", user2);
+    })
+    .catch(error => {
+        console.log("Error:", error.message);
+    });</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Promise States:</strong>
+                    <ul>
+                        <li><strong>Pending:</strong> Initial state, operation in progress</li>
+                        <li><strong>Fulfilled:</strong> Operation completed successfully (resolved)</li>
+                        <li><strong>Rejected:</strong> Operation failed</li>
+                    </ul>
+                </div>
+
+                <h3>Promise Methods</h3>
+                <div class="code-block">
+                    <pre><code>// Promise.all - wait for all to complete
+const p1 = Promise.resolve(1);
+const p2 = Promise.resolve(2);
+const p3 = new Promise(resolve => setTimeout(() => resolve(3), 1000));
+
+Promise.all([p1, p2, p3])
+    .then(results => {
+        console.log(results);  // [1, 2, 3]
+    });
+
+// If any rejects, all rejects
+Promise.all([
+    Promise.resolve(1),
+    Promise.reject("Error"),
+    Promise.resolve(3)
+])
+    .catch(error => console.log(error));  // "Error"
+
+// Promise.allSettled - wait for all, never rejects
+Promise.allSettled([
+    Promise.resolve(1),
+    Promise.reject("Error"),
+    Promise.resolve(3)
+])
+    .then(results => {
+        console.log(results);
+        // [
+        //   { status: "fulfilled", value: 1 },
+        //   { status: "rejected", reason: "Error" },
+        //   { status: "fulfilled", value: 3 }
+        // ]
+    });
+
+// Promise.race - first to settle wins
+Promise.race([
+    new Promise(r => setTimeout(() => r("slow"), 2000)),
+    new Promise(r => setTimeout(() => r("fast"), 1000))
+])
+    .then(result => console.log(result));  // "fast"
+
+// Promise.any - first to fulfill wins
+Promise.any([
+    Promise.reject("Error 1"),
+    Promise.resolve("Success"),
+    Promise.reject("Error 2")
+])
+    .then(result => console.log(result));  // "Success"
+
+// Promise.resolve and Promise.reject
+const resolved = Promise.resolve("Instant value");
+const rejected = Promise.reject("Instant error");</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Async/Await</h2>
+                <p>Write async code that looks synchronous:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic async/await
+async function fetchUser(id) {
+    // Simulating API call
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve({ id, name: `User ${id}` });
+        }, 1000);
+    });
+}
+
+async function main() {
+    console.log("Fetching user...");
+    const user = await fetchUser(1);
+    console.log("Got user:", user);
+}
+
+main();
+
+// Error handling with try/catch
+async function fetchWithError() {
+    try {
+        const user = await fetchUser(-1);
+        console.log(user);
+    } catch (error) {
+        console.log("Caught error:", error.message);
+    } finally {
+        console.log("Cleanup");
+    }
+}
+
+// Parallel operations
+async function fetchAllUsers() {
+    const [user1, user2, user3] = await Promise.all([
+        fetchUser(1),
+        fetchUser(2),
+        fetchUser(3)
+    ]);
+    
+    console.log(user1, user2, user3);
+}
+
+// Sequential vs Parallel
+async function sequential() {
+    const start = Date.now();
+    
+    const a = await fetchUser(1);  // Wait 1 second
+    const b = await fetchUser(2);  // Wait another second
+    const c = await fetchUser(3);  // Wait another second
+    
+    console.log("Sequential:", Date.now() - start);  // ~3 seconds
+}
+
+async function parallel() {
+    const start = Date.now();
+    
+    const [a, b, c] = await Promise.all([
+        fetchUser(1),
+        fetchUser(2),
+        fetchUser(3)
+    ]);
+    
+    console.log("Parallel:", Date.now() - start);  // ~1 second
+}</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Async/Await Rules:</strong>
+                    <ul>
+                        <li><code>async</code> keyword makes a function return a Promise</li>
+                        <li><code>await</code> pauses execution until Promise resolves</li>
+                        <li><code>await</code> can only be used inside <code>async</code> functions</li>
+                        <li>Use <code>try/catch</code> for error handling</li>
+                    </ul>
+                </div>
+
+                <h3>Advanced Patterns</h3>
+                <div class="code-block">
+                    <pre><code>// Loop with async/await
+async function processItems(items) {
+    for (const item of items) {
+        await processItem(item);  // Process one at a time
+    }
+}
+
+async function processItemsParallel(items) {
+    await Promise.all(items.map(item => processItem(item)));
+}
+
+// Sequential with reduce
+async function processSequentially(items) {
+    await items.reduce(async (promise, item) => {
+        await promise;
+        return processItem(item);
+    }, Promise.resolve());
+}
+
+// Async generator
+async function* fetchPages(url) {
+    let page = 1;
+    while (true) {
+        const data = await fetch(`${url}?page=${page}`);
+        if (data.items.length === 0) break;
+        yield data.items;
+        page++;
+    }
+}
+
+// Using async generator
+async function getAllItems() {
+    const allItems = [];
+    for await (const items of fetchPages("/api/items")) {
+        allItems.push(...items);
+    }
+    return allItems;
+}
+
+// Top-level await (ES2022, in modules)
+// const data = await fetch('/api/data');
+// console.log(data);
+
+// In non-module contexts, wrap in async IIFE
+(async () => {
+    const data = await fetch('/api/data');
+    console.log(data);
+})();</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The Event Loop</h2>
+                <p>Understand how JavaScript handles async operations:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Event loop demonstration
+console.log("1. Script start");
+
+setTimeout(() => {
+    console.log("2. setTimeout");
+}, 0);
+
+Promise.resolve()
+    .then(() => console.log("3. Promise 1"))
+    .then(() => console.log("4. Promise 2"));
+
+console.log("5. Script end");
+
+// Output order:
+// 1. Script start
+// 5. Script end
+// 3. Promise 1
+// 4. Promise 2
+// 2. setTimeout
+
+// Why? Event loop priorities:
+// 1. Call stack (synchronous code)
+// 2. Microtask queue (Promises)
+// 3. Macrotask queue (setTimeout, setInterval)
+
+// Practical example
+async function asyncFunction() {
+    console.log("async start");
+    await Promise.resolve();
+    console.log("async end");
+}
+
+new Promise(resolve => {
+    console.log("promise constructor");
+    resolve();
+}).then(() => console.log("promise then"));
+
+console.log("main");
+
+// Output:
+// async start
+// promise constructor
+// main
+// async end
+// promise then</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Task Queues:</strong>
+                    <ul>
+                        <li><strong>Call Stack:</strong> Where function execution happens</li>
+                        <li><strong>Microtask Queue:</strong> Promises, queueMicrotask (higher priority)</li>
+                        <li><strong>Macrotask Queue:</strong> setTimeout, setInterval, I/O operations</li>
+                        <li>Event loop processes: all sync code → all microtasks → one macrotask → repeat</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Error Handling Strategies</h2>
+                <p>Robust error handling for async code:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Pattern 1: try/catch
+async function fetchSafe(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Fetch failed:", error);
+        throw error;  // Re-throw or return default
+    }
+}
+
+// Pattern 2: Higher-order function
+function withErrorHandling(asyncFn) {
+    return async (...args) => {
+        try {
+            return await asyncFn(...args);
+        } catch (error) {
+            console.error("Error in", asyncFn.name, error);
+            return null;  // Or some default value
+        }
+    };
+}
+
+const safeFetch = withErrorHandling(fetch);
+
+// Pattern 3: Result object (like Rust)
+function Result(success, data, error) {
+    return { success, data, error };
+}
+
+async function fetchWithResult(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return Result(true, data, null);
+    } catch (error) {
+        return Result(false, null, error.message);
+    }
+}
+
+// Usage
+const result = await fetchWithResult("/api/data");
+if (result.success) {
+    console.log(result.data);
+} else {
+    console.log("Error:", result.error);
+}
+
+// Pattern 4: Retry logic
+async function fetchWithRetry(url, maxRetries = 3) {
+    let lastError;
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            lastError = error;
+            console.log(`Attempt ${attempt} failed:`, error.message);
+            
+            if (attempt < maxRetries) {
+                await new Promise(r => setTimeout(r, 1000 * attempt));
+            }
+        }
+    }
+    
+    throw lastError;
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Timing and Scheduling</h2>
+                <p>Control when code executes:</p>
+                
+                <div class="code-block">
+                    <pre><code>// setTimeout - run once after delay
+const timeoutId = setTimeout(() => {
+    console.log("Delayed execution");
+}, 1000);
+
+clearTimeout(timeoutId);  // Cancel
+
+// setInterval - run repeatedly
+const intervalId = setInterval(() => {
+    console.log("Repeating execution");
+}, 1000);
+
+clearInterval(intervalId);  // Stop
+
+// Request animation frame - synced with display refresh
+let animationId;
+function animate() {
+    // Update animation
+    animationId = requestAnimationFrame(animate);
+}
+animationId = requestAnimationFrame(animate);
+cancelAnimationFrame(animationId);
+
+// queueMicrotask - run before any macrotask
+queueMicrotask(() => {
+    console.log("Runs before setTimeout");
+});
+
+// setImmediate (Node.js) - run after I/O
+// setImmediate(() => console.log("Immediate"));
+
+// Delay utility
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function example() {
+    console.log("Start");
+    await delay(1000);
+    console.log("After 1 second");
+}
+
+// Debounce async
+function debounceAsync(fn, delay) {
+    let timeoutId;
+    return async (...args) => {
+        clearTimeout(timeoutId);
+        return new Promise((resolve) => {
+            timeoutId = setTimeout(async () => {
+                resolve(await fn(...args));
+            }, delay);
+        });
+    };
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Concurrency Patterns</h2>
+                <p>Manage multiple async operations:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Limit concurrent operations
+async function limitConcurrency(tasks, limit) {
+    const results = [];
+    const executing = [];
+    
+    for (const task of tasks) {
+        const promise = Promise.resolve().then(() => task());
+        results.push(promise);
+        
+        if (limit <= tasks.length) {
+            const exec = promise.then(() => {
+                executing.splice(executing.indexOf(exec), 1);
+            });
+            executing.push(exec);
+            
+            if (executing.length >= limit) {
+                await Promise.race(executing);
+            }
+        }
+    }
+    
+    return Promise.all(results);
+}
+
+// Simpler version with pool
+async function asyncPool(poolLimit, array, iteratorFn) {
+    const ret = [];
+    const executing = new Set();
+    
+    for (const item of array) {
+        const p = Promise.resolve().then(() => iteratorFn(item));
+        ret.push(p);
+        executing.add(p);
+        
+        const cleanup = () => executing.delete(p);
+        p.then(cleanup).catch(cleanup);
+        
+        if (executing.size >= poolLimit) {
+            await Promise.race(executing);
+        }
+    }
+    
+    return Promise.all(ret);
+}
+
+// Usage: Fetch 100 URLs, max 5 at a time
+const urls = Array.from({ length: 100 }, (_, i) => `/api/item/${i}`);
+
+await asyncPool(5, urls, async (url) => {
+    const response = await fetch(url);
+    return response.json();
+});
+
+// Producer-consumer pattern
+class AsyncQueue {
+    constructor() {
+        this.queue = [];
+        this.waiting = [];
+    }
+    
+    enqueue(item) {
+        if (this.waiting.length > 0) {
+            const resolve = this.waiting.shift();
+            resolve(item);
+        } else {
+            this.queue.push(item);
+        }
+    }
+    
+    dequeue() {
+        if (this.queue.length > 0) {
+            return Promise.resolve(this.queue.shift());
+        }
+        return new Promise(resolve => this.waiting.push(resolve));
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Examples</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Example 1: Rate-limited API client
+class RateLimitedClient {
+    constructor(baseUrl, requestsPerSecond = 5) {
+        this.baseUrl = baseUrl;
+        this.minInterval = 1000 / requestsPerSecond;
+        this.lastRequest = 0;
+    }
+    
+    async request(endpoint) {
+        const now = Date.now();
+        const waitTime = Math.max(0, this.minInterval - (now - this.lastRequest));
+        
+        if (waitTime > 0) {
+            await new Promise(r => setTimeout(r, waitTime));
+        }
+        
+        this.lastRequest = Date.now();
+        const response = await fetch(this.baseUrl + endpoint);
+        return response.json();
+    }
+}
+
+// Example 2: Data fetching with cache
+class DataFetcher {
+    constructor() {
+        this.cache = new Map();
+        this.pending = new Map();
+    }
+    
+    async fetch(url) {
+        // Check cache
+        if (this.cache.has(url)) {
+            return this.cache.get(url);
+        }
+        
+        // Check if request is already pending
+        if (this.pending.has(url)) {
+            return this.pending.get(url);
+        }
+        
+        // Make new request
+        const promise = fetch(url)
+            .then(r => r.json())
+            .then(data => {
+                this.cache.set(url, data);
+                this.pending.delete(url);
+                return data;
+            });
+        
+        this.pending.set(url, promise);
+        return promise;
+    }
+}
+
+// Example 3: Cancellable async operations
+class CancellationToken {
+    constructor() {
+        this.cancelled = false;
+        this.listeners = [];
+    }
+    
+    cancel() {
+        this.cancelled = true;
+        this.listeners.forEach(fn => fn());
+    }
+    
+    throwIfCancelled() {
+        if (this.cancelled) {
+            throw new Error("Operation cancelled");
+        }
+    }
+    
+    async race(promise) {
+        return Promise.race([
+            promise,
+            new Promise((_, reject) => {
+                this.listeners.push(() => reject(new Error("Cancelled")));
+            })
+        ]);
+    }
+}
+
+async function fetchWithCancellation(url, token) {
+    token.throwIfCancelled();
+    const response = await token.race(fetch(url));
+    token.throwIfCancelled();
+    return response.json();
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a data loading system
+class DataLoader {
+    constructor() {
+        this.cache = new Map();
+        this.pending = new Map();
+        this.subscribers = new Map();
+    }
+    
+    // Fetch with caching
+    async load(key, fetcher) {
+        if (this.cache.has(key)) {
+            return this.cache.get(key);
+        }
+        
+        if (this.pending.has(key)) {
+            return this.pending.get(key);
+        }
+        
+        const promise = fetcher()
+            .then(data => {
+                this.cache.set(key, data);
+                this.pending.delete(key);
+                this.notifySubscribers(key, data);
+                return data;
+            })
+            .catch(error => {
+                this.pending.delete(key);
+                throw error;
+            });
+        
+        this.pending.set(key, promise);
+        return promise;
+    }
+    
+    // Subscribe to data changes
+    subscribe(key, callback) {
+        if (!this.subscribers.has(key)) {
+            this.subscribers.set(key, new Set());
+        }
+        this.subscribers.get(key).add(callback);
+        
+        // Return unsubscribe function
+        return () => {
+            this.subscribers.get(key).delete(callback);
+        };
+    }
+    
+    notifySubscribers(key, data) {
+        const callbacks = this.subscribers.get(key);
+        if (callbacks) {
+            callbacks.forEach(cb => cb(data));
+        }
+    }
+    
+    // Invalidate cache
+    invalidate(key) {
+        this.cache.delete(key);
+    }
+    
+    // Prefetch data
+    async prefetch(keys, fetcher, concurrency = 3) {
+        const batches = [];
+        for (let i = 0; i < keys.length; i += concurrency) {
+            batches.push(keys.slice(i, i + concurrency));
+        }
+        
+        for (const batch of batches) {
+            await Promise.all(batch.map(key => this.load(key, () => fetcher(key))));
+        }
+    }
+}
+
+// Test it
+const loader = new DataLoader();
+
+loader.subscribe("users", (data) => {
+    console.log("Users updated:", data.length);
+});
+
+await loader.load("users", () => 
+    fetch("/api/users").then(r => r.json())
+);
+
+loader.invalidate("users");</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson10.html" class="btn btn-secondary">← Previous: Events</a>
+                <a href="lesson12.html" class="btn btn-primary">Next: Fetch & APIs →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

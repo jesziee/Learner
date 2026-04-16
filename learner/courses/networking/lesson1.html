@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: Networking Fundamentals - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🌐 Lesson 1: Networking Fundamentals</h1>
+            <p>Understand what networks are, how they work, and why they're essential for modern computing - from beginner concepts to pro principles</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is a Computer Network?</h2>
+                <p>A computer network is a collection of interconnected devices (computers, servers, smartphones) that communicate and share resources. Networks enable data exchange over short or long distances.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Analogy:</strong> Networks are like highways where data packets travel like cars between cities.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Why Networks Matter</h2>
+                <p>Essential for:</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Resource sharing</span>
+                    <span class="topic-tag">Communication</span>
+                    <span class="topic-tag">Cloud services</span>
+                    <span class="topic-tag">Internet access</span>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Network Types</h2>
+                <h3>LAN • MAN • WAN</h3>
+                <p><strong>LAN:</strong> Local network (office/home WiFi)<br>
+                <strong>MAN:</strong> City-wide (campuses)<br>
+                <strong>WAN:</strong> Global (Internet)</p>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Key Devices</h2>
+                <div class="code-block">
+                    <h4>Core Network Hardware:</h4>
+<pre><code>Routers  → Network gateways
+Switches → LAN connections
+Firewalls → Security
+Modems   → Internet converter</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Router:</strong> Traffic director</p>
+                        <p><strong>Switch:</strong> Local device connector</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>OSI Model</h2>
+                <div class="code-block">
+                    <h4>7 Layers:</h4>
+<pre><code>7 App     HTTP
+6 Present Encrypt
+5 Session Connect
+4 Trans   TCP/UDP
+3 Net     IP route
+2 Link    MAC/switch
+1 Phys    Cables</code></pre>
+                </div>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Mnemonic:</strong> All People Seem To Need Data Processing</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Packet Flow</h2>
+                <p>1. Create → 2. Encapsulate → 3. Transmit → 4. Decapsulate → 5. Deliver</p>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice</h2>
+                <div class="code-block">
+                    <pre><code>fetch('https://httpbin.org/ip')
+  .then(res => res.json())
+  .then(data => console.log('IP:', data.origin));</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Networks connect & share</li>
+                        <li>LAN/WAN, routers/switches</li>
+                        <li>OSI 7 layers</li>
+                        <li>Packets, not whole files</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn prev">← Course</a>
+                <a href="lesson2.html" class="nav-btn next">IP Addressing →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner</p>
+    </footer>
+</body>
+</html>

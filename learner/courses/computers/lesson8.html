@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Basics - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🔒 Lesson 8: Security Basics</h1>
+            <p>Protecting your computer and data</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Why Security Matters</h2>
+                <p>In our connected world, computer security is essential. Every day, cybercriminals attempt to steal data, money, and identities. Understanding security basics helps protect yourself and others.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>The reality:</strong> There are malicious actors constantly scanning the Internet for vulnerable systems. A new computer connected to the Internet can be attacked within minutes.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Common Threats</h2>
+                
+                <h3>Malware (Malicious Software)</h3>
+                <p>Software designed to harm or exploit systems. Types include:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Virus:</strong> Attaches to files, spreads when files are shared</li>
+                    <li><strong>Worm:</strong> Self-replicates across networks</li>
+                    <li><strong>Trojan:</strong> Disguises as legitimate software</li>
+                    <li><strong>Ransomware:</strong> Encrypts your files, demands payment</li>
+                    <li><strong>Spyware:</strong> Secretly monitors your activity</li>
+                </ul>
+                
+                <h3>Phishing</h3>
+                <p>Fake emails or websites that trick you into revealing passwords or personal information. They often impersonate banks, social media, or trusted companies.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Example phishing email signs:</span>
+
+<span class="variable">From:</span> "Bank Security" <security@bank-secure.xyz>
+<span class="comment">// Suspicious domain (not your real bank)</span>
+
+<span class="variable">Subject:</span> URGENT: Your account will be closed!
+<span class="comment">// Creates panic to bypass critical thinking</span>
+
+<span class="variable">Link:</span> http://bank-verify.com/login
+<span class="comment">// Not the real bank website!</span>
+
+<span class="variable">Request:</span> "Click here to verify your password"
+<span class="comment">// Banks never ask for passwords via email</span></code></pre>
+                </div>
+                
+                <h3>Social Engineering</h3>
+                <p>Manipulating people into revealing information or performing actions. The human element is often the weakest link in security.</p>
+                
+                <h3>Man-in-the-Middle Attacks</h3>
+                <p>An attacker intercepts communication between two parties, potentially reading or modifying the data.</p>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Password Security</h2>
+                <p>Passwords are your first line of defense. Strong password practices are crucial:</p>
+                
+                <h3>Creating Strong Passwords</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Password Strength Examples:</span>
+
+<span class="keyword">WEAK</span>    → <span class="string">"password123"</span>      <span class="comment">// Common, easily guessed</span>
+<span class="keyword">WEAK</span>    → <span class="string">"john1990"</span>          <span class="comment">// Personal info</span>
+<span class="keyword">MEDIUM</span>  → <span class="string">"P@ssw0rd!"</span>         <span class="comment">// Common with substitutions</span>
+<span class="keyword">STRONG</span>  → <span class="string">"Xk9#mP2$vL5@nQ8!"</span>  <span class="comment">// Random, complex</span>
+<span class="keyword">STRONG</span>  → <span class="string">"correct-horse-battery-staple"</span> <span class="comment">// Long passphrase</span></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Best Practice:</strong> Use a password manager! It generates and stores unique, complex passwords for each account. You only need to remember one master password.</p>
+                </div>
+                
+                <h3>Two-Factor Authentication (2FA)</h3>
+                <p>Requires something you know (password) AND something you have (phone, security key). Even if someone steals your password, they can't access your account without the second factor.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// 2FA Types:</span>
+
+<span class="variable">SMS Code</span>     → Texted to your phone
+<span class="variable">Auth App</span>     → Google/Microsoft Authenticator
+<span class="variable">Hardware Key</span> → Physical device (YubiKey)
+<span class="variable">Biometric</span>    → Fingerprint, face recognition</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Encryption</h2>
+                <p>Encryption converts data into a coded form that can only be read with the correct key. It protects your data both in transit and at rest.</p>
+                
+                <h3>How Encryption Works</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Simplified Encryption:</span>
+
+<span class="variable">Original</span>: "Hello World"
+    ↓
+<span class="function">Encryption</span> (using key)
+    ↓
+<span class="variable">Encrypted</span>: "U2FsdGVkX1+abc123..."
+    ↓
+<span class="function">Decryption</span> (using same key)
+    ↓
+<span class="variable">Original</span>: "Hello World"</code></pre>
+                </div>
+                
+                <h3>Encryption Types</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Symmetric:</strong> Same key encrypts and decrypts (faster, but key must be shared securely)</li>
+                    <li><strong>Asymmetric:</strong> Two keys - public (encrypt) and private (decrypt). Used in HTTPS.</li>
+                </ul>
+                
+                <h3>Where You See Encryption</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>HTTPS:</strong> Encrypts web traffic (look for the padlock!)</li>
+                    <li><strong>End-to-end encryption:</strong> Messaging apps like Signal, WhatsApp</li>
+                    <li><strong>Full disk encryption:</strong> Protects data if device is stolen</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Safe Browsing Practices</h2>
+                
+                <h3>Recognizing Secure Websites</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>Look for "https://" (not just "http://")</li>
+                    <li>Check for the padlock icon in the address bar</li>
+                    <li>Verify the domain name is correct (no typos!)</li>
+                    <li>Be wary of shortened URLs (bit.ly, etc.)</li>
+                </ul>
+                
+                <h3>Download Safety</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>Only download from official sources</li>
+                    <li>Be cautious of "free" software - it may include malware</li>
+                    <li>Scan downloaded files with antivirus software</li>
+                    <li>Don't open unexpected email attachments</li>
+                </ul>
+                
+                <h3>Public WiFi Risks</h3>
+                <p>Public WiFi networks (coffee shops, airports) are often unsecured. Others on the network could potentially see your traffic.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Public WiFi Safety:</strong> Use a VPN (Virtual Private Network) on public WiFi. It creates an encrypted tunnel for your traffic, keeping it private from others on the network.</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Keeping Software Updated</h2>
+                <p>Software updates often include security patches for newly discovered vulnerabilities.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Why updates matter:</span>
+
+<span class="number">1.</span> <span class="variable">Vulnerability discovered</span> → Hackers start exploiting it
+<span class="number">2.</span> <span class="function">Developer creates patch</span>   → Fixes the security hole
+<span class="number">3.</span> <span class="function">Update released</span>          → Available to users
+<span class="number">4.</span> <span class="keyword">You install update</span>       → Now protected!
+
+<span class="comment">// If you don't update, you remain vulnerable!</span></code></pre>
+                </div>
+                
+                <h3>What to Update</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Operating System:</strong> Enable automatic updates</li>
+                    <li><strong>Browsers:</strong> Usually auto-update, but check</li>
+                    <li><strong>Applications:</strong> Especially security software</li>
+                    <li><strong>Antivirus:</strong> Must update for new threat definitions</li>
+                </ul>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Backup and Recovery</h2>
+                <p>Security isn't just about prevention - it's also about being able to recover if something goes wrong.</p>
+                
+                <h3>The 3-2-1 Backup Rule</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// 3-2-1 Backup Strategy:</span>
+
+<span class="number">3</span> copies of your data
+<span class="number">2</span> different storage types
+<span class="number">1</span> copy offsite (cloud or different location)
+
+<span class="comment">// Example:</span>
+- <span class="variable">Original</span> on your computer
+- <span class="variable">Backup</span> on external hard drive
+- <span class="variable">Backup</span> in cloud storage (Google Drive, Dropbox)</code></pre>
+                </div>
+                
+                <p>This ensures that even if your computer is lost, stolen, or hit by ransomware, you can recover your data.</p>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>Threats:</strong> Malware, phishing, social engineering</li>
+                            <li><strong>Passwords:</strong> Use strong, unique passwords and a password manager</li>
+                            <li><strong>2FA:</strong> Enable two-factor authentication everywhere possible</li>
+                            <li><strong>Encryption:</strong> Protects data in transit and at rest</li>
+                            <li><strong>Updates:</strong> Keep all software updated for security patches</li>
+                            <li><strong>Backups:</strong> Follow the 3-2-1 rule for data protection</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="code-explanation" style="margin-top: 2rem;">
+                    <p><strong>Congratulations!</strong> 🎉 You've completed the "How Computers Work" course! You now have a solid foundation in computer hardware, software, networks, and security. You're ready to start learning programming languages!</p>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson7.html" class="nav-btn prev">← Previous: The Internet and Web</a>
+                <a href="../../index.html" class="nav-btn next">Back to Courses →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

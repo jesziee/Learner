@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 New Elements - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🚀 Lesson 9: HTML5 New Elements</h1>
+            <p>Modern HTML5 features and APIs</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is HTML5?</h2>
+                <p>HTML5 is the latest version of HTML, introducing new semantic elements, form input types, multimedia support, and APIs for building modern web applications.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Key improvements:</strong> Better semantic structure, native multimedia support, new form input types, offline storage, geolocation, canvas for graphics, and drag-and-drop APIs.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Multimedia Elements</h2>
+                
+                <h3><video> Element</h3>
+                <p>Embed video content without plugins like Flash.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Basic video</span>
+<<span class="keyword">video</span> <span class="variable">src</span>=<span class="string">"video.mp4"</span>></<span class="keyword">video</span>>
+
+<span class="comment">// Video with controls and multiple sources</span>
+<<span class="keyword">video</span> <span class="variable">controls</span> <span class="variable">width</span>=<span class="string">"640"</span> <span class="variable">height</span>=<span class="string">"360"</span>>
+    <<span class="keyword">source</span> <span class="variable">src</span>=<span class="string">"video.mp4"</span> <span class="variable">type</span>=<span class="string">"video/mp4"</span>>
+    <<span class="keyword">source</span> <span class="variable">src</span>=<span class="string">"video.webm"</span> <span class="variable">type</span>=<span class="string">"video/webm"</span>>
+    Your browser doesn't support video.
+</<span class="keyword">video</span>>
+
+<span class="comment">// Common attributes:</span>
+<span class="variable">controls</span>    <span class="comment">// Show play/pause controls</span>
+<span class="variable">autoplay</span>    <span class="comment">// Auto-play (often blocked without muted)</span>
+<span class="variable">muted</span>       <span class="comment">// Mute audio</span>
+<span class="variable">loop</span>        <span class="comment">// Loop video</span>
+<span class="variable">poster</span>=<span class="string">"img.jpg"</span>  <span class="comment">// Thumbnail before play</span>
+<span class="variable">preload</span>=<span class="string">"auto"</span>   <span class="comment">// Load behavior</span>
+<span class="variable">playsinline</span> <span class="comment">// Play inline on mobile (not fullscreen)</span></code></pre>
+                </div>
+                
+                <h3><audio> Element</h3>
+                <p>Embed audio content.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Basic audio</span>
+<<span class="keyword">audio</span> <span class="variable">src</span>=<span class="string">"audio.mp3"</span> <span class="variable">controls</span>></<span class="keyword">audio</span>>
+
+<span class="comment">// Audio with multiple sources</span>
+<<span class="keyword">audio</span> <span class="variable">controls</span>>
+    <<span class="keyword">source</span> <span class="variable">src</span>=<span class="string">"audio.mp3"</span> <span class="variable">type</span>=<span class="string">"audio/mpeg"</span>>
+    <<span class="keyword">source</span> <span class="variable">src</span>=<span class="string">"audio.ogg"</span> <span class="variable">type</span>=<span class="string">"audio/ogg"</span>>
+    Your browser doesn't support audio.
+</<span class="keyword">audio</span>>
+
+<span class="comment">// Common attributes:</span>
+<span class="variable">controls</span>  <span class="comment">// Show audio controls</span>
+<span class="variable">autoplay</span>  <span class="comment">// Auto-play (often blocked)</span>
+<span class="variable">muted</span>     <span class="comment">// Mute</span>
+<span class="variable">loop</span>      <span class="comment">// Loop audio</span>
+<span class="variable">preload</span>   <span class="comment">// Load behavior</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Canvas and SVG</h2>
+                
+                <h3><canvas></h3>
+                <p>A drawable region for JavaScript graphics.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Canvas element</span>
+<<span class="keyword">canvas</span> <span class="variable">id</span>=<span class="string">"myCanvas"</span> <span class="variable">width</span>=<span class="string">"400"</span> <span class="variable">height</span>=<span class="string">"300"</span>>
+    Your browser doesn't support canvas.
+</<span class="keyword">canvas</span>>
+
+<span class="comment">// JavaScript draws on canvas:</span>
+<span class="keyword">const</span> <span class="variable">canvas</span> = <span class="variable">document</span>.<span class="function">getElementById</span>(<span class="string">'myCanvas'</span>);
+<span class="keyword">const</span> <span class="variable">ctx</span> = <span class="variable">canvas</span>.<span class="function">getContext</span>(<span class="string">'2d'</span>);
+
+<span class="comment">// Draw a rectangle</span>
+<span class="variable">ctx</span>.<span class="variable">fillStyle</span> = <span class="string">'#7C3AED'</span>;
+<span class="variable">ctx</span>.<span class="function">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">50</span>);
+
+<span class="comment">// Uses: Games, charts, image editing, animations</span></code></pre>
+                </div>
+                
+                <h3><svg></h3>
+                <p>Inline scalable vector graphics.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Inline SVG</span>
+<<span class="keyword">svg</span> <span class="variable">width</span>=<span class="string">"100"</span> <span class="variable">height</span>=<span class="string">"100"</span>>
+    <<span class="keyword">circle</span> <span class="variable">cx</span>=<span class="string">"50"</span> <span class="variable">cy</span>=<span class="string">"50"</span> <span class="variable">r</span>=<span class="string">"40"</span> <span class="variable">fill</span>=<span class="string">"#7C3AED"</span>/>
+</<span class="keyword">svg</span>>
+
+<span class="comment">// SVG is scalable, can be styled with CSS,</span>
+<span class="comment">// and can be manipulated with JavaScript</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Interactive Elements</h2>
+                
+                <h3><details> and <summary></h3>
+                <p>Expandable/collapsible content.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">details</span>>
+    <<span class="keyword">summary</span>>Click to expand</<span class="keyword">summary</span>>
+    <<span class="keyword">p</span>>This content is hidden until clicked.</<span class="keyword">p</span>>
+    <<span class="keyword">ul</span>>
+        <<span class="keyword">li</span>>Item 1</<span class="keyword">li</span>>
+        <<span class="keyword">li</span>>Item 2</<span class="keyword">li</span>>
+    </<span class="keyword">ul</span>>
+</<span class="keyword">details</span>>
+
+<span class="comment">// Open by default</span>
+<<span class="keyword">details</span> <span class="variable">open</span>>
+    <<span class="keyword">summary</span>>FAQ</<span class="keyword">summary</span>>
+    <<span class="keyword">p</span>>Answer here...</<span class="keyword">p</span>>
+</<span class="keyword">details</span>></code></pre>
+                </div>
+                
+                <h3><dialog></h3>
+                <p>Modal or non-modal dialog boxes.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">dialog</span> <span class="variable">id</span>=<span class="string">"myModal"</span>>
+    <<span class="keyword">h2</span>>Dialog Title</<span class="keyword">h2</span>>
+    <<span class="keyword">p</span>>Dialog content here.</<span class="keyword">p</span>>
+    <<span class="keyword">button</span> <span class="variable">id</span>=<span class="string">"closeBtn"</span>>Close</<span class="keyword">button</span>>
+</<span class="keyword">dialog</span>>
+
+<<span class="keyword">button</span> <span class="variable">onclick</span>=<span class="string">"document.getElementById('myModal').showModal()"</span>>
+    Open Dialog
+</<span class="keyword">button</span>>
+
+<span class="comment">// Methods: showModal() for modal, show() for non-modal</span>
+<span class="comment">// Close with close() method or Escape key</span></code></pre>
+                </div>
+                
+                <h3><progress> and <meter></h3>
+                <p>Visual indicators.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Progress bar (indeterminate or determinate)</span>
+<<span class="keyword">progress</span>></<span class="keyword">progress</span>>  <span class="comment">// Indeterminate (loading...)</span>
+
+<<span class="keyword">progress</span> <span class="variable">value</span>=<span class="string">"70"</span> <span class="variable">max</span>=<span class="string">"100"</span>>70%</<span class="keyword">progress</span>>  <span class="comment">// 70%</span>
+
+<span class="comment">// Meter (scalar measurement within known range)</span>
+<<span class="keyword">meter</span> <span class="variable">value</span>=<span class="string">"0.7"</span> <span class="variable">min</span>=<span class="string">"0"</span> <span class="variable">max</span>=<span class="string">"1"</span>>70%</<span class="keyword">meter</span>>
+
+<span class="comment">// Meter with ranges</span>
+<<span class="keyword">meter</span> <span class="variable">value</span>=<span class="string">"0.3"</span> <span class="variable">min</span>=<span class="string">"0"</span> <span class="variable">max</span>=<span class="string">"1"</span> 
+       <span class="variable">low</span>=<span class="string">"0.3"</span> <span class="variable">high</span>=<span class="string">"0.7"</span> <span class="variable">optimum</span>=<span class="string">"0.8"</span>>
+    30%
+</<span class="keyword">meter</span>>
+
+<span class="comment">// Use meter for known ranges (disk space, test scores)</span>
+<span class="comment">// Use progress for task completion</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>New Form Input Types</h2>
+                <p>HTML5 added many new input types with built-in validation:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Date and time inputs</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"date"</span>>           <span class="comment">// Date picker</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"time"</span>>           <span class="comment">// Time picker</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"datetime-local"</span>> <span class="comment">// Date and time</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"month"</span>>          <span class="comment">// Month picker</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"week"</span>>           <span class="comment">// Week picker</span>
+
+<span class="comment">// Other new types</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"email"</span>>         <span class="comment">// Email validation</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"url"</span>>           <span class="comment">// URL validation</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"tel"</span>>           <span class="comment">// Phone number</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"search"</span>>        <span class="comment">// Search field</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"number"</span>>        <span class="comment">// Number with spinner</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"range"</span>>         <span class="comment">// Slider</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"color"</span>>         <span class="comment">// Color picker</span>
+
+<span class="comment">// New attributes</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">autocomplete</span>=<span class="string">"on"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">autofocus</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">placeholder</span>=<span class="string">"Hint"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">required</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">pattern</span>=<span class="string">"[A-Za-z]{3}"</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>HTML5 APIs Overview</h2>
+                <p>HTML5 introduced JavaScript APIs for powerful web applications:</p>
+                
+                <h3>Local Storage</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Store data in the browser</span>
+<span class="variable">localStorage</span>.<span class="function">setItem</span>(<span class="string">'username'</span>, <span class="string">'John'</span>);
+<span class="keyword">const</span> <span class="variable">name</span> = <span class="variable">localStorage</span>.<span class="function">getItem</span>(<span class="string">'username'</span>);
+<span class="variable">localStorage</span>.<span class="function">removeItem</span>(<span class="string">'username'</span>);
+<span class="variable">localStorage</span>.<span class="function">clear</span>();  <span class="comment">// Clear all</span>
+
+<span class="comment">// sessionStorage works the same but clears when tab closes</span></code></pre>
+                </div>
+                
+                <h3>Geolocation</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Get user's location</span>
+<span class="variable">navigator</span>.<span class="variable">geolocation</span>.<span class="function">getCurrentPosition</span>(<span class="keyword">function</span>(<span class="variable">position</span>) {
+    <span class="variable">console</span>.<span class="function">log</span>(<span class="variable">position</span>.<span class="variable">coords</span>.<span class="variable">latitude</span>);
+    <span class="variable">console</span>.<span class="function">log</span>(<span class="variable">position</span>.<span class="variable">coords</span>.<span class="variable">longitude</span>);
+});</code></pre>
+                </div>
+                
+                <h3>Drag and Drop</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Make element draggable</span>
+<<span class="keyword">div</span> <span class="variable">draggable</span>=<span class="string">"true"</span> <span class="variable">id</span>=<span class="string">"drag1"</span>>Drag me</<span class="keyword">div</span>>
+
+<<span class="keyword">div</span> <span class="variable">id</span>=<span class="string">"dropzone"</span>>Drop here</<span class="keyword">div</span>>
+
+<span class="comment">// JavaScript handles the drag/drop events</span>
+<span class="comment">// dragstart, dragover, drop events</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><video>/<audio>:</strong> Native multimedia embedding</li>
+                            <li><strong><canvas>:</strong> JavaScript-drawn graphics</li>
+                            <li><strong><svg>:</strong> Scalable vector graphics</li>
+                            <li><strong><details>/<summary>:</strong> Expandable content</li>
+                            <li><strong><dialog>:</strong> Modal dialogs</li>
+                            <li><strong><progress>/<meter>:</strong> Visual indicators</li>
+                            <li><strong>New input types:</strong> date, email, url, color, range, etc.</li>
+                            <li><strong>localStorage:</strong> Store data in browser</li>
+                            <li><strong>Geolocation:</strong> Get user's location</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson8.html" class="nav-btn prev">← Previous: HTML Attributes</a>
+                <a href="lesson10.html" class="nav-btn next">Next: Accessibility →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

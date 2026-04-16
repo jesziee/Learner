@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 13: Modules & Packages - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 13: Modules & Packages</h1>
+            <p>Organize code with modules and use external packages with pip</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Modules?</h2>
+                <p>Modules are Python files containing code that can be imported and reused. They help organize code into logical units, prevent namespace pollution, and enable code reuse across projects. A module is simply a .py file that can contain functions, classes, and variables.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Importing Modules</h2>
+                <p>Python provides several ways to import modules and their contents.</p>
+                
+                <div class="code-block">
+                    <h4>Import Statements:</h4>
+<pre><code># Import entire module
+import math
+print(math.sqrt(16))  # 4.0
+print(math.pi)        # 3.141592653589793
+
+# Import with alias
+import math as m
+print(m.sqrt(25))  # 5.0
+
+# Import specific items
+from math import sqrt, pi
+print(sqrt(36))  # 6.0
+print(pi)        # 3.14159...
+
+# Import multiple items
+from math import sin, cos, tan
+
+# Import with alias (specific items)
+from math import sqrt as square_root
+print(square_root(49))  # 7.0
+
+# Import everything (not recommended)
+from math import *
+# Now all math functions are available directly
+# But this pollutes the namespace
+
+# Common module aliases (conventions)
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Import user-defined module
+import my_module
+from my_module import my_function</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Import the whole module and access items with dot notation.</p>
+                        <p><strong>Lines 8-10:</strong> Use aliases to shorten module names.</p>
+                        <p><strong>Lines 13-16:</strong> Import specific functions or variables from a module.</p>
+                        <p><strong>Lines 24-25:</strong> Avoid <code>from module import *</code> - it pollutes your namespace.</p>
+                        <p><strong>Lines 28-31:</strong> Some modules have conventional aliases everyone uses.</p>
+                        <p><strong>Lines 34-35:</strong> Import your own Python files as modules.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Your Own Modules</h2>
+                <p>Any Python file can be a module. Let's create a simple module structure.</p>
+                
+                <div class="code-block">
+                    <h4>Module Example (mymath.py):</h4>
+<pre><code># mymath.py - A custom math utilities module
+
+"""Mathematical utility functions."""
+
+PI = 3.14159
+
+def circle_area(radius):
+    """Calculate the area of a circle."""
+    return PI * radius ** 2
+
+def circle_circumference(radius):
+    """Calculate the circumference of a circle."""
+    return 2 * PI * radius
+
+def rectangle_area(width, height):
+    """Calculate the area of a rectangle."""
+    return width * height
+
+# Code that runs only when executed directly
+if __name__ == "__main__":
+    # This block runs when: python mymath.py
+    # It does NOT run when: import mymath
+    print("Testing mymath module:")
+    print(f"Circle area (r=5): {circle_area(5)}")
+    print(f"Circle circumference (r=5): {circle_circumference(5)}")</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Using the Module:</h4>
+<pre><code># main.py - Using our custom module
+import mymath
+
+print(mymath.PI)                    # 3.14159
+print(mymath.circle_area(5))        # 78.53975
+print(mymath.circle_circumference(3))  # 18.84954
+
+# Import specific functions
+from mymath import circle_area, PI
+
+area = circle_area(10)
+print(f"Area: {area}")  # Area: 314.159
+
+# Check what's in a module
+import mymath
+print(dir(mymath))  # Lists all attributes
+# ['PI', '__builtins__', '__cached__', ... , 'circle_area', ...]
+
+# Get help on a module
+help(mymath)  # Shows docstrings</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5:</strong> Module-level variables can be constants.</p>
+                        <p><strong>Lines 8-18:</strong> Define functions that will be available when imported.</p>
+                        <p><strong>Lines 21-27:</strong> The <code>if __name__ == "__main__"</code> block runs only when the file is executed directly.</p>
+                        <p><strong>Lines 34-35:</strong> Access module contents with dot notation.</p>
+                        <p><strong>Lines 44-45:</strong> <code>dir()</code> lists all module attributes.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Packages</h2>
+                <p>A package is a collection of modules organized in directories. Packages help structure larger projects and avoid naming conflicts.</p>
+                
+                <div class="code-block">
+                    <h4>Package Structure:</h4>
+<pre><code># Directory structure:
+# mypackage/
+# ├── __init__.py
+# ├── core.py
+# ├── utils.py
+# └── subpackage/
+#     ├── __init__.py
+#     └── helpers.py
+
+# __init__.py can be empty or contain initialization code
+# mypackage/__init__.py
+from .core import main_function
+from .utils import helper
+
+__version__ = "1.0.0"
+
+# mypackage/core.py
+def main_function():
+    return "Main function called"
+
+def internal_function():
+    return "Internal use only"
+
+# mypackage/utils.py
+def helper():
+    return "Helper function"
+
+# Using the package
+import mypackage
+print(mypackage.__version__)  # 1.0.0
+print(mypackage.main_function())  # Main function called
+
+# Import from submodule
+from mypackage import core
+from mypackage.utils import helper
+
+# Import from subpackage
+from mypackage.subpackage.helpers import something</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-8:</strong> Package directory structure with <code>__init__.py</code> files.</p>
+                        <p><strong>Lines 11-15:</strong> <code>__init__.py</code> can define what the package exports.</p>
+                        <p><strong>Lines 24-26:</strong> Import from package uses dot notation.</p>
+                        <p><strong>Lines 29-30:</strong> Import specific modules from the package.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 __init__.py</h4>
+                    <p>The <code>__init__.py</code> file marks a directory as a Python package. It can be empty or contain initialization code. In Python 3.3+, packages can be "namespace packages" without <code>__init__.py</code>, but it's still recommended to include it.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Relative vs Absolute Imports</h2>
+                <p>Within packages, you can use relative imports to import from sibling modules.</p>
+                
+                <div class="code-block">
+                    <h4>Import Types:</h4>
+<pre><code># Package structure:
+# myapp/
+# ├── __init__.py
+# ├── models.py
+# ├── views.py
+# └── utils/
+#     ├── __init__.py
+#     ├── helpers.py
+#     └── validators.py
+
+# Absolute imports (recommended)
+# In myapp/views.py:
+from myapp.models import User
+from myapp.utils.helpers import format_date
+from myapp.utils.validators import validate_email
+
+# Relative imports (within package only)
+# In myapp/views.py:
+from .models import User          # Same level
+from .utils.helpers import format_date  # Subdirectory
+
+# In myapp/utils/helpers.py:
+from .validators import validate_email  # Same level
+from ..models import User         # Parent level (..)
+
+# In myapp/utils/__init__.py:
+from .helpers import format_date
+from .validators import validate_email
+
+# Relative import syntax:
+# .     current package
+# ..    parent package
+# ...   grandparent package (rare)
+
+# Avoid circular imports!
+# If A imports B and B imports A, you get a circular import error
+# Solution: Restructure code or import inside functions</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 11-13:</strong> Absolute imports use the full path from the project root.</p>
+                        <p><strong>Lines 16-20:</strong> Relative imports use dots to navigate the package structure.</p>
+                        <p><strong>Lines 23-24:</strong> Use <code>..</code> to import from the parent package.</p>
+                        <p><strong>Lines 32-34:</strong> Circular imports happen when modules import each other.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The Python Standard Library</h2>
+                <p>Python comes with a rich standard library. Here are some commonly used modules.</p>
+                
+                <div class="code-block">
+                    <h4>Useful Standard Modules:</h4>
+<pre><code># Operating system interface
+import os
+print(os.getcwd())           # Current directory
+os.listdir('.')              # List files
+os.environ.get('HOME')       # Environment variables
+
+# Path handling (modern)
+from pathlib import Path
+home = Path.home()
+file = Path("folder/file.txt")
+
+# System-specific parameters
+import sys
+print(sys.version)           # Python version
+print(sys.argv)              # Command line arguments
+
+# Pattern matching
+import re
+re.findall(r'\d+', "abc123def456")  # ['123', '456']
+
+# Mathematics
+import math
+math.sqrt(16)    # 4.0
+math.ceil(4.3)   # 5
+
+# Random numbers
+import random
+random.random()           # 0.0 to 1.0
+random.randint(1, 10)     # 1 to 10
+random.choice([1, 2, 3])  # Random element
+random.shuffle(list_)     # Shuffle in place
+
+# Date and time
+from datetime import datetime, timedelta
+now = datetime.now()
+tomorrow = now + timedelta(days=1)
+
+# JSON handling
+import json
+json.dumps({"a": 1})  # '{"a": 1}'
+json.loads('{"a": 1}')  # {"a": 1}
+
+# Collections
+from collections import Counter, defaultdict
+Counter("hello")  # {'l': 2, 'h': 1, 'e': 1, 'o': 1}
+
+# Itertools
+from itertools import chain, combinations
+list(chain([1, 2], [3, 4]))  # [1, 2, 3, 4]
+
+# Logging
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("Application started")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-6:</strong> <code>os</code> module for operating system interaction.</p>
+                        <p><strong>Lines 9-11:</strong> <code>pathlib</code> provides object-oriented path handling.</p>
+                        <p><strong>Lines 18-19:</strong> <code>re</code> module for regular expressions.</p>
+                        <p><strong>Lines 27-31:</strong> <code>random</code> module for generating random values.</p>
+                        <p><strong>Lines 34-36:</strong> <code>datetime</code> for working with dates and times.</p>
+                        <p><strong>Lines 48-50:</strong> <code>logging</code> is better than print for production code.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Installing External Packages with pip</h2>
+                <p>pip is Python's package installer. It downloads and installs packages from the Python Package Index (PyPI).</p>
+                
+                <div class="code-block">
+                    <h4>pip Commands:</h4>
+<pre><code># Install a package
+pip install requests
+
+# Install specific version
+pip install requests==2.28.0
+
+# Install with version constraints
+pip install "requests>=2.25.0,<3.0.0"
+
+# List installed packages
+pip list
+
+# Show package details
+pip show requests
+
+# Uninstall a package
+pip uninstall requests
+
+# Create requirements file
+pip freeze > requirements.txt
+
+# Install from requirements file
+pip install -r requirements.txt
+
+# Upgrade a package
+pip install --upgrade requests
+
+# Install in user space (no admin needed)
+pip install --user package_name
+
+# Search for packages (command line)
+# pip search is disabled; use pypi.org
+
+# Install from git repository
+pip install git+https://github.com/user/repo.git
+
+# Install in development mode
+pip install -e ./my-local-package</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Basic package installation from PyPI.</p>
+                        <p><strong>Lines 6-9:</strong> Install specific versions or version ranges.</p>
+                        <p><strong>Lines 15-16:</strong> View installed packages and their details.</p>
+                        <p><strong>Lines 22-25:</strong> Requirements files enable reproducible installations.</p>
+                        <p><strong>Lines 34-35:</strong> Install from source code repositories.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Virtual Environments</h2>
+                <p>Virtual environments create isolated Python installations, preventing package conflicts between projects.</p>
+                
+                <div class="code-block">
+                    <h4>Working with Virtual Environments:</h4>
+<pre><code># Create virtual environment
+python -m venv myenv
+
+# Activate (Linux/macOS)
+source myenv/bin/activate
+
+# Activate (Windows)
+myenv\Scripts\activate
+
+# Deactivate
+deactivate
+
+# Once activated, pip installs to the virtual environment
+pip install requests  # Only in this environment
+
+# Create with specific Python version
+python3.11 -m venv myenv
+
+# Virtual environment structure:
+# myenv/
+# ├── bin/ (Linux/macOS) or Scripts/ (Windows)
+# │   ├── activate
+# │   ├── python
+# │   └── pip
+# ├── lib/
+# │   └── python3.x/
+# │       └── site-packages/
+# └── pyvenv.cfg
+
+# Using virtualenv (third-party, more features)
+pip install virtualenv
+virtualenv myenv
+
+# Using poetry (modern dependency management)
+pip install poetry
+poetry new myproject
+poetry add requests  # Add dependency
+
+# Using conda (Anaconda/Miniconda)
+conda create -n myenv python=3.11
+conda activate myenv
+conda install requests</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Create a virtual environment with Python's built-in venv module.</p>
+                        <p><strong>Lines 5-9:</strong> Activate/deactivate the virtual environment.</p>
+                        <p><strong>Lines 13-14:</strong> When activated, all pip commands affect only this environment.</p>
+                        <p><strong>Lines 17-18:</strong> Specify which Python version to use.</p>
+                        <p><strong>Lines 32-34:</strong> Poetry is a modern tool for dependency management.</p>
+                        <p><strong>Lines 37-39:</strong> Conda is popular in data science environments.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Always Use Virtual Environments</h4>
+                    <p>Never install project dependencies globally. Each project should have its own virtual environment. This prevents version conflicts and makes projects reproducible.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>requirements.txt</h2>
+                <p>The requirements.txt file specifies project dependencies for reproducible installations.</p>
+                
+                <div class="code-block">
+                    <h4>Requirements File:</h4>
+<pre><code># requirements.txt
+# Basic format
+requests>=2.28.0
+flask>=2.0.0
+pandas>=1.5.0
+
+# With exact versions (more deterministic)
+requests==2.28.1
+flask==2.2.2
+pandas==1.5.2
+
+# With comments
+numpy>=1.21.0  # Required for data processing
+matplotlib>=3.5.0  # For visualizations
+
+# Environment markers
+pywin32>=300; sys_platform == 'win32'
+
+# Direct URLs
+git+https://github.com/user/repo.git@main#egg=package
+
+# Install from requirements file
+pip install -r requirements.txt
+
+# Generate requirements (freeze current environment)
+pip freeze > requirements.txt
+
+# Development requirements (requirements-dev.txt)
+pytest>=7.0.0
+black>=22.0.0
+flake8>=5.0.0
+
+# Install development requirements
+pip install -r requirements-dev.txt</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-6:</strong> Use <code>>=</code> to allow compatible updates.</p>
+                        <p><strong>Lines 9-11:</strong> Use <code>==</code> for exact versions (most deterministic).</p>
+                        <p><strong>Lines 18-19:</strong> Environment markers for platform-specific dependencies.</p>
+                        <p><strong>Lines 24-27:</strong> Generate requirements from installed packages.</p>
+                        <p><strong>Lines 30-35:</strong> Separate development dependencies into their own file.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a simple package with modules for string and math utilities.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Create this package structure:
+# utils/
+# ├── __init__.py
+# ├── strings.py
+# └── math_utils.py
+
+# utils/strings.py
+"""String utility functions."""
+
+def reverse_string(s: str) -> str:
+    """Reverse a string."""
+    # Your code here
+    pass
+
+def is_palindrome(s: str) -> bool:
+    """Check if string is a palindrome."""
+    # Your code here (ignore case and spaces)
+    pass
+
+def count_vowels(s: str) -> int:
+    """Count vowels in a string."""
+    # Your code here
+    pass
+
+# utils/math_utils.py
+"""Math utility functions."""
+
+def factorial(n: int) -> int:
+    """Calculate factorial."""
+    # Your code here
+    pass
+
+def is_prime(n: int) -> bool:
+    """Check if number is prime."""
+    # Your code here
+    pass
+
+def fibonacci(n: int) -> list:
+    """Generate first n Fibonacci numbers."""
+    # Your code here
+    pass
+
+# utils/__init__.py
+# Import functions to make them available at package level
+# Your imports here
+
+# test_utils.py - Test your package
+from utils import reverse_string, factorial, is_prime
+# Test your functions</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson12.html" class="nav-button prev">← Previous: Error Handling</a>
+                <a href="lesson14.html" class="nav-button next">Next: Working with APIs →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

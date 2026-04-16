@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Box Model - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Beginner Level</span>
+            <h1>Lesson 4: Box Model</h1>
+            <p>Understanding how CSS treats every element as a box</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 33%;"></div>
+            </div>
+            <span class="progress-text">Lesson 4 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>The CSS Box Model</h2>
+                <p>In CSS, every element is treated as a rectangular box. Understanding the box model is essential for controlling layout, spacing, and sizing. The box model consists of four areas: content, padding, border, and margin. These layers determine how much space an element takes up and how it relates to other elements.</p>
+            </section>
+            
+            <section>
+                <h2>The Four Layers of the Box Model</h2>
+                <p>Every element box has four concentric layers:</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Box Model Visualization */
+/*
+┌─────────────────────────────────────┐
+│              MARGIN                 │  ← Outermost: Space outside
+│   ┌─────────────────────────────┐   │
+│   │           BORDER            │   │  ← The border edge
+│   │   ┌─────────────────────┐   │   │
+│   │   │      PADDING        │   │   │  ← Space inside border
+│   │   │   ┌─────────────┐   │   │   │
+│   │   │   │   CONTENT   │   │   │   │  ← The actual content
+│   │   │   └─────────────┘   │   │   │
+│   │   └─────────────────────┘   │   │
+│   └─────────────────────────────┘   │
+└─────────────────────────────────────┘
+*/</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>The four layers:</strong>
+                    <ul>
+                        <li><strong>Content:</strong> The actual content (text, images)</li>
+                        <li><strong>Padding:</strong> Space between content and border</li>
+                        <li><strong>Border:</strong> The edge around the padding</li>
+                        <li><strong>Margin:</strong> Space outside the border, between elements</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>1. Content Area</h2>
+                <p>The content area holds the element's actual content — text, images, or child elements.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Width and Height control the content area */
+.box {
+  width: 300px;           /* Content width */
+  height: 200px;          /* Content height */
+}
+
+/* Min and Max dimensions */
+.responsive {
+  width: 100%;
+  max-width: 1200px;      /* Won't exceed 1200px */
+  min-width: 300px;       /* Won't go below 300px */
+}
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;      /* At least full viewport height */
+}
+
+/* Intrinsic sizing keywords */
+.element {
+  width: fit-content;     /* Only as wide as content needs */
+  width: min-content;     /* As narrow as possible */
+  width: max-content;     /* As wide as content wants */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Width keywords:</strong>
+                    <ul>
+                        <li><code>auto</code> — Default, fills available space</li>
+                        <li><code>fit-content</code> — Shrinks to fit content</li>
+                        <li><code>min-content</code> — Minimum width of content</li>
+                        <li><code>max-content</code> — Maximum width of content</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Padding</h2>
+                <p>Padding creates space between the content and the border. It's inside the element and inherits the element's background.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Padding - space inside the border */
+.box {
+  /* All sides equal */
+  padding: 20px;
+}
+
+/* Different sides: top right bottom left (clockwise) */
+.card {
+  padding: 10px 20px 15px 25px;
+  /*       top  right bottom left */
+}
+
+/* Three values: top, right/left, bottom */
+.element {
+  padding: 10px 20px 15px;
+  /*       top  sides  bottom */
+}
+
+/* Two values: top/bottom, right/left */
+.section {
+  padding: 20px 40px;
+  /*       vertical horizontal */
+}
+
+/* Individual sides */
+.custom {
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
+
+/* Inline shorthand */
+.inline-padding {
+  padding-inline: 20px;      /* Left and right in LTR */
+  padding-block: 10px;       /* Top and bottom */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Padding shorthand patterns:</strong>
+                    <ul>
+                        <li><code>padding: 20px;</code> — All four sides</li>
+                        <li><code>padding: 10px 20px;</code> — Vertical | Horizontal</li>
+                        <li><code>padding: 10px 20px 15px;</code> — Top | Sides | Bottom</li>
+                        <li><code>padding: 10px 20px 15px 25px;</code> — Top | Right | Bottom | Left</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Remember:</strong> Padding increases the total size of the element (by default). A 300px wide box with 20px padding is actually 340px wide!
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Border</h2>
+                <p>The border sits between padding and margin. It can be visible (styled) or invisible but still takes space.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Border shorthand: width style color */
+.box {
+  border: 2px solid #7C3AED;
+}
+
+/* Individual properties */
+.custom-border {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #7C3AED;
+}
+
+/* Border styles */
+.style-examples {
+  border-style: solid;      /* Solid line */
+  border-style: dashed;     /* Dashed line */
+  border-style: dotted;     /* Dotted line */
+  border-style: double;     /* Double line */
+  border-style: groove;     /* 3D grooved */
+  border-style: ridge;      /* 3D ridged */
+  border-style: inset;      /* 3D inset */
+  border-style: outset;     /* 3D outset */
+  border-style: none;       /* No border */
+  border-style: hidden;     /* Hidden border */
+}
+
+/* Individual sides */
+.asymmetric {
+  border-top: 3px solid #7C3AED;
+  border-right: 1px dashed #ccc;
+  border-bottom: 2px dotted #999;
+  border-left: none;
+}
+
+/* Border radius (rounded corners) */
+.rounded {
+  border-radius: 8px;              /* All corners */
+}
+
+.circle {
+  border-radius: 50%;              /* Perfect circle (if square) */
+}
+
+.pill {
+  border-radius: 100px;            /* Pill shape */
+}
+
+/* Individual corners */
+.custom-radius {
+  border-radius: 10px 20px 10px 20px;
+  /*            top-left top-right bottom-right bottom-left */
+}
+
+/* Elliptical corners */
+.ellipse {
+  border-radius: 20px / 10px;      /* Horizontal / Vertical radius */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Border properties:</strong>
+                    <ul>
+                        <li><code>border-width</code> — Thickness (px, em, thin, medium, thick)</li>
+                        <li><code>border-style</code> — solid, dashed, dotted, double, none</li>
+                        <li><code>border-color</code> — Any valid color</li>
+                        <li><code>border-radius</code> — Rounds the corners</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Margin</h2>
+                <p>Margin creates space outside the border, separating elements from each other. Margins are transparent.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Margin - space outside the border */
+.box {
+  /* All sides equal */
+  margin: 20px;
+}
+
+/* Same shorthand patterns as padding */
+.card {
+  margin: 10px 20px 15px 25px;   /* Top Right Bottom Left */
+  margin: 10px 20px;              /* Vertical Horizontal */
+  margin: 10px 20px 15px;         /* Top Sides Bottom */
+}
+
+/* Individual sides */
+.custom-margin {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  margin-left: 25px;
+}
+
+/* Auto margins for centering */
+.centered {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  /* OR shorthand */
+  margin: 0 auto;
+}
+
+/* Horizontal centering */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;        /* Center horizontally */
+}
+
+/* Inline/Block margins */
+.horizontal-space {
+  margin-inline: auto;   /* Left/right in LTR */
+  margin-block: 20px;    /* Top/bottom */
+}
+
+/* Negative margins (overlap) */
+.overlap {
+  margin-top: -20px;     /* Pulls element up */
+}
+
+.pull-left {
+  margin-left: -10px;    /* Extends beyond container */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Margin behaviors:</strong>
+                    <ul>
+                        <li><code>margin: auto</code> — Takes available space, used for centering</li>
+                        <li>Negative margins — Pull elements closer or extend beyond</li>
+                        <li>Percentages — Relative to parent's width</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Margin Collapsing</h2>
+                <p>Vertical margins between block elements collapse into a single margin equal to the larger one.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Margin Collapsing Example */
+
+/* HTML */
+<div class="box-one">Box 1</div>
+<div class="box-two">Box 2</div>
+
+/* CSS */
+.box-one {
+  margin-bottom: 30px;
+}
+
+.box-two {
+  margin-top: 20px;
+}
+
+/* Total space between them: 30px, NOT 50px! */
+/* The margins collapse to the larger value */
+
+/* Preventing margin collapse */
+.no-collapse-parent {
+  overflow: hidden;       /* Creates BFC */
+  /* OR */
+  display: flow-root;     /* Modern way to create BFC */
+}
+
+.no-collapse-child {
+  display: inline-block;  /* Inline-blocks don't collapse */
+}
+
+/* Margins DON'T collapse when: */
+/* - Using Flexbox or Grid */
+/* - Parent has overflow: hidden/auto/scroll */
+/* - Parent has border or padding */
+/* - Elements are positioned or floated */</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Margin collapse only happens:</strong> Between vertical margins of block elements in normal flow. Horizontal margins never collapse.
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Box Sizing</h2>
+                <p>The box-sizing property controls how total width/height is calculated.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* content-box (default) */
+.content-box {
+  box-sizing: content-box;    /* Default */
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+  /* Total width: 300 + 40 + 10 = 350px */
+}
+
+/* border-box (recommended) */
+.border-box {
+  box-sizing: border-box;     /* Width includes padding & border */
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+  /* Total width: 300px (padding and border are INSIDE) */
+  /* Content area: 300 - 40 - 10 = 250px */
+}
+
+/* Best practice: Apply border-box to all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Or inherit from html */
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Why border-box is better:</strong>
+                    <ul>
+                        <li>Width you set is the total width</li>
+                        <li>Easier to calculate layouts</li>
+                        <li>Adding padding/border doesn't break layout</li>
+                        <li>Most CSS frameworks expect this</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Display and Box Type</h2>
+                <p>The display property affects how the box model works for an element.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Block elements */
+div, p, h1, section {
+  /* display: block (default) */
+  /* - Take full width available */
+  /* - Start on new line */
+  /* - Width, height, margins all work */
+  /* - Can contain other block and inline elements */
+}
+
+/* Inline elements */
+span, a, strong {
+  /* display: inline (default) */
+  /* - Only take needed width */
+  /* - Don't start new line */
+  /* - Width and height ignored */
+  /* - Vertical margins/padding work differently */
+}
+
+/* Inline-block */
+.button {
+  display: inline-block;
+  /* - Flows like inline */
+  /* - But respects width, height, margins like block */
+}
+
+/* None */
+.hidden {
+  display: none;
+  /* - Removes element from layout */
+  /* - No space reserved */
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Outline vs Border</h2>
+                <p>Outline is similar to border but doesn't affect layout.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Outline - doesn't add to box size */
+:focus {
+  outline: 2px solid #7C3AED;
+  outline-offset: 2px;       /* Space between element and outline */
+}
+
+/* Differences between border and outline: */
+/* 
+   BORDER:
+   - Part of the box model
+   - Takes up space
+   - Can have different sides
+   - Affects layout
+   
+   OUTLINE:
+   - NOT part of box model
+   - Doesn't take space
+   - Always same on all sides
+   - Doesn't affect layout
+   - Often used for focus states
+*/
+
+/* Remove default outline (add your own focus style!) */
+:focus {
+  outline: none;             /* Never do this without adding focus styles! */
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.5);
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Box Model Debugging</h2>
+                <p>Browser DevTools make it easy to visualize the box model.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* How to debug box model issues: */
+
+/* 1. Right-click element → Inspect */
+/* 2. Look at the "Computed" panel */
+/* 3. See visual diagram of box model */
+/* 4. Hover over elements to see box highlighted */
+
+/* Common issues: */
+
+/* Element wider than expected */
+.too-wide {
+  box-sizing: border-box;    /* Fix: use border-box */
+  width: 100%;
+  padding: 20px;
+}
+
+/* Unexpected spacing */
+.weird-space {
+  /* Check for margin collapse */
+  /* Add overflow: hidden to parent */
+}
+
+/* Element not centering */
+.not-centering {
+  /* Must have a width */
+  width: 300px;
+  margin: 0 auto;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create these boxes with specific sizes:</p>
+                <div class="code-block">
+                    <pre><code>/* Challenge: Create boxes that look like this: */
+/*
+   A: Total width 300px, 20px padding, 2px border
+   B: 100px square content, 10px padding all sides, rounded corners
+   C: Centered box, 500px wide, 30px vertical margin
+*/
+
+/* Hint: Think about box-sizing! */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Every element is a box with content, padding, border, and margin</li>
+                    <li>Padding is inside, margin is outside the border</li>
+                    <li>Use <code>box-sizing: border-box</code> for predictable sizing</li>
+                    <li>Margin collapse affects vertical margins between block elements</li>
+                    <li><code>margin: auto</code> centers block elements horizontally</li>
+                    <li>Outline doesn't affect layout, great for focus states</li>
+                    <li>Use DevTools to debug box model issues</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson3.html" class="btn-secondary">← Previous: Colors and Text</a>
+            <a href="lesson5.html" class="btn-primary">Next: Display Property →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

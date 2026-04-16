@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Loops - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 5: Loops</h1>
+            <p>Iterate through code with for and while loops, and understand loop control</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Loops?</h2>
+                <p>Loops allow you to execute a block of code repeatedly. Python has two main types of loops: for loops iterate over sequences, while while loops run as long as a condition is true. Loops are essential for processing collections, repeating actions, and automating tasks.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>for Loops</h2>
+                <p>The for loop iterates over a sequence (like a list, string, or range) and executes code for each item. This is Python's most commonly used loop type.</p>
+                
+                <div class="code-block">
+                    <h4>Basic for Loop:</h4>
+<pre><code># Iterating over a list
+fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(fruit)
+
+# Iterating over a string
+for char in "Python":
+    print(char)
+
+# Iterating with range()
+for i in range(5):
+    print(i)  # Prints 0, 1, 2, 3, 4
+
+# range with start and stop
+for i in range(2, 6):
+    print(i)  # Prints 2, 3, 4, 5
+
+# range with step
+for i in range(0, 10, 2):
+    print(i)  # Prints 0, 2, 4, 6, 8
+
+# Countdown using negative step
+for i in range(5, 0, -1):
+    print(i)  # Prints 5, 4, 3, 2, 1</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-5:</strong> The for loop takes each item from the list and assigns it to the variable <code>fruit</code>.</p>
+                        <p><strong>Lines 8-9:</strong> Strings are sequences, so you can iterate over each character.</p>
+                        <p><strong>Lines 12-13:</strong> <code>range(n)</code> generates numbers from 0 to n-1.</p>
+                        <p><strong>Lines 16-17:</strong> <code>range(start, stop)</code> generates from start to stop-1.</p>
+                        <p><strong>Lines 20-21:</strong> The third argument is the step value.</p>
+                        <p><strong>Lines 24-25:</strong> Negative step counts downward.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4>Loop Patterns:</h4>
+<pre><code># Using enumerate() for index and value
+colors = ["red", "green", "blue"]
+
+for index, color in enumerate(colors):
+    print(f"{index}: {color}")
+
+# Starting enumerate at a different number
+for index, color in enumerate(colors, start=1):
+    print(f"{index}: {color}")
+
+# Looping with index using range
+for i in range(len(colors)):
+    print(f"colors[{i}] = {colors[i]}")
+
+# Iterating over dictionary
+person = {"name": "Alice", "age": 25, "city": "NYC"}
+
+# Keys only (default)
+for key in person:
+    print(key)
+
+# Keys and values
+for key, value in person.items():
+    print(f"{key}: {value}")
+
+# Values only
+for value in person.values():
+    print(value)
+
+# Nested loops
+for i in range(3):
+    for j in range(3):
+        print(f"({i}, {j})", end=" ")
+    print()  # New line after each row</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-5:</strong> <code>enumerate()</code> gives both index and value from a sequence.</p>
+                        <p><strong>Lines 8-9:</strong> The <code>start</code> parameter sets the starting index.</p>
+                        <p><strong>Lines 18-23:</strong> Dictionary iteration options: keys (default), items (key-value pairs), values.</p>
+                        <p><strong>Lines 26-30:</strong> Nested loops are useful for multi-dimensional data.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>while Loops</h2>
+                <p>while loops execute as long as a condition is true. They're useful when you don't know in advance how many iterations you need.</p>
+                
+                <div class="code-block">
+                    <h4>Basic while Loop:</h4>
+<pre><code># Basic while loop
+count = 0
+
+while count < 5:
+    print(count)
+    count += 1  # Don't forget to increment!
+
+# User input validation
+password = ""
+
+while len(password) < 8:
+    password = input("Enter password (min 8 chars): ")
+    if len(password) < 8:
+        print("Too short, try again.")
+
+print("Password accepted!")
+
+# Simulating a game loop
+playing = True
+
+while playing:
+    action = input("Enter action (quit to exit): ")
+    
+    if action == "quit":
+        playing = False
+        print("Game over!")
+    else:
+        print(f"You performed: {action}")
+
+# Finding first number divisible by 7
+num = 1
+
+while num % 7 != 0:
+    num += 1
+
+print(f"Found: {num}")  # 7</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-6:</strong> while checks the condition before each iteration. Always update the condition variable!</p>
+                        <p><strong>Lines 9-16:</strong> while is perfect for input validation loops.</p>
+                        <p><strong>Lines 19-29:</strong> Game loops often use a boolean flag with while.</p>
+                        <p><strong>Lines 32-38:</strong> Use while when searching for something with unknown iterations.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Infinite Loops</h4>
+                    <p>Be careful with while loops! If the condition never becomes false, you get an infinite loop. Always ensure your loop can terminate. Use <code>Ctrl+C</code> to stop an infinite loop.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Loop Control Statements</h2>
+                <p>Python provides break, continue, and else clauses to give you fine control over loop execution.</p>
+                
+                <div class="code-block">
+                    <h4>break, continue, and else:</h4>
+<pre><code># break - exit the loop entirely
+for i in range(10):
+    if i == 5:
+        print("Breaking at 5")
+        break
+    print(i)
+# Prints: 0, 1, 2, 3, 4, "Breaking at 5"
+
+# continue - skip to next iteration
+for i in range(5):
+    if i == 2:
+        continue  # Skip 2
+    print(i)
+# Prints: 0, 1, 3, 4
+
+# Loop else - runs if loop completed without break
+for i in range(5):
+    if i == 10:
+        break
+else:
+    print("Loop completed normally!")
+
+# Practical example: searching
+numbers = [1, 3, 5, 7, 9]
+target = 5
+
+for num in numbers:
+    if num == target:
+        print(f"Found {target}!")
+        break
+else:
+    print(f"{target} not found")
+
+# continue in while loop
+i = 0
+while i < 10:
+    i += 1
+    if i % 2 == 0:  # Skip even numbers
+        continue
+    print(i)  # Prints: 1, 3, 5, 7, 9</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-7:</strong> <code>break</code> immediately exits the entire loop.</p>
+                        <p><strong>Lines 11-14:</strong> <code>continue</code> skips the rest of the current iteration and moves to the next.</p>
+                        <p><strong>Lines 17-22:</strong> The <code>else</code> block runs only if the loop finished without hitting <code>break</code>.</p>
+                        <p><strong>Lines 25-33:</strong> A common pattern: use for-else when searching for items.</p>
+                        <p><strong>Lines 36-41:</strong> <code>continue</code> works in while loops too.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>List Comprehensions</h2>
+                <p>List comprehensions provide a concise way to create lists from existing sequences. They're a Pythonic alternative to using loops for list creation.</p>
+                
+                <div class="code-block">
+                    <h4>Creating Lists Concisely:</h4>
+<pre><code># Traditional loop to create a list
+squares = []
+for x in range(1, 6):
+    squares.append(x ** 2)
+print(squares)  # [1, 4, 9, 16, 25]
+
+# List comprehension (same result)
+squares = [x ** 2 for x in range(1, 6)]
+
+# With condition (filtering)
+evens = [x for x in range(10) if x % 2 == 0]
+print(evens)  # [0, 2, 4, 6, 8]
+
+# Transform strings
+words = ["hello", "world", "python"]
+upper_words = [word.upper() for word in words]
+print(upper_words)  # ['HELLO', 'WORLD', 'PYTHON']
+
+# With if-else (different from filter)
+labels = ["even" if x % 2 == 0 else "odd" for x in range(5)]
+print(labels)  # ['even', 'odd', 'even', 'odd', 'even']
+
+# Nested comprehension (matrix)
+matrix = [[i * j for j in range(1, 4)] for i in range(1, 4)]
+print(matrix)  # [[1, 2, 3], [2, 4, 6], [3, 6, 9]]
+
+# Flatten a matrix
+flat = [num for row in matrix for num in row]
+print(flat)  # [1, 2, 3, 2, 4, 6, 3, 6, 9]
+
+# Dictionary comprehension
+squares_dict = {x: x**2 for x in range(1, 6)}
+print(squares_dict)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Set comprehension
+unique_lengths = {len(word) for word in words}
+print(unique_lengths)  # {5, 6}</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-6:</strong> Traditional approach creates empty list and appends in a loop.</p>
+                        <p><strong>Line 9:</strong> List comprehension: <code>[expression for item in iterable]</code>.</p>
+                        <p><strong>Line 12:</strong> Add condition: <code>[expression for item in iterable if condition]</code>.</p>
+                        <p><strong>Line 22:</strong> if-else goes before the for: <code>[value_if_true if cond else value_if_false for item in iterable]</code>.</p>
+                        <p><strong>Lines 28-29:</strong> Nested loops in comprehensions: read left to right.</p>
+                        <p><strong>Lines 32-36:</strong> Comprehensions work for dictionaries and sets too.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Readability First</h4>
+                    <p>List comprehensions are powerful but can become hard to read. If your comprehension is complex, use a regular loop instead. Readability counts!</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The pass Statement</h2>
+                <p>Sometimes you need a placeholder in your loop. The pass statement does nothing but allows syntactically required blocks to be empty.</p>
+                
+                <div class="code-block">
+                    <h4>Using pass:</h4>
+<pre><code># pass as placeholder
+for i in range(5):
+    pass  # TODO: implement later
+
+# While loop with pass
+while False:
+    pass  # Never runs, but valid syntax
+
+# Empty class or function placeholder
+class MyFutureClass:
+    pass
+
+def future_function():
+    pass
+
+# Useful in try-except when you want to ignore errors
+try:
+    risky_operation()
+except:
+    pass  # Silently ignore errors (use sparingly!)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-4:</strong> <code>pass</code> lets you write syntactically correct but empty loops.</p>
+                        <p><strong>Lines 7-8:</strong> Works with all control structures that require a code block.</p>
+                        <p><strong>Lines 11-16:</strong> Commonly used as placeholder for classes and functions.</p>
+                        <p><strong>Lines 19-21:</strong> Can be used to silently ignore exceptions, but use this sparingly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Iterators and iter()</h2>
+                <p>Under the hood, for loops work with iterators. Understanding this helps you work with custom iterable objects.</p>
+                
+                <div class="code-block">
+                    <h4>How Iteration Works:</h4>
+<pre><code># Manual iteration with iter() and next()
+numbers = [1, 2, 3]
+iterator = iter(numbers)
+
+print(next(iterator))  # 1
+print(next(iterator))  # 2
+print(next(iterator))  # 3
+# next(iterator) would raise StopIteration
+
+# This is what a for loop does internally
+numbers = [1, 2, 3]
+iterator = iter(numbers)
+
+while True:
+    try:
+        num = next(iterator)
+        print(num)
+    except StopIteration:
+        break
+
+# Creating a custom iterator
+class Countdown:
+    def __init__(self, start):
+        self.current = start
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.current <= 0:
+            raise StopIteration
+        self.current -= 1
+        return self.current + 1
+
+# Using the custom iterator
+for num in Countdown(5):
+    print(num)  # 5, 4, 3, 2, 1</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-8:</strong> <code>iter()</code> creates an iterator; <code>next()</code> gets the next item.</p>
+                        <p><strong>Lines 11-19:</strong> This is essentially what for loops do internally.</p>
+                        <p><strong>Lines 22-36:</strong> Custom iterators implement <code>__iter__</code> and <code>__next__</code>.</p>
+                        <p><strong>Lines 39-41:</strong> Once defined, custom iterators work with for loops.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a program that finds all prime numbers up to a given number using loops.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Find prime numbers up to n
+n = 50
+
+primes = []
+
+for num in range(2, n + 1):
+    # Assume num is prime
+    is_prime = True
+    
+    # Check if num is divisible by any number from 2 to num-1
+    for i in range(2, num):
+        # Your condition here...
+        pass
+    
+    # If still prime, add to list
+    if is_prime:
+        primes.append(num)
+
+print(f"Prime numbers up to {n}:")
+print(primes)
+
+# Bonus: Rewrite using list comprehension!</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Hint</h4>
+                    <p>A number is prime if it's not divisible by any number from 2 to its square root. Check if <code>num % i == 0</code> to find divisors.</p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson4.html" class="nav-button prev">← Previous: Conditionals</a>
+                <a href="lesson6.html" class="nav-button next">Next: Functions →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

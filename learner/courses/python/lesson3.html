@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Operators - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 3: Operators</h1>
+            <p>Master arithmetic, comparison, and logical operators in Python</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Operators?</h2>
+                <p>Operators are special symbols that perform operations on values and variables. Python supports several types of operators including arithmetic, comparison, logical, assignment, and more. Understanding operators is fundamental to writing expressions and making decisions in your code.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Arithmetic Operators</h2>
+                <p>Arithmetic operators perform mathematical operations like addition, subtraction, multiplication, and division.</p>
+                
+                <div class="code-block">
+                    <h4>Basic Arithmetic:</h4>
+<pre><code>a = 10
+b = 3
+
+# Addition
+print(a + b)   # 13
+
+# Subtraction
+print(a - b)   # 7
+
+# Multiplication
+print(a * b)   # 30
+
+# Division (always returns float)
+print(a / b)   # 3.3333333333333335
+
+# Floor Division (rounds down to nearest integer)
+print(a // b)  # 3
+
+# Modulo (remainder of division)
+print(a % b)   # 1
+
+# Exponentiation (power)
+print(a ** b)  # 1000 (10 to the power of 3)
+
+# Negative numbers
+print(-a)      # -10
+print(a + -b)  # 7
+
+# Operator precedence (PEMDAS)
+result = 2 + 3 * 4    # 14 (multiplication first)
+result = (2 + 3) * 4  # 20 (parentheses first)
+result = 2 ** 3 ** 2  # 512 (right to left: 2 ** 9)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-17:</strong> Basic math operations: +, -, *, / work as expected.</p>
+                        <p><strong>Line 15:</strong> Regular division always returns a float, even with integers.</p>
+                        <p><strong>Line 18:</strong> Floor division (<code>//</code>) rounds down to the nearest whole number.</p>
+                        <p><strong>Line 21:</strong> Modulo (<code>%</code>) returns the remainder - useful for checking even/odd.</p>
+                        <p><strong>Line 24:</strong> Double asterisk (<code>**</code>) is the power operator.</p>
+                        <p><strong>Lines 31-33:</strong> Python follows mathematical order of operations. Use parentheses to control order.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Tip: Floor Division</h4>
+                    <p>Floor division always rounds toward negative infinity, not toward zero. So <code>-7 // 3</code> equals <code>-3</code>, not <code>-2</code>.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Comparison Operators</h2>
+                <p>Comparison operators compare two values and return a boolean result (True or False). These are essential for making decisions in your programs.</p>
+                
+                <div class="code-block">
+                    <h4>Comparing Values:</h4>
+<pre><code>x = 5
+y = 10
+
+# Equal to
+print(x == y)   # False
+
+# Not equal to
+print(x != y)   # True
+
+# Greater than
+print(x > y)    # False
+
+# Less than
+print(x < y)    # True
+
+# Greater than or equal to
+print(x >= 5)   # True
+
+# Less than or equal to
+print(x <= 4)   # False
+
+# Comparing strings
+print("apple" < "banana")  # True (alphabetical order)
+print("Apple" < "apple")   # True (uppercase comes before lowercase)
+print("abc" == "abc")      # True
+
+# Chained comparisons
+age = 25
+print(18 <= age <= 65)     # True (age is between 18 and 65)
+print(0 < x < 10)          # True (x is between 0 and 10)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-21:</strong> Standard comparison operators return True or False.</p>
+                        <p><strong>Line 24:</strong> Strings compare alphabetically using ASCII/Unicode values.</p>
+                        <p><strong>Line 25:</strong> Uppercase letters have lower values than lowercase in ASCII.</p>
+                        <p><strong>Lines 28-30:</strong> Python allows chaining comparisons for range checks.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Logical Operators</h2>
+                <p>Logical operators combine boolean values and are used to build complex conditions.</p>
+                
+                <div class="code-block">
+                    <h4>and, or, not:</h4>
+<pre><code>a = True
+b = False
+
+# and - both must be True
+print(a and b)    # False
+print(a and True) # True
+
+# or - at least one must be True
+print(a or b)     # True
+print(False or False)  # False
+
+# not - inverts the value
+print(not a)      # False
+print(not b)      # True
+
+# Practical example
+age = 25
+has_id = True
+
+# Check if person can enter a club
+if age >= 21 and has_id:
+    print("Welcome to the club!")
+
+# Check discount eligibility
+is_student = False
+is_senior = False
+
+if is_student or is_senior:
+    print("You get a discount!")
+else:
+    print("Regular price")
+
+# Short-circuit evaluation
+x = 0
+# This won't cause an error because x != 0 is False
+# Python doesn't evaluate the division when the first part is False
+if x != 0 and 10 / x > 1:
+    print("This won't print")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-7:</strong> <code>and</code> returns True only if both operands are True.</p>
+                        <p><strong>Lines 10-11:</strong> <code>or</code> returns True if at least one operand is True.</p>
+                        <p><strong>Lines 14-15:</strong> <code>not</code> inverts the boolean value.</p>
+                        <p><strong>Lines 18-26:</strong> Combine logical operators with comparison operators for complex conditions.</p>
+                        <p><strong>Lines 36-39:</strong> Short-circuit evaluation: Python stops evaluating as soon as the result is determined.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Assignment Operators</h2>
+                <p>Assignment operators assign values to variables. Python offers shorthand operators that combine assignment with another operation.</p>
+                
+                <div class="code-block">
+                    <h4>Assignment Shortcuts:</h4>
+<pre><code># Basic assignment
+x = 10
+
+# Addition assignment
+x += 5   # Same as: x = x + 5
+print(x)  # 15
+
+# Subtraction assignment
+x -= 3   # Same as: x = x - 3
+print(x)  # 12
+
+# Multiplication assignment
+x *= 2   # Same as: x = x * 2
+print(x)  # 24
+
+# Division assignment
+x /= 4   # Same as: x = x / 4
+print(x)  # 6.0 (becomes float)
+
+# Floor division assignment
+x //= 2
+print(x)  # 3.0
+
+# Modulo assignment
+x %= 2
+print(x)  # 1.0
+
+# Exponentiation assignment
+x **= 3
+print(x)  # 1.0
+
+# Works with strings too
+greeting = "Hello"
+greeting += " World"
+print(greeting)  # Hello World</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2:</strong> Basic assignment sets a variable's value.</p>
+                        <p><strong>Lines 5-6:</strong> <code>+=</code> adds and assigns in one step.</p>
+                        <p><strong>Lines 15-17:</strong> Division always produces a float, even with integers.</p>
+                        <p><strong>Lines 29-31:</strong> These operators work with strings and other types too.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Identity Operators</h2>
+                <p>Identity operators check if two variables refer to the same object in memory, not just equal values.</p>
+                
+                <div class="code-block">
+                    <h4>is and is not:</h4>
+<pre><code># 'is' checks if two variables point to the same object
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(a == b)   # True (same values)
+print(a is b)   # False (different objects)
+print(a is c)   # True (same object)
+
+# Common use: checking for None
+value = None
+if value is None:
+    print("Value is not set")
+
+# Small integers are cached (implementation detail)
+x = 256
+y = 256
+print(x is y)   # True (cached)
+
+x = 257
+y = 257
+print(x is y)   # May be False (not cached)
+
+# Always use 'is' for None comparisons
+# Bad: if value == None
+# Good: if value is None</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-8:</strong> <code>is</code> checks object identity, <code>==</code> checks value equality.</p>
+                        <p><strong>Lines 11-13:</strong> Use <code>is</code> when checking for <code>None</code>.</p>
+                        <p><strong>Lines 16-23:</strong> Python caches small integers (-5 to 256), so they may share identity.</p>
+                        <p><strong>Lines 26-27:</strong> Always use <code>is</code> for None, not <code>==</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Membership Operators</h2>
+                <p>Membership operators test whether a value is contained in a sequence like a string, list, or tuple.</p>
+                
+                <div class="code-block">
+                    <h4>in and not in:</h4>
+<pre><code># Check if value is in a string
+text = "Hello, Python!"
+print("Python" in text)     # True
+print("python" in text)     # False (case-sensitive)
+print("Java" not in text)   # True
+
+# Check if value is in a list
+fruits = ["apple", "banana", "cherry"]
+print("apple" in fruits)    # True
+print("grape" in fruits)    # False
+
+# Check if key is in a dictionary
+person = {"name": "Alice", "age": 25}
+print("name" in person)     # True (checks keys)
+print("Alice" in person)    # False (not a key)
+print("age" in person)      # True
+
+# Practical use in conditionals
+user_input = "yes"
+if user_input in ["yes", "y", "Yeah"]:
+    print("User agreed!")
+
+# Check if character is a vowel
+char = "e"
+if char in "aeiou":
+    print(f"{char} is a vowel")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-6:</strong> <code>in</code> checks for substrings in strings.</p>
+                        <p><strong>Lines 9-11:</strong> Check for items in a list.</p>
+                        <p><strong>Lines 14-17:</strong> For dictionaries, <code>in</code> checks keys, not values.</p>
+                        <p><strong>Lines 20-22:</strong> Useful for checking against multiple valid values.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Bitwise Operators</h2>
+                <p>Bitwise operators work on individual bits of integers. They're useful for low-level programming and optimization.</p>
+                
+                <div class="code-block">
+                    <h4>Working with Bits:</h4>
+<pre><code>a = 10  # Binary: 1010
+b = 4   # Binary: 0100
+
+# AND (&) - 1 only if both bits are 1
+print(a & b)   # 0 (0000)
+
+# OR (|) - 1 if either bit is 1
+print(a | b)   # 14 (1110)
+
+# XOR (^) - 1 if bits are different
+print(a ^ b)   # 14 (1110)
+
+# NOT (~) - inverts all bits
+print(~a)      # -11 (two's complement)
+
+# Left shift (<<) - shifts bits left, adds zeros
+print(a << 2)  # 40 (101000)
+
+# Right shift (>>) - shifts bits right
+print(a >> 1)  # 5 (0101)
+
+# Practical use: checking flags
+READ = 1      # 001
+WRITE = 2     # 010
+EXECUTE = 4   # 100
+
+permissions = READ | WRITE  # 011
+
+if permissions & READ:
+    print("Has read permission")
+if permissions & EXECUTE:
+    print("Has execute permission")  # Won't print</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-14:</strong> Basic bitwise operations: AND, OR, XOR, NOT.</p>
+                        <p><strong>Lines 17-19:</strong> Shift operators move bits left or right.</p>
+                        <p><strong>Lines 22-33:</strong> Bitwise operators are commonly used for flags and permissions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a program that calculates the final price of an item after applying a discount and tax.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Item details
+original_price = 100.00
+discount_percent = 20  # 20% discount
+tax_rate = 8.5  # 8.5% tax
+
+# Calculate discount amount
+discount_amount = original_price * discount_percent / 100
+
+# Calculate price after discount
+# Your code here...
+
+# Calculate tax on discounted price
+# Your code here...
+
+# Calculate final price
+# Your code here...
+
+# Print all the details using f-strings
+print(f"Original Price: ${original_price:.2f}")
+# Add more print statements...</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Expected Output</h4>
+                    <p>Original Price: $100.00, Discount: $20.00, Subtotal: $80.00, Tax: $6.80, Final Price: $86.80</p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson2.html" class="nav-button prev">← Previous: Variables & Data Types</a>
+                <a href="lesson4.html" class="nav-button next">Next: Conditionals →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

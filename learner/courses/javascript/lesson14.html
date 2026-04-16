@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 14: Local Storage - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 14: Local Storage</h1>
+            <p>Learn to persist data in the browser using localStorage, sessionStorage, and other storage APIs.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Understanding Browser Storage</h2>
+                <p>Web browsers provide several ways to store data locally. This allows web applications to remember user preferences, save progress, cache data for offline use, and provide a better user experience. The main storage options are localStorage, sessionStorage, cookies, and IndexedDB, each with different use cases and limitations.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> localStorage persists indefinitely, sessionStorage lasts only for the session (until tab closes), cookies are sent to the server with requests, and IndexedDB is for large amounts of structured data.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>localStorage Basics</h2>
+                <p>Store data that persists across browser sessions:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Store data
+localStorage.setItem("username", "john_doe");
+localStorage.setItem("theme", "dark");
+localStorage.setItem("language", "en");
+
+// Retrieve data
+const username = localStorage.getItem("username");
+console.log(username);  // "john_doe"
+
+// Get non-existent key
+const missing = localStorage.getItem("nonexistent");
+console.log(missing);  // null
+
+// Remove specific item
+localStorage.removeItem("theme");
+
+// Clear all storage
+localStorage.clear();
+
+// Check if key exists
+if (localStorage.getItem("username") !== null) {
+    console.log("Username exists");
+}
+
+// Get number of items stored
+const count = localStorage.length;
+console.log(`Storage has ${count} items`);</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>localStorage Methods:</strong>
+                    <ul>
+                        <li><code>setItem(key, value)</code> - Store a value (must be string)</li>
+                        <li><code>getItem(key)</code> - Retrieve a value (returns null if not found)</li>
+                        <li><code>removeItem(key)</code> - Delete a specific item</li>
+                        <li><code>clear()</code> - Delete all stored data</li>
+                        <li><code>length</code> - Number of items stored</li>
+                    </ul>
+                </div>
+
+                <h3>Dot Notation and Property Access</h3>
+                <div class="code-block">
+                    <pre><code>// Alternative syntax (not recommended)
+localStorage.username = "john_doe";
+console.log(localStorage.username);  // "john_doe"
+delete localStorage.username;
+
+// Why prefer setItem/getItem:
+localStorage.setItem("setItem", "works");
+localStorage.setItem("length", "custom value");  // Works
+
+localStorage.length = "custom";  // Doesn't work! 
+// length is a read-only property
+
+// Iterating over storage
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    console.log(`${key}: ${value}`);
+}
+
+// Using Object methods
+const keys = Object.keys(localStorage);
+const values = Object.values(localStorage);
+const entries = Object.entries(localStorage);</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Storing Complex Data</h2>
+                <p>localStorage only stores strings, so we need JSON for objects and arrays:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Storing objects
+const user = {
+    name: "Alice",
+    email: "alice@example.com",
+    preferences: {
+        theme: "dark",
+        notifications: true
+    }
+};
+
+// Convert to JSON string before storing
+localStorage.setItem("user", JSON.stringify(user));
+
+// Parse when retrieving
+const storedUser = JSON.parse(localStorage.getItem("user"));
+console.log(storedUser.name);  // "Alice"
+
+// Storing arrays
+const todos = [
+    { id: 1, text: "Learn JavaScript", done: false },
+    { id: 2, text: "Build a project", done: false }
+];
+
+localStorage.setItem("todos", JSON.stringify(todos));
+const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+
+// Handling parse errors
+function getJSON(key, defaultValue = null) {
+    try {
+        const value = localStorage.getItem(key);
+        return value ? JSON.parse(value) : defaultValue;
+    } catch (error) {
+        console.error(`Error parsing ${key}:`, error);
+        return defaultValue;
+    }
+}
+
+const settings = getJSON("settings", { theme: "light" });
+
+// Updating stored objects
+function updateUser(updates) {
+    const user = getJSON("user", {});
+    const updated = { ...user, ...updates };
+    localStorage.setItem("user", JSON.stringify(updated));
+    return updated;
+}
+
+updateUser({ name: "Alice Smith" });</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>sessionStorage</h2>
+                <p>Storage that only lasts for the current session:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Same API as localStorage
+sessionStorage.setItem("tempData", "cleared on tab close");
+const data = sessionStorage.getItem("tempData");
+sessionStorage.removeItem("tempData");
+sessionStorage.clear();
+
+// Use cases for sessionStorage
+// 1. Form data being filled (survives page refresh)
+sessionStorage.setItem("formData", JSON.stringify({
+    name: "John",
+    email: "john@example.com"
+}));
+
+// 2. Temporary state
+sessionStorage.setItem("redirectAfterLogin", "/dashboard");
+
+// 3. One-time notifications
+sessionStorage.setItem("showWelcome", "true");
+
+// Difference from localStorage
+// localStorage: Data persists until cleared
+// sessionStorage: Data clears when tab/window closes
+
+// Check storage type
+const isLocalStorage = typeof localStorage !== "undefined";
+const isSessionStorage = typeof sessionStorage !== "undefined";</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>When to Use Which:</strong>
+                    <ul>
+                        <li><strong>localStorage:</strong> User preferences, theme, cached data, remember login</li>
+                        <li><strong>sessionStorage:</strong> Form data, temporary state, one-time messages, multi-step wizard</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Storage Events</h2>
+                <p>Listen for changes in other tabs/windows:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Listen for storage changes from other tabs
+window.addEventListener("storage", (event) => {
+    console.log("Key changed:", event.key);
+    console.log("Old value:", event.oldValue);
+    console.log("New value:", event.newValue);
+    console.log("URL:", event.url);
+    
+    // React to changes
+    if (event.key === "theme") {
+        applyTheme(event.newValue);
+    }
+    
+    if (event.key === "logout") {
+        // Another tab logged out
+        window.location.href = "/login";
+    }
+});
+
+// Example: Sync theme across tabs
+function setTheme(theme) {
+    localStorage.setItem("theme", theme);
+    applyTheme(theme);
+}
+
+function applyTheme(theme) {
+    document.body.className = theme;
+}
+
+// Initialize from storage
+const savedTheme = localStorage.getItem("theme") || "light";
+applyTheme(savedTheme);
+
+// Example: Broadcast logout
+function logout() {
+    localStorage.removeItem("token");
+    localStorage.setItem("logout", Date.now().toString());
+    window.location.href = "/login";
+}
+
+// Example: Tab communication
+function sendMessage(message) {
+    localStorage.setItem("message", JSON.stringify({
+        ...message,
+        timestamp: Date.now()
+    }));
+}
+
+window.addEventListener("storage", (e) => {
+    if (e.key === "message") {
+        const message = JSON.parse(e.newValue);
+        handleIncomingMessage(message);
+    }
+});</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Important:</strong> The storage event only fires in OTHER tabs/windows, not in the tab that made the change. This is useful for syncing state across tabs.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Storage Limits and Quotas</h2>
+                <p>Understand browser storage limitations:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Typical storage limit: 5-10 MB per origin
+// localStorage and sessionStorage share this limit
+
+// Check available storage (not universally supported)
+if (navigator.storage && navigator.storage.estimate) {
+    navigator.storage.estimate().then(({ quota, usage }) => {
+        console.log(`Used: ${usage} bytes`);
+        console.log(`Available: ${quota} bytes`);
+        console.log(`Used: ${(usage / quota * 100).toFixed(2)}%`);
+    });
+}
+
+// Handle quota exceeded error
+function safeSetItem(key, value) {
+    try {
+        localStorage.setItem(key, value);
+        return true;
+    } catch (error) {
+        if (error.name === "QuotaExceededError") {
+            console.error("Storage quota exceeded");
+            // Option 1: Clear old data
+            clearOldData();
+            // Option 2: Ask user
+            alert("Storage full. Please clear some data.");
+        }
+        return false;
+    }
+}
+
+// Estimate size of data
+function getStringSize(str) {
+    return new Blob([str]).size;
+}
+
+const data = JSON.stringify({ large: "object" });
+console.log(`Size: ${getStringSize(data)} bytes`);
+
+// Manage storage efficiently
+class StorageManager {
+    constructor(prefix = "app_") {
+        this.prefix = prefix;
+    }
+    
+    set(key, value, ttl = null) {
+        const data = {
+            value,
+            timestamp: Date.now(),
+            ttl
+        };
+        
+        try {
+            localStorage.setItem(
+                this.prefix + key,
+                JSON.stringify(data)
+            );
+            return true;
+        } catch (error) {
+            console.error("Storage error:", error);
+            return false;
+        }
+    }
+    
+    get(key) {
+        const raw = localStorage.getItem(this.prefix + key);
+        if (!raw) return null;
+        
+        try {
+            const data = JSON.parse(raw);
+            
+            // Check TTL
+            if (data.ttl && Date.now() > data.timestamp + data.ttl) {
+                this.remove(key);
+                return null;
+            }
+            
+            return data.value;
+        } catch {
+            return null;
+        }
+    }
+    
+    remove(key) {
+        localStorage.removeItem(this.prefix + key);
+    }
+    
+    clear() {
+        const keys = Object.keys(localStorage)
+            .filter(k => k.startsWith(this.prefix));
+        keys.forEach(k => localStorage.removeItem(k));
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Patterns</h2>
+                <p>Common patterns for using localStorage effectively:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Pattern 1: User Preferences
+const preferences = {
+    get(key, defaultValue = null) {
+        const prefs = JSON.parse(localStorage.getItem("preferences") || "{}");
+        return prefs[key] ?? defaultValue;
+    },
+    
+    set(key, value) {
+        const prefs = JSON.parse(localStorage.getItem("preferences") || "{}");
+        prefs[key] = value;
+        localStorage.setItem("preferences", JSON.stringify(prefs));
+    },
+    
+    remove(key) {
+        const prefs = JSON.parse(localStorage.getItem("preferences") || "{}");
+        delete prefs[key];
+        localStorage.setItem("preferences", JSON.stringify(prefs));
+    }
+};
+
+preferences.set("theme", "dark");
+preferences.set("fontSize", 16);
+console.log(preferences.get("theme"));  // "dark"
+
+// Pattern 2: Offline Data Cache
+class OfflineCache {
+    constructor(name, ttl = 3600000) {  // Default 1 hour
+        this.name = name;
+        this.ttl = ttl;
+    }
+    
+    async get(key, fetcher) {
+        const cacheKey = `${this.name}_${key}`;
+        const cached = this.getFromCache(cacheKey);
+        
+        if (cached) return cached;
+        
+        const data = await fetcher();
+        this.setToCache(cacheKey, data);
+        return data;
+    }
+    
+    getFromCache(key) {
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+        
+        const { data, timestamp } = JSON.parse(raw);
+        
+        if (Date.now() - timestamp > this.ttl) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        
+        return data;
+    }
+    
+    setToCache(key, data) {
+        localStorage.setItem(key, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+    }
+    
+    invalidate(key) {
+        localStorage.removeItem(`${this.name}_${key}`);
+    }
+}
+
+// Usage
+const userCache = new OfflineCache("users", 300000);  // 5 minutes
+const user = await userCache.get("user_123", () => 
+    fetch("/api/users/123").then(r => r.json())
+);
+
+// Pattern 3: Form State Persistence
+class FormState {
+    constructor(formId, fields) {
+        this.formId = formId;
+        this.fields = fields;
+        this.key = `form_${formId}`;
+    }
+    
+    save() {
+        const state = {};
+        this.fields.forEach(field => {
+            const input = document.querySelector(`[name="${field}"]`);
+            if (input) state[field] = input.value;
+        });
+        localStorage.setItem(this.key, JSON.stringify(state));
+    }
+    
+    restore() {
+        const state = JSON.parse(localStorage.getItem(this.key) || "{}");
+        this.fields.forEach(field => {
+            const input = document.querySelector(`[name="${field}"]`);
+            if (input && state[field]) {
+                input.value = state[field];
+            }
+        });
+    }
+    
+    clear() {
+        localStorage.removeItem(this.key);
+    }
+}
+
+// Auto-save form
+const formState = new FormState("registration", ["name", "email", "phone"]);
+formState.restore();
+
+document.querySelector("#registration").addEventListener("input", 
+    debounce(() => formState.save(), 500)
+);</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Cookies</h2>
+                <p>Another way to store data, sent to the server:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Setting cookies
+document.cookie = "username=john_doe";
+document.cookie = "theme=dark";
+document.cookie = "session_id=abc123; path=/";
+
+// Cookie with expiration
+const days = 7;
+const date = new Date();
+date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+document.cookie = `remember_me=true; expires=${date.toUTCString()}; path=/`;
+
+// Reading cookies
+function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+        const [key, value] = cookie.split("=");
+        if (key === name) return decodeURIComponent(value);
+    }
+    return null;
+}
+
+console.log(getCookie("username"));  // "john_doe"
+
+// Deleting cookies
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+// Cookie helper library
+const cookies = {
+    set(name, value, options = {}) {
+        let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+        
+        if (options.days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (options.days * 24 * 60 * 60 * 1000));
+            cookie += `; expires=${date.toUTCString()}`;
+        }
+        
+        if (options.path) cookie += `; path=${options.path}`;
+        if (options.domain) cookie += `; domain=${options.domain}`;
+        if (options.secure) cookie += "; secure";
+        if (options.httpOnly) cookie += "; HttpOnly";
+        if (options.sameSite) cookie += `; SameSite=${options.sameSite}`;
+        
+        document.cookie = cookie;
+    },
+    
+    get(name) {
+        return getCookie(name);
+    },
+    
+    remove(name, options = {}) {
+        let cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+        if (options.path) cookie += `; path=${options.path}`;
+        document.cookie = cookie;
+    }
+};
+
+// Usage
+cookies.set("token", "abc123", { days: 30, secure: true, sameSite: "Strict" });</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>localStorage vs Cookies:</strong>
+                    <ul>
+                        <li><strong>Cookies:</strong> Sent to server with every request, smaller limit (4KB), good for auth</li>
+                        <li><strong>localStorage:</strong> Not sent to server, larger limit (5MB+), good for client data</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>IndexedDB Overview</h2>
+                <p>For large amounts of structured data:</p>
+                
+                <div class="code-block">
+                    <pre><code>// IndexedDB is a full database in the browser
+// Much more powerful but more complex than localStorage
+
+// Simple wrapper for IndexedDB
+class SimpleDB {
+    constructor(dbName, storeName, version = 1) {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(dbName, version);
+            
+            request.onerror = () => reject(request.error);
+            
+            request.onsuccess = () => {
+                this.db = request.result;
+                this.storeName = storeName;
+                resolve(this);
+            };
+            
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains(storeName)) {
+                    db.createObjectStore(storeName, { keyPath: "id" });
+                }
+            };
+        });
+    }
+    
+    async add(data) {
+        return this.transaction("readwrite", (store) => 
+            this.promisify(store.add(data))
+        );
+    }
+    
+    async get(id) {
+        return this.transaction("readonly", (store) => 
+            this.promisify(store.get(id))
+        );
+    }
+    
+    async put(data) {
+        return this.transaction("readwrite", (store) => 
+            this.promisify(store.put(data))
+        );
+    }
+    
+    async delete(id) {
+        return this.transaction("readwrite", (store) => 
+            this.promisify(store.delete(id))
+        );
+    }
+    
+    async getAll() {
+        return this.transaction("readonly", (store) => 
+            this.promisify(store.getAll())
+        );
+    }
+    
+    async transaction(mode, operation) {
+        return new Promise((resolve, reject) => {
+            const transaction = this.db.transaction(this.storeName, mode);
+            const store = transaction.objectStore(this.storeName);
+            const request = operation(store);
+            
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+    }
+    
+    promisify(request) {
+        return request;  // Handled by transaction wrapper
+    }
+}
+
+// Usage
+const db = await new SimpleDB("MyApp", "users");
+await db.add({ id: 1, name: "Alice", email: "alice@example.com" });
+const user = await db.get(1);
+console.log(user);
+const allUsers = await db.getAll();
+
+// When to use IndexedDB:
+// - Large datasets (100MB+)
+// - Complex queries and indexes
+// - Offline-first applications
+// - Storing files or blobs</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Security Considerations</h2>
+                <p>Keep stored data safe:</p>
+                
+                <div class="code-block">
+                    <pre><code>// DON'T store sensitive data in localStorage
+// ❌ Bad - passwords, tokens, personal info
+localStorage.setItem("password", "secret123");  // NEVER!
+
+// Anyone with access to the computer can read this
+// XSS attacks can steal this data
+
+// If you must store tokens, use secure patterns
+// Option 1: HttpOnly cookies (server sets)
+// Option 2: Short-lived tokens with refresh
+// Option 3: Encrypt sensitive data
+
+// Simple encryption helper (not cryptographically secure)
+function encrypt(text, key) {
+    return btoa(encodeURIComponent(text));
+}
+
+function decrypt(encoded, key) {
+    return decodeURIComponent(atob(encoded));
+}
+
+// For real encryption, use Web Crypto API
+async function encryptData(data, password) {
+    const encoder = new TextEncoder();
+    const dataBuffer = encoder.encode(JSON.stringify(data));
+    
+    const keyMaterial = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(password),
+        { name: "PBKDF2" },
+        false,
+        ["deriveKey"]
+    );
+    
+    const key = await crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: encoder.encode("salt"), iterations: 100000, hash: "SHA-256" },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt"]
+    );
+    
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const encrypted = await crypto.subtle.encrypt(
+        { name: "AES-GCM", iv },
+        key,
+        dataBuffer
+    );
+    
+    return { iv: Array.from(iv), data: Array.from(new Uint8Array(encrypted)) };
+}
+
+// Clear sensitive data on logout
+function logout() {
+    // Clear all storage
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Clear specific items
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    
+    // Redirect
+    window.location.href = "/login";
+}
+
+// Validate stored data
+function getValidatedUser() {
+    const raw = localStorage.getItem("user");
+    if (!raw) return null;
+    
+    try {
+        const user = JSON.parse(raw);
+        
+        // Validate structure
+        if (typeof user.id !== "number" || typeof user.name !== "string") {
+            localStorage.removeItem("user");
+            return null;
+        }
+        
+        return user;
+    } catch {
+        localStorage.removeItem("user");
+        return null;
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a complete storage manager
+class StorageService {
+    constructor(namespace = "app") {
+        this.namespace = namespace;
+        this.cache = new Map();
+    }
+    
+    // Prefix keys with namespace
+    prefix(key) {
+        return `${this.namespace}_${key}`;
+    }
+    
+    // Store with optional TTL
+    set(key, value, ttlMs = null) {
+        const data = {
+            value,
+            meta: {
+                created: Date.now(),
+                ttl: ttlMs
+            }
+        };
+        
+        try {
+            const serialized = JSON.stringify(data);
+            localStorage.setItem(this.prefix(key), serialized);
+            this.cache.set(key, data);
+            return true;
+        } catch (error) {
+            console.error("Storage error:", error);
+            return false;
+        }
+    }
+    
+    // Retrieve with TTL check
+    get(key, defaultValue = null) {
+        // Check memory cache first
+        if (this.cache.has(key)) {
+            const cached = this.cache.get(key);
+            if (!this.isExpired(cached)) {
+                return cached.value;
+            }
+        }
+        
+        // Check localStorage
+        const raw = localStorage.getItem(this.prefix(key));
+        if (!raw) return defaultValue;
+        
+        try {
+            const data = JSON.parse(raw);
+            
+            if (this.isExpired(data)) {
+                this.remove(key);
+                return defaultValue;
+            }
+            
+            this.cache.set(key, data);
+            return data.value;
+        } catch {
+            return defaultValue;
+        }
+    }
+    
+    // Check if data is expired
+    isExpired(data) {
+        if (!data.meta?.ttl) return false;
+        return Date.now() > data.meta.created + data.meta.ttl;
+    }
+    
+    // Remove item
+    remove(key) {
+        localStorage.removeItem(this.prefix(key));
+        this.cache.delete(key);
+    }
+    
+    // Clear all items in namespace
+    clearAll() {
+        const keys = Object.keys(localStorage)
+            .filter(k => k.startsWith(this.namespace + "_"));
+        
+        keys.forEach(k => {
+            localStorage.removeItem(k);
+            this.cache.delete(k.replace(this.namespace + "_", ""));
+        });
+    }
+    
+    // Get all keys in namespace
+    keys() {
+        return Object.keys(localStorage)
+            .filter(k => k.startsWith(this.namespace + "_"))
+            .map(k => k.replace(this.namespace + "_", ""));
+    }
+    
+    // Export all data
+    export() {
+        const data = {};
+        this.keys().forEach(key => {
+            data[key] = this.get(key);
+        });
+        return data;
+    }
+    
+    // Import data
+    import(data) {
+        Object.entries(data).forEach(([key, value]) => {
+            this.set(key, value);
+        });
+    }
+}
+
+// Use it
+const storage = new StorageService("myApp");
+
+// Store user preferences
+storage.set("preferences", {
+    theme: "dark",
+    language: "en",
+    notifications: true
+});
+
+// Store with expiration (1 hour)
+storage.set("session_token", "abc123", 3600000);
+
+// Retrieve
+const prefs = storage.get("preferences");
+console.log(prefs);
+
+// Create a todo list using storage
+class TodoList {
+    constructor(storage) {
+        this.storage = storage;
+        this.todos = this.storage.get("todos", []);
+    }
+    
+    add(text) {
+        const todo = {
+            id: Date.now(),
+            text,
+            done: false,
+            created: new Date().toISOString()
+        };
+        this.todos.push(todo);
+        this.save();
+        return todo;
+    }
+    
+    toggle(id) {
+        const todo = this.todos.find(t => t.id === id);
+        if (todo) {
+            todo.done = !todo.done;
+            this.save();
+        }
+    }
+    
+    remove(id) {
+        this.todos = this.todos.filter(t => t.id !== id);
+        this.save();
+    }
+    
+    save() {
+        this.storage.set("todos", this.todos);
+    }
+    
+    getAll() {
+        return this.todos;
+    }
+    
+    getActive() {
+        return this.todos.filter(t => !t.done);
+    }
+    
+    getCompleted() {
+        return this.todos.filter(t => t.done);
+    }
+}
+
+const todoStorage = new StorageService("todos");
+const todos = new TodoList(todoStorage);
+todos.add("Learn localStorage");
+todos.add("Build a project");
+console.log(todos.getAll());</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson13.html" class="btn btn-secondary">← Previous: Error Handling</a>
+                <a href="lesson15.html" class="btn btn-primary">Next: Best Practices →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

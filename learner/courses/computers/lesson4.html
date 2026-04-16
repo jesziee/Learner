@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is an Operating System? - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>💿 Lesson 4: What is an Operating System?</h1>
+            <p>Windows, macOS, Linux, and their roles</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is an Operating System?</h2>
+                <p>An Operating System (OS) is the main software that manages all the hardware and software on your computer. It's the foundation that allows you to interact with your computer and run applications.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Think of the OS as:</strong> A traffic controller that manages all the "traffic" (data and programs) flowing through your computer, making sure everything gets to where it needs to go safely and efficiently.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>What Does an OS Do?</h2>
+                <p>The operating system performs many essential functions:</p>
+                
+                <h3>Memory Management</h3>
+                <p>Decides how much RAM each program gets and ensures programs don't interfere with each other's memory.</p>
+                
+                <h3>Process Management</h3>
+                <p>Decides which programs get CPU time and when. Your CPU can only do one thing at a time per core, so the OS rapidly switches between programs to create the illusion of multitasking.</p>
+                
+                <h3>File Management</h3>
+                <p>Organizes and keeps track of all your files and folders on storage devices.</p>
+                
+                <h3>Device Management</h3>
+                <p>Communicates with hardware devices through special programs called drivers. When you plug in a printer, the OS uses a driver to communicate with it.</p>
+                
+                <h3>User Interface</h3>
+                <p>Provides the visual interface (windows, icons, menus) that lets you interact with your computer.</p>
+                
+                <h3>Security</h3>
+                <p>Controls access to files and resources, requiring passwords and permissions to protect your data.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Key Point:</strong> Without an operating system, you'd have to write code to control every piece of hardware directly - even just to display a single character on screen!</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Popular Operating Systems</h2>
+                
+                <h3>Microsoft Windows</h3>
+                <p>The most widely used desktop operating system in the world. Known for its compatibility with most software and hardware.</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Used for:</strong> Gaming, business, general computing</li>
+                    <li><strong>Latest version:</strong> Windows 11</li>
+                    <li><strong>Strengths:</strong> Wide software compatibility, gaming support</li>
+                </ul>
+                
+                <h3>macOS</h3>
+                <p>Apple's operating system for Mac computers. Known for its elegant design and seamless integration with other Apple devices.</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Used for:</strong> Creative work, development, productivity</li>
+                    <li><strong>Latest version:</strong> macOS Sonoma</li>
+                    <li><strong>Strengths:</strong> Design, ecosystem integration, Unix-based</li>
+                </ul>
+                
+                <h3>Linux</h3>
+                <p>An open-source operating system kernel that forms the basis for many different operating systems (called distributions or "distros").</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Used for:</strong> Servers, development, privacy-conscious users</li>
+                    <li><strong>Popular distros:</strong> Ubuntu, Fedora, Debian, Arch</li>
+                    <li><strong>Strengths:</strong> Free, customizable, secure, runs on almost anything</li>
+                </ul>
+                
+                <h3>Mobile Operating Systems</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>iOS:</strong> Apple's mobile OS for iPhones, known for security and app quality</li>
+                    <li><strong>Android:</strong> Google's mobile OS, based on Linux, highly customizable</li>
+                </ul>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Operating System Architecture</h2>
+                <p>An OS is built in layers, each with specific responsibilities:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// OS Architecture Layers (from top to bottom):</span>
+
+┌─────────────────────────────────────┐
+│        <span class="function">User Applications</span>              │  ← Your programs
+├─────────────────────────────────────┤
+│        <span class="function">User Interface (GUI/Shell)</span>        │  ← Windows, menus, commands
+├─────────────────────────────────────┤
+│        <span class="function">System Libraries</span>                 │  ← Pre-built code for apps
+├─────────────────────────────────────┤
+│        <span class="function">System Services</span>                   │  ← Background tasks
+├─────────────────────────────────────┤
+│        <span class="keyword">KERNEL</span>                          │  ← Core OS functions
+├─────────────────────────────────────┤
+│        <span class="variable">Device Drivers</span>                   │  ← Hardware communication
+├─────────────────────────────────────┤
+│        <span class="variable">Hardware</span>                         │  ← Physical components
+└─────────────────────────────────────┘</code></pre>
+                </div>
+                
+                <h3>The Kernel</h3>
+                <p>The kernel is the core of the operating system. It has complete control over everything and manages:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>Memory allocation</li>
+                    <li>CPU scheduling</li>
+                    <li>Device communication</li>
+                    <li>System security</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>File Systems</h2>
+                <p>Operating systems organize data using file systems - structures that determine how files are stored, named, and accessed.</p>
+                
+                <h3>Common File Systems</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>NTFS:</strong> Windows default, supports large files and security features</li>
+                    <li><strong>APFS:</strong> Apple's modern file system for macOS and iOS</li>
+                    <li><strong>ext4:</strong> Common Linux file system, reliable and efficient</li>
+                    <li><strong>FAT32/exFAT:</strong> Compatible with most systems, used for USB drives</li>
+                </ul>
+                
+                <h3>File Paths</h3>
+                <p>Files are located using paths - addresses that show where a file is stored:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Windows path:</span>
+<span class="variable">C:\Users\YourName\Documents\report.txt</span>
+
+<span class="comment">// macOS/Linux path:</span>
+<span class="variable">/home/yourname/documents/report.txt</span>
+
+<span class="comment">// Key differences:</span>
+<span class="comment">// - Windows uses backslashes (\) and drive letters (C:)</span>
+<span class="comment">// - macOS/Linux use forward slashes (/) and start from root (/)</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Running Programs</h2>
+                <p>When you double-click an application, here's what happens:</p>
+                
+                <ol style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Loading:</strong> The OS reads the program from storage into RAM</li>
+                    <li><strong>Memory Allocation:</strong> Space is assigned for the program's data</li>
+                    <li><strong>Execution:</strong> The CPU starts running the program's instructions</li>
+                    <li><strong>Resource Management:</strong> The OS provides access to screen, keyboard, network as needed</li>
+                    <li><strong> multitasking:</strong> The OS shares CPU time with other running programs</li>
+                </ol>
+                
+                <div class="code-explanation">
+                    <p><strong>Background Processes:</strong> Your computer is always running dozens of processes even when you're not actively using applications. These handle system tasks like checking for updates, managing network connections, and more.</p>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>OS:</strong> The main software that manages hardware and runs applications</li>
+                            <li><strong>Kernel:</strong> The core of the OS with direct hardware access</li>
+                            <li><strong>Main OS types:</strong> Windows, macOS, Linux (desktop); iOS, Android (mobile)</li>
+                            <li><strong>File System:</strong> How the OS organizes and stores data</li>
+                            <li><strong>Processes:</strong> Programs that are currently running in memory</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson3.html" class="nav-btn prev">← Previous: How Data is Stored</a>
+                <a href="lesson5.html" class="nav-btn next">Next: How Software Works →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

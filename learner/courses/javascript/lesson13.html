@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 13: Error Handling - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 13: Error Handling</h1>
+            <p>Master the art of handling errors gracefully to build robust, reliable applications.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>Understanding Errors</h2>
+                <p>Errors are inevitable in programming. They can occur due to invalid user input, network failures, programming mistakes, or external service issues. Good error handling prevents crashes, provides helpful feedback to users, and makes debugging easier. In JavaScript, errors are objects that contain information about what went wrong.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Error handling is not just about preventing crashes—it's about creating a good user experience and making your code maintainable. Anticipate errors, handle them gracefully, and provide clear feedback.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Error Types</h2>
+                <p>JavaScript has several built-in error types:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Error - Generic error
+const error = new Error("Something went wrong");
+console.log(error.name);    // "Error"
+console.log(error.message); // "Something went wrong"
+console.log(error.stack);   // Stack trace
+
+// SyntaxError - Invalid JavaScript syntax
+// const syntaxError = new SyntaxError("Unexpected token");
+
+// ReferenceError - Variable not found
+// const refError = new ReferenceError("x is not defined");
+
+// TypeError - Wrong type for operation
+// const typeError = new TypeError("Cannot read property of undefined");
+
+// RangeError - Value out of expected range
+// const rangeError = new RangeError("Argument must be between 0 and 100");
+
+// URIError - Invalid URI handling
+// const uriError = new URIError("Malformed URI");
+
+// Create custom errors
+class ValidationError extends Error {
+    constructor(message, field) {
+        super(message);
+        this.name = "ValidationError";
+        this.field = field;
+    }
+}
+
+const validationError = new ValidationError("Invalid email", "email");
+console.log(validationError.field);  // "email"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Built-in Error Types:</strong>
+                    <ul>
+                        <li><code>Error</code> - Generic error, base for all others</li>
+                        <li><code>SyntaxError</code> - Code parsing error (usually during development)</li>
+                        <li><code>ReferenceError</code> - Accessing undefined variable</li>
+                        <li><code>TypeError</code> - Operation on wrong type</li>
+                        <li><code>RangeError</code> - Value outside valid range</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>try...catch...finally</h2>
+                <p>The fundamental error handling structure:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic try...catch
+try {
+    // Code that might throw an error
+    const result = JSON.parse('invalid json');
+} catch (error) {
+    // Handle the error
+    console.log("Caught error:", error.message);
+}
+
+// try...catch...finally
+try {
+    const data = riskyOperation();
+    processData(data);
+} catch (error) {
+    console.log("Error:", error.message);
+    notifyUser("Operation failed");
+} finally {
+    // Always runs, regardless of success or error
+    cleanup();
+}
+
+// Catch block only catches errors in the try block
+try {
+    const result = divide(10, 0);
+    console.log(result);
+} catch (error) {
+    console.log("Division failed:", error.message);
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero");
+    }
+    return a / b;
+}
+
+// Nested try...catch
+try {
+    try {
+        throw new Error("Inner error");
+    } catch (innerError) {
+        console.log("Inner catch:", innerError.message);
+        throw new Error("Re-thrown as outer error");
+    }
+} catch (outerError) {
+    console.log("Outer catch:", outerError.message);
+}</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Execution Flow:</strong>
+                    <ul>
+                        <li><code>try</code> - Code that might fail (required)</li>
+                        <li><code>catch</code> - Handles thrown errors (required if no finally)</li>
+                        <li><code>finally</code> - Cleanup code, always runs (optional)</li>
+                        <li>Only one of catch or finally is required</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Throwing Errors</h2>
+                <p>Create and throw your own errors:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic throw
+function validateAge(age) {
+    if (typeof age !== "number") {
+        throw new TypeError("Age must be a number");
+    }
+    if (age < 0 || age > 150) {
+        throw new RangeError("Age must be between 0 and 150");
+    }
+    return true;
+}
+
+// Throw custom error
+class ApplicationError extends Error {
+    constructor(message, code, details = {}) {
+        super(message);
+        this.name = "ApplicationError";
+        this.code = code;
+        this.details = details;
+    }
+}
+
+function processPayment(amount, currency) {
+    if (amount <= 0) {
+        throw new ApplicationError(
+            "Invalid payment amount",
+            "INVALID_AMOUNT",
+            { amount, currency }
+        );
+    }
+    // Process payment
+}
+
+// Re-throwing errors
+async function fetchUser(id) {
+    try {
+        const response = await fetch(`/api/users/${id}`);
+        const user = await response.json();
+        return user;
+    } catch (error) {
+        // Log the error
+        console.error("Failed to fetch user:", error);
+        // Re-throw with more context
+        throw new Error(`Failed to fetch user ${id}: ${error.message}`);
+    }
+}
+
+// Conditional throw
+function assert(condition, message) {
+    if (!condition) {
+        throw new Error(`Assertion failed: ${message}`);
+    }
+}
+
+assert(user.age >= 18, "User must be 18 or older");</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Custom Error Classes</h2>
+                <p>Create specialized error types for your application:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Base application error
+class AppError extends Error {
+    constructor(message, code, statusCode = 500) {
+        super(message);
+        this.name = this.constructor.name;
+        this.code = code;
+        this.statusCode = statusCode;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+
+// Validation error
+class ValidationError extends AppError {
+    constructor(message, field = null) {
+        super(message, "VALIDATION_ERROR", 400);
+        this.field = field;
+    }
+}
+
+// Not found error
+class NotFoundError extends AppError {
+    constructor(resource, id) {
+        super(`${resource} with id '${id}' not found`, "NOT_FOUND", 404);
+        this.resource = resource;
+        this.resourceId = id;
+    }
+}
+
+// Authentication error
+class AuthenticationError extends AppError {
+    constructor(message = "Authentication required") {
+        super(message, "AUTHENTICATION_ERROR", 401);
+    }
+}
+
+// Authorization error
+class AuthorizationError extends AppError {
+    constructor(message = "Access denied") {
+        super(message, "AUTHORIZATION_ERROR", 403);
+    }
+}
+
+// Usage examples
+function findUser(id) {
+    const user = database.find(u => u.id === id);
+    if (!user) {
+        throw new NotFoundError("User", id);
+    }
+    return user;
+}
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        throw new ValidationError("Invalid email format", "email");
+    }
+}
+
+// Error type checking
+try {
+    findUser(999);
+} catch (error) {
+    if (error instanceof NotFoundError) {
+        console.log("Not found, show 404 page");
+    } else if (error instanceof ValidationError) {
+        console.log(`Invalid field: ${error.field}`);
+    } else {
+        console.log("Unknown error:", error.message);
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Async Error Handling</h2>
+                <p>Handle errors in asynchronous code:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Promises with .catch()
+fetch("/api/data")
+    .then(response => response.json())
+    .then(data => processData(data))
+    .catch(error => {
+        console.error("Fetch failed:", error);
+    });
+
+// async/await with try...catch
+async function fetchUserData(userId) {
+    try {
+        const response = await fetch(`/api/users/${userId}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        
+        const user = await response.json();
+        return user;
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        throw error;  // Re-throw for caller to handle
+    }
+}
+
+// Handle multiple async operations
+async function fetchAll() {
+    const results = await Promise.allSettled([
+        fetch("/api/users"),
+        fetch("/api/posts"),
+        fetch("/api/comments")
+    ]);
+    
+    results.forEach((result, index) => {
+        if (result.status === "rejected") {
+            console.error(`Request ${index} failed:`, result.reason);
+        }
+    });
+    
+    return results
+        .filter(r => r.status === "fulfilled")
+        .map(r => r.value);
+}
+
+// Async error wrapper
+function asyncHandler(fn) {
+    return (req, res, next) => {
+        Promise.resolve(fn(req, res, next)).catch(next);
+    };
+}
+
+// Express.js style
+app.get("/users/:id", asyncHandler(async (req, res) => {
+    const user = await findUser(req.params.id);
+    res.json(user);
+}));
+
+// Catch unhandled promise rejections
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+// In browser
+window.addEventListener("unhandledrejection", (event) => {
+    console.error("Unhandled rejection:", event.reason);
+    event.preventDefault();
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Error Propagation</h2>
+                <p>Decide where to catch and where to re-throw errors:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Pattern: Catch, wrap, re-throw
+async function getUserProfile(userId) {
+    try {
+        const user = await fetchUser(userId);
+        const posts = await fetchUserPosts(userId);
+        return { user, posts };
+    } catch (error) {
+        // Add context and re-throw
+        throw new Error(
+            `Failed to get profile for user ${userId}: ${error.message}`
+        );
+    }
+}
+
+// Pattern: Handle at the right level
+async function displayUserProfile(userId) {
+    try {
+        const profile = await getUserProfile(userId);
+        renderProfile(profile);
+    } catch (error) {
+        // This is the UI layer - handle user feedback here
+        showError("Could not load profile. Please try again.");
+        logError(error);
+    }
+}
+
+// Pattern: Error boundaries (React-style)
+class ErrorBoundary {
+    constructor() {
+        this.hasError = false;
+        this.error = null;
+    }
+    
+    try(fn) {
+        try {
+            return fn();
+        } catch (error) {
+            this.hasError = true;
+            this.error = error;
+            this.onError(error);
+            return null;
+        }
+    }
+    
+    onError(error) {
+        console.error("Error caught:", error);
+        // Render fallback UI
+    }
+}
+
+// Pattern: Result type (functional approach)
+class Result {
+    static ok(value) {
+        return { success: true, value, error: null };
+    }
+    
+    static fail(error) {
+        return { success: false, value: null, error };
+    }
+}
+
+function divideSafely(a, b) {
+    if (b === 0) {
+        return Result.fail("Cannot divide by zero");
+    }
+    return Result.ok(a / b);
+}
+
+const result = divideSafely(10, 2);
+if (result.success) {
+    console.log("Result:", result.value);
+} else {
+    console.log("Error:", result.error);
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Global Error Handling</h2>
+                <p>Catch errors at the application level:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Browser: Global error handler
+window.onerror = function(message, source, lineno, colno, error) {
+    console.error("Global error:", { message, source, lineno, colno, error });
+    // Log to error tracking service
+    logToService({ message, source, lineno, colno, error });
+    return true;  // Prevent default browser error handling
+};
+
+// Modern: addEventListener
+window.addEventListener("error", (event) => {
+    console.error("Error:", event.error);
+    event.preventDefault();
+});
+
+// Handle unhandled promise rejections
+window.addEventListener("unhandledrejection", (event) => {
+    console.error("Unhandled rejection:", event.reason);
+    event.preventDefault();
+});
+
+// Node.js: Uncaught exception
+process.on("uncaughtException", (error) => {
+    console.error("Uncaught Exception:", error);
+    // Perform cleanup
+    process.exit(1);  // Usually best to exit
+});
+
+// Node.js: Unhandled rejection
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("Unhandled Rejection:", reason);
+});
+
+// Error tracking service integration
+class ErrorTracker {
+    constructor(apiKey) {
+        this.apiKey = apiKey;
+        this.setupGlobalHandlers();
+    }
+    
+    setupGlobalHandlers() {
+        window.addEventListener("error", (event) => {
+            this.capture(event.error || new Error(event.message));
+        });
+        
+        window.addEventListener("unhandledrejection", (event) => {
+            this.capture(event.reason);
+        });
+    }
+    
+    capture(error, context = {}) {
+        const errorData = {
+            message: error.message,
+            stack: error.stack,
+            url: window.location.href,
+            userAgent: navigator.userAgent,
+            timestamp: new Date().toISOString(),
+            ...context
+        };
+        
+        // Send to tracking service
+        this.send(errorData);
+        
+        // Also log locally
+        console.error("Captured error:", errorData);
+    }
+    
+    async send(data) {
+        try {
+            await fetch("https://errors.example.com/api/capture", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+        } catch (e) {
+            console.error("Failed to send error:", e);
+        }
+    }
+}
+
+// Initialize
+const tracker = new ErrorTracker("your-api-key");</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Validation and Input Checking</h2>
+                <p>Prevent errors with proper validation:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Defensive programming
+function processUser(user) {
+    // Check required fields
+    if (!user) {
+        throw new Error("User is required");
+    }
+    
+    if (!user.name || typeof user.name !== "string") {
+        throw new ValidationError("Valid name is required", "name");
+    }
+    
+    if (!user.email || !isValidEmail(user.email)) {
+        throw new ValidationError("Valid email is required", "email");
+    }
+    
+    // Process user
+    return normalizeUser(user);
+}
+
+// Type checking utility
+function assertType(value, type, name = "value") {
+    if (typeof value !== type) {
+        throw new TypeError(`${name} must be a ${type}, got ${typeof value}`);
+    }
+}
+
+function assertInstance(value, constructor, name = "value") {
+    if (!(value instanceof constructor)) {
+        throw new TypeError(`${name} must be an instance of ${constructor.name}`);
+    }
+}
+
+// Usage
+function processData(data) {
+    assertType(data, "object", "data");
+    assertType(data.items, "object", "data.items");
+    assertInstance(data.items, Array, "data.items");
+    // Now safe to process
+}
+
+// Schema validation
+function validateUser(data) {
+    const schema = {
+        name: { type: "string", required: true, minLength: 2 },
+        email: { type: "string", required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+        age: { type: "number", required: false, min: 0, max: 150 }
+    };
+    
+    const errors = [];
+    
+    for (const [field, rules] of Object.entries(schema)) {
+        const value = data[field];
+        
+        if (rules.required && (value === undefined || value === null || value === "")) {
+            errors.push({ field, message: `${field} is required` });
+            continue;
+        }
+        
+        if (value !== undefined) {
+            if (rules.type && typeof value !== rules.type) {
+                errors.push({ field, message: `${field} must be a ${rules.type}` });
+            }
+            
+            if (rules.minLength && value.length < rules.minLength) {
+                errors.push({ field, message: `${field} must be at least ${rules.minLength} characters` });
+            }
+            
+            if (rules.pattern && !rules.pattern.test(value)) {
+                errors.push({ field, message: `${field} has invalid format` });
+            }
+            
+            if (rules.min !== undefined && value < rules.min) {
+                errors.push({ field, message: `${field} must be at least ${rules.min}` });
+            }
+            
+            if (rules.max !== undefined && value > rules.max) {
+                errors.push({ field, message: `${field} must be at most ${rules.max}` });
+            }
+        }
+    }
+    
+    return errors.length > 0 ? { valid: false, errors } : { valid: true };
+}
+
+// Usage
+const result = validateUser({
+    name: "J",
+    email: "invalid-email",
+    age: 200
+});
+console.log(result);
+// { valid: false, errors: [...] }</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Logging and Debugging</h2>
+                <p>Track errors effectively:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Logger utility
+class Logger {
+    constructor(level = "info") {
+        this.level = level;
+        this.levels = { debug: 0, info: 1, warn: 2, error: 3 };
+    }
+    
+    shouldLog(level) {
+        return this.levels[level] >= this.levels[this.level];
+    }
+    
+    formatMessage(level, message, data = {}) {
+        return {
+            timestamp: new Date().toISOString(),
+            level,
+            message,
+            ...data
+        };
+    }
+    
+    debug(message, data) {
+        if (this.shouldLog("debug")) {
+            console.debug(this.formatMessage("debug", message, data));
+        }
+    }
+    
+    info(message, data) {
+        if (this.shouldLog("info")) {
+            console.info(this.formatMessage("info", message, data));
+        }
+    }
+    
+    warn(message, data) {
+        if (this.shouldLog("warn")) {
+            console.warn(this.formatMessage("warn", message, data));
+        }
+    }
+    
+    error(message, error = null, data = {}) {
+        if (this.shouldLog("error")) {
+            const formatted = this.formatMessage("error", message, {
+                ...data,
+                error: error ? { message: error.message, stack: error.stack } : null
+            });
+            console.error(formatted);
+        }
+    }
+}
+
+const logger = new Logger("debug");
+
+// Usage
+try {
+    await processPayment(amount);
+    logger.info("Payment processed", { amount, userId });
+} catch (error) {
+    logger.error("Payment failed", error, { amount, userId });
+    throw error;
+}
+
+// Debugging with stack traces
+function trace() {
+    console.log(new Error().stack);
+}
+
+function level1() {
+    level2();
+}
+
+function level2() {
+    level3();
+}
+
+function level3() {
+    trace();  // Shows call stack
+}
+
+level1();
+
+// Conditional breakpoints with debugger
+function complexOperation(data) {
+    if (data.debug) {
+        debugger;  // Pause execution in dev tools
+    }
+    // Process data
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Error Recovery Strategies</h2>
+                <p>Handle errors gracefully and recover:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Retry with backoff
+async function retryWithBackoff(fn, maxRetries = 3, baseDelay = 1000) {
+    let lastError;
+    
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+            return await fn();
+        } catch (error) {
+            lastError = error;
+            
+            if (attempt < maxRetries - 1) {
+                const delay = baseDelay * Math.pow(2, attempt);
+                console.log(`Attempt ${attempt + 1} failed, retrying in ${delay}ms`);
+                await new Promise(r => setTimeout(r, delay));
+            }
+        }
+    }
+    
+    throw lastError;
+}
+
+// Fallback values
+function getConfigValue(key) {
+    try {
+        const config = JSON.parse(localStorage.getItem("config"));
+        return config[key];
+    } catch {
+        return DEFAULT_CONFIG[key];  // Fallback
+    }
+}
+
+// Circuit breaker pattern
+class CircuitBreaker {
+    constructor(fn, options = {}) {
+        this.fn = fn;
+        this.failureThreshold = options.failureThreshold || 5;
+        this.resetTimeout = options.resetTimeout || 60000;
+        this.failures = 0;
+        this.state = "closed";  // closed, open, half-open
+        this.lastFailure = null;
+    }
+    
+    async execute(...args) {
+        if (this.state === "open") {
+            if (Date.now() - this.lastFailure > this.resetTimeout) {
+                this.state = "half-open";
+            } else {
+                throw new Error("Circuit breaker is open");
+            }
+        }
+        
+        try {
+            const result = await this.fn(...args);
+            this.onSuccess();
+            return result;
+        } catch (error) {
+            this.onFailure();
+            throw error;
+        }
+    }
+    
+    onSuccess() {
+        this.failures = 0;
+        this.state = "closed";
+    }
+    
+    onFailure() {
+        this.failures++;
+        this.lastFailure = Date.now();
+        
+        if (this.failures >= this.failureThreshold) {
+            this.state = "open";
+        }
+    }
+}
+
+// Graceful degradation
+class FeatureFlags {
+    constructor() {
+        this.flags = {};
+    }
+    
+    async checkFeature(name, fallback = false) {
+        try {
+            const response = await fetch(`/api/features/${name}`);
+            const data = await response.json();
+            return data.enabled;
+        } catch {
+            return fallback;  // Fallback if API fails
+        }
+    }
+}
+
+async function renderPage() {
+    const showNewFeature = await featureFlags.checkFeature("new-ui", false);
+    
+    if (showNewFeature) {
+        renderNewUI();
+    } else {
+        renderOldUI();
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a robust form validation system
+class FormValidator {
+    constructor(schema) {
+        this.schema = schema;
+        this.errors = {};
+    }
+    
+    validate(data) {
+        this.errors = {};
+        
+        for (const [field, rules] of Object.entries(this.schema)) {
+            const value = data[field];
+            
+            // Required check
+            if (rules.required && this.isEmpty(value)) {
+                this.addError(field, `${this.formatFieldName(field)} is required`);
+                continue;
+            }
+            
+            // Skip other validations if empty and not required
+            if (this.isEmpty(value) && !rules.required) continue;
+            
+            // Type validation
+            if (rules.type && !this.checkType(value, rules.type)) {
+                this.addError(field, `${this.formatFieldName(field)} must be a ${rules.type}`);
+            }
+            
+            // Custom validators
+            if (rules.validators) {
+                for (const validator of rules.validators) {
+                    const result = validator(value, data);
+                    if (result !== true) {
+                        this.addError(field, result);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return Object.keys(this.errors).length === 0;
+    }
+    
+    isEmpty(value) {
+        return value === undefined || value === null || value === "";
+    }
+    
+    checkType(value, type) {
+        switch (type) {
+            case "string": return typeof value === "string";
+            case "number": return typeof value === "number" && !isNaN(value);
+            case "boolean": return typeof value === "boolean";
+            case "array": return Array.isArray(value);
+            case "email": return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            default: return true;
+        }
+    }
+    
+    addError(field, message) {
+        if (!this.errors[field]) {
+            this.errors[field] = [];
+        }
+        this.errors[field].push(message);
+    }
+    
+    formatFieldName(field) {
+        return field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1');
+    }
+    
+    getErrors() {
+        return this.errors;
+    }
+    
+    hasErrors() {
+        return Object.keys(this.errors).length > 0;
+    }
+}
+
+// Define schema and use
+const registrationSchema = {
+    email: {
+        type: "email",
+        required: true
+    },
+    password: {
+        type: "string",
+        required: true,
+        validators: [
+            (value) => value.length >= 8 || "Password must be at least 8 characters",
+            (value) => /[A-Z]/.test(value) || "Password must contain an uppercase letter",
+            (value) => /[0-9]/.test(value) || "Password must contain a number"
+        ]
+    },
+    confirmPassword: {
+        required: true,
+        validators: [
+            (value, data) => value === data.password || "Passwords do not match"
+        ]
+    },
+    age: {
+        type: "number",
+        required: false,
+        validators: [
+            (value) => value >= 18 || "Must be at least 18 years old"
+        ]
+    }
+};
+
+const validator = new FormValidator(registrationSchema);
+
+const formData = {
+    email: "invalid-email",
+    password: "short",
+    confirmPassword: "different",
+    age: 16
+};
+
+if (!validator.validate(formData)) {
+    console.log("Validation errors:", validator.getErrors());
+}</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson12.html" class="btn btn-secondary">← Previous: Fetch & APIs</a>
+                <a href="lesson14.html" class="btn btn-primary">Next: Local Storage →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

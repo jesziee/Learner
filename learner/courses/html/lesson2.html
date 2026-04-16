@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Document Structure - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>📄 Lesson 2: HTML Document Structure</h1>
+            <p>The basic skeleton of every web page</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>The Basic HTML Template</h2>
+                <p>Every HTML document follows a standard structure. This is the foundation of every webpage you'll create.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="keyword"><!DOCTYPE html></span>
+<<span class="keyword">html</span> <span class="variable">lang</span>=<span class="string">"en"</span>>
+<<span class="keyword">head</span>>
+    <<span class="keyword">meta</span> <span class="variable">charset</span>=<span class="string">"UTF-8"</span>>
+    <<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"viewport"</span> <span class="variable">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>>
+    <<span class="keyword">title</span>>My First Webpage</<span class="keyword">title</span>>
+</<span class="keyword">head</span>>
+<<span class="keyword">body</span>>
+    <<span class="keyword">h1</span>>Hello, World!</<span class="keyword">h1</span>>
+    <<span class="keyword">p</span>>This is my first webpage.</<span class="keyword">p</span>>
+</<span class="keyword">body</span>>
+</<span class="keyword">html</span>></code></pre>
+                </div>
+                
+                <p>Let's break down each part to understand what it does.</p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>The DOCTYPE Declaration</h2>
+                
+                <div class="code-block">
+                    <pre><code><span class="keyword"><!DOCTYPE html></span></code></pre>
+                </div>
+                
+                <p>This tells the browser that this is an HTML5 document. It must be the very first line in your HTML file, before any other code. Without it, browsers may display your page in "quirks mode" (older, inconsistent rendering).</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Why it matters:</strong> In the past, there were different versions of HTML with different DOCTYPEs. The simple HTML5 DOCTYPE tells modern browsers to use the latest standards.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>The html Element</h2>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">html</span> <span class="variable">lang</span>=<span class="string">"en"</span>>
+    <span class="comment">// All page content goes here</span>
+</<span class="keyword">html</span>></code></pre>
+                </div>
+                
+                <p>The <code><html></code> element is the root element that contains all other elements. Everything on your page goes inside it.</p>
+                
+                <h3>The lang Attribute</h3>
+                <p>The <code>lang</code> attribute specifies the language of the content:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><code>lang="en"</code> - English</li>
+                    <li><code>lang="es"</code> - Spanish</li>
+                    <li><code>lang="fr"</code> - French</li>
+                    <li><code>lang="zh"</code> - Chinese</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Why lang matters:</strong> It helps screen readers pronounce content correctly and enables proper spell-checking in browsers.</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>The head Element</h2>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">head</span>>
+    <span class="comment">// Metadata goes here (not visible on page)</span>
+    <<span class="keyword">meta</span> <span class="variable">charset</span>=<span class="string">"UTF-8"</span>>
+    <<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"viewport"</span> <span class="variable">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>>
+    <<span class="keyword">title</span>>Page Title</<span class="keyword">title</span>>
+    <<span class="keyword">link</span> <span class="variable">rel</span>=<span class="string">"stylesheet"</span> <span class="variable">href</span>=<span class="string">"styles.css"</span>>
+</<span class="keyword">head</span>></code></pre>
+                </div>
+                
+                <p>The <code><head></code> contains <strong>metadata</strong> - information about the page that isn't displayed. This includes:</p>
+                
+                <h3>Meta Tags</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Character encoding (required for special characters):</span>
+<<span class="keyword">meta</span> <span class="variable">charset</span>=<span class="string">"UTF-8"</span>>
+
+<span class="comment">// Viewport for responsive design:</span>
+<<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"viewport"</span> <span class="variable">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>>
+
+<span class="comment">// Description for search engines:</span>
+<<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"description"</span> <span class="variable">content</span>=<span class="string">"A description of your page"</span>>
+
+<span class="comment">// Author information:</span>
+<<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"author"</span> <span class="variable">content</span>=<span class="string">"Your Name"</span>></code></pre>
+                </div>
+                
+                <h3>The title Element</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">title</span>>My Awesome Website</<span class="keyword">title</span>></code></pre>
+                </div>
+                <p>The title appears in the browser tab and is used by search engines. Make it descriptive!</p>
+                
+                <h3>Linking External Resources</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Link to CSS stylesheet:</span>
+<<span class="keyword">link</span> <span class="variable">rel</span>=<span class="string">"stylesheet"</span> <span class="variable">href</span>=<span class="string">"styles.css"</span>>
+
+<span class="comment">// Link to favicon (tab icon):</span>
+<<span class="keyword">link</span> <span class="variable">rel</span>=<span class="string">"icon"</span> <span class="variable">href</span>=<span class="string">"favicon.ico"</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>The body Element</h2>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">body</span>>
+    <span class="comment">// All visible content goes here</span>
+    <<span class="keyword">h1</span>>Welcome to My Website</<span class="keyword">h1</span>>
+    <<span class="keyword">p</span>>This is visible content.</<span class="keyword">p</span>>
+    <<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"photo.jpg"</span> <span class="variable">alt</span>=<span class="string">"A photo"</span>>
+</<span class="keyword">body</span>></code></pre>
+                </div>
+                
+                <p>The <code><body></code> contains everything visible on the page: text, images, videos, forms, and more. Everything you want users to see goes here.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>head vs body:</strong> The head is for metadata (information about the page). The body is for content (what users actually see).</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>HTML Comments</h2>
+                <p>Comments are notes in your code that aren't displayed. They help document your code.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment"><!-- This is a comment. It won't appear on the page. --></span>
+
+<<span class="keyword">p</span>>This text is visible.</<span class="keyword">p</span>> <span class="comment"><!-- Inline comment --></span>
+
+<span class="comment"><!-- 
+    Multi-line comments 
+    can span multiple lines.
+    Useful for longer notes or temporarily hiding code.
+--></span></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Use comments to:</strong> Explain complex code, leave notes for yourself or others, temporarily disable code during debugging, and document your thought process.</p>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Complete Example</h2>
+                <p>Here's a complete, properly structured HTML document:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="keyword"><!DOCTYPE html></span>
+<<span class="keyword">html</span> <span class="variable">lang</span>=<span class="string">"en"</span>>
+<<span class="keyword">head</span>>
+    <<span class="keyword">meta</span> <span class="variable">charset</span>=<span class="string">"UTF-8"</span>>
+    <<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"viewport"</span> <span class="variable">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>>
+    <<span class="keyword">meta</span> <span class="variable">name</span>=<span class="string">"description"</span> <span class="variable">content</span>=<span class="string">"A simple webpage"</span>>
+    <<span class="keyword">title</span>>My First Webpage</<span class="keyword">title</span>>
+</<span class="keyword">head</span>>
+<<span class="keyword">body</span>>
+    <span class="comment"><!-- Main heading --></span>
+    <<span class="keyword">h1</span>>Welcome!</<span class="keyword">h1</span>>
+    
+    <span class="comment"><!-- Introduction paragraph --></span>
+    <<span class="keyword">p</span>>This is my first webpage. I'm learning HTML!</<span class="keyword">p</span>>
+    
+    <span class="comment"><!-- A link --></span>
+    <<span class="keyword">a</span> <span class="variable">href</span>=<span class="string">"https://example.com"</span>>Click here</<span class="keyword">a</span>>
+</<span class="keyword">body</span>>
+</<span class="keyword">html</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><!DOCTYPE html>:</strong> Always first, declares HTML5</li>
+                            <li><strong><html>:</strong> Root element, use lang attribute</li>
+                            <li><strong><head>:</strong> Contains metadata (title, meta tags, links)</li>
+                            <li><strong><body>:</strong> Contains all visible content</li>
+                            <li><strong>charset="UTF-8":</strong> Essential for proper text encoding</li>
+                            <li><strong>viewport meta:</strong> Critical for mobile responsiveness</li>
+                            <li><strong>Comments:</strong> Use <!-- --> to document code</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson1.html" class="nav-btn prev">← Previous: Introduction to HTML</a>
+                <a href="lesson3.html" class="nav-btn next">Next: Text Elements →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

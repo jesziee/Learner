@@ -1,0 +1,19 @@
+total 308
+drwxr-xr-x 2 root root  4096 Apr 15 13:25 .
+drwxr-xr-x 7 root root  4096 Apr 15 12:36 ..
+-rw-r--r-- 1 root root  6827 Apr 15 12:36 index.html
+-rw-r--r-- 1 root root  8872 Apr 15 12:37 lesson1.html
+-rw-r--r-- 1 root root 17840 Apr 15 13:09 lesson10.html
+-rw-r--r-- 1 root root 21109 Apr 15 13:12 lesson11.html
+-rw-r--r-- 1 root root 20193 Apr 15 13:16 lesson12.html
+-rw-r--r-- 1 root root 20112 Apr 15 13:19 lesson13.html
+-rw-r--r-- 1 root root 23641 Apr 15 13:22 lesson14.html
+-rw-r--r-- 1 root root 26240 Apr 15 13:25 lesson15.html
+-rw-r--r-- 1 root root 15975 Apr 15 12:39 lesson2.html
+-rw-r--r-- 1 root root 14667 Apr 15 12:41 lesson3.html
+-rw-r--r-- 1 root root 15476 Apr 15 12:43 lesson4.html
+-rw-r--r-- 1 root root 15845 Apr 15 12:53 lesson5.html
+-rw-r--r-- 1 root root 17556 Apr 15 12:55 lesson6.html
+-rw-r--r-- 1 root root 18041 Apr 15 12:58 lesson7.html
+-rw-r--r-- 1 root root 18710 Apr 15 13:02 lesson8.html
+-rw-r--r-- 1 root root 19002 Apr 15 13:06 lesson9.html

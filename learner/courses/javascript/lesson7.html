@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: Arrays - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 7: Arrays</h1>
+            <p>Master the essential data structure for storing and manipulating collections of data.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Arrays?</h2>
+                <p>Arrays are ordered collections of data. They allow you to store multiple values in a single variable, accessed by their position (index). Arrays are one of the most commonly used data structures in JavaScript and are essential for working with lists of items, whether it's a list of names, numbers, objects, or even other arrays.</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Arrays use zero-based indexing, meaning the first item is at index 0, the second at index 1, and so on. This is a convention shared by most programming languages.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Arrays</h2>
+                <p>There are several ways to create arrays in JavaScript:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Method 1: Array literal (most common)
+const fruits = ["Apple", "Banana", "Orange"];
+console.log(fruits);  // ["Apple", "Banana", "Orange"]
+
+// Method 2: Array constructor
+const numbers = new Array(1, 2, 3, 4, 5);
+console.log(numbers);  // [1, 2, 3, 4, 5]
+
+// Method 3: Array.from()
+const fromString = Array.from("Hello");
+console.log(fromString);  // ["H", "e", "l", "l", "o"]
+
+// Method 4: Array.of()
+const mixed = Array.of(1, "two", true, null);
+console.log(mixed);  // [1, "two", true, null]
+
+// Empty array
+const empty = [];
+console.log(empty);  // []
+
+// Array with initial length
+const sparse = new Array(5);
+console.log(sparse);  // [empty × 5]</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>[]</code> - Array literal syntax (preferred for most cases)</li>
+                        <li><code>new Array()</code> - Constructor (be careful with single number argument)</li>
+                        <li><code>Array.from()</code> - Creates array from iterable or array-like object</li>
+                        <li><code>Array.of()</code> - Creates array from arguments (safer than constructor)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Accessing Array Elements</h2>
+                <p>Use index numbers to access individual elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>const colors = ["Red", "Green", "Blue", "Yellow"];
+
+// Access by index (zero-based)
+console.log(colors[0]);   // "Red" (first element)
+console.log(colors[1]);   // "Green" (second element)
+console.log(colors[3]);   // "Yellow" (fourth element)
+
+// Accessing out of bounds
+console.log(colors[4]);   // undefined (no element at index 4)
+
+// Negative indices don't work like Python
+console.log(colors[-1]);  // undefined (not the last element)
+
+// Get last element using length
+console.log(colors[colors.length - 1]);  // "Yellow"
+
+// At method (ES2022) - supports negative indices
+console.log(colors.at(-1));  // "Yellow" (last element)
+console.log(colors.at(-2));  // "Blue" (second to last)</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Array Properties</h2>
+                
+                <div class="code-block">
+                    <pre><code>const animals = ["Cat", "Dog", "Bird", "Fish"];
+
+// Length property
+console.log(animals.length);  // 4
+
+// Use length to iterate
+for (let i = 0; i < animals.length; i++) {
+    console.log(animals[i]);
+}
+
+// Check if array
+console.log(Array.isArray(animals));  // true
+console.log(animals instanceof Array);  // true</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Modifying Arrays</h2>
+                <p>Arrays are mutable - you can change their contents:</p>
+                
+                <h3>Changing Elements</h3>
+                <div class="code-block">
+                    <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// Modify existing element
+numbers[0] = 10;
+console.log(numbers);  // [10, 2, 3, 4, 5]
+
+// Modify multiple elements
+numbers[1] = 20;
+numbers[2] = 30;
+console.log(numbers);  // [10, 20, 30, 4, 5]
+
+// Add element at specific index
+numbers[5] = 60;
+console.log(numbers);  // [10, 20, 30, 4, 5, 60]
+
+// Warning: Can create "holes"
+numbers[10] = 100;
+console.log(numbers);  // [10, 20, 30, 4, 5, 60, empty × 4, 100]</code></pre>
+                </div>
+
+                <h3>Adding Elements</h3>
+                <div class="code-block">
+                    <pre><code>const fruits = ["Apple", "Banana"];
+
+// push() - add to end
+fruits.push("Orange");
+console.log(fruits);  // ["Apple", "Banana", "Orange"]
+
+// push multiple items
+fruits.push("Grape", "Mango");
+console.log(fruits);  // ["Apple", "Banana", "Orange", "Grape", "Mango"]
+
+// unshift() - add to beginning
+fruits.unshift("Strawberry");
+console.log(fruits);  // ["Strawberry", "Apple", "Banana", "Orange", "Grape", "Mango"]
+
+// Returns new length
+let newLength = fruits.push("Kiwi");
+console.log(newLength);  // 7</code></pre>
+                </div>
+
+                <h3>Removing Elements</h3>
+                <div class="code-block">
+                    <pre><code>const colors = ["Red", "Green", "Blue", "Yellow", "Purple"];
+
+// pop() - remove from end (returns removed element)
+let lastColor = colors.pop();
+console.log(lastColor);  // "Purple"
+console.log(colors);     // ["Red", "Green", "Blue", "Yellow"]
+
+// shift() - remove from beginning
+let firstColor = colors.shift();
+console.log(firstColor);  // "Red"
+console.log(colors);      // ["Green", "Blue", "Yellow"]
+
+// splice() - remove from anywhere
+let removed = colors.splice(1, 1);  // Remove 1 element at index 1
+console.log(removed);  // ["Blue"]
+console.log(colors);   // ["Green", "Yellow"]
+
+// Remove multiple elements
+colors.splice(0, 2);  // Remove 2 elements starting at index 0
+console.log(colors);  // []</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The splice() Method</h2>
+                <p>A powerful method for adding, removing, and replacing elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>// splice(startIndex, deleteCount, item1, item2, ...)
+const nums = [1, 2, 3, 4, 5];
+
+// Remove elements
+nums.splice(2, 1);  // Remove 1 element at index 2
+console.log(nums);  // [1, 2, 4, 5]
+
+// Replace elements
+nums.splice(1, 1, 10);  // Remove 1 element at index 1, insert 10
+console.log(nums);  // [1, 10, 4, 5]
+
+// Insert without removing
+nums.splice(2, 0, 20, 30);  // Insert 20, 30 at index 2
+console.log(nums);  // [1, 10, 20, 30, 4, 5]
+
+// Negative index (from end)
+nums.splice(-1, 1);  // Remove last element
+console.log(nums);  // [1, 10, 20, 30, 4]
+
+// Returns removed elements
+const letters = ["a", "b", "c", "d"];
+let removed = letters.splice(1, 2, "x", "y");
+console.log(letters);  // ["a", "x", "y", "d"]
+console.log(removed);  // ["b", "c"]</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>splice() Parameters:</strong>
+                    <ul>
+                        <li><code>startIndex</code> - Where to begin (negative counts from end)</li>
+                        <li><code>deleteCount</code> - How many to remove (0 to just insert)</li>
+                        <li><code>item1, item2, ...</code> - Elements to insert</li>
+                        <li>Returns array of removed elements</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The slice() Method</h2>
+                <p>Extract a portion of an array without modifying the original:</p>
+                
+                <div class="code-block">
+                    <pre><code>const fruits = ["Apple", "Banana", "Orange", "Grape", "Mango"];
+
+// slice(startIndex, endIndex)
+const citrus = fruits.slice(1, 3);
+console.log(citrus);   // ["Banana", "Orange"] (index 1 to 2, excludes 3)
+console.log(fruits);   // Original unchanged
+
+// From index to end
+const lastThree = fruits.slice(2);
+console.log(lastThree);  // ["Orange", "Grape", "Mango"]
+
+// Negative indices
+const lastTwo = fruits.slice(-2);
+console.log(lastTwo);  // ["Grape", "Mango"]
+
+// Copy entire array
+const copy = fruits.slice();
+console.log(copy);  // ["Apple", "Banana", "Orange", "Grape", "Mango"]</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Remember:</strong> <code>slice()</code> creates a shallow copy and doesn't modify the original. <code>splice()</code> modifies the original array.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Finding Elements</h2>
+                <p>Various methods to search within arrays:</p>
+                
+                <div class="code-block">
+                    <pre><code>const fruits = ["Apple", "Banana", "Orange", "Banana"];
+
+// indexOf() - first occurrence index
+console.log(fruits.indexOf("Banana"));     // 1
+console.log(fruits.indexOf("Grape"));      // -1 (not found)
+
+// lastIndexOf() - last occurrence index
+console.log(fruits.lastIndexOf("Banana"));  // 3
+
+// includes() - boolean check
+console.log(fruits.includes("Orange"));  // true
+console.log(fruits.includes("Grape"));   // false
+
+// find() - first element matching condition
+const numbers = [1, 5, 10, 15, 20];
+const found = numbers.find(n => n > 10);
+console.log(found);  // 15 (first element > 10)
+
+// findIndex() - index of first matching element
+const index = numbers.findIndex(n => n > 10);
+console.log(index);  // 3 (index of 15)
+
+// With objects
+const users = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+    { id: 3, name: "Charlie" }
+];
+
+const user = users.find(u => u.id === 2);
+console.log(user);  // { id: 2, name: "Bob" }</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Array Iteration Methods</h2>
+                <p>Modern methods for working with array elements:</p>
+                
+                <h3>forEach()</h3>
+                <div class="code-block">
+                    <pre><code>const colors = ["Red", "Green", "Blue"];
+
+// forEach - execute function for each element
+colors.forEach((color, index) => {
+    console.log(`${index}: ${color}`);
+});
+// 0: Red
+// 1: Green
+// 2: Blue</code></pre>
+                </div>
+
+                <h3>map()</h3>
+                <div class="code-block">
+                    <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// map - transform each element, return new array
+const doubled = numbers.map(n => n * 2);
+console.log(doubled);  // [2, 4, 6, 8, 10]
+
+// Transform objects
+const users = [
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 }
+];
+
+const names = users.map(user => user.name);
+console.log(names);  // ["Alice", "Bob"]</code></pre>
+                </div>
+
+                <h3>filter()</h3>
+                <div class="code-block">
+                    <pre><code>const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// filter - keep elements that pass test
+const evens = numbers.filter(n => n % 2 === 0);
+console.log(evens);  // [2, 4, 6, 8, 10]
+
+const greaterThan5 = numbers.filter(n => n > 5);
+console.log(greaterThan5);  // [6, 7, 8, 9, 10]
+
+// Filter objects
+const products = [
+    { name: "Laptop", price: 999 },
+    { name: "Phone", price: 699 },
+    { name: "Tablet", price: 499 }
+];
+
+const affordable = products.filter(p => p.price < 700);
+console.log(affordable);
+// [{ name: "Phone", price: 699 }, { name: "Tablet", price: 499 }]</code></pre>
+                </div>
+
+                <h3>reduce()</h3>
+                <div class="code-block">
+                    <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// reduce - accumulate values into single result
+const sum = numbers.reduce((accumulator, current) => {
+    return accumulator + current;
+}, 0);
+console.log(sum);  // 15
+
+// Shorter syntax
+const sum2 = numbers.reduce((acc, cur) => acc + cur, 0);
+console.log(sum2);  // 15
+
+// Find maximum
+const max = numbers.reduce((max, cur) => cur > max ? cur : max);
+console.log(max);  // 5
+
+// Count occurrences
+const words = ["apple", "banana", "apple", "orange", "banana", "apple"];
+const count = words.reduce((acc, word) => {
+    acc[word] = (acc[word] || 0) + 1;
+    return acc;
+}, {});
+console.log(count);  // { apple: 3, banana: 2, orange: 1 }</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>More Array Methods</h2>
+                
+                <h3>some() and every()</h3>
+                <div class="code-block">
+                    <pre><code>const ages = [18, 21, 25, 30, 16];
+
+// some() - at least one passes test?
+const hasMinor = ages.some(age => age < 18);
+console.log(hasMinor);  // true
+
+// every() - all pass test?
+const allAdults = ages.every(age => age >= 18);
+console.log(allAdults);  // false</code></pre>
+                </div>
+
+                <h3>sort()</h3>
+                <div class="code-block">
+                    <pre><code>const fruits = ["Banana", "Apple", "Cherry", "Date"];
+
+// Sort alphabetically (modifies original)
+fruits.sort();
+console.log(fruits);  // ["Apple", "Banana", "Cherry", "Date"]
+
+// Sort numbers (need compare function!)
+const numbers = [10, 5, 40, 25, 100];
+numbers.sort();  // Wrong! Sorts as strings
+console.log(numbers);  // [10, 100, 25, 40, 5]
+
+// Correct number sort
+numbers.sort((a, b) => a - b);  // Ascending
+console.log(numbers);  // [5, 10, 25, 40, 100]
+
+numbers.sort((a, b) => b - a);  // Descending
+console.log(numbers);  // [100, 40, 25, 10, 5]
+
+// Sort objects
+const users = [
+    { name: "Charlie", age: 35 },
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 }
+];
+
+users.sort((a, b) => a.age - b.age);
+console.log(users);
+// [{ name: "Alice", age: 25 }, { name: "Bob", age: 30 }, { name: "Charlie", age: 35 }]</code></pre>
+                </div>
+
+                <h3>reverse()</h3>
+                <div class="code-block">
+                    <pre><code>const letters = ["a", "b", "c", "d"];
+letters.reverse();
+console.log(letters);  // ["d", "c", "b", "a"]</code></pre>
+                </div>
+
+                <h3>join() and split()</h3>
+                <div class="code-block">
+                    <pre><code>// join - array to string
+const words = ["Hello", "World"];
+console.log(words.join(" "));  // "Hello World"
+console.log(words.join("-"));  // "Hello-World"
+console.log(words.join());     // "Hello,World"
+
+// split - string to array
+const sentence = "Hello beautiful world";
+const wordArray = sentence.split(" ");
+console.log(wordArray);  // ["Hello", "beautiful", "world"]</code></pre>
+                </div>
+
+                <h3>concat()</h3>
+                <div class="code-block">
+                    <pre><code>const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+// concat - combine arrays
+const combined = arr1.concat(arr2);
+console.log(combined);  // [1, 2, 3, 4, 5, 6]
+
+// Multiple arrays
+const arr3 = [7, 8];
+const all = arr1.concat(arr2, arr3);
+console.log(all);  // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// Spread operator (modern alternative)
+const spread = [...arr1, ...arr2];
+console.log(spread);  // [1, 2, 3, 4, 5, 6]</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Spread Operator with Arrays</h2>
+                <p>The spread operator (...) expands arrays into individual elements:</p>
+                
+                <div class="code-block">
+                    <pre><code>const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+// Copy array
+const copy = [...arr1];
+console.log(copy);  // [1, 2, 3]
+
+// Combine arrays
+const combined = [...arr1, ...arr2];
+console.log(combined);  // [1, 2, 3, 4, 5, 6]
+
+// Add elements while copying
+const extended = [0, ...arr1, 4];
+console.log(extended);  // [0, 1, 2, 3, 4]
+
+// Convert array-like to array
+const nodeList = document.querySelectorAll("p");
+const paragraphs = [...nodeList];
+
+// Math functions with arrays
+const numbers = [5, 2, 8, 1, 9];
+console.log(Math.max(...numbers));  // 9
+console.log(Math.min(...numbers));  // 1</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Destructuring Arrays</h2>
+                <p>Extract values into variables easily:</p>
+                
+                <div class="code-block">
+                    <pre><code>const colors = ["Red", "Green", "Blue"];
+
+// Basic destructuring
+const [first, second, third] = colors;
+console.log(first);   // "Red"
+console.log(second);  // "Green"
+console.log(third);   // "Blue"
+
+// Skip elements
+const [a, , c] = colors;
+console.log(a);  // "Red"
+console.log(c);  // "Blue"
+
+// Default values
+const [x, y, z, w = "Yellow"] = colors;
+console.log(w);  // "Yellow" (default used)
+
+// Rest pattern
+const [head, ...tail] = [1, 2, 3, 4, 5];
+console.log(head);  // 1
+console.log(tail);  // [2, 3, 4, 5]
+
+// Swap variables
+let m = 10, n = 20;
+[m, n] = [n, m];
+console.log(m);  // 20
+console.log(n);  // 10</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Multidimensional Arrays</h2>
+                <p>Arrays containing other arrays:</p>
+                
+                <div class="code-block">
+                    <pre><code>// 2D array (matrix)
+const matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Access elements
+console.log(matrix[0]);      // [1, 2, 3]
+console.log(matrix[0][1]);   // 2
+console.log(matrix[2][2]);   // 9
+
+// Iterate through 2D array
+for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+        console.log(matrix[row][col]);
+    }
+}
+
+// Flatten 2D array
+const flat = matrix.flat();
+console.log(flat);  // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// Real-world example: Tic-tac-toe board
+const board = [
+    ["X", "O", "X"],
+    ["O", "X", "O"],
+    ["O", "X", "X"]
+];
+
+// Check winner
+function checkWinner(board) {
+    // Check rows
+    for (let row of board) {
+        if (row[0] === row[1] && row[1] === row[2]) {
+            return row[0];
+        }
+    }
+    // ... more checks for columns and diagonals
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a task manager
+const tasks = [];
+
+function addTask(task) {
+    tasks.push({ task, completed: false, id: Date.now() });
+    console.log(`Added: "${task}"`);
+}
+
+function completeTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.completed = true;
+        console.log(`Completed: "${task.task}"`);
+    }
+}
+
+function removeTask(id) {
+    const index = tasks.findIndex(t => t.id === id);
+    if (index > -1) {
+        const removed = tasks.splice(index, 1);
+        console.log(`Removed: "${removed[0].task}"`);
+    }
+}
+
+function listTasks() {
+    console.log("\n=== Tasks ===");
+    tasks.forEach(t => {
+        const status = t.completed ? "✓" : "○";
+        console.log(`${status} [${t.id}] ${t.task}`);
+    });
+}
+
+function getPendingTasks() {
+    return tasks.filter(t => !t.completed);
+}
+
+function getCompletedTasks() {
+    return tasks.filter(t => t.completed);
+}
+
+// Test it out
+addTask("Learn JavaScript");
+addTask("Build a project");
+addTask("Deploy to production");
+listTasks();
+
+const taskId = tasks[0].id;
+completeTask(taskId);
+listTasks();
+
+console.log("\nPending:", getPendingTasks().length);
+console.log("Completed:", getCompletedTasks().length);</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson6.html" class="btn btn-secondary">← Previous: Functions</a>
+                <a href="lesson8.html" class="btn btn-primary">Next: Objects →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

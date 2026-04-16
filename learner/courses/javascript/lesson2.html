@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Variables - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 2: Variables</h1>
+            <p>Learn how to store and manage data using variables in JavaScript.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Variables?</h2>
+                <p>Variables are containers for storing data values. Think of them as labeled boxes where you can put information that you want to use later. In JavaScript, we use variables to store all kinds of data: numbers, text, lists, and more.</p>
+                
+                <div class="tip-box">
+                    <strong>Analogy:</strong> Think of a variable like a storage box. You put a label on the box (the variable name) and put something inside (the value). Later, you can find the box by its label and retrieve what's inside.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Declaring Variables</h2>
+                <p>In JavaScript, there are three ways to declare variables:</p>
+                
+                <h3>1. Using <code>let</code></h3>
+                <p>The modern way to declare variables that can be changed:</p>
+                
+                <div class="code-block">
+                    <pre><code>let age = 25;
+console.log(age);  // Outputs: 25
+
+age = 26;          // We can change the value
+console.log(age);  // Outputs: 26</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>let age = 25;</code> - Declares a variable named 'age' with value 25</li>
+                        <li><code>age = 26;</code> - Changes the value to 26 (reassignment)</li>
+                        <li><code>let</code> allows you to change the value later</li>
+                    </ul>
+                </div>
+
+                <h3>2. Using <code>const</code></h3>
+                <p>For variables that should never change:</p>
+                
+                <div class="code-block">
+                    <pre><code>const PI = 3.14159;
+const MAX_SIZE = 100;
+
+console.log(PI);       // Outputs: 3.14159
+
+// PI = 3.14;          // ERROR! Cannot change a const</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>const PI = 3.14159;</code> - Creates a constant (unchangeable) variable</li>
+                        <li>Constants must be assigned a value when declared</li>
+                        <li>Attempting to change a <code>const</code> causes an error</li>
+                        <li>Use <code>const</code> by default, <code>let</code> only when you need to reassign</li>
+                    </ul>
+                </div>
+
+                <h3>3. Using <code>var</code> (Old Way)</h3>
+                <p>The original way to declare variables (mostly avoid in modern JavaScript):</p>
+                
+                <div class="code-block">
+                    <pre><code>var name = "John";
+var name = "Jane";    // Can redeclare (not ideal)
+
+console.log(name);    // Outputs: Jane</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Best Practice:</strong> Avoid <code>var</code> in modern JavaScript. Use <code>const</code> for values that won't change and <code>let</code> for values that will change.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Naming Variables</h2>
+                <p>Variable names must follow certain rules:</p>
+                
+                <div class="code-block">
+                    <pre><code>// ✅ Valid variable names
+let userName = "Alice";      // Letters and numbers
+let _private = "hidden";     // Underscore allowed
+let $price = 99.99;          // Dollar sign allowed
+let camelCase = "popular";   // Camel case (recommended)
+let userAge = 25;
+
+// ❌ Invalid variable names
+// let 2fast = "too fast";   // Cannot start with number
+// let my-var = "invalid";   // Hyphens not allowed
+// let let = "reserved";     // Cannot use reserved words</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Naming Rules:</strong>
+                    <ul>
+                        <li>Names can contain letters, digits, underscores, and dollar signs</li>
+                        <li>Names must begin with a letter, underscore, or dollar sign</li>
+                        <li>Names are case sensitive (<code>age</code> and <code>Age</code> are different)</li>
+                        <li>Reserved words (like <code>let</code>, <code>const</code>, <code>if</code>) cannot be used as names</li>
+                    </ul>
+                </div>
+
+                <h3>Naming Conventions</h3>
+                <div class="code-block">
+                    <pre><code>// Camel Case (recommended in JavaScript)
+let firstName = "John";
+let lastName = "Doe";
+let totalPrice = 99.99;
+
+// Descriptive names are better
+let x = 60;                        // Not clear what x means
+let secondsInMinute = 60;          // Much clearer!
+
+// Boolean variables often start with is, has, or should
+let isLoggedIn = true;
+let hasPermission = false;
+let shouldDisplay = true;</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Data Types</h2>
+                <p>Variables can hold different types of data:</p>
+                
+                <h3>Numbers</h3>
+                <div class="code-block">
+                    <pre><code>let integer = 42;           // Whole number
+let decimal = 3.14;         // Decimal number
+let negative = -10;         // Negative number
+let scientific = 2.5e6;     // Scientific notation (2,500,000)
+
+// Numbers can be used in calculations
+let sum = integer + decimal;  // 45.14</code></pre>
+                </div>
+
+                <h3>Strings (Text)</h3>
+                <div class="code-block">
+                    <pre><code>// Strings can use single or double quotes
+let singleQuotes = 'Hello';
+let doubleQuotes = "World";
+
+// Template literals (modern way)
+let greeting = `Hello, ${singleQuotes}!`;
+console.log(greeting);  // Outputs: Hello, Hello!
+
+// Strings can be combined (concatenation)
+let fullName = 'John' + ' ' + 'Doe';
+console.log(fullName);  // Outputs: John Doe</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>`Hello, ${name}!`</code> - Template literal with variable embedding</li>
+                        <li><code>${variable}</code> - Placeholder that gets replaced with the variable's value</li>
+                        <li>Backticks (<code>`</code>) are required for template literals</li>
+                    </ul>
+                </div>
+
+                <h3>Booleans</h3>
+                <div class="code-block">
+                    <pre><code>let isJavaScriptFun = true;
+let isBoring = false;
+
+// Booleans are used for decisions
+if (isJavaScriptFun) {
+    console.log("Let's learn more!");
+}</code></pre>
+                </div>
+
+                <h3>Undefined and Null</h3>
+                <div class="code-block">
+                    <pre><code>let notAssigned;            // undefined (no value assigned)
+let emptyValue = null;      // null (intentionally empty)
+
+console.log(notAssigned);   // Outputs: undefined
+console.log(emptyValue);    // Outputs: null</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>undefined</code> - Variable declared but no value assigned</li>
+                        <li><code>null</code> - Intentionally empty value (represents "nothing")</li>
+                        <li>Both represent "no value" but are used differently</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Variable Scope</h2>
+                <p>Where you declare a variable determines where it can be used:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Global scope - accessible everywhere
+let globalVar = "I'm global";
+
+function myFunction() {
+    // Function scope - only inside this function
+    let localVar = "I'm local";
+    
+    console.log(globalVar);  // ✅ Works
+    console.log(localVar);   // ✅ Works
+}
+
+myFunction();
+
+console.log(globalVar);      // ✅ Works
+// console.log(localVar);    // ❌ Error! Not accessible here</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Scope Types:</strong>
+                    <ul>
+                        <li><strong>Global scope:</strong> Variables declared outside any function/block</li>
+                        <li><strong>Function scope:</strong> Variables declared inside a function</li>
+                        <li><strong>Block scope:</strong> Variables declared inside { } with let/const</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Multiple Declarations</h2>
+                <p>You can declare multiple variables at once:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Multiple variables on one line
+let a = 1, b = 2, c = 3;
+
+// Or on multiple lines (more readable)
+let firstName = "John",
+    lastName = "Doe",
+    age = 30,
+    city = "New York";
+
+// Or declare first, assign later
+let x, y, z;
+x = 1;
+y = 2;
+z = 3;</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create variables to store information about yourself:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Try this exercise
+const fullName = "Your Name";
+let age = 25;
+let isStudent = true;
+let favoriteLanguage = "JavaScript";
+
+console.log("Name:", fullName);
+console.log("Age:", age);
+console.log("Is Student:", isStudent);
+console.log("Favorite Language:", favoriteLanguage);
+
+// Now try using template literals
+console.log(`My name is ${fullName} and I'm ${age} years old.`);</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson1.html" class="btn btn-secondary">← Previous: Introduction</a>
+                <a href="lesson3.html" class="btn btn-primary">Next: Operators →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

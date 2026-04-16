@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6: Functions - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 6: Functions</h1>
+            <p>Master the art of creating reusable code blocks with functions.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Functions?</h2>
+                <p>Functions are reusable blocks of code that perform specific tasks. Think of them as mini-programs within your program. Instead of writing the same code multiple times, you write it once as a function and call it whenever needed. This makes your code cleaner, more organized, and easier to maintain.</p>
+                
+                <div class="tip-box">
+                    <strong>Why Functions Matter:</strong> Functions are the building blocks of any program. They help you write DRY code (Don't Repeat Yourself), organize your logic into manageable pieces, and make your code easier to test and debug.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Function Declaration</h2>
+                <p>The traditional way to create a function:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic function declaration
+function greet() {
+    console.log("Hello, World!");
+}
+
+// Call (invoke) the function
+greet();  // Output: Hello, World!
+greet();  // Output: Hello, World!
+greet();  // Output: Hello, World!</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Function Parts:</strong>
+                    <ul>
+                        <li><code>function</code> - Keyword that declares a function</li>
+                        <li><code>greet</code> - Function name (use descriptive names)</li>
+                        <li><code>()</code> - Parameters go here (empty if no parameters)</li>
+                        <li><code>{ }</code> - Function body contains the code to execute</li>
+                        <li><code>greet();</code> - Calling/invoking the function</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Parameters and Arguments</h2>
+                <p>Pass data into functions to make them dynamic:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Function with parameters
+function greetPerson(name) {
+    console.log("Hello, " + name + "!");
+}
+
+// Call with different arguments
+greetPerson("Alice");    // Output: Hello, Alice!
+greetPerson("Bob");      // Output: Hello, Bob!
+greetPerson("Charlie");  // Output: Hello, Charlie!</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Parameters vs Arguments:</strong>
+                    <ul>
+                        <li><strong>Parameter:</strong> Variable in the function definition (name)</li>
+                        <li><strong>Argument:</strong> Actual value passed when calling ("Alice")</li>
+                        <li>Parameters act as placeholders for the values you'll pass in</li>
+                    </ul>
+                </div>
+
+                <h3>Multiple Parameters</h3>
+                <div class="code-block">
+                    <pre><code>// Function with multiple parameters
+function introduce(name, age, city) {
+    console.log("Hi, I'm " + name);
+    console.log("I'm " + age + " years old");
+    console.log("I live in " + city);
+}
+
+introduce("John", 25, "New York");
+
+// Output:
+// Hi, I'm John
+// I'm 25 years old
+// I live in New York</code></pre>
+                </div>
+
+                <h3>Default Parameters</h3>
+                <div class="code-block">
+                    <pre><code>// Parameters with default values
+function greetWithDefault(name = "Guest") {
+    console.log("Hello, " + name + "!");
+}
+
+greetWithDefault();         // Output: Hello, Guest!
+greetWithDefault("Alice");  // Output: Hello, Alice!
+
+// Multiple default parameters
+function createUser(name = "Anonymous", role = "user", active = true) {
+    console.log(`Name: ${name}, Role: ${role}, Active: ${active}`);
+}
+
+createUser();                      // Name: Anonymous, Role: user, Active: true
+createUser("Admin", "admin");      // Name: Admin, Role: admin, Active: true
+createUser("Bob", "editor", false); // Name: Bob, Role: editor, Active: false</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Return Values</h2>
+                <p>Functions can send values back to the caller:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Function that returns a value
+function add(a, b) {
+    return a + b;
+}
+
+// Store the returned value
+let result = add(5, 3);
+console.log(result);  // Output: 8
+
+// Use directly in expressions
+console.log(add(10, 20));        // Output: 30
+console.log(add(2, 3) * 2);      // Output: 10
+console.log("Sum: " + add(7, 8)); // Output: Sum: 15</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>How Return Works:</strong>
+                    <ul>
+                        <li><code>return</code> - Keyword that sends a value back</li>
+                        <li>Function stops executing when it hits return</li>
+                        <li>Without return, functions return <code>undefined</code></li>
+                        <li>Returned values can be stored, displayed, or used in calculations</li>
+                    </ul>
+                </div>
+
+                <h3>Early Return</h3>
+                <div class="code-block">
+                    <pre><code>// Return exits the function immediately
+function divide(a, b) {
+    if (b === 0) {
+        return "Cannot divide by zero";
+    }
+    return a / b;
+}
+
+console.log(divide(10, 2));   // Output: 5
+console.log(divide(10, 0));   // Output: Cannot divide by zero
+
+// Multiple return points
+function getGrade(score) {
+    if (score >= 90) return "A";
+    if (score >= 80) return "B";
+    if (score >= 70) return "C";
+    if (score >= 60) return "D";
+    return "F";
+}
+
+console.log(getGrade(85));  // Output: B</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Function Expressions</h2>
+                <p>Store functions in variables:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Function expression
+const sayHello = function() {
+    console.log("Hello!");
+};
+
+sayHello();  // Output: Hello!
+
+// Function expression with parameters
+const add = function(a, b) {
+    return a + b;
+};
+
+console.log(add(3, 4));  // Output: 7
+
+// Named function expression (useful for debugging)
+const multiply = function multiplyNumbers(a, b) {
+    return a * b;
+};
+
+console.log(multiply(3, 4));  // Output: 12</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Declaration vs Expression:</strong>
+                    <ul>
+                        <li><strong>Declaration:</strong> <code>function name() { }</code> - Hoisted (can call before definition)</li>
+                        <li><strong>Expression:</strong> <code>const name = function() { }</code> - Not hoisted</li>
+                        <li>Expressions are often preferred in modern JavaScript</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Arrow Functions</h2>
+                <p>A modern, concise way to write functions (ES6+):</p>
+                
+                <div class="code-block">
+                    <pre><code>// Traditional function
+const addTraditional = function(a, b) {
+    return a + b;
+};
+
+// Arrow function
+const addArrow = (a, b) => {
+    return a + b;
+};
+
+// Arrow function with implicit return
+const addShort = (a, b) => a + b;
+
+console.log(addTraditional(2, 3));  // 5
+console.log(addArrow(2, 3));       // 5
+console.log(addShort(2, 3));       // 5</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Arrow Function Syntax:</strong>
+                    <ul>
+                        <li><code>(params) => { body }</code> - Full syntax</li>
+                        <li><code>param => { body }</code> - Single parameter (no parens needed)</li>
+                        <li><code>(params) => expression</code> - Implicit return (no braces)</li>
+                        <li><code>() => expression</code> - No parameters</li>
+                    </ul>
+                </div>
+
+                <h3>Arrow Function Variations</h3>
+                <div class="code-block">
+                    <pre><code>// No parameters
+const sayHi = () => console.log("Hi!");
+sayHi();  // Hi!
+
+// One parameter (parentheses optional)
+const double = x => x * 2;
+console.log(double(5));  // 10
+
+// Multiple parameters
+const subtract = (a, b) => a - b;
+console.log(subtract(10, 3));  // 7
+
+// Multiple lines (need braces and return)
+const calculate = (a, b, operation) => {
+    if (operation === "add") return a + b;
+    if (operation === "subtract") return a - b;
+    return 0;
+};
+
+// Returning an object (wrap in parentheses)
+const makePerson = (name, age) => ({ name, age });
+console.log(makePerson("Alice", 25));  // { name: "Alice", age: 25 }</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Scope and Functions</h2>
+                <p>Variables have different visibility depending on where they're declared:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Global scope
+let globalVar = "I'm global";
+
+function myFunction() {
+    // Function scope
+    let localVar = "I'm local";
+    
+    console.log(globalVar);  // Accessible
+    console.log(localVar);   // Accessible
+    
+    // Block scope inside function
+    if (true) {
+        let blockVar = "I'm in a block";
+        console.log(blockVar);  // Accessible
+    }
+    
+    // console.log(blockVar);  // Error! Not accessible outside block
+}
+
+myFunction();
+console.log(globalVar);   // Accessible
+// console.log(localVar); // Error! Not accessible outside function</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Scope Types:</strong>
+                    <ul>
+                        <li><strong>Global:</strong> Accessible everywhere (avoid if possible)</li>
+                        <li><strong>Function:</strong> Accessible only within the function</li>
+                        <li><strong>Block:</strong> Accessible only within { } block (let/const)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Closures</h2>
+                <p>Functions can "remember" variables from their outer scope:</p>
+                
+                <div class="code-block">
+                    <pre><code>// A closure example
+function createCounter() {
+    let count = 0;  // Private variable
+    
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter());  // 1
+console.log(counter());  // 2
+console.log(counter());  // 3
+
+// count is "enclosed" in the returned function
+// console.log(count);  // Error! count is not accessible
+
+// Practical example: Configuration
+function createGreeter(greeting) {
+    return function(name) {
+        return `${greeting}, ${name}!`;
+    };
+}
+
+const sayHello = createGreeter("Hello");
+const sayHi = createGreeter("Hi");
+
+console.log(sayHello("Alice"));  // Hello, Alice!
+console.log(sayHi("Bob"));        // Hi, Bob!</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Why Closures Matter:</strong>
+                    <ul>
+                        <li>Create private variables</li>
+                        <li>Maintain state between function calls</li>
+                        <li>Create configurable functions</li>
+                        <li>Essential for callbacks and event handlers</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Higher-Order Functions</h2>
+                <p>Functions that take other functions as arguments or return functions:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Function that takes a function as argument
+function applyOperation(a, b, operation) {
+    return operation(a, b);
+}
+
+const add = (x, y) => x + y;
+const multiply = (x, y) => x * y;
+
+console.log(applyOperation(5, 3, add));      // 8
+console.log(applyOperation(5, 3, multiply)); // 15
+
+// Built-in higher-order functions
+const numbers = [1, 2, 3, 4, 5];
+
+// map - transform each element
+const doubled = numbers.map(n => n * 2);
+console.log(doubled);  // [2, 4, 6, 8, 10]
+
+// filter - keep elements that pass a test
+const evens = numbers.filter(n => n % 2 === 0);
+console.log(evens);  // [2, 4]
+
+// reduce - combine elements into one value
+const sum = numbers.reduce((total, n) => total + n, 0);
+console.log(sum);  // 15</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Rest Parameters</h2>
+                <p>Accept any number of arguments:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Rest parameters (...args)
+function sumAll(...numbers) {
+    let total = 0;
+    for (let num of numbers) {
+        total += num;
+    }
+    return total;
+}
+
+console.log(sumAll(1, 2, 3));           // 6
+console.log(sumAll(1, 2, 3, 4, 5));     // 15
+console.log(sumAll(1, 2, 3, 4, 5, 6));  // 21
+
+// Rest with regular parameters
+function logItems(category, ...items) {
+    console.log("Category:", category);
+    console.log("Items:", items);
+}
+
+logItems("Fruits", "Apple", "Banana", "Orange");
+// Category: Fruits
+// Items: ["Apple", "Banana", "Orange"]</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Rest Parameter Syntax:</strong>
+                    <ul>
+                        <li><code>...name</code> - Collects remaining arguments into an array</li>
+                        <li>Must be the last parameter in the function</li>
+                        <li>Allows flexible number of arguments</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Callback Functions</h2>
+                <p>Functions passed to other functions to be called later:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic callback
+function processData(data, callback) {
+    console.log("Processing:", data);
+    const result = callback(data);
+    console.log("Result:", result);
+}
+
+processData(5, x => x * 2);
+// Processing: 5
+// Result: 10
+
+// Async callback (simulated)
+function fetchUser(userId, onSuccess, onError) {
+    // Simulating async operation
+    setTimeout(() => {
+        if (userId > 0) {
+            onSuccess({ id: userId, name: "User " + userId });
+        } else {
+            onError("Invalid user ID");
+        }
+    }, 1000);
+}
+
+fetchUser(
+    1,
+    user => console.log("Success:", user),
+    error => console.log("Error:", error)
+);
+// After 1 second: Success: { id: 1, name: "User 1" }</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>IIFE (Immediately Invoked Function Expression)</h2>
+                <p>Functions that run immediately after being defined:</p>
+                
+                <div class="code-block">
+                    <pre><code>// IIFE pattern
+(function() {
+    console.log("This runs immediately!");
+})();
+
+// IIFE with arrow function
+(() => {
+    console.log("Arrow IIFE");
+})();
+
+// IIFE with parameters
+(function(name) {
+    console.log("Hello, " + name);
+})("World");
+// Output: Hello, World
+
+// Useful for creating private scope
+const counter = (function() {
+    let count = 0;
+    return {
+        increment: () => ++count,
+        decrement: () => --count,
+        getCount: () => count
+    };
+})();
+
+console.log(counter.increment());  // 1
+console.log(counter.increment());  // 2
+console.log(counter.getCount());   // 2</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Examples</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Example 1: Temperature converter
+const toCelsius = fahrenheit => (fahrenheit - 32) * 5/9;
+const toFahrenheit = celsius => (celsius * 9/5) + 32;
+
+console.log(toCelsius(68));     // 20
+console.log(toFahrenheit(20));  // 68
+
+// Example 2: Password validator
+function validatePassword(password) {
+    const checks = {
+        length: password.length >= 8,
+        hasUpper: /[A-Z]/.test(password),
+        hasLower: /[a-z]/.test(password),
+        hasNumber: /[0-9]/.test(password)
+    };
+    
+    const valid = Object.values(checks).every(c => c);
+    return { valid, checks };
+}
+
+console.log(validatePassword("Pass123!"));
+
+// Example 3: Curry function
+function multiply(a) {
+    return function(b) {
+        return function(c) {
+            return a * b * c;
+        };
+    };
+}
+
+console.log(multiply(2)(3)(4));  // 24
+
+const multiplyBy2 = multiply(2);
+const multiplyBy2And3 = multiplyBy2(3);
+console.log(multiplyBy2And3(5));  // 30</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a shopping cart system
+const cart = [];
+
+function addItem(name, price, quantity = 1) {
+    cart.push({ name, price, quantity });
+}
+
+function removeItem(name) {
+    const index = cart.findIndex(item => item.name === name);
+    if (index > -1) {
+        cart.splice(index, 1);
+    }
+}
+
+function getTotal() {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+function printCart() {
+    console.log("=== Shopping Cart ===");
+    cart.forEach(item => {
+        console.log(`${item.name}: $${item.price} x ${item.quantity}`);
+    });
+    console.log(`Total: $${getTotal().toFixed(2)}`);
+}
+
+// Test the cart
+addItem("Apple", 1.50, 3);
+addItem("Bread", 2.99);
+addItem("Milk", 3.49);
+printCart();
+
+removeItem("Bread");
+printCart();</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson5.html" class="btn btn-secondary">← Previous: Loops</a>
+                <a href="lesson7.html" class="btn btn-primary">Next: Arrays →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

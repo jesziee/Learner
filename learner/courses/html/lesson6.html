@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms and Input Elements - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>📝 Lesson 6: Forms and Input Elements</h1>
+            <p>Creating interactive forms for user input</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>The Form Element</h2>
+                <p>The <form> element is a container for all the inputs that collect user data.</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">form</span> <span class="variable">action</span>=<span class="string">"/submit"</span> <span class="variable">method</span>=<span class="string">"POST"</span>>
+    <span class="comment">// Form inputs go here</span>
+</<span class="keyword">form</span>>
+
+<span class="comment">// action: Where to send the data (URL)</span>
+<span class="comment">// method: How to send it (GET or POST)</span>
+
+<span class="comment">// GET: Data visible in URL (search, filters)</span>
+<span class="comment">// POST: Data hidden in request body (login, forms)</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Text Inputs</h2>
+                <p>The most common input type for collecting text:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Basic text input</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">name</span>=<span class="string">"username"</span>>
+
+<span class="comment">// With label (important for accessibility)</span>
+<<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"username"</span>>Username:</<span class="keyword">label</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">id</span>=<span class="string">"username"</span> <span class="variable">name</span>=<span class="string">"username"</span>>
+
+<span class="comment">// With placeholder and required</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> 
+       <span class="variable">name</span>=<span class="string">"username"</span> 
+       <span class="variable">placeholder</span>=<span class="string">"Enter your username"</span>
+       <span class="variable">required</span>>
+
+<span class="comment">// Password input (characters hidden)</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"password"</span> <span class="variable">name</span>=<span class="string">"password"</span>>
+
+<span class="comment">// Email input (validates email format)</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"email"</span> <span class="variable">name</span>=<span class="string">"email"</span>></code></pre>
+                </div>
+                
+                <h3>Common Input Attributes</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>name:</strong> Identifier for the data (required for form submission)</li>
+                    <li><strong>id:</strong> Unique identifier (links to label)</li>
+                    <li><strong>placeholder:</strong> Hint text shown when empty</li>
+                    <li><strong>value:</strong> Default/pre-filled value</li>
+                    <li><strong>required:</strong> Makes the field mandatory</li>
+                    <li><strong>disabled:</strong> Prevents user input</li>
+                    <li><strong>readonly:</strong> Visible but not editable</li>
+                    <li><strong>maxlength:</strong> Maximum character count</li>
+                </ul>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Labels</h2>
+                <p>Labels are crucial for accessibility and usability:</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Method 1: Using for and id (preferred)</span>
+<<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"email"</span>>Email Address:</<span class="keyword">label</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"email"</span> <span class="variable">id</span>=<span class="string">"email"</span> <span class="variable">name</span>=<span class="string">"email"</span>>
+
+<span class="comment">// Method 2: Wrapping the input</span>
+<<span class="keyword">label</span>>
+    Email Address:
+    <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"email"</span> <span class="variable">name</span>=<span class="string">"email"</span>>
+</<span class="keyword">label</span>></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Why labels matter:</strong> Clicking a label focuses its input. Screen readers announce the label when the input is focused. Always use labels for accessibility!</p>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Other Input Types</h2>
+                
+                <h3>Number Input</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"number"</span> 
+       <span class="variable">name</span>=<span class="string">"age"</span> 
+       <span class="variable">min</span>=<span class="string">"0"</span> 
+       <span class="variable">max</span>=<span class="string">"120"</span>
+       <span class="variable">step</span>=<span class="string">"1"</span>>
+
+<span class="comment">// min/max: Range limits</span>
+<span class="comment">// step: Increment value (1, 0.5, etc.)</span></code></pre>
+                </div>
+                
+                <h3>Date and Time Inputs</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"date"</span> <span class="variable">name</span>=<span class="string">"birthday"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"time"</span> <span class="variable">name</span>=<span class="string">"appointment"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"datetime-local"</span> <span class="variable">name</span>=<span class="string">"event"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"month"</span> <span class="variable">name</span>=<span class="string">"expiry"</span>>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"week"</span> <span class="variable">name</span>=<span class="string">"schedule"</span>></code></pre>
+                </div>
+                
+                <h3>Other Useful Types</h3>
+                <div class="code-block">
+                    <pre><code><span class="comment">// Phone number</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"tel"</span> <span class="variable">name</span>=<span class="string">"phone"</span>>
+
+<span class="comment">// URL</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"url"</span> <span class="variable">name</span>=<span class="string">"website"</span>>
+
+<span class="comment">// Search field</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"search"</span> <span class="variable">name</span>=<span class="string">"query"</span>>
+
+<span class="comment">// Hidden field (not visible, but submitted)</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"hidden"</span> <span class="variable">name</span>=<span class="string">"user_id"</span> <span class="variable">value</span>=<span class="string">"123"</span>>
+
+<span class="comment">// Color picker</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"color"</span> <span class="variable">name</span>=<span class="string">"favorite"</span> <span class="variable">value</span>=<span class="string">"#7C3AED"</span>>
+
+<span class="comment">// Range slider</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"range"</span> <span class="variable">name</span>=<span class="string">"volume"</span> <span class="variable">min</span>=<span class="string">"0"</span> <span class="variable">max</span>=<span class="string">"100"</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Textarea</h2>
+                <p>For multi-line text input:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"message"</span>>Message:</<span class="keyword">label</span>><<span class="keyword">br</span>>
+<<span class="keyword">textarea</span> <span class="variable">id</span>=<span class="string">"message"</span> 
+          <span class="variable">name</span>=<span class="string">"message"</span> 
+          <span class="variable">rows</span>=<span class="string">"4"</span> 
+          <span class="variable">cols</span>=<span class="string">"50"</span>
+          <span class="variable">placeholder</span>=<span class="string">"Type your message here..."</span>></<span class="keyword">textarea</span>>
+
+<span class="comment">// rows: Height in lines</span>
+<span class="comment">// cols: Width in characters</span>
+<span class="comment">// Content goes between opening and closing tags</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Checkboxes and Radio Buttons</h2>
+                
+                <h3>Checkboxes (Multiple Selections)</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">fieldset</span>>
+    <<span class="keyword">legend</span>>Select your interests:</<span class="keyword">legend</span>>
+    
+    <<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">name</span>=<span class="string">"interests"</span> <span class="variable">value</span>=<span class="string">"coding"</span>> Coding
+    </<span class="keyword">label</span>>
+    <<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">name</span>=<span class="string">"interests"</span> <span class="variable">value</span>=<span class="string">"design"</span>> Design
+    </<span class="keyword">label</span>>
+    <<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"checkbox"</span> <span class="variable">name</span>=<span class="string">"interests"</span> <span class="variable">value</span>=<span class="string">"music"</span> <span class="variable">checked</span>> Music
+    </<span class="keyword">label</span>>
+</<span class="keyword">fieldset</span>>
+
+<span class="comment">// Same name = same group</span>
+<span class="comment">// checked = pre-selected</span></code></pre>
+                </div>
+                
+                <h3>Radio Buttons (Single Selection)</h3>
+                <div class="code-block">
+                    <pre><code><<span class="keyword">fieldset</span>>
+    <<span class="keyword">legend</span>>Select your level:</<span class="keyword">legend</span>>
+    
+    <<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"radio"</span> <span class="variable">name</span>=<span class="string">"level"</span> <span class="variable">value</span>=<span class="string">"beginner"</span> <span class="variable">checked</span>> Beginner
+    </<span class="keyword">label</span>>
+    <<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"radio"</span> <span class="variable">name</span>=<span class="string">"level"</span> <span class="variable">value</span>=<span class="string">"intermediate"</span>> Intermediate
+    </<span class="keyword">label</span>>
+    <<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"radio"</span> <span class="variable">name</span>=<span class="string">"level"</span> <span class="variable">value</span>=<span class="string">"pro"</span>> Pro
+    </<span class="keyword">label</span>>
+</<span class="keyword">fieldset</span>>
+
+<span class="comment">// Same name = only one can be selected</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="lesson-section">
+                <h2>Select Dropdowns</h2>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"country"</span>>Country:</<span class="keyword">label</span>>
+<<span class="keyword">select</span> <span class="variable">id</span>=<span class="string">"country"</span> <span class="variable">name</span>=<span class="string">"country"</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">""</span>>Select a country</<span class="keyword">option</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"us"</span>>United States</<span class="keyword">option</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"uk"</span>>United Kingdom</<span class="keyword">option</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"ca"</span> <span class="variable">selected</span>>Canada</<span class="keyword">option</span>>
+</<span class="keyword">select</span>>
+
+<span class="comment">// With option groups</span>
+<<span class="keyword">select</span> <span class="variable">name</span>=<span class="string">"car"</span>>
+    <<span class="keyword">optgroup</span> <span class="variable">label</span>=<span class="string">"Swedish"</span>>
+        <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"volvo"</span>>Volvo</<span class="keyword">option</span>>
+        <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"saab"</span>>Saab</<span class="keyword">option</span>>
+    </<span class="keyword">optgroup</span>>
+    <<span class="keyword">optgroup</span> <span class="variable">label</span>=<span class="string">"German"</span>>
+        <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"bmw"</span>>BMW</<span class="keyword">option</span>>
+        <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"audi"</span>>Audi</<span class="keyword">option</span>>
+    </<span class="keyword">optgroup</span>>
+</<span class="keyword">select</span>>
+
+<span class="comment">// Multiple selection (with Ctrl/Cmd click)</span>
+<<span class="keyword">select</span> <span class="variable">name</span>=<span class="string">"skills"</span> <span class="variable">multiple</span> <span class="variable">size</span>=<span class="string">"4"</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"html"</span>>HTML</<span class="keyword">option</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"css"</span>>CSS</<span class="keyword">option</span>>
+    <<span class="keyword">option</span> <span class="variable">value</span>=<span class="string">"js"</span>>JavaScript</<span class="keyword">option</span>>
+</<span class="keyword">select</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 8 -->
+            <section class="lesson-section">
+                <h2>Buttons</h2>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Submit button (submits the form)</span>
+<<span class="keyword">button</span> <span class="variable">type</span>=<span class="string">"submit"</span>>Submit Form</<span class="keyword">button</span>>
+
+<span class="comment">// Or using input element</span>
+<<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"submit"</span> <span class="variable">value</span>=<span class="string">"Submit"</span>>
+
+<span class="comment">// Reset button (clears form)</span>
+<<span class="keyword">button</span> <span class="variable">type</span>=<span class="string">"reset"</span>>Clear Form</<span class="keyword">button</span>>
+
+<span class="comment">// Regular button (no default behavior)</span>
+<<span class="keyword">button</span> <span class="variable">type</span>=<span class="string">"button"</span>>Click Me</<span class="keyword">button</span>>
+
+<span class="comment">// Button with icon</span>
+<<span class="keyword">button</span> <span class="variable">type</span>=<span class="string">"submit"</span>>
+    <<span class="keyword">img</span> <span class="variable">src</span>=<span class="string">"icon.png"</span> <span class="variable">alt</span>=<span class="string">""</span>> Submit
+</<span class="keyword">button</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 9 -->
+            <section class="lesson-section">
+                <h2>Form Validation</h2>
+                <p>HTML5 provides built-in validation:</p>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">form</span>>
+    <span class="comment">// Required field</span>
+    <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">name</span>=<span class="string">"name"</span> <span class="variable">required</span>>
+    
+    <span class="comment">// Pattern matching (regex)</span>
+    <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> 
+           <span class="variable">name</span>=<span class="string">"zip"</span> 
+           <span class="variable">pattern</span>=<span class="string">"[0-9]{5}"</span>
+           <span class="variable">title</span>=<span class="string">"5-digit zip code"</span>>
+    
+    <span class="comment">// Min/max length</span>
+    <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> 
+           <span class="variable">name</span>=<span class="string">"username"</span> 
+           <span class="variable">minlength</span>=<span class="string">"3"</span> 
+           <span class="variable">maxlength</span>=<span class="string">"20"</span>>
+    
+    <span class="comment">// Min/max values</span>
+    <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"number"</span> <span class="variable">name</span>=<span class="string">"age"</span> <span class="variable">min</span>=<span class="string">"18"</span> <span class="variable">max</span>=<span class="string">"100"</span>>
+    
+    <<span class="keyword">button</span> <span class="variable">type</span>=<span class="string">"submit"</span>>Submit</<span class="keyword">button</span>>
+</<span class="keyword">form</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 10 -->
+            <section class="lesson-section">
+                <h2>Complete Form Example</h2>
+                
+                <div class="code-block">
+                    <pre><code><<span class="keyword">form</span> <span class="variable">action</span>=<span class="string">"/register"</span> <span class="variable">method</span>=<span class="string">"POST"</span>>
+    <<span class="keyword">fieldset</span>>
+        <<span class="keyword">legend</span>>Registration Form</<span class="keyword">legend</span>>
+        
+        <<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"name"</span>>Full Name:</<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"text"</span> <span class="variable">id</span>=<span class="string">"name"</span> <span class="variable">name</span>=<span class="string">"name"</span> <span class="variable">required</span>><<span class="keyword">br</span>>
+        
+        <<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"email"</span>>Email:</<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"email"</span> <span class="variable">id</span>=<span class="string">"email"</span> <span class="variable">name</span>=<span class="string">"email"</span> <span class="variable">required</span>><<span class="keyword">br</span>>
+        
+        <<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"password"</span>>Password:</<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"password"</span> <span class="variable">id</span>=<span class="string">"password"</span> <span class="variable">name</span>=<span class="string">"password"</span> <span class="variable">minlength</span>=<span class="string">"8"</span> <span class="variable">required</span>><<span class="keyword">br</span>>
+        
+        <<span class="keyword">label</span> <span class="variable">for</span>=<span class="string">"dob"</span>>Date of Birth:</<span class="keyword">label</span>>
+        <<span class="keyword">input</span> <span class="variable">type</span>=<span class="string">"date"</span> <span class="variable">id</span>=<span class="string">"dob"</span> <span class="variable">name</span>=<span class="string">"dob"</span>><<span class="keyword">br</span>>
+        
+        <<span class="keyword">button</span> <span class="variable">type</span>=<span class="string">"submit"</span>>Register</<span class="keyword">button</span>>
+    </<span class="keyword">fieldset</span>>
+</<span class="keyword">form</span>></code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong><form>:</strong> Container for form elements</li>
+                            <li><strong><input>:</strong> Various input types (text, email, password, etc.)</li>
+                            <li><strong><label>:</strong> Essential for accessibility</li>
+                            <li><strong><textarea>:</strong> Multi-line text input</li>
+                            <li><strong><select>/<option>:</strong> Dropdown menus</li>
+                            <li><strong>checkbox:</strong> Multiple selections allowed</li>
+                            <li><strong>radio:</strong> Single selection from group</li>
+                            <li><strong>required:</strong> Makes field mandatory</li>
+                            <li><strong><fieldset>/<legend>:</strong> Group related form elements</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson5.html" class="nav-btn prev">← Previous: Lists and Tables</a>
+                <a href="lesson7.html" class="nav-btn next">Next: Semantic HTML →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

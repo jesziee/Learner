@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Conditionals - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 4: Conditionals</h1>
+            <p>Learn how to make decisions in your code with if statements and switches.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Conditionals?</h2>
+                <p>Conditionals allow your code to make decisions. Just like in real life, programs often need to take different actions based on different conditions. "If it's raining, take an umbrella. Otherwise, leave it at home." JavaScript conditionals work the same way!</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Conditionals use boolean values (true/false) to decide which code to run. The condition is evaluated, and if it's true, certain code executes.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The if Statement</h2>
+                <p>The most basic conditional - runs code only if a condition is true:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Basic if statement
+let temperature = 30;
+
+if (temperature > 25) {
+    console.log("It's hot outside!");
+}
+
+// The condition (temperature > 25) is true, so the message prints</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>if</code> - Keyword that starts the conditional</li>
+                        <li><code>(temperature > 25)</code> - The condition to check (must be true/false)</li>
+                        <li><code>{ }</code> - Curly braces contain the code to run if condition is true</li>
+                        <li>Code inside { } only runs when temperature is greater than 25</li>
+                    </ul>
+                </div>
+
+                <h3>Real-World Example</h3>
+                <div class="code-block">
+                    <pre><code>let userAge = 18;
+
+if (userAge >= 18) {
+    console.log("You can vote!");
+}
+
+if (userAge >= 21) {
+    console.log("You can drink alcohol in the US!");
+}
+
+// Output: "You can vote!" (but not the second message)</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The else Statement</h2>
+                <p>What if you want to run different code when the condition is false? Use else:</p>
+                
+                <div class="code-block">
+                    <pre><code>let isRaining = false;
+
+if (isRaining) {
+    console.log("Take an umbrella!");
+} else {
+    console.log("Enjoy the sunny day!");
+}
+
+// Output: "Enjoy the sunny day!"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>if (isRaining)</code> - Checks if isRaining is true</li>
+                        <li>Since isRaining is false, the first block is skipped</li>
+                        <li><code>else</code> - Runs when the if condition is false</li>
+                        <li>The else block always runs when the if condition is false</li>
+                    </ul>
+                </div>
+
+                <h3>Password Validation Example</h3>
+                <div class="code-block">
+                    <pre><code>let password = "secret123";
+let confirmPassword = "secret456";
+
+if (password === confirmPassword) {
+    console.log("Password matches! Account created.");
+} else {
+    console.log("Passwords don't match. Please try again.");
+}
+
+// Output: "Passwords don't match. Please try again."</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The else if Statement</h2>
+                <p>Check multiple conditions in sequence:</p>
+                
+                <div class="code-block">
+                    <pre><code>let score = 75;
+
+if (score >= 90) {
+    console.log("Grade: A - Excellent!");
+} else if (score >= 80) {
+    console.log("Grade: B - Good job!");
+} else if (score >= 70) {
+    console.log("Grade: C - Satisfactory");
+} else if (score >= 60) {
+    console.log("Grade: D - Needs improvement");
+} else {
+    console.log("Grade: F - Please study more");
+}
+
+// Output: "Grade: C - Satisfactory"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>How it works:</strong>
+                    <ul>
+                        <li>First, check if score >= 90 (false)</li>
+                        <li>Then check if score >= 80 (false)</li>
+                        <li>Then check if score >= 70 (true!) - runs this block</li>
+                        <li>Remaining conditions are skipped</li>
+                        <li>Only ONE block ever executes</li>
+                    </ul>
+                </div>
+
+                <h3>Time of Day Example</h3>
+                <div class="code-block">
+                    <pre><code>let hour = 14;  // 24-hour format
+
+if (hour < 12) {
+    console.log("Good morning!");
+} else if (hour < 17) {
+    console.log("Good afternoon!");
+} else if (hour < 21) {
+    console.log("Good evening!");
+} else {
+    console.log("Good night!");
+}
+
+// Output: "Good afternoon!" (14 is between 12 and 17)</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Nested Conditionals</h2>
+                <p>You can place conditionals inside other conditionals:</p>
+                
+                <div class="code-block">
+                    <pre><code>let age = 25;
+let hasLicense = true;
+
+if (age >= 18) {
+    console.log("You're an adult");
+    
+    if (hasLicense) {
+        console.log("You can drive!");
+    } else {
+        console.log("You need a license to drive");
+    }
+} else {
+    console.log("You're a minor");
+}
+
+// Output:
+// "You're an adult"
+// "You can drive!"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li>First, check if age >= 18 (true)</li>
+                        <li>Inside that block, check if hasLicense (true)</li>
+                        <li>Both conditions must be true for "You can drive!"</li>
+                        <li>Nested conditionals are checked only if the outer condition is true</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Best Practice:</strong> Avoid deeply nested conditionals (more than 2-3 levels). They make code hard to read. Instead, use logical operators or return early.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Logical Operators with Conditionals</h2>
+                <p>Combine multiple conditions using AND (&&) and OR (||):</p>
+                
+                <h3>Using AND (&&)</h3>
+                <div class="code-block">
+                    <pre><code>let age = 25;
+let hasID = true;
+
+// Both conditions must be true
+if (age >= 21 && hasID) {
+    console.log("Welcome to the club!");
+} else {
+    console.log("Sorry, you can't enter");
+}
+
+// Output: "Welcome to the club!"
+
+// Example: User login
+let username = "admin";
+let password = "secret";
+let isActive = true;
+
+if (username === "admin" && password === "secret" && isActive) {
+    console.log("Login successful!");
+}</code></pre>
+                </div>
+
+                <h3>Using OR (||)</h3>
+                <div class="code-block">
+                    <pre><code>let day = "Saturday";
+
+// At least one condition must be true
+if (day === "Saturday" || day === "Sunday") {
+    console.log("It's the weekend!");
+} else {
+    console.log("It's a weekday");
+}
+
+// Output: "It's the weekend!"
+
+// Example: Admin access
+let role = "editor";
+
+if (role === "admin" || role === "editor") {
+    console.log("You have editing permissions");
+}</code></pre>
+                </div>
+
+                <h3>Combining AND and OR</h3>
+                <div class="code-block">
+                    <pre><code>let isMember = true;
+let purchaseAmount = 150;
+let hasCoupon = false;
+
+// Members get free shipping OR orders over $100
+if (isMember || purchaseAmount > 100) {
+    console.log("Free shipping applied!");
+}
+
+// More complex: VIP members OR (non-VIP with coupon)
+let isVIP = false;
+
+if (isVIP || (!isVIP && hasCoupon)) {
+    console.log("Discount applied!");
+} else {
+    console.log("No discount available");
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The switch Statement</h2>
+                <p>A cleaner way to check one value against many possibilities:</p>
+                
+                <div class="code-block">
+                    <pre><code>let dayNumber = 3;
+let dayName;
+
+switch (dayNumber) {
+    case 1:
+        dayName = "Monday";
+        break;
+    case 2:
+        dayName = "Tuesday";
+        break;
+    case 3:
+        dayName = "Wednesday";
+        break;
+    case 4:
+        dayName = "Thursday";
+        break;
+    case 5:
+        dayName = "Friday";
+        break;
+    case 6:
+        dayName = "Saturday";
+        break;
+    case 7:
+        dayName = "Sunday";
+        break;
+    default:
+        dayName = "Invalid day";
+}
+
+console.log(dayName);  // "Wednesday"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Switch Syntax:</strong>
+                    <ul>
+                        <li><code>switch (value)</code> - The value to compare against</li>
+                        <li><code>case 1:</code> - If value equals 1, run this code</li>
+                        <li><code>break;</code> - Exit the switch (important!)</li>
+                        <li><code>default:</code> - Runs if no case matches (like else)</li>
+                    </ul>
+                </div>
+
+                <h3>The Break Statement</h3>
+                <p>Without break, code "falls through" to the next case:</p>
+                
+                <div class="code-block">
+                    <pre><code>let grade = "B";
+
+switch (grade) {
+    case "A":
+        console.log("Excellent!");
+        break;
+    case "B":
+        console.log("Good job!");
+        // Missing break - falls through!
+    case "C":
+        console.log("Satisfactory");
+        break;
+}
+
+// Output:
+// "Good job!"
+// "Satisfactory"  (unintended!)</code></pre>
+                </div>
+
+                <h3>Grouping Cases</h3>
+                <div class="code-block">
+                    <pre><code>let month = 2;
+
+switch (month) {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+        console.log("31 days");
+        break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        console.log("30 days");
+        break;
+    case 2:
+        console.log("28 or 29 days");
+        break;
+}
+
+// Output: "28 or 29 days"</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Truthy and Falsy Values</h2>
+                <p>In JavaScript, values can be "truthy" or "falsy" in conditionals:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Falsy values (treated as false)
+if (false) { }      // false
+if (0) { }          // zero is falsy
+if ("") { }         // empty string is falsy
+if (null) { }       // null is falsy
+if (undefined) { }  // undefined is falsy
+if (NaN) { }        // Not a Number is falsy
+
+// Truthy values (treated as true)
+if (true) { }       // true
+if (1) { }          // any non-zero number
+if ("hello") { }    // non-empty string
+if ([]) { }         // arrays (even empty)
+if ({}) { }         // objects (even empty)
+
+// Practical use
+let userName = "";
+
+if (userName) {
+    console.log("Hello, " + userName);
+} else {
+    console.log("Please enter your name");
+}
+// Output: "Please enter your name"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Why This Matters:</strong>
+                    <ul>
+                        <li>You can check if a variable has a value without explicit comparison</li>
+                        <li><code>if (name)</code> is shorter than <code>if (name !== "" && name !== null)</code></li>
+                        <li>Be careful with 0 and empty strings - they're valid values but falsy!</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Short-Circuit Evaluation</h2>
+                <p>Logical operators can be used for conditional logic:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Using && for conditional execution
+let isLoggedIn = true;
+
+isLoggedIn && console.log("Welcome back!");
+// Runs only if isLoggedIn is true
+
+// Using || for default values
+let userName = "";
+let displayName = userName || "Guest";
+console.log(displayName);  // "Guest" (userName is falsy)
+
+userName = "Alice";
+displayName = userName || "Guest";
+console.log(displayName);  // "Alice"
+
+// Modern nullish coalescing (??)
+// Only uses default for null/undefined, not other falsy values
+let count = 0;
+let displayCount = count ?? "No items";
+console.log(displayCount);  // 0 (not "No items")</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Build a simple calculator that determines grade and pass/fail:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Grade Calculator
+let score = 85;
+let attendance = 90;
+
+// Determine grade
+let grade;
+if (score >= 90) {
+    grade = "A";
+} else if (score >= 80) {
+    grade = "B";
+} else if (score >= 70) {
+    grade = "C";
+} else if (score >= 60) {
+    grade = "D";
+} else {
+    grade = "F";
+}
+
+// Check if passed (grade D or better AND attendance >= 75%)
+let passed = (grade !== "F") && (attendance >= 75);
+
+console.log("Grade:", grade);
+console.log("Passed:", passed);
+
+// Challenge: Create a day type checker
+let day = "Saturday";
+let dayType;
+
+switch (day) {
+    case "Monday":
+    case "Tuesday":
+    case "Wednesday":
+    case "Thursday":
+    case "Friday":
+        dayType = "Weekday";
+        break;
+    case "Saturday":
+    case "Sunday":
+        dayType = "Weekend";
+        break;
+    default:
+        dayType = "Invalid day";
+}
+
+console.log(day + " is a " + dayType);</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson3.html" class="btn btn-secondary">← Previous: Operators</a>
+                <a href="lesson5.html" class="btn btn-primary">Next: Loops →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

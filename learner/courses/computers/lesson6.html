@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks Basics - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../index.html#courses">Courses</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <h1>🌐 Lesson 6: Computer Networks Basics</h1>
+            <p>How computers communicate with each other</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is a Computer Network?</h2>
+                <p>A computer network is a group of computers connected together to share resources and communicate. Networks range from small home networks to the global Internet.</p>
+                
+                <div class="code-explanation">
+                    <p><strong>Why Networks Matter:</strong> Without networks, each computer would be isolated. Networks enable email, web browsing, video calls, online gaming, and virtually everything we do with computers today.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Types of Networks</h2>
+                
+                <h3>PAN (Personal Area Network)</h3>
+                <p>Very short-range network around a person. Example: Bluetooth connections between your phone and headphones.</p>
+                
+                <h3>LAN (Local Area Network)</h3>
+                <p>Network in a limited area like a home, office, or building. Your home WiFi network is a LAN.</p>
+                
+                <h3>WAN (Wide Area Network)</h3>
+                <p>Network spanning large geographic areas. The Internet is the largest WAN.</p>
+                
+                <h3>WLAN (Wireless LAN)</h3>
+                <p>A LAN that uses wireless communication (WiFi) instead of cables.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Key Point:</strong> The Internet is a network of networks. Your home network connects to your ISP's network, which connects to other networks worldwide.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Network Hardware</h2>
+                
+                <h3>Router</h3>
+                <p>Directs data between networks. Your home router connects your LAN to the Internet (WAN) and decides where to send data.</p>
+                
+                <h3>Switch</h3>
+                <p>Connects devices within a LAN. Unlike a router, it only handles local traffic between connected devices.</p>
+                
+                <h3>Modem</h3>
+                <p>Converts signals between your ISP's network and your home network. Often combined with routers in "gateway" devices.</p>
+                
+                <h3>Network Interface Card (NIC)</h3>
+                <p>Hardware that lets a computer connect to a network. Most computers have built-in WiFi and Ethernet NICs.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Simplified network structure:</span>
+
+<span class="variable">Internet</span>
+    ↓
+<span class="function">Modem</span> (converts ISP signals)
+    ↓
+<span class="function">Router</span> (directs traffic, provides WiFi)
+    ↓
+<span class="function">Switch</span> (optional, expands wired connections)
+    ↓
+<span class="variable">Devices</span> (computers, phones, tablets)</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>IP Addresses</h2>
+                <p>Every device on a network needs a unique address - like a postal address for your computer. This is called an IP (Internet Protocol) address.</p>
+                
+                <h3>IPv4 Addresses</h3>
+                <p>The traditional format: four numbers separated by dots. Each number ranges from 0-255.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// IPv4 Address Example:</span>
+<span class="number">192.168.1.1</span>
+
+<span class="comment">// Breakdown:</span>
+<span class="number">192</span>.<span class="number">168</span>.<span class="number">1</span>.<span class="number">1</span>
+ ↑    ↑   ↑   ↑
+<span class="variable">0-255</span> for each section
+
+<span class="comment">// Total possible IPv4 addresses:</span>
+<span class="number">256</span> × <span class="number">256</span> × <span class="number">256</span> × <span class="number">256</span> ≈ <span class="number">4.3 billion</span></code></pre>
+                </div>
+                
+                <h3>IPv6 Addresses</h3>
+                <p>With 4.3 billion IPv4 addresses running out, IPv6 was created with a much larger address space.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// IPv6 Address Example:</span>
+<span class="number">2001:0db8:85a3:0000:0000:8a2e:0370:7334</span>
+
+<span class="comment">// Uses hexadecimal (0-9, a-f)</span>
+<span class="comment">// 128 bits vs IPv4's 32 bits</span>
+<span class="comment">// Approximately 340 undecillion addresses!</span></code></pre>
+                </div>
+                
+                <h3>Public vs Private IPs</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>Public IP:</strong> Unique address visible on the Internet. Assigned by your ISP.</li>
+                    <li><strong>Private IP:</strong> Used within local networks. Not directly accessible from the Internet.</li>
+                </ul>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Common private IP ranges:</span>
+<span class="number">192.168.0.0</span> - <span class="number">192.168.255.255</span>  <span class="comment">// Home routers</span>
+<span class="number">10.0.0.0</span> - <span class="number">10.255.255.255</span>    <span class="comment">// Large organizations</span>
+<span class="number">172.16.0.0</span> - <span class="number">172.31.255.255</span>  <span class="comment">// Medium networks</span></code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Ports and Protocols</h2>
+                
+                <h3>What are Ports?</h3>
+                <p>Ports are numbered channels that help route data to the right application on a device. Think of an IP address as a building address and ports as apartment numbers.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// Common port numbers:</span>
+<span class="number">80</span>   → <span class="variable">HTTP</span>   (web browsing)
+<span class="number">443</span>  → <span class="variable">HTTPS</span>  (secure web browsing)
+<span class="number">22</span>   → <span class="variable">SSH</span>    (secure remote access)
+<span class="number">25</span>   → <span class="variable">SMTP</span>   (email sending)
+<span class="number">53</span>   → <span class="variable">DNS</span>    (domain name system)
+<span class="number">3306</span> → <span class="variable">MySQL</span>  (database)
+
+<span class="comment">// Example: https://example.com:443</span>
+<span class="comment">// The :443 specifies the port (usually hidden for standard ports)</span></code></pre>
+                </div>
+                
+                <h3>Common Protocols</h3>
+                <p>Protocols are standardized rules for communication:</p>
+                
+                <ul style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li><strong>HTTP/HTTPS:</strong> Transfers web pages</li>
+                    <li><strong>FTP:</strong> File transfers</li>
+                    <li><strong>SMTP/POP/IMAP:</strong> Email</li>
+                    <li><strong>DNS:</strong> Translates domain names to IP addresses</li>
+                    <li><strong>TCP:</strong> Reliable, connection-based data transfer</li>
+                    <li><strong>UDP:</strong> Fast, connectionless data transfer (used for streaming)</li>
+                </ul>
+                
+                <div class="code-explanation">
+                    <p><strong>TCP vs UDP:</strong> TCP guarantees data arrives correctly (like certified mail). UDP is faster but doesn't guarantee delivery (like regular mail). Video streaming uses UDP because speed matters more than perfection.</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>DNS (Domain Name System)</h2>
+                <p>DNS translates human-readable domain names to IP addresses. It's like the phonebook of the Internet.</p>
+                
+                <div class="code-block">
+                    <pre><code><span class="comment">// DNS Translation Example:</span>
+
+<span class="variable">You type:</span> www.google.com
+        ↓
+<span class="function">DNS Lookup</span> (finds the IP address)
+        ↓
+<span class="variable">Browser connects to:</span> <span class="number">142.250.190.46</span>
+
+<span class="comment">// Without DNS, you'd have to memorize</span>
+<span class="comment">// IP addresses for every website!</span></code></pre>
+                </div>
+                
+                <h3>How DNS Works</h3>
+                <ol style="margin-left: 1.5rem; color: var(--text-gray);">
+                    <li>You type a domain name in your browser</li>
+                    <li>Your computer checks its local cache</li>
+                    <li>If not found, it asks your ISP's DNS server</li>
+                    <li>If still not found, it asks root DNS servers</li>
+                    <li>The chain continues until the IP is found</li>
+                    <li>The result is cached for future use</li>
+                </ol>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <div>
+                        <p><strong>Remember:</strong></p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><strong>Network:</strong> Connected computers sharing resources</li>
+                            <li><strong>LAN:</strong> Local network; WAN: Wide-area network</li>
+                            <li><strong>Router:</strong> Directs traffic between networks</li>
+                            <li><strong>IP Address:</strong> Unique identifier for each device</li>
+                            <li><strong>Ports:</strong> Channels for routing data to applications</li>
+                            <li><strong>DNS:</strong> Translates domain names to IP addresses</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson5.html" class="nav-btn prev">← Previous: How Software Works</a>
+                <a href="lesson7.html" class="nav-btn next">Next: The Internet and Web →</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: Introduction to JavaScript - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 1: Introduction to JavaScript</h1>
+            <p>Learn what JavaScript is, where it's used, and write your first script!</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What is JavaScript?</h2>
+                <p>JavaScript is a programming language that brings websites to life. While HTML provides structure and CSS adds style, JavaScript adds interactivity and dynamic behavior. It's one of the most popular programming languages in the world and runs in every modern web browser.</p>
+                
+                <div class="tip-box">
+                    <strong>Fun Fact:</strong> JavaScript was created in just 10 days by Brendan Eich in 1995. Despite its name, JavaScript has nothing to do with Java - they are completely different languages!
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Where is JavaScript Used?</h2>
+                <p>JavaScript is incredibly versatile and is used in many areas:</p>
+                <ul>
+                    <li><strong>Websites:</strong> Interactive forms, animations, and user interfaces</li>
+                    <li><strong>Web Applications:</strong> Google Maps, Gmail, Facebook</li>
+                    <li><strong>Mobile Apps:</strong> React Native, Ionic frameworks</li>
+                    <li><strong>Desktop Apps:</strong> VS Code, Slack, Discord</li>
+                    <li><strong>Server-side:</strong> Node.js for backend development</li>
+                    <li><strong>Games:</strong> Browser-based games and game engines</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>How to Add JavaScript to HTML</h2>
+                <p>There are three ways to include JavaScript in your web pages:</p>
+                
+                <h3>Method 1: Internal JavaScript</h3>
+                <p>Place JavaScript code inside a <code><script></code> tag within your HTML:</p>
+                
+                <div class="code-block">
+                    <pre><code><!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <h1>Hello World</h1>
+    
+    <script>
+        // Your JavaScript code goes here
+        alert('Hello from JavaScript!');
+    </script>
+</body>
+</html></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code><script></code> - This tag tells the browser that JavaScript code follows</li>
+                        <li><code>//</code> - This creates a comment (notes that JavaScript ignores)</li>
+                        <li><code>alert()</code> - A built-in function that shows a popup dialog</li>
+                        <li><code>'Hello from JavaScript!'</code> - A text string (message to display)</li>
+                    </ul>
+                </div>
+
+                <h3>Method 2: External JavaScript File</h3>
+                <p>Create a separate .js file and link it to your HTML:</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- In your HTML file -->
+<script src="script.js"></script></code></pre>
+                </div>
+                
+                <div class="code-block">
+                    <pre><code>// In your script.js file
+console.log('Hello from external JavaScript!');</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>src="script.js"</code> - Points to the external JavaScript file</li>
+                        <li><code>console.log()</code> - Outputs messages to the browser's developer console</li>
+                    </ul>
+                </div>
+
+                <h3>Method 3: Inline JavaScript</h3>
+                <p>Add JavaScript directly to HTML attributes (not recommended for larger code):</p>
+                
+                <div class="code-block">
+                    <pre><code><button onclick="alert('Button clicked!')">
+    Click Me
+</button></code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>onclick</code> - An event attribute that runs when the element is clicked</li>
+                        <li><code>alert('Button clicked!')</code> - The code that runs on click</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Your First JavaScript Program</h2>
+                <p>Let's write a simple program that greets the user:</p>
+                
+                <div class="code-block">
+                    <pre><code>// This is our first JavaScript program
+// It will ask for your name and greet you
+
+let userName = prompt('What is your name?');
+alert('Hello, ' + userName + '! Welcome to JavaScript!');</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Line by Line Explanation:</strong>
+                    <ul>
+                        <li><code>// This is our first JavaScript program</code> - A comment that explains what the code does (JavaScript ignores this)</li>
+                        <li><code>let userName</code> - Creates a variable (container) to store data</li>
+                        <li><code>=</code> - Assignment operator, puts a value into the variable</li>
+                        <li><code>prompt('What is your name?')</code> - Shows a dialog asking for user input</li>
+                        <li><code>alert('Hello, ' + userName + '!')</code> - Shows a greeting using the stored name</li>
+                        <li><code>+</code> - Combines (concatenates) text strings together</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Opening the Browser Console</h2>
+                <p>The browser console is where you can see JavaScript output and errors, and even write JavaScript directly:</p>
+                
+                <h3>How to Open the Console:</h3>
+                <ul>
+                    <li><strong>Chrome/Edge:</strong> Press F12 or Ctrl+Shift+J (Cmd+Option+J on Mac)</li>
+                    <li><strong>Firefox:</strong> Press F12 or Ctrl+Shift+K (Cmd+Option+K on Mac)</li>
+                    <li><strong>Safari:</strong> Enable Developer menu in Preferences, then Cmd+Option+C</li>
+                </ul>
+                
+                <div class="code-block">
+                    <pre><code>// Try typing this in the console:
+console.log('Hello, Console!');
+console.log(2 + 2);
+console.log('JavaScript is awesome!');</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>console.log()</code> - Prints output to the console (useful for debugging)</li>
+                        <li><code>2 + 2</code> - JavaScript can do math! This outputs 4</li>
+                        <li>Each <code>console.log()</code> creates a new line of output</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>JavaScript Statements</h2>
+                <p>A JavaScript statement is an instruction that the browser executes. Statements are usually separated by semicolons:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Each line is a statement
+let x = 5;           // Statement 1: Create variable
+let y = 10;          // Statement 2: Create another variable
+let sum = x + y;     // Statement 3: Add them together
+console.log(sum);    // Statement 4: Display the result</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>let x = 5;</code> - Creates variable x with value 5</li>
+                        <li><code>let y = 10;</code> - Creates variable y with value 10</li>
+                        <li><code>let sum = x + y;</code> - Creates sum with value 15 (5 + 10)</li>
+                        <li><code>;</code> - Semicolon marks the end of a statement</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Best Practice:</strong> Always end your statements with semicolons. While JavaScript can sometimes work without them, using semicolons prevents errors and makes your code clearer.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>JavaScript is Case-Sensitive</h2>
+                <p>JavaScript treats uppercase and lowercase letters as different characters:</p>
+                
+                <div class="code-block">
+                    <pre><code>// These are three different variables:
+let myVariable = 1;
+let MyVariable = 2;
+let MYVARIABLE = 3;
+
+console.log(myVariable);   // Outputs: 1
+console.log(MyVariable);   // Outputs: 2
+console.log(MYVARIABLE);   // Outputs: 3</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Code Explanation:</strong>
+                    <ul>
+                        <li><code>myVariable</code>, <code>MyVariable</code>, <code>MYVARIABLE</code> - All different variables</li>
+                        <li>Capitalization matters in JavaScript!</li>
+                        <li>This applies to variables, functions, and keywords</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Try writing JavaScript that:</p>
+                <ol>
+                    <li>Opens the browser console (F12)</li>
+                    <li>Types <code>console.log('My name is [your name]');</code></li>
+                    <li>Creates a variable for your age: <code>let age = [your age];</code></li>
+                    <li>Displays it: <code>console.log('I am ' + age + ' years old');</code></li>
+                </ol>
+                
+                <div class="tip-box">
+                    <strong>Remember:</strong> Practice is key! The more you write JavaScript, the more natural it becomes. Don't be afraid to experiment and make mistakes - that's how we learn!
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="index.html" class="btn btn-secondary">← Back to Course</a>
+                <a href="lesson2.html" class="btn btn-primary">Next: Variables →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

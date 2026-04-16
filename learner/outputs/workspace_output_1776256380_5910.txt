@@ -1,0 +1,15 @@
+# Learner Platform - Course Content Creation
+
+## Completed
+- [x] Create main CSS styles (white and purple palette)
+- [x] Create main dashboard (index.html)
+- [x] Create How Computers/OS/Software Works course (8 lessons)
+- [x] Create HTML course (12 lessons - Beginner to Pro)
+- [x] Create CSS course (12 lessons - Beginner to Pro)
+- [x] Create JavaScript course index.html
+
+## In Progress
+- [ ] Create JavaScript course lessons 1-15
+
+## Pending
+- [ ] Create Python course (index.html + 15 lessons)

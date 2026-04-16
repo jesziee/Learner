@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: CSS Variables & Functions - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Pro Level</span>
+            <h1>Lesson 11: CSS Variables & Functions</h1>
+            <p>Write smarter, more maintainable CSS with modern features</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 92%;"></div>
+            </div>
+            <span class="progress-text">Lesson 11 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>CSS Custom Properties and Functions</h2>
+                <p>CSS Custom Properties (commonly called CSS variables) allow you to store values for reuse throughout your stylesheets. Combined with CSS functions like calc(), clamp(), and min/max, they enable dynamic, maintainable styling that was previously only possible with CSS preprocessors or JavaScript.</p>
+            </section>
+            
+            <section>
+                <h2>1. CSS Custom Properties (Variables)</h2>
+                <p>Define reusable values that can be changed in one place.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Define custom properties with -- prefix */
+:root {
+  --primary-color: #7C3AED;
+  --secondary-color: #9333EA;
+  --spacing: 1rem;
+  --border-radius: 8px;
+  --font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Use with var() function */
+.button {
+  background-color: var(--primary-color);
+  padding: var(--spacing);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+}
+
+/* Fallback values */
+.element {
+  color: var(--text-color, #333);    /* Use #333 if --text-color not defined */
+}
+
+/* Nested fallbacks */
+.element {
+  color: var(--text-color, var(--default-color, black));
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Why use custom properties:</strong>
+                    <ul>
+                        <li>Change values in one place, update everywhere</li>
+                        <li>Create theming systems easily</li>
+                        <li>Can be manipulated with JavaScript</li>
+                        <li>Cascade and inherit like other properties</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Scope and Inheritance</h2>
+                <p>Custom properties follow CSS cascade and inheritance rules.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Global scope: defined on :root */
+:root {
+  --primary: #7C3AED;
+  --spacing: 1rem;
+}
+
+/* Local scope: defined on specific selector */
+.card {
+  --card-padding: 1.5rem;
+  padding: var(--card-padding);
+}
+
+/* Inheritance: children inherit custom properties */
+.parent {
+  --text-color: #333;
+}
+
+.child {
+  color: var(--text-color);    /* Inherits from parent */
+}
+
+/* Override values locally */
+:root {
+  --background: white;
+}
+
+.dark-mode {
+  --background: #1a1a1a;       /* Override for dark mode */
+}
+
+body {
+  background-color: var(--background);
+}
+
+/* Scoped components */
+.alert {
+  --alert-color: #7C3AED;
+  border-left: 4px solid var(--alert-color);
+}
+
+.alert.error {
+  --alert-color: #ef4444;
+}
+
+.alert.success {
+  --alert-color: #22c55e;
+}
+/* Each alert type uses its own color */</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Best practice:</strong> Define design tokens (colors, spacing, typography) on :root for global access. Define component-specific variables within the component selector.
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. calc() Function</h2>
+                <p>Perform calculations directly in CSS.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Basic math operations */
+.element {
+  width: calc(100% - 20px);           /* Subtract */
+  width: calc(50% + 10px);            /* Add */
+  width: calc(200px * 2);             /* Multiply */
+  width: calc(600px / 3);             /* Divide */
+}
+
+/* Mix units */
+.container {
+  width: calc(100% - 2rem);           /* Percentage minus rem */
+  padding: calc(1rem + 5px);          /* Mix rem and px */
+}
+
+/* With variables */
+:root {
+  --sidebar-width: 250px;
+}
+
+.main-content {
+  width: calc(100% - var(--sidebar-width));
+}
+
+/* Header height minus padding */
+.header {
+  height: calc(100vh - var(--header-height));
+}
+
+/* Nested calculations */
+.element {
+  width: calc(calc(100% / 3) - 20px);
+  /* Or simply: */
+  width: calc(100% / 3 - 20px);
+}
+
+/* Practical examples */
+
+/* Full-height layout minus fixed header */
+main {
+  min-height: calc(100vh - 60px);
+}
+
+/* Responsive font size with minimum */
+.text {
+  font-size: calc(1rem + 1vw);
+}
+
+/* Grid gap accounting */
+.item {
+  width: calc(33.333% - 20px);    /* Third minus gap */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>calc() rules:</strong>
+                    <ul>
+                        <li>Mix different units (%, px, em, rem, vh, vw)</li>
+                        <li>Spaces required around + and - operators</li>
+                        <li>Nested calc() allowed but not necessary</li>
+                        <li>Can use with custom properties</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. min() and max() Functions</h2>
+                <p>Choose the smaller or larger value automatically.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* min(): Use the smallest value */
+.element {
+  width: min(50%, 400px);    /* At most 400px or 50%, whichever is smaller */
+  /* On narrow screens: uses 50% */
+  /* On wide screens: caps at 400px */
+}
+
+/* max(): Use the largest value */
+.element {
+  width: max(300px, 50%);    /* At least 300px or 50%, whichever is larger */
+}
+
+/* Practical example: Responsive container */
+.container {
+  width: min(90%, 1200px);    /* 90% up to max 1200px */
+  margin: 0 auto;
+}
+
+/* Font sizing */
+.text {
+  font-size: max(1rem, 2vw);    /* At least 1rem, scales with viewport */
+}
+
+/* Padding that scales */
+.section {
+  padding: min(5vw, 3rem);      /* Responsive padding with maximum */
+}
+
+/* Multiple values */
+.element {
+  width: min(100%, 800px, 50vw);    /* Uses smallest of all three */
+}
+
+/* With variables */
+:root {
+  --max-width: 1200px;
+  --padding: 2rem;
+}
+
+.container {
+  width: min(var(--max-width), 100% - var(--padding) * 2);
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. clamp() Function</h2>
+                <p>Set a value with minimum, preferred, and maximum bounds.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* clamp(min, preferred, max) */
+.element {
+  /* Minimum: 100px
+     Preferred: 50%
+     Maximum: 500px */
+  width: clamp(100px, 50%, 500px);
+}
+
+/* Fluid typography */
+h1 {
+  /* At least 1.5rem, prefers 5vw, at most 3rem */
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+/* Fluid spacing */
+.section {
+  padding: clamp(1rem, 5vw, 4rem);
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Fluid width container */
+.container {
+  width: clamp(300px, 90%, 1200px);
+  margin: 0 auto;
+}
+
+/* Fluid line height */
+p {
+  line-height: clamp(1.4, 1.5 + 0.5vw, 1.8);
+}
+
+/* Creating a scale system */
+:root {
+  --space-xs: clamp(0.25rem, 1vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 2vw, 1rem);
+  --space-md: clamp(1rem, 3vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 4vw, 2rem);
+  --space-xl: clamp(2rem, 5vw, 3rem);
+}</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Why clamp is powerful:</strong> It replaces media queries for many responsive sizing needs. One line of CSS creates fluid scaling with built-in limits.
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Color Functions</h2>
+                <p>Modern CSS provides powerful color manipulation functions.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* rgb() and rgba() */
+.element {
+  color: rgb(124, 58, 237);              /* Purple */
+  color: rgba(124, 58, 237, 0.8);        /* With 80% opacity */
+  /* Modern syntax: */
+  color: rgb(124 58 237);                /* No commas */
+  color: rgb(124 58 237 / 0.8);          /* Alpha with slash */
+}
+
+/* hsl() and hsla() */
+.element {
+  color: hsl(258, 83%, 58%);
+  color: hsla(258, 83%, 58%, 0.8);
+  /* Modern syntax: */
+  color: hsl(258 83% 58%);
+  color: hsl(258 83% 58% / 0.8);
+}
+
+/* Mixing colors */
+.mixed {
+  background-color: color-mix(in srgb, #7C3AED 50%, white);
+  /* Mixes purple with white at 50% */
+}
+
+/* Relative color syntax (new!) */
+:root {
+  --primary: #7C3AED;
+  
+  /* Create variations from base color */
+  --primary-light: hsl(from var(--primary) h s 80%);
+  --primary-dark: hsl(from var(--primary) h s 30%);
+  --primary-transparent: hsl(from var(--primary) h s l / 0.5);
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Environment Variables</h2>
+                <p>Access browser and device information with env().</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Safe area insets for notched devices */
+.element {
+  /* Add padding for device notch/safe areas */
+  padding: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Full screen app on iPhone */
+.app {
+  padding-top: env(safe-area-inset-top, 20px);
+  /* Fallback of 20px if env() not supported */
+}
+
+/* Combining with calc */
+.footer {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* For web app manifests */
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100dvh;    /* Dynamic viewport height */
+  padding-bottom: env(safe-area-inset-bottom);
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>When to use env():</strong> Essential for apps on iOS devices with notches. Ensures content isn't hidden behind the notch or home indicator.
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Custom Properties with JavaScript</h2>
+                <p>Dynamically update CSS variables from JavaScript.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* CSS */
+:root {
+  --primary-color: #7C3AED;
+  --rotation: 0deg;
+}
+
+.box {
+  background: var(--primary-color);
+  transform: rotate(var(--rotation));
+}
+
+/* JavaScript */
+// Get computed value
+const primaryColor = getComputedStyle(document.documentElement)
+  .getPropertyValue('--primary-color');
+
+// Set value on root
+document.documentElement.style.setProperty('--primary-color', '#9333EA');
+
+// Set value on specific element
+const card = document.querySelector('.card');
+card.style.setProperty('--rotation', '45deg');
+
+// Toggle dark mode
+function toggleDarkMode() {
+  const root = document.documentElement;
+  const currentTheme = getComputedStyle(root).getPropertyValue('--bg-color');
+  
+  if (currentTheme === '#ffffff') {
+    root.style.setProperty('--bg-color', '#1a1a1a');
+    root.style.setProperty('--text-color', '#ffffff');
+  } else {
+    root.style.setProperty('--bg-color', '#ffffff');
+    root.style.setProperty('--text-color', '#1a1a1a');
+  }
+}
+
+// Slider controls rotation
+slider.addEventListener('input', (e) => {
+  document.documentElement.style.setProperty('--rotation', `${e.target.value}deg`);
+});</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Building a Design System</h2>
+                <p>Use custom properties to create maintainable design tokens.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Design Tokens */
+:root {
+  /* Colors */
+  --color-primary: #7C3AED;
+  --color-primary-light: #A78BFA;
+  --color-primary-dark: #6D28D9;
+  --color-secondary: #9333EA;
+  --color-success: #22C55E;
+  --color-warning: #EAB308;
+  --color-error: #EF4444;
+  
+  /* Neutrals */
+  --color-white: #FFFFFF;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-500: #6B7280;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
+  
+  /* Typography */
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'Fira Code', monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+/* Using the design system */
+.button {
+  background: var(--color-primary);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  transition: background-color var(--transition-fast);
+}
+
+.button:hover {
+  background: var(--color-primary-dark);
+}</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create a design system using CSS variables:</p>
+                <div class="code-block">
+                    <pre><code>/* Challenge: Build a complete design system */
+
+/* 1. Define color variables (primary, secondary, neutrals) */
+/* 2. Create spacing scale using variables */
+/* 3. Build a button component using only variables */
+/* 4. Use clamp() for responsive font sizes */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Custom properties (--name) store reusable values</li>
+                    <li>var() retrieves values with optional fallbacks</li>
+                    <li>Custom properties cascade and inherit</li>
+                    <li>calc() performs calculations mixing units</li>
+                    <li>min() and max() choose between values</li>
+                    <li>clamp(min, preferred, max) sets bounded values</li>
+                    <li>Use clamp() for fluid typography and spacing</li>
+                    <li>Custom properties can be modified with JavaScript</li>
+                    <li>Build design systems with CSS variables as tokens</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson10.html" class="btn-secondary">← Previous: Transitions & Animations</a>
+            <a href="lesson12.html" class="btn-primary">Next: Best Practices & Architecture →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6: Positioning - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Intermediate Level</span>
+            <h1>Lesson 6: Positioning</h1>
+            <p>Control where elements appear on the page</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 50%;"></div>
+            </div>
+            <span class="progress-text">Lesson 6 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>CSS Positioning</h2>
+                <p>The position property determines how an element is placed in the document flow. Understanding positioning is essential for creating overlays, dropdowns, modals, and precise layouts. There are five position values: static, relative, absolute, fixed, and sticky — each with different behaviors.</p>
+            </section>
+            
+            <section>
+                <h2>1. Static Positioning</h2>
+                <p>Static is the default position for all elements. Elements appear in normal document flow.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Static positioning (default) */
+.element {
+  position: static;
+}
+
+/* Characteristics: */
+/* - Default for all elements */
+/* - Elements appear in normal document flow */
+/* - top, right, bottom, left have NO effect */
+/* - z-index has NO effect */
+
+/* Example: Normal flow */
+.box-one {
+  position: static;
+  /* This box appears first in the document */
+}
+
+.box-two {
+  position: static;
+  /* This box appears right after box-one */
+}
+
+/* You rarely need to explicitly set position: static */
+/* It's mainly used to override other positioning */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Normal flow:</strong> Block elements stack vertically, inline elements flow horizontally. This is the default behavior without positioning.
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Relative Positioning</h2>
+                <p>Relative positioning moves an element from its normal position, but reserves the original space.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Relative positioning */
+.element {
+  position: relative;
+  top: 20px;
+  left: 30px;
+}
+
+/* Characteristics: */
+/* - Element is moved FROM its normal position */
+/* - Original space is PRESERVED (gap remains) */
+/* - Other elements don't move to fill the gap */
+/* - top, right, bottom, left OFFSET from normal position */
+/* - z-index works */
+
+/* Visual example: */
+.container {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.normal-box {
+  background: lightblue;
+}
+
+.moved-box {
+  position: relative;
+  top: 20px;      /* Move DOWN 20px from normal position */
+  left: 30px;     /* Move RIGHT 30px from normal position */
+  background: lightcoral;
+}
+
+/* Before:
+   ┌─────────────────┐
+   │  Normal Box     │
+   └─────────────────┘
+   ┌─────────────────┐
+   │  Moved Box      │
+   └─────────────────┘
+
+   After (moved box shifted, space preserved):
+   ┌─────────────────┐
+   │  Normal Box     │
+   └─────────────────┘
+   [gap - space preserved]
+       ┌─────────────────┐
+       │  Moved Box      │
+       └─────────────────┘
+*/</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Key point:</strong> With relative positioning, the element is visually moved but its original space remains. Other content doesn't reflow.
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Common use:</strong> Relative positioning is often used as a positioning context for absolutely positioned children, not for moving elements.
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Absolute Positioning</h2>
+                <p>Absolute positioning removes an element from document flow and positions it relative to its nearest positioned ancestor.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Absolute positioning */
+.element {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Characteristics: */
+/* - Removed from normal document flow */
+/* - No space is preserved (other elements ignore it) */
+/* - Positioned relative to NEAREST positioned ancestor */
+/* - If no positioned ancestor, positioned relative to viewport */
+/* - top, right, bottom, left position within ancestor */
+
+/* Creating a positioning context */
+.parent {
+  position: relative;    /* This becomes the reference point */
+  width: 400px;
+  height: 300px;
+  border: 1px solid #ccc;
+}
+
+.child {
+  position: absolute;
+  top: 20px;             /* 20px from parent's top edge */
+  right: 20px;           /* 20px from parent's right edge */
+  background: #7C3AED;
+}
+
+/* Result:
+   ┌────────────────────────────┐
+   │                    [child] │  ← Positioned top-right
+   │                            │
+   │                            │
+   │         parent             │
+   │                            │
+   └────────────────────────────┘
+*/
+
+/* Center an absolute element */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Fill parent completely */
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* OR use inset shorthand */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Absolute positioning rules:</strong>
+                    <ul>
+                        <li>Element is removed from flow (no space reserved)</li>
+                        <li>Looks for nearest ancestor with position (not static)</li>
+                        <li>Usually pair with parent having position: relative</li>
+                        <li>top/right/bottom/left define position within that ancestor</li>
+                    </ul>
+                </div>
+                
+                <h3>Practical Examples</h3>
+                <div class="code-block">
+                    <pre><code>/* Close button on a card */
+.card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+/* Badge on icon */
+.icon-wrapper {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Image overlay */
+.image-container {
+  position: relative;
+}
+
+.image-container img {
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(124, 58, 237, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Fixed Positioning</h2>
+                <p>Fixed positioning places an element relative to the viewport. It stays in place even when scrolling.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Fixed positioning */
+.element {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Characteristics: */
+/* - Removed from document flow */
+/* - Positioned relative to VIEWPORT (browser window) */
+/* - Stays in same place even when scrolling */
+/* - Not affected by parent positioning */
+
+/* Fixed header */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Add padding to body to prevent content hiding */
+body {
+  padding-top: 60px;
+}
+
+/* Fixed chat button */
+.chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #7C3AED;
+  color: white;
+  cursor: pointer;
+}
+
+/* Cookie consent banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: #333;
+  color: white;
+}
+
+/* Fixed sidebar */
+.sidebar {
+  position: fixed;
+  top: 60px;        /* Below fixed header */
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+/* Main content offset */
+main {
+  margin-left: 250px;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Fixed positioning uses:</strong>
+                    <ul>
+                        <li>Sticky headers that stay visible</li>
+                        <li>Floating action buttons (chat, feedback)</li>
+                        <li>Modal overlays</li>
+                        <li>Notification banners</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Sticky Positioning</h2>
+                <p>Sticky positioning switches between relative and fixed based on scroll position.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Sticky positioning */
+.element {
+  position: sticky;
+  top: 0;
+}
+
+/* Characteristics: */
+/* - Acts like RELATIVE until scroll threshold */
+/* - Then acts like FIXED within its container */
+/* - Must specify at least one: top, right, bottom, left */
+/* - Stays within its parent container */
+
+/* Sticky section headers */
+.section-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+
+/* As user scrolls:
+   1. Header is in normal position (relative)
+   2. When it reaches top: 0, it sticks (fixed-like)
+   3. It stays stuck until parent section scrolls away
+*/
+
+/* Sticky table headers */
+table thead {
+  position: sticky;
+  top: 60px;    /* Below fixed header */
+}
+
+/* Sticky sidebar */
+.sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+/* Navigation that becomes sticky on scroll */
+.main-nav {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+}
+
+/* Important note about sticky: */
+/* - Parent must have enough height for scrolling */
+/* - overflow: hidden/auto on parent can break sticky */
+/* - Must have scrollable ancestor */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>How sticky works:</strong>
+                    <ul>
+                        <li>Starts as relative (in normal flow)</li>
+                        <li>When scroll reaches the threshold (top: 0), it sticks</li>
+                        <li>Stays stuck until parent container scrolls out of view</li>
+                        <li>Great for headers, navigation, table headers</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Sticky troubleshooting:</strong> If sticky isn't working, check that:
+                    <ul>
+                        <li>Parent has enough height to scroll</li>
+                        <li>No parent has overflow: hidden/auto/scroll</li>
+                        <li>You've specified top/bottom/left/right</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Z-Index and Stacking Context</h2>
+                <p>z-index controls the stacking order of positioned elements.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* z-index only works on positioned elements */
+.element {
+  position: relative;    /* Or absolute, fixed, sticky */
+  z-index: 10;
+}
+
+/* Higher values appear on top */
+.back-layer {
+  position: absolute;
+  z-index: 1;
+  background: blue;
+}
+
+.middle-layer {
+  position: absolute;
+  z-index: 2;
+  background: green;
+}
+
+.front-layer {
+  position: absolute;
+  z-index: 3;
+  background: red;    /* Appears on top */
+}
+
+/* Common z-index scale */
+:root {
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: var(--z-modal-backdrop);
+}
+
+.modal {
+  position: fixed;
+  z-index: var(--z-modal);
+}
+
+/* Stacking context */
+/* When you set z-index, you create a stacking context */
+/* Children are stacked within that context */
+
+.parent {
+  position: relative;
+  z-index: 10;
+}
+
+.child {
+  position: absolute;
+  z-index: 1;    /* Relative to parent, not page */
+}
+
+/* Even if another element has z-index: 5 globally, */
+/* if it's inside a z-index: 10 parent, */
+/* it's still behind elements in z-index: 20 context */</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>z-index rules:</strong>
+                    <ul>
+                        <li>Only works on positioned elements (not static)</li>
+                        <li>Higher values appear on top</li>
+                        <li>Creates a new stacking context</li>
+                        <li>Children stack within their parent's context</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Practical Positioning Patterns</h2>
+                
+                <h3>Modal Overlay</h3>
+                <div class="code-block">
+                    <pre><code>/* Modal overlay pattern */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}</code></pre>
+                </div>
+                
+                <h3>Dropdown Menu</h3>
+                <div class="code-block">
+                    <pre><code>/* Dropdown positioning */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;    /* Below the toggle */
+  left: 0;
+  min-width: 200px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}</code></pre>
+                </div>
+                
+                <h3>Tooltip</h3>
+                <div class="code-block">
+                    <pre><code>/* Tooltip positioning */
+.tooltip-trigger {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;    /* Above the trigger */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: #333;
+  color: white;
+  font-size: 12px;
+  white-space: nowrap;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s;
+}
+
+.tooltip-trigger:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Arrow using pseudo-element */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #333;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create these positioned elements:</p>
+                <div class="code-block">
+                    <pre><code>/* Challenge: Create these components */
+
+/* 1. A fixed header that stays at the top */
+/* 2. A badge on an icon (absolute within relative) */
+/* 3. A sticky section header */
+/* 4. A centered modal overlay */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Static is default, elements flow normally</li>
+                    <li>Relative moves element, preserves original space</li>
+                    <li>Absolute removes from flow, positions within nearest positioned ancestor</li>
+                    <li>Fixed positions relative to viewport, stays when scrolling</li>
+                    <li>Sticky switches between relative and fixed based on scroll</li>
+                    <li>z-index controls stacking order (only for positioned elements)</li>
+                    <li>Use position: relative on parent to create positioning context</li>
+                    <li>Common uses: modals, dropdowns, tooltips, sticky headers</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson5.html" class="btn-secondary">← Previous: Display Property</a>
+            <a href="lesson7.html" class="btn-primary">Next: Flexbox →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

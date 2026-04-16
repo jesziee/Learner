@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: Objects - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="index.html">JavaScript Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>Lesson 8: Objects</h1>
+            <p>Master objects - the fundamental building blocks for organizing data in JavaScript.</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Objects?</h2>
+                <p>Objects are collections of key-value pairs. While arrays use numeric indices, objects use named keys (strings or symbols) to access values. This makes objects perfect for representing real-world entities with properties and behaviors. Almost everything in JavaScript is an object or behaves like one!</p>
+                
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Think of an object like a real-world thing. A "person" object might have properties like name, age, and email, and methods (functions) like greet() or walk().
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Objects</h2>
+                <p>There are several ways to create objects:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Method 1: Object literal (most common)
+const person = {
+    name: "Alice",
+    age: 25,
+    city: "New York"
+};
+
+console.log(person);  // { name: "Alice", age: 25, city: "New York" }
+
+// Method 2: new Object()
+const car = new Object();
+car.brand = "Toyota";
+car.model = "Camry";
+car.year = 2022;
+
+// Method 3: Object.create()
+const animal = Object.create(null);
+animal.type = "Dog";
+animal.name = "Buddy";
+
+// Method 4: Constructor function
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+const john = new Person("John", 30);
+
+// Method 5: Class syntax (ES6)
+class Animal {
+    constructor(name, species) {
+        this.name = name;
+        this.species = species;
+    }
+}
+const cat = new Animal("Whiskers", "Cat");</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Object Literal Syntax:</strong>
+                    <ul>
+                        <li><code>{ }</code> - Curly braces create an object</li>
+                        <li><code>key: value</code> - Property pairs separated by colons</li>
+                        <li><code>,</code> - Commas separate properties (trailing comma allowed)</li>
+                        <li>Most common and preferred method for simple objects</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Accessing Properties</h2>
+                <p>Two ways to access object properties:</p>
+                
+                <div class="code-block">
+                    <pre><code>const user = {
+    name: "Bob",
+    age: 30,
+    email: "bob@example.com"
+};
+
+// Method 1: Dot notation
+console.log(user.name);    // "Bob"
+console.log(user.age);     // 30
+
+// Method 2: Bracket notation
+console.log(user["name"]);   // "Bob"
+console.log(user["email"]);  // "bob@example.com"
+
+// Bracket notation is required for:
+// 1. Property names with special characters
+const data = {
+    "full-name": "John Doe",
+    "favorite color": "Blue"
+};
+console.log(data["full-name"]);      // "John Doe"
+console.log(data["favorite color"]); // "Blue"
+
+// 2. Dynamic property names
+const key = "name";
+console.log(user[key]);  // "Bob" (uses variable value)
+console.log(user.key);   // undefined (looks for property named "key")
+
+// 3. Property names that are numbers
+const arrLike = {
+    0: "first",
+    1: "second",
+    length: 2
+};
+console.log(arrLike[0]);  // "first"</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Best Practice:</strong> Use dot notation when you know the property name. Use bracket notation when the property name is dynamic or contains special characters.
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Adding and Modifying Properties</h2>
+                <p>Objects are mutable - you can change their properties:</p>
+                
+                <div class="code-block">
+                    <pre><code>const product = {
+    name: "Laptop",
+    price: 999
+};
+
+// Add new property
+product.brand = "TechCorp";
+product["inStock"] = true;
+console.log(product);
+// { name: "Laptop", price: 999, brand: "TechCorp", inStock: true }
+
+// Modify existing property
+product.price = 899;
+console.log(product.price);  // 899
+
+// Update using bracket notation
+product["price"] = 799;
+console.log(product.price);  // 799
+
+// Computed property names
+const propName = "discount";
+product[propName] = 10;
+console.log(product.discount);  // 10
+
+// Delete property
+delete product.inStock;
+console.log(product.inStock);  // undefined</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Object Methods</h2>
+                <p>Functions stored as object properties are called methods:</p>
+                
+                <div class="code-block">
+                    <pre><code>const calculator = {
+    // Properties
+    brand: "Casio",
+    model: "FX-991",
+    
+    // Methods
+    add: function(a, b) {
+        return a + b;
+    },
+    
+    subtract: function(a, b) {
+        return a - b;
+    },
+    
+    // Shorthand method syntax (ES6)
+    multiply(a, b) {
+        return a * b;
+    },
+    
+    divide(a, b) {
+        if (b === 0) return "Error: Division by zero";
+        return a / b;
+    }
+};
+
+// Call methods
+console.log(calculator.add(5, 3));       // 8
+console.log(calculator.subtract(10, 4)); // 6
+console.log(calculator.multiply(3, 4));  // 12
+console.log(calculator.divide(15, 3));   // 5</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Method Syntax:</strong>
+                    <ul>
+                        <li><code>methodName: function() { }</code> - Traditional syntax</li>
+                        <li><code>methodName() { }</code> - Shorthand (ES6, preferred)</li>
+                        <li>Call with <code>object.methodName()</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>The 'this' Keyword</h2>
+                <p><code>this</code> refers to the current object context:</p>
+                
+                <div class="code-block">
+                    <pre><code>const person = {
+    name: "Alice",
+    age: 25,
+    
+    greet() {
+        // 'this' refers to the person object
+        console.log("Hello, I'm " + this.name);
+    },
+    
+    introduce() {
+        console.log(`I'm ${this.name} and I'm ${this.age} years old`);
+    },
+    
+    haveBirthday() {
+        this.age++;
+        console.log(`Happy birthday! Now I'm ${this.age}`);
+    }
+};
+
+person.greet();        // "Hello, I'm Alice"
+person.introduce();    // "I'm Alice and I'm 25 years old"
+person.haveBirthday(); // "Happy birthday! Now I'm 26"
+
+// Be careful with this!
+const greetFunc = person.greet;
+greetFunc();  // "Hello, I'm undefined" - 'this' is lost!
+
+// Fix with bind
+const boundGreet = person.greet.bind(person);
+boundGreet();  // "Hello, I'm Alice"</code></pre>
+                </div>
+                
+                <div class="code-explanation">
+                    <strong>Understanding 'this':</strong>
+                    <ul>
+                        <li>In a method, <code>this</code> refers to the object</li>
+                        <li>When extracted, <code>this</code> can be lost</li>
+                        <li>Use <code>bind()</code> to lock <code>this</code> to an object</li>
+                        <li>Arrow functions don't have their own <code>this</code></li>
+                    </ul>
+                </div>
+
+                <h3>Arrow Functions and 'this'</h3>
+                <div class="code-block">
+                    <pre><code>const counter = {
+    count: 0,
+    
+    // Regular function - 'this' works
+    increment: function() {
+        this.count++;
+        console.log(this.count);
+    },
+    
+    // Arrow function - 'this' is inherited from outer scope
+    // (doesn't work as expected here)
+    badIncrement: () => {
+        // this.count would be undefined
+        // Arrow functions don't bind their own 'this'
+    },
+    
+    // Good use of arrow function
+    delayedIncrement: function() {
+        setTimeout(() => {
+            // Arrow function inherits 'this' from delayedIncrement
+            this.count++;
+            console.log(this.count);
+        }, 1000);
+    }
+};
+
+counter.increment();  // 1
+counter.delayedIncrement();  // After 1 second: 2</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Iterating Over Objects</h2>
+                <p>Several ways to loop through object properties:</p>
+                
+                <div class="code-block">
+                    <pre><code>const user = {
+    name: "John",
+    age: 30,
+    city: "Boston",
+    job: "Developer"
+};
+
+// Method 1: for...in loop
+for (let key in user) {
+    console.log(`${key}: ${user[key]}`);
+}
+// name: John
+// age: 30
+// city: Boston
+// job: Developer
+
+// Method 2: Object.keys() - get array of keys
+const keys = Object.keys(user);
+console.log(keys);  // ["name", "age", "city", "job"]
+
+keys.forEach(key => {
+    console.log(`${key}: ${user[key]}`);
+});
+
+// Method 3: Object.values() - get array of values
+const values = Object.values(user);
+console.log(values);  // ["John", 30, "Boston", "Developer"]
+
+// Method 4: Object.entries() - get array of [key, value] pairs
+const entries = Object.entries(user);
+console.log(entries);
+// [["name", "John"], ["age", 30], ["city", "Boston"], ["job", "Developer"]]
+
+// Iterate with entries
+for (let [key, value] of Object.entries(user)) {
+    console.log(`${key}: ${value}`);
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Object Methods (Static)</h2>
+                <p>Built-in methods for working with objects:</p>
+                
+                <div class="code-block">
+                    <pre><code>const person = { name: "Alice", age: 25 };
+const job = { title: "Developer", company: "TechCorp" };
+
+// Object.assign() - copy/merge objects
+const merged = Object.assign({}, person, job);
+console.log(merged);
+// { name: "Alice", age: 25, title: "Developer", company: "TechCorp" }
+
+// Spread operator (modern alternative)
+const merged2 = { ...person, ...job };
+
+// Object.freeze() - prevent all changes
+const frozen = Object.freeze({ x: 1 });
+frozen.x = 2;  // Silently fails (or throws in strict mode)
+console.log(frozen.x);  // 1
+
+// Object.seal() - prevent adding/deleting, but allow modifications
+const sealed = Object.seal({ y: 10 });
+sealed.y = 20;     // Works
+sealed.z = 30;     // Fails silently
+delete sealed.y;   // Fails silently
+
+// Check status
+console.log(Object.isFrozen(frozen));  // true
+console.log(Object.isSealed(sealed));  // true
+
+// Object.hasOwn() - check if property exists (modern)
+console.log(Object.hasOwn(person, "name"));  // true
+console.log(Object.hasOwn(person, "email")); // false
+
+// 'in' operator - checks prototype chain too
+console.log("name" in person);  // true
+console.log("toString" in person);  // true (inherited)</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Destructuring Objects</h2>
+                <p>Extract properties into variables:</p>
+                
+                <div class="code-block">
+                    <pre><code>const person = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 30,
+    city: "New York"
+};
+
+// Basic destructuring
+const { firstName, lastName } = person;
+console.log(firstName);  // "John"
+console.log(lastName);   // "Doe"
+
+// Rename variables
+const { firstName: fName, lastName: lName } = person;
+console.log(fName);  // "John"
+console.log(lName);  // "Doe"
+
+// Default values
+const { email = "N/A" } = person;
+console.log(email);  // "N/A"
+
+// Nested destructuring
+const company = {
+    name: "TechCorp",
+    address: {
+        street: "123 Main St",
+        city: "Boston"
+    }
+};
+
+const { address: { city: companyCity } } = company;
+console.log(companyCity);  // "Boston"
+
+// Rest properties
+const { name, ...rest } = { name: "Alice", age: 25, city: "NYC" };
+console.log(name);  // "Alice"
+console.log(rest);  // { age: 25, city: "NYC" }
+
+// In function parameters
+function greetUser({ firstName, lastName, age = 0 }) {
+    console.log(`Hello ${firstName} ${lastName}, age ${age}`);
+}
+
+greetUser(person);  // "Hello John Doe, age 30"</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Spread Operator with Objects</h2>
+                <p>Copy and merge objects easily:</p>
+                
+                <div class="code-block">
+                    <pre><code>const defaults = {
+    theme: "light",
+    language: "en",
+    notifications: true
+};
+
+// Copy object
+const settings = { ...defaults };
+console.log(settings);  // { theme: "light", language: "en", notifications: true }
+
+// Override properties
+const customSettings = { ...defaults, theme: "dark" };
+console.log(customSettings);
+// { theme: "dark", language: "en", notifications: true }
+
+// Merge objects (later properties override)
+const userSettings = { theme: "dark", language: "es" };
+const merged = { ...defaults, ...userSettings };
+console.log(merged);
+// { theme: "dark", language: "es", notifications: true }
+
+// Add new properties
+const extended = { ...defaults, fontSize: 14 };
+console.log(extended);
+// { theme: "light", language: "en", notifications: true, fontSize: 14 }</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Shallow Copy Warning:</strong> The spread operator creates a shallow copy. Nested objects are still referenced, not copied.
+                </div>
+
+                <h3>Deep Copy</h3>
+                <div class="code-block">
+                    <pre><code>const original = {
+    name: "Test",
+    nested: { value: 10 }
+};
+
+// Shallow copy - nested object is shared
+const shallowCopy = { ...original };
+shallowCopy.nested.value = 20;
+console.log(original.nested.value);  // 20 (changed!)
+
+// Deep copy with JSON
+const deepCopy = JSON.parse(JSON.stringify(original));
+deepCopy.nested.value = 30;
+console.log(original.nested.value);  // 20 (unchanged)
+
+// Deep copy with structuredClone (modern)
+const deepCopy2 = structuredClone(original);</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Constructor Functions</h2>
+                <p>Create multiple objects with the same structure:</p>
+                
+                <div class="code-block">
+                    <pre><code>// Constructor function (capitalize first letter)
+function User(name, email, age) {
+    this.name = name;
+    this.email = email;
+    this.age = age;
+    this.isActive = true;
+    
+    this.greet = function() {
+        console.log(`Hello, I'm ${this.name}`);
+    };
+}
+
+// Create instances with 'new'
+const user1 = new User("Alice", "alice@example.com", 25);
+const user2 = new User("Bob", "bob@example.com", 30);
+
+console.log(user1.name);   // "Alice"
+console.log(user2.email);  // "bob@example.com"
+user1.greet();  // "Hello, I'm Alice"
+
+// What 'new' does:
+// 1. Creates empty object
+// 2. Sets 'this' to the new object
+// 3. Executes constructor code
+// 4. Returns the new object
+
+// instanceof check
+console.log(user1 instanceof User);  // true
+
+// Prototype - add methods to all instances
+User.prototype.getInfo = function() {
+    return `${this.name} (${this.email})`;
+};
+
+console.log(user1.getInfo());  // "Alice (alice@example.com)"</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Classes (ES6)</h2>
+                <p>Modern syntax for creating objects:</p>
+                
+                <div class="code-block">
+                    <pre><code>class Animal {
+    // Constructor
+    constructor(name, species) {
+        this.name = name;
+        this.species = species;
+        this.energy = 100;
+    }
+    
+    // Methods
+    speak() {
+        console.log(`${this.name} makes a sound`);
+    }
+    
+    eat(amount) {
+        this.energy += amount;
+        console.log(`${this.name} now has ${this.energy} energy`);
+    }
+    
+    // Getter
+    get info() {
+        return `${this.name} the ${this.species}`;
+    }
+    
+    // Setter
+    set nickname(value) {
+        this.name = value;
+    }
+    
+    // Static method (on class, not instance)
+    static create(name, species) {
+        return new Animal(name, species);
+    }
+}
+
+// Create instance
+const dog = new Animal("Buddy", "Dog");
+console.log(dog.info);      // "Buddy the Dog"
+dog.speak();                // "Buddy makes a sound"
+dog.eat(20);                // "Buddy now has 120 energy"
+dog.nickname = "Bud";       // Uses setter
+
+// Static method
+const cat = Animal.create("Whiskers", "Cat");
+
+// Inheritance
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name, "Dog");  // Call parent constructor
+        this.breed = breed;
+    }
+    
+    speak() {
+        console.log(`${this.name} barks!`);
+    }
+    
+    fetch() {
+        this.energy -= 10;
+        console.log(`${this.name} fetches the ball!`);
+    }
+}
+
+const myDog = new Dog("Max", "Labrador");
+myDog.speak();  // "Max barks!" (overridden method)
+myDog.fetch();  // "Max fetches the ball!"</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Object Property Descriptors</h2>
+                <p>Advanced property configuration:</p>
+                
+                <div class="code-block">
+                    <pre><code>const person = {};
+
+// Define property with descriptors
+Object.defineProperty(person, "name", {
+    value: "Alice",
+    writable: false,        // Cannot change value
+    enumerable: true,       // Shows in for...in
+    configurable: false     // Cannot delete or reconfigure
+});
+
+person.name = "Bob";  // Fails silently
+console.log(person.name);  // "Alice"
+
+// Get property descriptor
+const descriptor = Object.getOwnPropertyDescriptor(person, "name");
+console.log(descriptor);
+// { value: "Alice", writable: false, enumerable: true, configurable: false }
+
+// Define multiple properties
+Object.defineProperties(person, {
+    age: {
+        value: 25,
+        writable: true
+    },
+    email: {
+        value: "alice@example.com",
+        writable: true
+    }
+});
+
+// Getter and setter with defineProperty
+let _price = 0;
+Object.defineProperty(person, "price", {
+    get() { return _price; },
+    set(value) { 
+        if (value >= 0) _price = value;
+    }
+});</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Examples</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Example 1: Shopping cart
+const cart = {
+    items: [],
+    
+    add(product, quantity = 1) {
+        this.items.push({ ...product, quantity });
+    },
+    
+    remove(productId) {
+        this.items = this.items.filter(item => item.id !== productId);
+    },
+    
+    getTotal() {
+        return this.items.reduce((sum, item) => 
+            sum + (item.price * item.quantity), 0);
+    },
+    
+    clear() {
+        this.items = [];
+    }
+};
+
+// Example 2: User manager
+class UserManager {
+    constructor() {
+        this.users = [];
+    }
+    
+    add(user) {
+        user.id = Date.now();
+        this.users.push(user);
+        return user;
+    }
+    
+    find(id) {
+        return this.users.find(u => u.id === id);
+    }
+    
+    remove(id) {
+        this.users = this.users.filter(u => u.id !== id);
+    }
+    
+    update(id, updates) {
+        const user = this.find(id);
+        if (user) {
+            Object.assign(user, updates);
+        }
+        return user;
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                
+                <div class="code-block">
+                    <pre><code>// Exercise: Build a Library system
+class Book {
+    constructor(title, author, isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.isAvailable = true;
+    }
+}
+
+class Library {
+    constructor(name) {
+        this.name = name;
+        this.books = [];
+    }
+    
+    addBook(title, author, isbn) {
+        const book = new Book(title, author, isbn);
+        this.books.push(book);
+        console.log(`Added: "${title}"`);
+    }
+    
+    removeBook(isbn) {
+        const index = this.books.findIndex(b => b.isbn === isbn);
+        if (index > -1) {
+            const removed = this.books.splice(index, 1);
+            console.log(`Removed: "${removed[0].title}"`);
+        }
+    }
+    
+    findBook(query) {
+        return this.books.filter(b => 
+            b.title.toLowerCase().includes(query.toLowerCase()) ||
+            b.author.toLowerCase().includes(query.toLowerCase())
+        );
+    }
+    
+    borrowBook(isbn) {
+        const book = this.books.find(b => b.isbn === isbn);
+        if (book && book.isAvailable) {
+            book.isAvailable = false;
+            console.log(`Borrowed: "${book.title}"`);
+            return true;
+        }
+        console.log("Book not available");
+        return false;
+    }
+    
+    returnBook(isbn) {
+        const book = this.books.find(b => b.isbn === isbn);
+        if (book) {
+            book.isAvailable = true;
+            console.log(`Returned: "${book.title}"`);
+        }
+    }
+    
+    listAvailable() {
+        return this.books.filter(b => b.isAvailable);
+    }
+}
+
+// Test the library
+const library = new Library("City Library");
+library.addBook("1984", "George Orwell", "ISBN001");
+library.addBook("Dune", "Frank Herbert", "ISBN002");
+library.addBook("The Hobbit", "J.R.R. Tolkien", "ISBN003");
+
+console.log("\nSearching for 'the':");
+console.log(library.findBook("the"));
+
+library.borrowBook("ISBN001");
+console.log("\nAvailable books:", library.listAvailable().length);
+library.returnBook("ISBN001");</code></pre>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <a href="lesson7.html" class="btn btn-secondary">← Previous: Arrays</a>
+                <a href="lesson9.html" class="btn btn-primary">Next: DOM Manipulation →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

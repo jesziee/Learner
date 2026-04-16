@@ -1,0 +1,12 @@
+total 48
+drwxr-xr-x  9 user user 4096 Apr 15 12:33 .
+drwxr-xr-x 20 root root 4096 Apr 13 07:56 ..
+drwxr-xr-x  4 user user 4096 Mar 20 06:18 .agent_hooks
+drwxr-xr-x 11 root root 4096 Apr 15 12:53 .browser_data
+drwxr-xr-x  3 root root 4096 Apr 13 07:54 .psiphon_data
+drwxr-xr-x  7 root root 4096 Apr 15 12:36 courses
+drwxr-xr-x  2 root root 4096 Apr 15 10:25 css
+-rw-r--r--  1 root root 5378 Apr 15 10:26 index.html
+drwxr-xr-x  2 root root 4096 Apr 15 13:26 outputs
+drwxr-xr-x  2 root root 4096 Apr 15 13:26 summarized_conversations
+-rw-r--r--  1 root root  838 Apr 15 12:35 todo.md

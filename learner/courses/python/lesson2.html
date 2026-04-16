@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Variables & Data Types - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 2: Variables & Data Types</h1>
+            <p>Understand Python variables, strings, numbers, and basic data types</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Variables?</h2>
+                <p>Variables are containers for storing data values. In Python, you don't need to declare variable types - Python figures it out automatically. This is called dynamic typing. A variable is created the moment you assign a value to it using the equals sign (<code>=</code>).</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Creating Variables</h2>
+                <p>Creating variables in Python is straightforward. Just give your variable a name and assign a value using the assignment operator.</p>
+                
+                <div class="code-block">
+                    <h4>Variable Assignment:</h4>
+<pre><code># Creating variables is simple - just assign a value
+name = "Alice"
+age = 25
+height = 5.6
+is_student = True
+
+# Python automatically knows the type
+print(type(name))      # <class 'str'>
+print(type(age))       # <class 'int'>
+print(type(height))    # <class 'float'>
+print(type(is_student)) # <class 'bool'>
+
+# Variables can be reassigned to different types
+x = 10
+print(x)       # 10
+x = "hello"
+print(x)       # hello
+
+# Multiple assignment
+a, b, c = 1, 2, 3
+print(a, b, c) # 1 2 3
+
+# Assign same value to multiple variables
+x = y = z = 0
+print(x, y, z) # 0 0 0</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Create variables by assigning values. No type declaration needed.</p>
+                        <p><strong>Lines 8-11:</strong> The <code>type()</code> function shows what data type a variable contains.</p>
+                        <p><strong>Lines 14-17:</strong> Python variables can change types dynamically (though this isn't always good practice).</p>
+                        <p><strong>Lines 20-21:</strong> Multiple variables can be assigned in one line using tuple unpacking.</p>
+                        <p><strong>Lines 24-25:</strong> Chain assignment sets multiple variables to the same value.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Variable Naming Rules</h4>
+                    <p>Variable names must start with a letter or underscore, can contain letters, numbers, and underscores, and are case-sensitive. Use descriptive names like <code>user_age</code> instead of <code>x</code>.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Numbers</h2>
+                <p>Python has several numeric types. Integers are whole numbers, floats have decimal points, and complex numbers have real and imaginary parts. Python also supports arbitrary precision integers, meaning they can be as large as memory allows.</p>
+                
+                <div class="code-block">
+                    <h4>Numeric Types:</h4>
+<pre><code># Integers (whole numbers)
+count = 42
+temperature = -10
+big_number = 1_000_000  # Underscores for readability
+
+# Floats (decimal numbers)
+price = 19.99
+pi = 3.14159
+scientific = 2.5e-3    # 0.0025 (scientific notation)
+
+# Basic math operations
+a = 10
+b = 3
+
+print(a + b)   # Addition: 13
+print(a - b)   # Subtraction: 7
+print(a * b)   # Multiplication: 30
+print(a / b)   # Division: 3.333... (always returns float)
+print(a // b)  # Floor division: 3 (rounds down)
+print(a % b)   # Modulo: 1 (remainder)
+print(a ** b)  # Exponentiation: 1000
+
+# Type conversion
+x = 5.7
+print(int(x))    # 5 (truncates decimal)
+print(float(10)) # 10.0</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-5:</strong> Integers can be positive, negative, or use underscores for readability.</p>
+                        <p><strong>Lines 8-10:</strong> Floats include decimal numbers and support scientific notation.</p>
+                        <p><strong>Lines 17-23:</strong> Python supports all standard math operations.</p>
+                        <p><strong>Line 20:</strong> Regular division always returns a float, even with integer operands.</p>
+                        <p><strong>Line 21:</strong> Floor division (<code>//</code>) rounds down to the nearest integer.</p>
+                        <p><strong>Lines 26-28:</strong> Convert between numeric types using <code>int()</code> and <code>float()</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Strings</h2>
+                <p>Strings are sequences of characters enclosed in quotes. Python strings are immutable - once created, they cannot be changed. However, you can create new strings based on existing ones.</p>
+                
+                <div class="code-block">
+                    <h4>String Basics:</h4>
+<pre><code># Strings can use single or double quotes
+greeting = "Hello"
+name = 'Alice'
+
+# Multi-line strings use triple quotes
+bio = """
+This is a multi-line string.
+It can span multiple lines.
+"""
+
+# String operations
+first = "Hello"
+last = "World"
+full = first + " " + last  # Concatenation
+print(full)  # Hello World
+
+# String repetition
+print("=" * 10)  # ==========
+
+# String indexing (0-based)
+word = "Python"
+print(word[0])   # P (first character)
+print(word[-1])  # n (last character)
+print(word[-2])  # o (second to last)
+
+# String slicing
+print(word[0:3])   # Pyt (characters 0, 1, 2)
+print(word[2:])    # thon (from index 2 to end)
+print(word[:4])    # Pyth (from start to index 3)
+print(word[::2])   # Pto (every 2nd character)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Single and double quotes work identically for strings.</p>
+                        <p><strong>Lines 6-10:</strong> Triple quotes allow strings to span multiple lines.</p>
+                        <p><strong>Lines 13-16:</strong> Strings can be concatenated with the <code>+</code> operator.</p>
+                        <p><strong>Line 19:</strong> The <code>*</code> operator repeats strings.</p>
+                        <p><strong>Lines 22-25:</strong> Access characters by index. Negative indices count from the end.</p>
+                        <p><strong>Lines 28-31:</strong> Slicing extracts substrings using <code>[start:end:step]</code> syntax.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4>String Methods:</h4>
+<pre><code>text = "  Hello, Python World!  "
+
+# Case methods
+print(text.upper())      # "  HELLO, PYTHON WORLD!  "
+print(text.lower())      # "  hello, python world!  "
+print(text.title())      # "  Hello, Python World!  "
+print(text.strip())      # "Hello, Python World!" (removes whitespace)
+
+# Search methods
+sentence = "Python is awesome"
+print(sentence.find("is"))     # 7 (index of substring)
+print(sentence.startswith("Python"))  # True
+print(sentence.endswith("awesome"))   # True
+
+# Replace and split
+print(sentence.replace("awesome", "amazing"))  # Python is amazing
+print(sentence.split())        # ['Python', 'is', 'awesome']
+print("a,b,c".split(","))     # ['a', 'b', 'c']
+
+# Check contents
+print("hello".isalpha())    # True (only letters)
+print("123".isdigit())      # True (only digits)
+print("hello123".isalnum()) # True (letters and digits)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-7:</strong> Case conversion methods return new strings with changed case.</p>
+                        <p><strong>Line 7:</strong> <code>strip()</code> removes leading and trailing whitespace.</p>
+                        <p><strong>Lines 10-14:</strong> Search for substrings and check string boundaries.</p>
+                        <p><strong>Lines 17-19:</strong> Replace text or split strings into lists.</p>
+                        <p><strong>Lines 22-24:</strong> Check if string contains only certain character types.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>String Formatting</h2>
+                <p>Python offers several ways to format strings with variable values. F-strings (formatted string literals) are the modern and recommended approach.</p>
+                
+                <div class="code-block">
+                    <h4>String Formatting Methods:</h4>
+<pre><code>name = "Alice"
+age = 25
+score = 95.678
+
+# f-strings (Python 3.6+) - Recommended
+print(f"Name: {name}, Age: {age}")
+print(f"Score: {score:.2f}")  # Score: 95.68 (2 decimal places)
+print(f"Next year: {age + 1}")  # Expressions work too!
+
+# format() method
+print("Name: {}, Age: {}".format(name, age))
+print("Name: {0}, Age: {1}, Again: {0}".format(name, age))
+
+# %-formatting (old style)
+print("Name: %s, Age: %d" % (name, age))
+print("Score: %.2f" % score)
+
+# Formatting options
+price = 1234.5
+print(f"${price:,.2f}")    # $1,234.50 (comma separators)
+print(f"{name:>10}")       # "     Alice" (right-aligned, 10 chars)
+print(f"{name:<10}")       # "Alice     " (left-aligned)
+print(f"{name:^10}")       # "  Alice   " (centered)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-9:</strong> F-strings use <code>f"..."</code> with variables in curly braces. They support formatting and expressions.</p>
+                        <p><strong>Line 8:</strong> Format specifiers like <code>:.2f</code> control decimal places.</p>
+                        <p><strong>Lines 12-13:</strong> The <code>format()</code> method is useful for templates.</p>
+                        <p><strong>Lines 16-17:</strong> The old %-formatting is still seen in legacy code.</p>
+                        <p><strong>Lines 20-23:</strong> Format specifiers for alignment, commas, and width.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Pro Tip: F-strings</h4>
+                    <p>F-strings are faster and more readable than other formatting methods. Always prefer them unless you need to support Python versions older than 3.6.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Booleans</h2>
+                <p>Booleans represent one of two values: True or False. They're essential for making decisions in your code and are the result of comparison operations.</p>
+                
+                <div class="code-block">
+                    <h4>Boolean Values:</h4>
+<pre><code># Boolean literals
+is_active = True
+is_admin = False
+
+# Comparisons return booleans
+print(5 > 3)    # True
+print(5 < 3)    # False
+print(5 == 5)   # True (equality)
+print(5 != 3)   # True (not equal)
+print(5 >= 5)   # True (greater or equal)
+
+# Truthy and Falsy values
+# These values are "falsy" (evaluate to False in boolean context):
+# - None, False, 0, 0.0, "", [], {}, ()
+
+bool(0)        # False
+bool("")       # False
+bool([])       # False
+bool(None)     # False
+
+# Everything else is "truthy"
+bool(1)        # True
+bool("hello")  # True
+bool([1, 2])   # True
+
+# Logical operators
+print(True and False)  # False (both must be True)
+print(True or False)   # True (at least one True)
+print(not True)        # False (inverts the value)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-3:</strong> Boolean values are capitalized: <code>True</code> and <code>False</code>.</p>
+                        <p><strong>Lines 6-11:</strong> Comparison operators return boolean values.</p>
+                        <p><strong>Lines 14-24:</strong> Many values are implicitly truthy or falsy in boolean contexts.</p>
+                        <p><strong>Lines 27-29:</strong> Logical operators combine boolean values.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Type Conversion</h2>
+                <p>You can convert between different data types using built-in functions. This is called type casting or type conversion.</p>
+                
+                <div class="code-block">
+                    <h4>Converting Types:</h4>
+<pre><code># String to number
+age_str = "25"
+age_int = int(age_str)
+age_float = float(age_str)
+print(age_int + 5)    # 30
+
+# Number to string
+num = 42
+num_str = str(num)
+print("The answer is " + num_str)  # The answer is 42
+
+# To boolean
+print(bool(1))    # True
+print(bool(0))    # False
+print(bool(""))   # False
+
+# Handling conversion errors
+try:
+    bad = int("hello")  # This will fail
+except ValueError:
+    print("Cannot convert to integer")
+
+# input() always returns a string
+user_input = input("Enter a number: ")
+number = int(user_input)  # Convert to integer
+print(number * 2)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 2-6:</strong> Convert strings to numbers with <code>int()</code> and <code>float()</code>.</p>
+                        <p><strong>Lines 9-11:</strong> Convert anything to a string with <code>str()</code>.</p>
+                        <p><strong>Lines 14-16:</strong> Convert to boolean with <code>bool()</code>.</p>
+                        <p><strong>Lines 19-22:</strong> Invalid conversions raise ValueError - handle with try/except.</p>
+                        <p><strong>Lines 25-27:</strong> Always convert input() results if you need numbers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a program that asks for the user's name and birth year, then calculates and displays their age.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Get user input
+name = input("What is your name? ")
+birth_year = input("What year were you born? ")
+
+# Calculate age (assume current year is 2024)
+# Remember to convert birth_year to an integer!
+# Your code here...
+
+# Print a message with their name and age
+# Use an f-string!</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Solution</h4>
+                    <p>One solution: <code>age = 2024 - int(birth_year)</code> then <code>print(f"Hello {name}, you are approximately {age} years old!")</code></p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson1.html" class="nav-button prev">← Previous: Introduction to Python</a>
+                <a href="lesson3.html" class="nav-button next">Next: Operators →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

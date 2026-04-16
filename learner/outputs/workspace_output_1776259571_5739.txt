@@ -1,0 +1,8 @@
+total 28
+drwxr-xr-x 7 root root 4096 Apr 15 12:36 .
+drwxr-xr-x 9 user user 4096 Apr 15 12:33 ..
+drwxr-xr-x 2 root root 4096 Apr 15 10:39 computers
+drwxr-xr-x 2 root root 4096 Apr 15 11:36 css
+drwxr-xr-x 2 root root 4096 Apr 15 11:10 html
+drwxr-xr-x 2 root root 4096 Apr 15 12:35 javascript
+drwxr-xr-x 2 root root 4096 Apr 15 13:25 python

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 14: Working with APIs - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>Lesson 14: Working with APIs</h1>
+            <p>Make HTTP requests and work with REST APIs using Python</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are APIs?</h2>
+                <p>An Application Programming Interface (API) is a set of rules that allows different software applications to communicate. Web APIs (specifically REST APIs) use HTTP to exchange data. Python makes it easy to consume APIs, allowing you to fetch data from services like weather APIs, social media, financial data, and more.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>HTTP Basics</h2>
+                <p>HTTP (Hypertext Transfer Protocol) is the foundation of web APIs. Understanding HTTP methods and status codes is essential for working with APIs.</p>
+                
+                <div class="code-block">
+                    <h4>HTTP Methods:</h4>
+<pre><code># HTTP Methods (verbs):
+# GET     - Retrieve data
+# POST    - Create new data
+# PUT     - Update existing data (full replace)
+# PATCH   - Partially update data
+# DELETE  - Remove data
+
+# Common HTTP Status Codes:
+# 200 OK              - Request succeeded
+# 201 Created         - Resource created successfully
+# 204 No Content      - Success, no body returned
+# 400 Bad Request     - Invalid request format
+# 401 Unauthorized    - Authentication required
+# 403 Forbidden       - Access denied
+# 404 Not Found       - Resource doesn't exist
+# 429 Too Many Requests - Rate limit exceeded
+# 500 Internal Error  - Server error
+
+# Request Components:
+# - URL (endpoint)
+# - Method (GET, POST, etc.)
+# - Headers (metadata, authentication)
+# - Body (data for POST/PUT)
+# - Query parameters (for GET)
+
+# Example URL with query parameters:
+# https://api.example.com/users?page=2&limit=10&sort=name</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 3-8:</strong> HTTP methods correspond to CRUD operations (Create, Read, Update, Delete).</p>
+                        <p><strong>Lines 11-20:</strong> Status codes indicate the result of the request.</p>
+                        <p><strong>Lines 23-27:</strong> Requests have several components that control behavior.</p>
+                        <p><strong>Line 30:</strong> Query parameters filter and customize GET requests.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Using the requests Library</h2>
+                <p>The requests library is Python's most popular HTTP client. It's simple, elegant, and handles most HTTP operations easily.</p>
+                
+                <div class="code-block">
+                    <h4>Making GET Requests:</h4>
+<pre><code>import requests
+
+# Simple GET request
+response = requests.get("https://api.github.com")
+print(response.status_code)  # 200
+print(response.ok)           # True (status < 400)
+
+# Get response as text
+print(response.text)
+
+# Get response as JSON (most common for APIs)
+data = response.json()
+print(data["current_user_url"])
+
+# Check content type
+print(response.headers["Content-Type"])
+
+# GET with query parameters
+params = {"q": "python", "sort": "stars", "order": "desc"}
+response = requests.get(
+    "https://api.github.com/search/repositories",
+    params=params
+)
+data = response.json()
+print(f"Found {data['total_count']} repositories")
+
+# GET with headers
+headers = {
+    "User-Agent": "MyApp/1.0",
+    "Accept": "application/json"
+}
+response = requests.get("https://api.github.com", headers=headers)
+
+# Handling errors
+response = requests.get("https://api.github.com/nonexistent")
+if response.status_code == 404:
+    print("Resource not found")
+
+# Raise exception for HTTP errors
+response = requests.get("https://api.github.com/nonexistent")
+response.raise_for_status()  # Raises HTTPError for 4xx/5xx
+
+# Safe request with error handling
+try:
+    response = requests.get("https://api.example.com/data")
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.HTTPError as e:
+    print(f"HTTP error: {e}")
+except requests.exceptions.ConnectionError:
+    print("Connection failed")
+except requests.exceptions.JSONDecodeError:
+    print("Invalid JSON response")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-6:</strong> Make a simple GET request and check the response.</p>
+                        <p><strong>Lines 9-12:</strong> Access response content as text or parsed JSON.</p>
+                        <p><strong>Lines 16-23:</strong> Pass query parameters as a dictionary.</p>
+                        <p><strong>Lines 26-30:</strong> Add headers for metadata and authentication.</p>
+                        <p><strong>Lines 38-39:</strong> <code>raise_for_status()</code> raises an exception for HTTP errors.</p>
+                        <p><strong>Lines 42-51:</strong> Handle various types of request errors.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>POST, PUT, and DELETE Requests</h2>
+                <p>Most APIs require sending data to create, update, or delete resources. The requests library handles these operations seamlessly.</p>
+                
+                <div class="code-block">
+                    <h4>Sending Data:</h4>
+<pre><code>import requests
+
+# POST request (create resource)
+new_user = {
+    "name": "John Doe",
+    "email": "john@example.com"
+}
+response = requests.post(
+    "https://api.example.com/users",
+    json=new_user  # Automatically sets Content-Type header
+)
+created_user = response.json()
+print(f"Created user with ID: {created_user['id']}")
+
+# POST with form data
+form_data = {"username": "john", "password": "secret"}
+response = requests.post(
+    "https://api.example.com/login",
+    data=form_data  # Sends as application/x-www-form-urlencoded
+)
+
+# POST with files
+files = {"file": open("document.pdf", "rb")}
+response = requests.post(
+    "https://api.example.com/upload",
+    files=files
+)
+
+# PUT request (update/replace)
+updated_user = {
+    "name": "John Smith",
+    "email": "johnsmith@example.com"
+}
+response = requests.put(
+    "https://api.example.com/users/123",
+    json=updated_user
+)
+
+# PATCH request (partial update)
+patch_data = {"email": "newemail@example.com"}
+response = requests.patch(
+    "https://api.example.com/users/123",
+    json=patch_data
+)
+
+# DELETE request
+response = requests.delete("https://api.example.com/users/123")
+if response.status_code == 204:
+    print("User deleted successfully")
+
+# PUT vs PATCH:
+# PUT replaces the entire resource
+# PATCH updates only specified fields</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-14:</strong> POST creates resources. Use <code>json=</code> to send JSON data.</p>
+                        <p><strong>Lines 17-21:</strong> Use <code>data=</code> for form-encoded data.</p>
+                        <p><strong>Lines 24-28:</strong> Upload files using the <code>files=</code> parameter.</p>
+                        <p><strong>Lines 31-38:</strong> PUT replaces an entire resource.</p>
+                        <p><strong>Lines 41-45:</strong> PATCH updates only specific fields.</p>
+                        <p><strong>Lines 48-50:</strong> DELETE removes a resource, often returns 204.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Authentication</h2>
+                <p>Many APIs require authentication. The requests library supports various authentication methods.</p>
+                
+                <div class="code-block">
+                    <h4>Authentication Methods:</h4>
+<pre><code>import requests
+from requests.auth import HTTPBasicAuth
+
+# API Key in header
+headers = {"X-API-Key": "your-api-key-here"}
+response = requests.get("https://api.example.com/data", headers=headers)
+
+# API Key in query parameter
+params = {"api_key": "your-api-key-here"}
+response = requests.get("https://api.example.com/data", params=params)
+
+# Bearer token (OAuth 2.0)
+headers = {"Authorization": "Bearer your-token-here"}
+response = requests.get("https://api.example.com/protected", headers=headers)
+
+# Basic authentication
+response = requests.get(
+    "https://api.example.com/protected",
+    auth=HTTPBasicAuth("username", "password")
+)
+# Or simply:
+response = requests.get(
+    "https://api.example.com/protected",
+    auth=("username", "password")
+)
+
+# Session with persistent authentication
+session = requests.Session()
+session.headers.update({"Authorization": "Bearer your-token"})
+
+# All requests with this session include the header
+response1 = session.get("https://api.example.com/data1")
+response2 = session.get("https://api.example.com/data2")
+
+# Session with automatic retry
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+session = requests.Session()
+retry = Retry(
+    total=3,
+    backoff_factor=1,
+    status_forcelist=[500, 502, 503, 504]
+)
+adapter = HTTPAdapter(max_retries=retry)
+session.mount("https://", adapter)
+session.mount("http://", adapter)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> API key in a custom header (common pattern).</p>
+                        <p><strong>Lines 9-10:</strong> Some APIs accept the key as a query parameter.</p>
+                        <p><strong>Lines 13-14:</strong> Bearer tokens are standard for OAuth 2.0.</p>
+                        <p><strong>Lines 17-24:</strong> Basic auth sends username/password encoded in header.</p>
+                        <p><strong>Lines 27-33:</strong> Sessions persist headers across multiple requests.</p>
+                        <p><strong>Lines 36-46:</strong> Configure automatic retries for failed requests.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Working with JSON</h2>
+                <p>JSON is the most common data format for APIs. Python and JSON work together seamlessly.</p>
+                
+                <div class="code-block">
+                    <h4>JSON Operations:</h4>
+<pre><code>import json
+import requests
+
+# Python dict to JSON string
+data = {"name": "Alice", "age": 25, "active": True}
+json_string = json.dumps(data)
+print(json_string)  # {"name": "Alice", "age": 25, "active": true}
+
+# JSON string to Python dict
+parsed = json.loads(json_string)
+print(parsed["name"])  # Alice
+
+# Pretty print JSON
+print(json.dumps(data, indent=2))
+# {
+#   "name": "Alice",
+#   "age": 25,
+#   "active": true
+# }
+
+# Save JSON to file
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=2)
+
+# Load JSON from file
+with open("data.json", "r") as f:
+    loaded = json.load(f)
+
+# Working with API response
+response = requests.get("https://api.github.com/users/python")
+user = response.json()
+
+print(f"User: {user['login']}")
+print(f"Name: {user['name']}")
+print(f"Followers: {user['followers']}")
+
+# Handle nested JSON
+response = requests.get("https://api.github.com/repos/python/cpython")
+repo = response.json()
+
+print(f"Repo: {repo['full_name']}")
+print(f"Stars: {repo['stargazers_count']}")
+print(f"Language: {repo['language']}")
+
+# Complex nested data
+for commit in repo_data["commits"]:
+    print(f"Author: {commit['author']['name']}")
+    print(f"Message: {commit['message'][:50]}")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> <code>json.dumps()</code> converts Python objects to JSON string.</p>
+                        <p><strong>Lines 9-10:</strong> <code>json.loads()</code> parses JSON string to Python objects.</p>
+                        <p><strong>Lines 13-20:</strong> Use <code>indent</code> for readable JSON output.</p>
+                        <p><strong>Lines 23-27:</strong> <code>json.dump/load</code> work directly with files.</p>
+                        <p><strong>Lines 30-35:</strong> Response objects have a <code>.json()</code> method.</p>
+                        <p><strong>Lines 45-47:</strong> Access nested data with chained brackets.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Building an API Client Class</h2>
+                <p>Creating a dedicated client class makes working with an API cleaner and more maintainable.</p>
+                
+                <div class="code-block">
+                    <h4>API Client Pattern:</h4>
+<pre><code>import requests
+from typing import Optional, Dict, Any
+
+class APIClient:
+    """A reusable API client with error handling."""
+    
+    def __init__(self, base_url: str, api_key: str):
+        self.base_url = base_url.rstrip("/")
+        self.session = requests.Session()
+        self.session.headers.update({
+            "Authorization": f"Bearer {api_key}",
+            "Accept": "application/json"
+        })
+    
+    def _request(
+        self,
+        method: str,
+        endpoint: str,
+        **kwargs
+    ) -> Optional[Dict[str, Any]]:
+        """Make an HTTP request with error handling."""
+        url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        
+        try:
+            response = self.session.request(method, url, **kwargs)
+            response.raise_for_status()
+            return response.json() if response.content else None
+        except requests.exceptions.HTTPError as e:
+            print(f"HTTP Error: {e}")
+            return None
+        except requests.exceptions.RequestException as e:
+            print(f"Request Error: {e}")
+            return None
+    
+    def get(self, endpoint: str, params: dict = None):
+        """GET request."""
+        return self._request("GET", endpoint, params=params)
+    
+    def post(self, endpoint: str, data: dict = None):
+        """POST request."""
+        return self._request("POST", endpoint, json=data)
+    
+    def put(self, endpoint: str, data: dict = None):
+        """PUT request."""
+        return self._request("PUT", endpoint, json=data)
+    
+    def delete(self, endpoint: str):
+        """DELETE request."""
+        return self._request("DELETE", endpoint)
+
+# Using the client
+client = APIClient("https://api.example.com", "your-api-key")
+
+# Get all users
+users = client.get("/users")
+
+# Create a user
+new_user = client.post("/users", data={"name": "Alice"})
+
+# Update a user
+client.put("/users/1", data={"name": "Alice Smith"})
+
+# Delete a user
+client.delete("/users/1")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 8-14:</strong> Initialize with base URL and set up session with auth headers.</p>
+                        <p><strong>Lines 16-32:</strong> Private method handles all requests with error handling.</p>
+                        <p><strong>Lines 34-46:</strong> Public methods for each HTTP verb.</p>
+                        <p><strong>Lines 49-62:</strong> Using the client is clean and intuitive.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical Example: Weather API</h2>
+                <p>Let's build a practical weather application using a real API.</p>
+                
+                <div class="code-block">
+                    <h4>Weather Client:</h4>
+<pre><code>import requests
+
+class WeatherClient:
+    """Client for OpenWeatherMap API."""
+    
+    BASE_URL = "https://api.openweathermap.org/data/2.5"
+    
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+    
+    def get_weather(self, city: str) -> dict:
+        """Get current weather for a city."""
+        params = {
+            "q": city,
+            "appid": self.api_key,
+            "units": "metric"
+        }
+        
+        response = requests.get(
+            f"{self.BASE_URL}/weather",
+            params=params
+        )
+        response.raise_for_status()
+        return response.json()
+    
+    def get_forecast(self, city: str, days: int = 5) -> dict:
+        """Get weather forecast for a city."""
+        params = {
+            "q": city,
+            "appid": self.api_key,
+            "units": "metric",
+            "cnt": days * 8  # 8 forecasts per day
+        }
+        
+        response = requests.get(
+            f"{self.BASE_URL}/forecast",
+            params=params
+        )
+        response.raise_for_status()
+        return response.json()
+
+def display_weather(weather_data: dict):
+    """Display weather information."""
+    city = weather_data["name"]
+    temp = weather_data["main"]["temp"]
+    description = weather_data["weather"][0]["description"]
+    humidity = weather_data["main"]["humidity"]
+    wind = weather_data["wind"]["speed"]
+    
+    print(f"\nWeather in {city}:")
+    print(f"  Temperature: {temp}°C")
+    print(f"  Conditions: {description.title()}")
+    print(f"  Humidity: {humidity}%")
+    print(f"  Wind Speed: {wind} m/s")
+
+# Usage
+# client = WeatherClient("your-api-key")
+# weather = client.get_weather("London")
+# display_weather(weather)</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-8:</strong> Store constants at class level.</p>
+                        <p><strong>Lines 12-25:</strong> Method to fetch current weather with proper error handling.</p>
+                        <p><strong>Lines 27-41:</strong> Method for multi-day forecast.</p>
+                        <p><strong>Lines 44-54:</strong> Helper function to format and display weather data.</p>
+                        <p><strong>Lines 57-59:</strong> Clean API for end users.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Rate Limiting and Caching</h2>
+                <p>Real-world API usage requires handling rate limits and caching responses to avoid unnecessary requests.</p>
+                
+                <div class="code-block">
+                    <h4>Rate Limiting:</h4>
+<pre><code>import time
+import requests
+from functools import wraps
+
+# Simple rate limiter
+def rate_limit(calls_per_second: float = 2):
+    """Decorator to limit API call rate."""
+    min_interval = 1.0 / calls_per_second
+    last_call = [0.0]
+    
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            elapsed = time.time() - last_call[0]
+            if elapsed < min_interval:
+                time.sleep(min_interval - elapsed)
+            last_call[0] = time.time()
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@rate_limit(calls_per_second=2)
+def api_call(url):
+    return requests.get(url)
+
+# Simple cache
+import json
+from pathlib import Path
+
+class CachedAPI:
+    def __init__(self, cache_dir: str = "cache"):
+        self.cache_dir = Path(cache_dir)
+        self.cache_dir.mkdir(exist_ok=True)
+    
+    def get(self, url: str, expire_seconds: int = 3600):
+        """Get data with caching."""
+        cache_file = self.cache_dir / f"{hash(url)}.json"
+        
+        # Check cache
+        if cache_file.exists():
+            age = time.time() - cache_file.stat().st_mtime
+            if age < expire_seconds:
+                with open(cache_file) as f:
+                    return json.load(f)
+        
+        # Fetch fresh data
+        response = requests.get(url)
+        data = response.json()
+        
+        # Save to cache
+        with open(cache_file, "w") as f:
+            json.dump(data, f)
+        
+        return data
+
+# Using requests-cache (third-party library)
+# pip install requests-cache
+import requests_cache
+
+# Cache all requests automatically
+requests_cache.install_cache(
+    cache_name="api_cache",
+    backend="sqlite",
+    expire_after=3600  # 1 hour
+)
+
+# Now regular requests.get() is cached
+response = requests.get("https://api.example.com/data")
+print(response.from_cache)  # True if from cache</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-20:</strong> Decorator to limit request rate.</p>
+                        <p><strong>Lines 25-49:</strong> Manual caching implementation with expiration.</p>
+                        <p><strong>Lines 53-66:</strong> <code>requests-cache</code> library provides automatic caching.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a GitHub API client to fetch repository information.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code>import requests
+from typing import Optional
+
+class GitHubClient:
+    """Client for GitHub API."""
+    
+    BASE_URL = "https://api.github.com"
+    
+    def __init__(self, token: Optional[str] = None):
+        # Set up session with optional auth
+        # Your code here
+        pass
+    
+    def get_user(self, username: str) -> dict:
+        """Get user profile information."""
+        # Your code here
+        pass
+    
+    def get_repo(self, owner: str, repo: str) -> dict:
+        """Get repository information."""
+        # Your code here
+        pass
+    
+    def list_repos(self, username: str) -> list:
+        """List public repositories for a user."""
+        # Your code here
+        pass
+    
+    def search_repos(self, query: str, sort: str = "stars") -> list:
+        """Search repositories."""
+        # Your code here
+        pass
+
+def display_repo(repo: dict):
+    """Display repository information."""
+    print(f"\n{repo['full_name']}")
+    print(f"  Description: {repo.get('description', 'N/A')}")
+    print(f"  Stars: {repo['stargazers_count']}")
+    print(f"  Language: {repo.get('language', 'N/A')}")
+    print(f"  URL: {repo['html_url']}")
+
+# Test your client
+client = GitHubClient()
+user = client.get_user("python")
+print(f"Python user: {user['name']}")
+
+repos = client.search_repos("python requests")
+for repo in repos[:5]:
+    display_repo(repo)</code></pre>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson13.html" class="nav-button prev">← Previous: Modules & Packages</a>
+                <a href="lesson15.html" class="nav-button next">Next: Best Practices & Final Project →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

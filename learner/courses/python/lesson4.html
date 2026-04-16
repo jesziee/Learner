@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Conditionals - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">Python Course</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>Lesson 4: Conditionals</h1>
+            <p>Learn to make decisions in your code with if, elif, and else statements</p>
+        </div>
+
+        <div class="lesson-content">
+            <section class="content-section">
+                <h2>What are Conditionals?</h2>
+                <p>Conditional statements allow your program to make decisions and execute different code based on conditions. Using if, elif, and else, you can control the flow of your program and respond differently to various situations.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The if Statement</h2>
+                <p>The if statement executes code only when a condition is true. Python uses indentation (typically 4 spaces) to define code blocks.</p>
+                
+                <div class="code-block">
+                    <h4>Basic if Statement:</h4>
+<pre><code># Basic if statement
+age = 18
+
+if age >= 18:
+    print("You are an adult")
+    print("You can vote!")
+
+# Multiple conditions
+temperature = 75
+
+if temperature > 80:
+    print("It's hot outside!")
+
+if temperature < 60:
+    print("It's cold outside!")
+
+# Check if a number is positive
+number = 42
+
+if number > 0:
+    print(f"{number} is positive")
+
+# Check if a list is not empty
+items = [1, 2, 3]
+
+if items:  # Truthy check
+    print(f"List has {len(items)} items")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-6:</strong> The if statement checks a condition. If true, the indented block runs.</p>
+                        <p><strong>Lines 9-16:</strong> Multiple independent if statements can check different conditions.</p>
+                        <p><strong>Lines 19-21:</strong> The condition can be any expression that evaluates to a boolean.</p>
+                        <p><strong>Lines 24-27:</strong> Empty collections are falsy, non-empty ones are truthy.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Python Indentation</h4>
+                    <p>Python uses indentation to define code blocks, not curly braces like other languages. Always use consistent indentation (4 spaces is standard) to avoid errors.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>if-else Statement</h2>
+                <p>The else clause provides an alternative path when the if condition is false. This creates a two-way decision structure.</p>
+                
+                <div class="code-block">
+                    <h4>if-else Structure:</h4>
+<pre><code># Basic if-else
+age = 16
+
+if age >= 18:
+    print("You are an adult")
+else:
+    print("You are a minor")
+
+# Check even or odd
+number = 7
+
+if number % 2 == 0:
+    print(f"{number} is even")
+else:
+    print(f"{number} is odd")
+
+# Password check
+password = "secret123"
+
+if len(password) >= 8:
+    print("Password accepted")
+else:
+    print("Password too short (minimum 8 characters)")
+
+# Check if user is logged in
+user = None
+
+if user:
+    print(f"Welcome back, {user}!")
+else:
+    print("Please log in")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-7:</strong> The else block runs when the if condition is false.</p>
+                        <p><strong>Lines 10-15:</strong> Use modulo operator to check even/odd numbers.</p>
+                        <p><strong>Lines 18-22:</strong> Practical example of validating input.</p>
+                        <p><strong>Lines 25-29:</strong> None is falsy, so this checks if user exists.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>if-elif-else Statement</h2>
+                <p>Use elif (else if) to check multiple conditions in sequence. Python checks each condition in order and runs the first one that's true.</p>
+                
+                <div class="code-block">
+                    <h4>Multiple Conditions:</h4>
+<pre><code># Grade calculator
+score = 85
+
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+elif score >= 70:
+    grade = "C"
+elif score >= 60:
+    grade = "D"
+else:
+    grade = "F"
+
+print(f"Score: {score}, Grade: {grade}")
+
+# Time of day greeting
+hour = 14  # 24-hour format
+
+if hour < 12:
+    greeting = "Good morning"
+elif hour < 17:
+    greeting = "Good afternoon"
+elif hour < 21:
+    greeting = "Good evening"
+else:
+    greeting = "Good night"
+
+print(greeting)
+
+# Age categories
+age = 25
+
+if age < 13:
+    category = "Child"
+elif age < 20:
+    category = "Teenager"
+elif age < 65:
+    category = "Adult"
+else:
+    category = "Senior"
+
+print(f"You are a {category}")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-14:</strong> elif allows checking multiple conditions. Only the first true block runs.</p>
+                        <p><strong>Lines 17-28:</strong> Conditions are checked top-to-bottom. Order matters!</p>
+                        <p><strong>Lines 31-41:</strong> Complex multi-way decisions are easy with elif chains.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Important: Order Matters</h4>
+                    <p>Python evaluates conditions from top to bottom and stops at the first true one. Make sure your conditions are in the right order for your logic to work correctly.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Nested Conditionals</h2>
+                <p>You can place if statements inside other if statements. This is called nesting and allows for more complex decision-making.</p>
+                
+                <div class="code-block">
+                    <h4>Nested if Statements:</h4>
+<pre><code># Login system with nested conditions
+username = "admin"
+password = "secret123"
+is_admin = True
+
+if username:
+    if password:
+        if username == "admin" and password == "secret123":
+            if is_admin:
+                print("Admin access granted")
+            else:
+                print("User access granted")
+        else:
+            print("Invalid credentials")
+    else:
+        print("Password required")
+else:
+    print("Username required")
+
+# Nested vs flat - prefer flat when possible
+age = 25
+has_ticket = True
+
+# Nested version (harder to read)
+if age >= 18:
+    if has_ticket:
+        print("Welcome to the concert!")
+
+# Flat version with 'and' (preferred)
+if age >= 18 and has_ticket:
+    print("Welcome to the concert!")
+
+# Early return pattern (even better)
+def check_access(age, has_ticket):
+    if age < 18:
+        return "Too young"
+    if not has_ticket:
+        return "No ticket"
+    return "Welcome!"</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 6-19:</strong> Nested if statements create multiple levels of conditions.</p>
+                        <p><strong>Lines 22-34:</strong> Often, combining conditions with <code>and</code> is clearer than deep nesting.</p>
+                        <p><strong>Lines 37-42:</strong> The early return pattern avoids deep nesting and is more readable.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Logical Operators with Conditionals</h2>
+                <p>Combine conditions using and, or, and not for more complex logic.</p>
+                
+                <div class="code-block">
+                    <h4>Combining Conditions:</h4>
+<pre><code># Using 'and' - both conditions must be true
+age = 25
+has_license = True
+
+if age >= 18 and has_license:
+    print("You can drive")
+
+# Using 'or' - at least one condition must be true
+is_member = False
+has_coupon = True
+
+if is_member or has_coupon:
+    print("You get a discount!")
+
+# Using 'not' - inverts the condition
+is_banned = False
+
+if not is_banned:
+    print("Access allowed")
+
+# Complex conditions with parentheses
+age = 25
+is_student = False
+has_id = True
+
+# Parentheses clarify complex logic
+if (age >= 18 and age <= 25) and (is_student or has_id):
+    print("Youth discount applies!")
+
+# Checking multiple values
+day = "Saturday"
+
+if day == "Saturday" or day == "Sunday":
+    print("It's the weekend!")
+
+# Better way using 'in'
+if day in ["Saturday", "Sunday"]:
+    print("It's the weekend!")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 5-6:</strong> <code>and</code> requires both conditions to be true.</p>
+                        <p><strong>Lines 10-12:</strong> <code>or</code> requires at least one condition to be true.</p>
+                        <p><strong>Lines 15-17:</strong> <code>not</code> inverts the boolean value.</p>
+                        <p><strong>Lines 23-24:</strong> Use parentheses to clarify complex conditions.</p>
+                        <p><strong>Lines 32-34:</strong> Using <code>in</code> with a list is cleaner than multiple <code>or</code> conditions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Conditional Expressions (Ternary Operator)</h2>
+                <p>Python offers a concise way to write simple if-else statements in a single line using conditional expressions.</p>
+                
+                <div class="code-block">
+                    <h4>One-Line Conditionals:</h4>
+<pre><code># Traditional if-else
+age = 20
+
+if age >= 18:
+    status = "adult"
+else:
+    status = "minor"
+
+print(status)  # adult
+
+# Conditional expression (ternary)
+status = "adult" if age >= 18 else "minor"
+
+# More examples
+score = 75
+result = "Pass" if score >= 60 else "Fail"
+print(result)  # Pass
+
+# In f-strings
+print(f"You are an {'adult' if age >= 18 else 'minor'}")
+
+# With function calls
+def get_fee(is_member):
+    return 0 if is_member else 10
+
+print(get_fee(True))   # 0
+print(get_fee(False))  # 10
+
+# Nested conditional expressions (use sparingly)
+score = 85
+grade = "A" if score >= 90 else "B" if score >= 80 else "C"
+print(grade)  # B</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-9:</strong> Traditional multi-line if-else statement.</p>
+                        <p><strong>Line 12:</strong> Same logic in one line: <code>value_if_true if condition else value_if_false</code>.</p>
+                        <p><strong>Lines 16-17:</strong> Useful for simple value assignments based on conditions.</p>
+                        <p><strong>Line 20:</strong> Can be used inside f-strings for dynamic text.</p>
+                        <p><strong>Lines 23-26:</strong> Works well with functions for cleaner code.</p>
+                        <p><strong>Lines 29-31:</strong> Nested ternary is possible but harder to read - avoid deep nesting.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Match Statement (Python 3.10+)</h2>
+                <p>Python 3.10 introduced the match statement for pattern matching, which is powerful for comparing a value against multiple patterns.</p>
+                
+                <div class="code-block">
+                    <h4>Pattern Matching:</h4>
+<pre><code># Basic match statement
+day = "Monday"
+
+match day:
+    case "Monday":
+        print("Start of the work week")
+    case "Friday":
+        print("TGIF!")
+    case "Saturday" | "Sunday":  # Multiple patterns
+        print("It's the weekend!")
+    case _:  # Default case (like 'else')
+        print("It's a regular weekday")
+
+# Matching with conditions (guards)
+score = 85
+
+match score:
+    case s if s >= 90:
+        grade = "A"
+    case s if s >= 80:
+        grade = "B"
+    case s if s >= 70:
+        grade = "C"
+    case _:
+        grade = "F"
+
+print(f"Grade: {grade}")
+
+# Matching data structures
+point = (3, 4)
+
+match point:
+    case (0, 0):
+        print("Origin")
+    case (x, 0):
+        print(f"On x-axis at {x}")
+    case (0, y):
+        print(f"On y-axis at {y}")
+    case (x, y):
+        print(f"Point at ({x}, {y})")</code></pre>
+                    <div class="code-explanation">
+                        <p><strong>Lines 4-12:</strong> Basic match-case structure, similar to switch in other languages.</p>
+                        <p><strong>Line 9:</strong> Use <code>|</code> to match multiple patterns.</p>
+                        <p><strong>Line 11:</strong> <code>_</code> is the wildcard pattern, matches anything.</p>
+                        <p><strong>Lines 15-26:</strong> Guards with <code>if</code> add conditions to patterns.</p>
+                        <p><strong>Lines 29-39:</strong> Match can destructure tuples and other data structures.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Python Version</h4>
+                    <p>The match statement requires Python 3.10 or newer. For older versions, use if-elif-else chains instead.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Practice Exercise</h2>
+                <p>Create a program that determines the price of a movie ticket based on age and time of day.</p>
+                
+                <div class="code-block">
+                    <h4>Exercise Template:</h4>
+<pre><code># Movie ticket pricing
+# Rules:
+# - Children (0-12): $5
+# - Adults (13-64): $12
+# - Seniors (65+): $8
+# - Matinee (before 5 PM): $2 discount
+
+age = 35
+hour = 16  # 24-hour format
+
+# Determine base price based on age
+# Your code here...
+
+# Apply matinee discount if applicable
+# Your code here...
+
+# Print the final ticket price
+print(f"Your ticket costs ${price}")</code></pre>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Solution Hint</h4>
+                    <p>First determine base price with if-elif-else, then check if hour < 17 to apply discount: <code>price -= 2</code></p>
+                </div>
+            </section>
+
+            <div class="lesson-navigation">
+                <a href="lesson3.html" class="nav-button prev">← Previous: Operators</a>
+                <a href="lesson5.html" class="nav-button next">Next: Loops →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: SEO Best Practices - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">HTML Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Pro Level</span>
+            <h1>Lesson 11: SEO Best Practices</h1>
+            <p>Optimize your HTML for search engines</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 92%;"></div>
+            </div>
+            <span class="progress-text">Lesson 11 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>What is SEO?</h2>
+                <p>SEO (Search Engine Optimization) is the practice of improving your website so it ranks higher in search engine results like Google, Bing, and DuckDuckGo. Good SEO means more people can find your content organically — without paid ads. HTML plays a crucial role in SEO because search engines crawl and understand your HTML code.</p>
+            </section>
+            
+            <section>
+                <h2>1. The Title Tag</h2>
+                <p>The title tag is one of the most important SEO elements. It appears in search results, browser tabs, and when sharing links on social media.</p>
+                
+                <div class="code-block">
+                    <pre><code><!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Title appears in search results as the clickable headline -->
+  <title>Best Chocolate Chip Cookie Recipe | Sweet Bakery</title>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Best practices for titles:</strong>
+                    <ul>
+                        <li><strong>Length:</strong> 50-60 characters (Google truncates longer titles)</li>
+                        <li><strong>Keywords:</strong> Put important keywords near the beginning</li>
+                        <li><strong>Branding:</strong> Include your brand name after a pipe (|) or dash (-)</li>
+                        <li><strong>Unique:</strong> Each page should have a unique title</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Meta Description</h2>
+                <p>The meta description doesn't directly affect rankings, but it influences click-through rates from search results.</p>
+                
+                <div class="code-block">
+                    <pre><code><head>
+  <meta name="description" 
+        content="Learn how to make the perfect chocolate chip cookies with our easy-to-follow recipe. Crispy edges, chewy center, ready in 25 minutes.">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Line by line:</strong>
+                    <ul>
+                        <li><code>name="description"</code> — Tells search engines this is the page description</li>
+                        <li><code>content="..."</code> — A compelling summary (150-160 characters ideal)</li>
+                        <li>Includes target keywords naturally within a readable sentence</li>
+                        <li>Encourages clicks with a clear value proposition</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Heading Hierarchy (H1-H6)</h2>
+                <p>Search engines use headings to understand your page structure. A proper hierarchy helps both SEO and accessibility.</p>
+                
+                <div class="code-block">
+                    <pre><code><article>
+  <!-- One H1 per page - the main topic -->
+  <h1>Complete Guide to Baking Bread</h1>
+  
+  <!-- H2s are major sections -->
+  <h2>Ingredients You'll Need</h2>
+  <p>List of ingredients...</p>
+  
+  <h2>Step-by-Step Instructions</h2>
+  <p>Overview of the process...</p>
+  
+    <!-- H3s are subsections under H2 -->
+    <h3>Preparing the Dough</h3>
+    <p>First, mix the flour and water...</p>
+    
+    <h3>Kneading Technique</h3>
+    <p>Push, fold, and turn...</p>
+    
+  <h2>Common Mistakes to Avoid</h2>
+  <p>Don't make these errors...</p>
+</article></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Heading hierarchy rules:</strong>
+                    <ul>
+                        <li><strong>One H1:</strong> Only one per page, describing the main topic</li>
+                        <li><strong>Logical order:</strong> Don't skip levels (H1 → H2 → H3, not H1 → H3)</li>
+                        <li><strong>Keywords:</strong> Include relevant keywords in headings naturally</li>
+                        <li><strong>Descriptive:</strong> Headings should summarize the content that follows</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Semantic HTML for SEO</h2>
+                <p>Using semantic elements helps search engines understand your content structure and importance.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- Search engines understand these landmarks -->
+<header>
+  <nav aria-label="Main navigation">
+    <a href="/">Home</a>
+    <a href="/products">Products</a>
+    <a href="/blog">Blog</a>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <!-- Article is for standalone content -->
+    <h1>How to Start a Garden</h1>
+    <p>Published: <time datetime="2024-03-15">March 15, 2024</time></p>
+    <p>Article content...</p>
+  </article>
+  
+  <aside>
+    <!-- Aside is for related/tangential content -->
+    <h2>Related Articles</h2>
+    <ul>...</ul>
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2024 Garden Tips</p>
+</footer></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>SEO benefits of semantic HTML:</strong>
+                    <ul>
+                        <li><code><article></code> — Indicates self-contained content that could be syndicated</li>
+                        <li><code><nav></code> — Helps search engines identify site structure</li>
+                        <li><code><main></code> — Points to the primary content area</li>
+                        <li><code><time></code> — Provides machine-readable date information</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Image SEO</h2>
+                <p>Images can appear in image search results and improve your overall SEO when optimized properly.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- Descriptive filename (not IMG_1234.jpg) -->
+<!-- File: homemade-chocolate-chip-cookies.jpg -->
+
+<img src="homemade-chocolate-chip-cookies.jpg" 
+     alt="Freshly baked chocolate chip cookies on a cooling rack"
+     width="800"
+     height="600"
+     loading="lazy">
+
+<!-- For images that are links -->
+<a href="/cookie-recipe">
+  <img src="cookies.jpg" 
+       alt="Click for the full chocolate chip cookie recipe">
+</a></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Image SEO checklist:</strong>
+                    <ul>
+                        <li><strong>Filename:</strong> Use descriptive names with keywords (words separated by hyphens)</li>
+                        <li><strong>Alt text:</strong> Describe the image for accessibility and SEO</li>
+                        <li><strong>Dimensions:</strong> Include width/height to prevent layout shift</li>
+                        <li><strong>loading="lazy"</strong> — Defers loading off-screen images</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Structured Data (Schema.org)</h2>
+                <p>Structured data helps search engines understand your content and can create rich snippets in search results.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- JSON-LD format (recommended by Google) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Chocolate Chip Cookies",
+  "description": "Easy homemade chocolate chip cookies",
+  "author": {
+    "@type": "Person",
+    "name": "Jane Baker"
+  },
+  "cookTime": "PT12M",
+  "recipeYield": "24 cookies",
+  "recipeIngredient": [
+    "2 cups flour",
+    "1 cup butter, softened",
+    "2 eggs"
+  ],
+  "recipeInstructions": [
+    "Preheat oven to 375°F",
+    "Mix butter and sugars until fluffy",
+    "Add eggs and vanilla"
+  ]
+}
+</script></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>What this creates:</strong>
+                    <ul>
+                        <li><code>@type": "Recipe"</code> — Tells Google this is a recipe</li>
+                        <li>Enables rich results with cook time, ratings, and photos</li>
+                        <li>Other types: Article, Product, LocalBusiness, FAQ, HowTo</li>
+                        <li>Test with Google's Rich Results Test tool</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Meta Tags for SEO</h2>
+                <p>Additional meta tags provide information to search engines and social media platforms.</p>
+                
+                <div class="code-block">
+                    <pre><code><head>
+  <!-- Robots meta tag -->
+  <meta name="robots" content="index, follow">
+  <!-- index: allow search engines to index this page -->
+  <!-- follow: allow following links on this page -->
+  
+  <!-- Canonical URL (prevents duplicate content issues) -->
+  <link rel="canonical" href="https://example.com/blog/chocolate-cookies">
+  
+  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="Best Chocolate Chip Cookies">
+  <meta property="og:description" content="Easy recipe for perfect cookies">
+  <meta property="og:image" content="https://example.com/cookies.jpg">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Best Chocolate Chip Cookies">
+  <meta name="twitter:description" content="Easy recipe for perfect cookies">
+  <meta name="twitter:image" content="https://example.com/cookies.jpg">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Meta tag purposes:</strong>
+                    <ul>
+                        <li><code>robots</code> — Controls crawler behavior (index/noindex, follow/nofollow)</li>
+                        <li><code>canonical</code> — Specifies the preferred URL when duplicates exist</li>
+                        <li><code>og:*</code> — Controls how content appears when shared on social media</li>
+                        <li><code>twitter:*</code> — Twitter-specific card formatting</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. URL Structure</h2>
+                <p>Clean, descriptive URLs help both users and search engines understand your page content.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- Bad URLs -->
+https://example.com/p?id=123&cat=5
+https://example.com/blog/post?a=1&b=2&c=3
+https://example.com/this-is-a-very-long-url-with-too-many-keywords-stuffed-into-it
+
+<!-- Good URLs -->
+https://example.com/products/running-shoes
+https://example.com/blog/how-to-bake-bread
+https://example.com/recipes/chocolate-chip-cookies
+
+<!-- URL best practices -->
+<!-- ✓ Use words, not IDs -->
+<!-- ✓ Separate words with hyphens -->
+<!-- ✓ Keep URLs short and descriptive -->
+<!-- ✓ Use lowercase only -->
+<!-- ✓ Avoid special characters --></code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Internal Linking</h2>
+                <p>Linking between your own pages helps search engines discover content and understand site structure.</p>
+                
+                <div class="code-block">
+                    <pre><code><!-- Good internal linking -->
+<p>Learn more about <a href="/baking/bread-basics">bread baking basics</a> 
+before attempting this recipe. Check out our <a href="/tips/kneading">kneading 
+tips</a> for better results.</p>
+
+<!-- Descriptive link text (not "click here") -->
+<!-- Bad -->
+<p>For more information, <a href="/guide">click here</a>.</p>
+
+<!-- Good -->
+<p>Read our complete <a href="/guide">baking guide</a> for more information.</p>
+
+<!-- Navigation with aria-current -->
+<nav>
+  <a href="/">Home</a>
+  <a href="/blog" aria-current="page">Blog</a>
+  <a href="/about">About</a>
+</nav></code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Internal linking best practices:</strong>
+                    <ul>
+                        <li><strong>Descriptive anchor text:</strong> "bread baking basics" not "click here"</li>
+                        <li><strong>Relevant links:</strong> Link to related content</li>
+                        <li><strong>Reasonable number:</strong> Don't overload with links</li>
+                        <li><code>aria-current="page"</code> — Indicates current page in navigation</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>10. Mobile-First and Performance</h2>
+                <p>Google uses mobile-first indexing, meaning it primarily uses the mobile version of your site for ranking.</p>
+                
+                <div class="code-block">
+                    <pre><code><head>
+  <!-- Essential for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Preconnect to important third-party origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="critical.css" as="style">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+
+<!-- Performance tips -->
+<!-- ✓ Compress images (use WebP format when possible) -->
+<!-- ✓ Minimize CSS and JavaScript -->
+<!-- ✓ Use lazy loading for images -->
+<!-- ✓ Enable browser caching -->
+<!-- ✓ Use a Content Delivery Network (CDN) --></code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Core Web Vitals:</strong> Google's Core Web Vitals (LCP, INP, CLS) are ranking factors. Test your pages with PageSpeed Insights to ensure good performance scores.
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Optimize this HTML for SEO:</p>
+                <div class="code-block">
+                    <pre><code><!-- Before: Poor SEO -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page 1</title>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div>
+    <div>How to Cook Pasta</div>
+    <img src="img001.jpg">
+    <p>Click <a href="p2.html">here</a> for more.</p>
+  </div>
+</body>
+</html>
+
+<!-- Try optimizing it yourself! --></code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Write unique, descriptive title tags (50-60 characters)</li>
+                    <li>Include meta descriptions for better click-through rates</li>
+                    <li>Use proper heading hierarchy (H1 → H2 → H3)</li>
+                    <li>Semantic HTML helps search engines understand content</li>
+                    <li>Optimize images with descriptive filenames and alt text</li>
+                    <li>Use structured data for rich search results</li>
+                    <li>Keep URLs clean and descriptive</li>
+                    <li>Link internally with descriptive anchor text</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson10.html" class="btn-secondary">← Previous: Accessibility</a>
+            <a href="lesson12.html" class="btn-primary">Next: Best Practices & Validation →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>

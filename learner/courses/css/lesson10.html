@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10: Transitions & Animations - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Learner</h1>
+            <nav>
+                <a href="../../index.html">Home</a>
+                <a href="index.html">CSS Course</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="lesson-header">
+            <span class="lesson-badge">Pro Level</span>
+            <h1>Lesson 10: Transitions & Animations</h1>
+            <p>Add life and interactivity to your web pages</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 83%;"></div>
+            </div>
+            <span class="progress-text">Lesson 10 of 12</span>
+        </div>
+        
+        <div class="lesson-content">
+            <section class="intro">
+                <h2>Bringing CSS to Life</h2>
+                <p>CSS transitions and animations add movement and visual feedback to your web pages. Transitions create smooth changes between states, while animations enable complex, multi-step motion sequences. Used thoughtfully, they improve user experience by providing visual feedback and guiding attention. Overused, they can distract and annoy.</p>
+            </section>
+            
+            <section>
+                <h2>1. CSS Transitions</h2>
+                <p>Transitions smoothly animate changes between CSS states.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Basic transition */
+.button {
+  background-color: #7C3AED;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #9333EA;
+}
+/* Background smoothly changes over 0.3 seconds */
+
+/* Transition syntax */
+.element {
+  /* transition: property duration timing-function delay; */
+  transition: all 0.3s ease 0s;
+}
+
+/* Individual properties */
+.element {
+  transition-property: background-color, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+/* Multiple transitions */
+.card {
+  transition: 
+    background-color 0.3s ease,
+    transform 0.2s ease-out,
+    box-shadow 0.3s ease;
+}
+
+/* Shorthand for multiple */
+.card {
+  transition: all 0.3s ease;    /* All animatable properties */
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Transition components:</strong>
+                    <ul>
+                        <li><strong>property:</strong> What CSS property to animate (or "all")</li>
+                        <li><strong>duration:</strong> How long the transition takes (0.3s, 300ms)</li>
+                        <li><strong>timing-function:</strong> Speed curve (ease, linear, ease-in, ease-out)</li>
+                        <li><strong>delay:</strong> Wait before starting</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>2. Timing Functions</h2>
+                <p>Timing functions control the acceleration curve of transitions.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Built-in timing functions */
+.ease {
+  transition-timing-function: ease;        /* Default: slow start, fast middle, slow end */
+}
+
+.linear {
+  transition-timing-function: linear;      /* Constant speed */
+}
+
+.ease-in {
+  transition-timing-function: ease-in;     /* Slow start */
+}
+
+.ease-out {
+  transition-timing-function: ease-out;    /* Slow end */
+}
+
+.ease-in-out {
+  transition-timing-function: ease-in-out; /* Slow start and end */
+}
+
+/* Cubic-bezier for custom curves */
+.custom {
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  /* Bouncy effect! */
+}
+
+/* Step functions */
+.steps {
+  transition-timing-function: steps(4, end);
+  /* Animation jumps in 4 discrete steps */
+}
+
+/* Common timing function presets */
+:root {
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Choosing timing functions:</strong> Use ease-out for elements entering the screen, ease-in for elements leaving, and ease-in-out for state changes.
+                </div>
+            </section>
+            
+            <section>
+                <h2>3. Transform Property</h2>
+                <p>Transforms are perfect for transitions — they're performant and versatile.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Scale: Grow or shrink */
+.scale-box {
+  transition: transform 0.3s ease;
+}
+
+.scale-box:hover {
+  transform: scale(1.1);        /* Grow 10% */
+  transform: scale(0.9);        /* Shrink 10% */
+  transform: scaleX(1.5);       /* Stretch horizontally */
+  transform: scaleY(0.8);       /* Compress vertically */
+}
+
+/* Rotate: Spin */
+.rotate-box {
+  transition: transform 0.3s ease;
+}
+
+.rotate-box:hover {
+  transform: rotate(45deg);     /* Rotate 45 degrees */
+  transform: rotate(-90deg);    /* Rotate counter-clockwise */
+  transform: rotateX(180deg);   /* 3D rotate around X axis */
+  transform: rotateY(180deg);   /* 3D rotate around Y axis */
+}
+
+/* Translate: Move */
+.move-box {
+  transition: transform 0.3s ease;
+}
+
+.move-box:hover {
+  transform: translateX(20px);  /* Move right 20px */
+  transform: translateY(-10px); /* Move up 10px */
+  transform: translate(20px, -10px);  /* Both X and Y */
+}
+
+/* Skew: Distort */
+.skew-box:hover {
+  transform: skewX(10deg);
+  transform: skewY(5deg);
+  transform: skew(10deg, 5deg);
+}
+
+/* Combine transforms */
+.card {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02) rotate(1deg);
+}
+
+/* Transform origin */
+.pivot {
+  transform-origin: center center;    /* Default */
+  transform-origin: top left;
+  transform-origin: 50% 100%;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Why transforms for animation:</strong>
+                    <ul>
+                        <li>GPU-accelerated (smooth performance)</li>
+                        <li>Don't trigger layout reflows</li>
+                        <li>Can be combined for complex effects</li>
+                        <li>Work great with transitions</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. CSS Animations</h2>
+                <p>Keyframe animations create complex, multi-step sequences.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Define keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Or using percentages for more control */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation */
+.element {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+/* Shorthand */
+.element {
+  /* animation: name duration timing delay count direction fill-mode; */
+  animation: fadeIn 1s ease 0s 1 normal forwards;
+}
+
+/* Multiple animations */
+.element {
+  animation: 
+    fadeIn 0.5s ease forwards,
+    slideUp 0.5s ease 0.2s forwards;
+}</code></pre>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Animation properties:</strong>
+                    <ul>
+                        <li><strong>name:</strong> The @keyframes name</li>
+                        <li><strong>duration:</strong> How long one cycle takes</li>
+                        <li><strong>timing-function:</strong> Speed curve</li>
+                        <li><strong>delay:</strong> Wait before starting</li>
+                        <li><strong>iteration-count:</strong> How many times (number or infinite)</li>
+                        <li><strong>direction:</strong> normal, reverse, alternate, alternate-reverse</li>
+                        <li><strong>fill-mode:</strong> What happens before/after animation</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>5. Animation Fill Mode</h2>
+                <p>Control what happens before and after an animation.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* none: Default, animation doesn't apply outside execution */
+.fill-none {
+  animation-fill-mode: none;
+}
+
+/* forwards: Element keeps final animation state */
+.fill-forwards {
+  animation-fill-mode: forwards;
+}
+/* After animation ends, stays at 100% keyframe state */
+
+/* backwards: Element takes 0% state before delay */
+.fill-backwards {
+  animation-fill-mode: backwards;
+}
+/* During animation delay, takes 0% keyframe state */
+
+/* both: Combines forwards and backwards */
+.fill-both {
+  animation-fill-mode: both;
+}
+
+/* Practical example: Fade in and stay */
+.fade-in {
+  opacity: 0;                          /* Start hidden */
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+/* Element fades in and stays visible */</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>6. Common Animation Patterns</h2>
+                
+                <h3>Pulse Effect</h3>
+                <div class="code-block">
+                    <pre><code>/* Pulsing element */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.notification-badge {
+  animation: pulse 2s ease-in-out infinite;
+}</code></pre>
+                </div>
+                
+                <h3>Slide In</h3>
+                <div class="code-block">
+                    <pre><code>/* Slide in from left */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideInLeft 0.5s ease-out forwards;
+}</code></pre>
+                </div>
+                
+                <h3>Shake Effect</h3>
+                <div class="code-block">
+                    <pre><code>/* Shake for errors */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+.error-shake {
+  animation: shake 0.5s ease-in-out;
+}</code></pre>
+                </div>
+                
+                <h3>Loading Spinner</h3>
+                <div class="code-block">
+                    <pre><code>/* Rotating spinner */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #7C3AED;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}</code></pre>
+                </div>
+                
+                <h3>Bounce In</h3>
+                <div class="code-block">
+                    <pre><code>/* Bouncy entrance */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 0.6s ease-out forwards;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>7. Hover Effects</h2>
+                <p>Interactive hover animations enhance user feedback.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Button lift effect */
+.btn {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image zoom */
+.image-container {
+  overflow: hidden;
+}
+
+.image-container img {
+  transition: transform 0.5s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
+}
+
+/* Card flip */
+.card {
+  perspective: 1000px;
+}
+
+.card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Underline animation */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #7C3AED;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}</code></pre>
+                </div>
+            </section>
+            
+            <section>
+                <h2>8. Performance Considerations</h2>
+                <p>Animate efficiently for smooth performance.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* Good properties to animate (GPU accelerated) */
+.performant {
+  /* These trigger compositing, not layout: */
+  transform: translateX(10px);    /* ✓ Good */
+  opacity: 0.5;                   /* ✓ Good */
+}
+
+/* Avoid animating these (trigger layout): */
+.avoid {
+  width: 200px;                   /* ✗ Triggers layout */
+  height: 100px;                  /* ✗ Triggers layout */
+  left: 50px;                     /* ✗ Triggers layout */
+  margin: 20px;                   /* ✗ Triggers layout */
+  padding: 10px;                  /* ✗ Triggers layout */
+  border-width: 2px;              /* ✗ Triggers layout */
+}
+
+/* Use will-change sparingly */
+.will-change-element {
+  will-change: transform, opacity;
+}
+/* Tells browser to optimize for these changes */
+/* Only use when you know animation will happen */
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* This respects user's motion preferences */</code></pre>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Performance tip:</strong> Stick to transform and opacity for animations. They're GPU-accelerated and won't cause layout thrashing.
+                </div>
+            </section>
+            
+            <section>
+                <h2>9. Animation Events (JavaScript)</h2>
+                <p>Detect when animations start, end, or repeat.</p>
+                
+                <div class="code-block">
+                    <pre><code>/* JavaScript can listen for animation events */
+/*
+  animationstart - Animation begins
+  animationend - Animation completes
+  animationiteration - Animation repeats
+*/
+
+// JavaScript example
+const element = document.querySelector('.animated');
+
+element.addEventListener('animationend', () => {
+  console.log('Animation complete!');
+  element.classList.add('animation-done');
+});
+
+// Start animation by adding class
+function startAnimation() {
+  element.classList.add('animate');
+}
+
+// Pause/resume animation
+function pauseAnimation() {
+  element.style.animationPlayState = 'paused';
+}
+
+function resumeAnimation() {
+  element.style.animationPlayState = 'running';
+}</code></pre>
+                </div>
+            </section>
+            
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Create these animations:</p>
+                <div class="code-block">
+                    <pre><code>/* Challenge: Create these effects */
+
+/* 1. A button that grows slightly on hover */
+/* 2. A card that lifts up with shadow on hover */
+/* 3. A loading spinner using animation */
+/* 4. An element that fades in when page loads */
+
+/* Your CSS: */</code></pre>
+                </div>
+            </section>
+            
+            <section class="summary">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Transitions smoothly animate between states</li>
+                    <li>transition: property duration timing delay</li>
+                    <li>Transform (scale, rotate, translate) is performant for animation</li>
+                    <li>@keyframes define multi-step animations</li>
+                    <li>animation: name duration timing delay count direction fill</li>
+                    <li>Use fill-mode: forwards to keep final animation state</li>
+                    <li>Stick to transform and opacity for best performance</li>
+                    <li>Respect prefers-reduced-motion for accessibility</li>
+                </ul>
+            </section>
+        </div>
+        
+        <div class="lesson-navigation">
+            <a href="lesson9.html" class="btn-secondary">← Previous: Responsive Design</a>
+            <a href="lesson11.html" class="btn-primary">Next: CSS Variables & Functions →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    </footer>
+</body>
+</html>
