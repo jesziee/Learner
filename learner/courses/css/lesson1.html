@@ -8,19 +8,19 @@
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1 class="logo">Learner</h1>
-            <nav>
+<header class="header">
+        <div class="container">
+            <a href="../../index.html" class="logo">Learner</a>
+            <nav class="nav-links">
                 <a href="../../index.html">Home</a>
                 <a href="index.html">CSS Course</a>
             </nav>
         </div>
     </header>
     
-    <main>
+<main class="container">
         <div class="lesson-header">
-            <span class="lesson-badge">Beginner Level</span>
+<span class="lesson-badge beginner">Beginner</span>
             <h1>Lesson 1: Introduction to CSS</h1>
             <p>Understanding what CSS is and how it styles the web</p>
             <div class="progress-bar">
@@ -30,7 +30,7 @@
         </div>
         
         <div class="lesson-content">
-            <section class="intro">
+            <section class="content-section">
                 <h2>What is CSS?</h2>
                 <p>CSS (Cascading Style Sheets) is the language used to style and layout web pages. While HTML provides the structure and content, CSS controls how that content looks — colors, fonts, spacing, layouts, and even animations. Think of HTML as the skeleton of a webpage and CSS as the skin and clothing that makes it look good.</p>
             </section>
@@ -363,7 +363,7 @@ a:hover {
                 </div>
             </section>
             
-            <section class="practice">
+            <section class="content-section">
                 <h2>🎯 Practice Exercise</h2>
                 <p>Create a simple HTML page and style it with an external CSS file:</p>
                 <div class="code-block">
@@ -392,7 +392,7 @@ a:hover {
                 </div>
             </section>
             
-            <section class="summary">
+            <section class="content-section">
                 <h2>📚 Key Takeaways</h2>
                 <ul>
                     <li>CSS (Cascading Style Sheets) controls how HTML looks</li>
@@ -405,14 +405,16 @@ a:hover {
             </section>
         </div>
         
-        <div class="lesson-navigation">
-            <a href="index.html" class="btn-secondary">← Course Overview</a>
-            <a href="lesson2.html" class="btn-primary">Next: Selectors →</a>
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn prev">← Course Overview</a>
+            <a href="lesson2.html" class="nav-btn next">Next: Selectors →</a>
         </div>
     </main>
     
-    <footer>
-        <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Learner. Learn to code, one lesson at a time.</p>
+        </div>
     </footer>
 </body>
 </html>
