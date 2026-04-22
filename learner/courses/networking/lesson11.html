@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: Cloud Networking - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>☁️ Lesson 11: Cloud Networking</h1>
+            <p>VPCs, SDN, AWS/GCP/Azure networking, hybrid cloud, Direct Connect</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Virtual Private Cloud (VPC)</h2>
+                <p>Logically isolated network section in cloud. Your private data center.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Subnets, route tables, gateways</span>
+                    <span class="topic-tag">Public/private subnets</span>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Software Defined Networking (SDN)</h2>
+                <p>Control plane separate from data plane. Programmable networks.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>OpenFlow separates routing logic from switches.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>AWS Networking</h2>
+                
+                <div class="code-block">
+                    <h4>AWS Components:</h4>
+<pre><code>VPC: Virtual network
+IGW:  Internet Gateway
+NAT:  Private subnet Internet
+ELB:  Elastic Load Balancer
+Route53: AWS DNS
+Direct Connect: Private fiber</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>GCP Networking</h2>
+                
+                <div class="code-block">
+<pre><code>VPC: Global scope
+Cloud Router: Dynamic routing
+Cloud Load Balancer: L4-L7
+Cloud VPN: IPsec tunnels
+Interconnect: Private links</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Azure Networking</h2>
+                <div class="code-block">
+<pre><code>VNet: Virtual Network
+NSG: Network Security Groups
+Application Gateway: L7 LB
+ExpressRoute: Private to Azure
+Virtual WAN: Global connectivity</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Hybrid Cloud Patterns</h2>
+                <p>Site-to-cloud connectivity.</p>
+                <ul>
+                    <li>VPN: Encrypted tunnels (cost-effective)</li>
+                    <li>Dedicated: Direct Connect/MPLS (low latency)</li>
+                    <li>SD-WAN: Intelligent path selection</li>
+                </ul>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Cloud API Latency</h2>
+                <div class="code-block">
+                    <h4>Region Ping Test:</h4>
+<pre><code>async function testCloudLatency() {
+  const clouds = {
+    aws: 'https://s3.amazonaws.com',
+    gcp: 'https://storage.googleapis.com',
+    azure: 'https://storage.blob.core.windows.net'
+  };
+  
+  console.log('☁️ Cloud Provider Latency Test');
+  
+  for (const [provider, url] of Object.entries(clouds)) {
+    try {
+      const start = performance.now();
+      await fetch(url, {method: 'HEAD', mode: 'no-cors'});
+      const latency = performance.now() - start;
+      console.log(`${provider.padEnd(6)}: ${latency.toFixed(0)}ms`);
+    } catch(e) {
+      console.log(`${provider.padEnd(6)}: Error`);
+    }
+  }
+}
+testCloudLatency();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>VPC = isolated cloud network</li>
+                        <li>SDN: Programmable control plane</li>
+                        <li>AWS: VPC/IGW/ELB/Direct Connect</li>
+                        <li>GCP: Global VPC/Cloud Router</li>
+                        <li>Hybrid: VPN + Dedicated links</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson10.html" class="nav-btn prev">← HTTP</a>
+                <a href="lesson12.html" class="nav-btn next">Monitoring →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

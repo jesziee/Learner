@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: IP Addressing & Subnets - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.were.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>📍 Lesson 2: IP Addressing & Subnets</h1>
+            <p>Master IPv4/IPv6 addressing, subnetting, CIDR - calculate networks like a pro</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Why IP Addresses?</h2>
+                <p>Unique identifiers for devices on networks, like postal addresses for data packets.</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Analogy:</strong> IP = home address, MAC = apartment number.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>IPv4 Format</h2>
+                <p>32-bit address in dotted decimal: 192.168.1.1</p>
+                
+                <div class="code-block">
+                    <h4>Binary vs Decimal:</h4>
+<pre><code>Decimal: 192.168.1.1
+Binary:  11000000.10101000.00000001.00000001</code></pre>
+                    <div class="code-explanation">
+                        <p>Each octet = 8 bits (0-255). Total 2^32 ≈ 4.3B addresses.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Public vs Private IPs</h2>
+                <div class="topic-tags">
+                    <span class="topic-tag">Public: Internet routable (8.8.8.8)</span>
+                    <span class="topic-tag">Private: LAN only (192.168.x.x)</span>
+                </div>
+                
+                <div class="code-block">
+<pre><code>Private Ranges:
+10.0.0.0 - 10.255.255.255
+172.16.0.0 - 172.31.255.255
+192.168.0.0 - 192.168.255.255</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Subnet Masks & CIDR</h2>
+                <p>Mask defines network vs host portion. CIDR: /24 = 255.255.255.0</p>
+                
+                <div class="code-block">
+                    <h4>Subnet Examples:</h4>
+<pre><code>/24 (255.255.255.0)  → 256 addresses (254 usable)
+ /24 → 65,536 addresses
+ /16 → 65,536 addresses</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>IPv6: The Future</h2>
+                <p>128-bit hexadecimal: 2001:db8::1</p>
+                <div class="tip-box">
+                    <p>💡 Solves IPv4 exhaustion (2^128 addresses).</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Practice: IP Tools</h2>
+                <div class="code-block">
+                    <h4>Find Your IP & Subnet Calc:</h4>
+<pre><code>async function getMyIP() {
+  try {
+    const res = await fetch('https://httpbin.org/ip');
+    const data = await res.json();
+    console.log('Your Public IP:', data.origin);
+    
+    // Simple subnet calc
+    const ip = '192.168.1.100';
+    const cidr = 24;
+    const hosts = 2 ** (32 - cidr) - 2;
+    console.log(`/${cidr} has ${hosts} usable hosts`);
+  } catch(e) {
+    console.log('Network error');
+  }
+}
+getMyIP();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>IPv4: 192.168.1.1 (dotted decimal)</li>
+                        <li>Private ranges: 192.168.x.x, 10.x.x.x</li>
+                        <li>CIDR /24 = 254 hosts</li>
+                        <li>IPv6: Hex, massive address space</li>
+                        <li>Network = IP & Mask</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson1-fixed.html" class="nav-btn prev">← Fundamentals</a>
+                <a href="lesson3.html" class="nav-btn next">Ethernet →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

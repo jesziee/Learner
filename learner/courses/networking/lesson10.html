@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10: HTTP/HTTPS Protocols - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>🌐 Lesson 10: HTTP/HTTPS Protocols</h1>
+            <p>Web protocols, methods, status codes, TLS handshake, proxies, load balancing</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>HTTP Request/Response</h2>
+                <p>Stateless application protocol (TCP port 80/443).</p>
+                
+                <div class="code-block">
+                    <h4>Request Format:</h4>
+<pre><code>GET / HTTP/1.1
+Host: example.com
+User-Agent: Chrome
+Accept: text/html</code></pre>
+                    <div class="code-explanation">
+                        <p>Response: Status + Headers + Body</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>HTTP Methods</h2>
+                
+                <div class="code-block">
+                    <h4>CRUD Methods:</h4>
+<pre><code>GET:    Read resource
+POST:   Create resource  
+PUT:    Update (full)
+PATCH:  Update (partial)
+DELETE: Remove
+HEAD:   Metadata only</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Status Codes</h2>
+                <div class="topic-tags">
+                    <span class="topic-tag">2xx Success</span>
+                    <span class="topic-tag">3xx Redirect</span>
+                    <span class="topic-tag">4xx Client Error</span>
+                    <span class="topic-tag">5xx Server Error</span>
+                </div>
+                
+                <div class="code-block">
+<pre><code>200 OK
+301 Moved Permanently
+404 Not Found
+500 Internal Server Error
+502 Bad Gateway</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>HTTPS & TLS</h2>
+                <p>TLS 1.3 encrypts HTTP. Handshake: ClientHello → ServerHello → Key exchange.</p>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>HSTS forces HTTPS. Let's Encrypt free certs.</p>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Proxies & Load Balancers</h2>
+                <p>Proxy: Intermediary server. Load balancer: Distributes traffic.</p>
+                <ul>
+                    <li>Reverse proxy: Protects backend</li>
+                    <li>Forward proxy: Client anonymity</li>
+                    <li>Layer 4/7 balancing</li>
+                </ul>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>HTTP/2 & HTTP/3</h2>
+                <p>HTTP/2: Multiplexing, header compression (TCP).<br>
+                HTTP/3: QUIC over UDP (faster, reliable).</p>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: HTTP Client</h2>
+                <div class="code-block">
+                    <h4>Advanced Fetch:</h4>
+<pre><code>async function httpTest() {
+  const req = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({message: 'Hello HTTP!'})
+  };
+  
+  try {
+    const res = await fetch('https://httpbin.org/post', req);
+    const data = await res.json();
+    
+    console.log(`Status: ${res.status} ${res.statusText}`);
+    console.log('Echo:', data.json.message);
+    console.log('Headers:', Object.fromEntries(res.headers));
+  } catch(e) {
+    console.log('Error:', e.message);
+  }
+}
+httpTest();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>HTTP stateless: Request/Response cycle</li>
+                        <li>GET/POST/PUT/DELETE methods</li>
+                        <li>2xx good, 4xx client, 5xx server</li>
+                        <li>HTTPS = HTTP + TLS encryption</li>
+                        <li>Reverse proxy hides backend servers</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson9.html" class="nav-btn prev">← Firewalls</a>
+                <a href="lesson11.html" class="nav-btn next">Cloud →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

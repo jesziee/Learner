@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6: Routing Protocols - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>🗺️ Lesson 6: Routing Protocols</h1>
+            <p>Static vs dynamic routing, OSPF, BGP, path selection - how data finds its way</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is Routing?</h2>
+                <p>Layer 3 (IP) process of forwarding packets between networks. Routers make decisions.</p>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Analogy:</strong> GPS for packets across internet highways.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Static Routing</h2>
+                <p>Manually configured routes. Simple, predictable.</p>
+                
+                <div class="code-block">
+                    <h4>Static Route Example:</h4>
+<pre><code>ip route 10.0.0.0 255.255.255.0 192.168.1.1
+# Network → Mask → Next Hop</code></pre>
+                    <div class="code-explanation">
+                        <p>Good for small networks.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Dynamic Routing Protocols</h2>
+                <p>Routers automatically learn routes. Adapt to failures.</p>
+                
+                <div class="code-block">
+                    <h4>IGP vs EGP:</h4>
+<pre><code>Interior (same org):
+• RIP: Distance vector, hop count
+• OSPF: Link-state, Dijkstra SPF
+• EIGRP: Cisco hybrid
+
+Exterior (Internet):
+• BGP: Path vector, policy-based</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>OSPF Deep Dive</h2>
+                <p>Open Shortest Path First. Link-state, areas for scalability.</p>
+                <ul>
+                    <li>Hello packets discover neighbors</li>
+                    <li>LSA floods topology info</li>
+                    <li>SPF calculates best paths</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>BGP: Internet's Glue</h2>
+                <p>Border Gateway Protocol routes between ISPs. Policy-driven, not shortest path.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">AS Numbers: Autonomous Systems</span>
+                    <span class="topic-tag">Attributes: Local pref, AS path</span>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Routing Metrics</h2>
+                <div class="code-block">
+<pre><code>RIP: Hop count (max 15)
+OSPF: Cost = 10^8 / bandwidth
+BGP: AS path length + policies</code></pre>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Traceroute Simulation</h2>
+                <div class="code-block">
+                    <h4>Path Discovery:</h4>
+<pre><code>async function tracerouteSim() {
+  const hops = ['Your Router', 'ISP Gateway', 'Regional Hub', 'Destination'];
+  console.log('Traceroute simulation:');
+  
+  for (let hop = 1; hop <= hops.length; hop++) {
+    // Simulate latency
+    await new Promise(r => setTimeout(r, 50 * hop));
+    console.log(`${hop.toString().padStart(2)}: ${hops[hop-1]} (${50*hop}ms)`);
+  }
+  
+  console.log('Trace complete!');
+}
+tracerouteSim();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Static: Manual routes</li>
+                        <li>OSPF: Link-state IGP (SPF calc)</li>
+                        <li>BGP: EGP for Internet</li>
+                        <li>RIP: Hop count (simple)</li>
+                        <li>Dynamic > Static for large networks</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson5.html" class="nav-btn prev">← TCP/UDP</a>
+                <a href="lesson7.html" class="nav-btn next">DNS →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

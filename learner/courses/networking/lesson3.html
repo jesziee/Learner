@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Ethernet & LAN - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>🔌 Lesson 3: Ethernet & LAN</h1>
+            <p>Deep dive into wired networks: MAC addresses, switches, ARP, VLANs, cabling standards</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Ethernet Basics</h2>
+                <p>Standard for wired LAN (IEEE 802.3). Used in 90%+ of office/home networks.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Speeds: 10/100/1000/10G Mbps</span>
+                    <span class="topic-tag">Cables: Cat5e/Cat6</span>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>MAC Addresses</h2>
+                <p>48-bit hardware address burned into NIC (Network Interface Card).</p>
+                
+                <div class="code-block">
+                    <h4>MAC Format:</h4>
+<pre><code>Format: AA:BB:CC:DD:EE:FF (hex)
+Example: 00:1A:2B:3C:4D:5E
+OUI (first 24 bits) = Vendor ID</code></pre>
+                    <div class="code-explanation">
+                        <p>Layer 2 addressing (local network only).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Switches vs Hubs</h2>
+                <p><strong>Hub:</strong> Dumb broadcast (collision domain)<br>
+                <strong>Switch:</strong> Smart forwarding (learns MAC table)</p>
+                
+                <div class="code-block">
+<pre><code>MAC Table Example:
+Port1: 00:11:22:33:44:55
+Port2: AA:BB:CC:DD:EE:FF
+Unknown → Flood all ports</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>ARP Protocol</h2>
+                <p>Address Resolution: IP → MAC mapping.</p>
+                
+                <div class="code-block">
+                    <h4>ARP Flow:</h4>
+<pre><code>1. Who has 192.168.1.10? (Broadcast)
+2. 192.168.1.10 is at AA:BB:CC:DD:EE:FF (Unicast)
+3. Cache result in ARP table</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>VLANs (Virtual LANs)</h2>
+                <p>Logically segment physical switch into multiple networks.</p>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>VLAN 10: Finance, VLAN 20: HR (traffic isolation).</p>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Cabling Standards</h2>
+                <div class="code-block">
+<pre><code>Cat5e: 1Gbps / 100m
+Cat6:  10Gbps / 55m
+Cat6a: 10Gbps / 100m
+Fiber: 100Gbps+ unlimited</code></pre>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Network Info</h2>
+                <div class="code-block">
+                    <h4>Browser Network Details:</h4>
+<pre><code>async function getNetworkInfo() {
+  try {
+    const res = await fetch('https://httpbin.org/ip');
+    const ipData = await res.json();
+    
+    // Get local IPs (limited in browser)
+    console.log('Public IP:', ipData.origin);
+    console.log('Local IPs via RTCPeerConnection hack:');
+    
+    const pc = new RTCPeerConnection({iceServers:[]});
+    pc.createDataChannel('');
+    pc.createOffer().then(pc.setLocalDescription.bind(pc));
+    pc.onicecandidate = (ice) => {
+      if (ice.candidate) {
+        const ipMatch = /([0-9]{1,3}(\.[0-9]{1,3}){3})/.exec(ice.candidate.candidate);
+        if (ipMatch) console.log(ipMatch[1]);
+      }
+    };
+  } catch(e) {
+    console.log('Network info unavailable');
+  }
+}
+getNetworkInfo();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>MAC: 48-bit hardware address (AA:BB:CC:DD:EE:FF)</li>
+                        <li>Switch learns MAC table, forwards smartly</li>
+                        <li>ARP resolves IP→MAC</li>
+                        <li>VLANs segment traffic</li>
+                        <li>Cat6+ for Gigabit+ speeds</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson2.html" class="nav-btn prev">← IP Addressing</a>
+                <a href="lesson4.html" class="nav-btn next">WiFi →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

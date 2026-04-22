@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: DNS & Name Resolution - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>🔍 Lesson 7: DNS & Name Resolution</h1>
+            <p>Domain Name System hierarchy, records, caching, troubleshooting - internet's phonebook</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>What is DNS?</h2>
+                <p>Hierarchical distributed database translating domains to IPs (google.com → 142.250.190.14).</p>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>UDP port 53. 350B queries daily!</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>DNS Hierarchy</h2>
+                <p>Root → TLD (.com) → Authoritative → Recursive resolver.</p>
+                
+                <div class="code-block">
+                    <h4>Resolution Chain:</h4>
+<pre><code>1. Root (.): Knows TLD servers
+2. TLD (.com): Knows domain servers  
+3. Authoritative: Has the IP record
+4. Recursive: Your ISP/local resolver</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>DNS Record Types</h2>
+                
+                <div class="code-block">
+                    <h4>Common Records:</h4>
+<pre><code>A:     IPv4 (google.com → IP)
+AAAA:  IPv6
+CNAME: Alias (www → google.com)
+MX:    Mail server
+NS:    Name servers
+TXT:   Verification/SPF</code></pre>
+                    <div class="code-explanation">
+                        <p>TTL controls caching duration.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>DNS Caching</h2>
+                <p>Resolvers/OS cache responses (performance). Can cause stale data.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Browser → OS → Resolver → Authoritative</span>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>DNS Security (DNSSEC)</h2>
+                <p>DNSSEC adds cryptographic signatures. DoH/DoT encrypts queries.</p>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: DNS Lookup</h2>
+                <div class="code-block">
+                    <h4>DNS Query Simulation:</h4>
+<pre><code>async function dnsLookup(domain) {
+  try {
+    // Simulate recursive resolution
+    const ips = {
+      'google.com': '142.250.190.14',
+      'github.com': '140.82.121.3',
+      'cloudflare.com': '104.16.248.249'
+    };
+    
+    const ip = ips[domain] || 'Unknown';
+    console.log(`✅ ${domain} resolves to ${ip}`);
+    
+    // Real fetch test
+    await fetch(`https://${domain}/robots.txt`, {method: 'HEAD'});
+    console.log(`Site reachable`);
+  } catch(e) {
+    console.log(`❌ DNS/Connect error: ${e.message}`);
+  }
+}
+
+dnsLookup('google.com');
+dnsLookup('example.com');</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>DNS: Domain → IP phonebook (UDP/53)</li>
+                        <li>Root → TLD → Authoritative hierarchy</li>
+                        <li>A=IPv4, AAAA=IPv6, MX=mail, CNAME=alias</li>
+                        <li>Recursive resolver (8.8.8.8) does lookup</li>
+                        <li>Caching speeds resolution</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson6.html" class="nav-btn prev">← Routing</a>
+                <a href="lesson8.html" class="nav-btn next">Troubleshooting →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

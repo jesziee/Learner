@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: TCP & UDP Protocols - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>🔗 Lesson 5: TCP & UDP Protocols</h1>
+            <p>Reliable delivery (TCP) vs speed (UDP), ports, handshakes, sockets explained</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Layer 4: Transport Layer</h2>
+                <p>End-to-end delivery between applications. Adds ports + reliability.</p>
+                
+                <div class="topic-tags">
+                    <span class="topic-tag">TCP: Reliable, ordered</span>
+                    <span class="topic-tag">UDP: Fast, fire-and-forget</span>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>TCP Three-Way Handshake</h2>
+                <div class="code-block">
+                    <h4>Connection Setup:</h4>
+<pre><code>1. Client → SYN → Server (seq=x)
+2. Server → SYN-ACK → Client (seq=y, ack=x+1)  
+3. Client → ACK → Server (ack=y+1)
+
+✅ Connection established</code></pre>
+                    <div class="code-explanation">
+                        <p>Sequence numbers prevent old packets.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>TCP Reliability Features</h2>
+                <ul>
+                    <li>ACKs confirm receipt</li>
+                    <li>Retransmit lost packets</li>
+                    <li>Flow control (window size)</li>
+                    <li>Congestion control</li>
+                </ul>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>UDP: Connectionless</h2>
+                <p>No handshake, no ACKs, no order. Minimal overhead.</p>
+                
+                <div class="code-block">
+<pre><code>UDP Use Cases:
+• Video streaming (Netflix)
+• Online gaming (low latency)
+• DNS queries
+• VoIP calls</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Ports & Sockets</h2>
+                <p>Socket = IP:Port (192.168.1.10:80)</p>
+                
+                <div class="code-block">
+                    <h4>Common Ports:</h4>
+<pre><code>80: HTTP
+443: HTTPS
+53: DNS
+123: NTP
+1935: RTMP (video)</code></pre>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Port Scanner Simulation</h2>
+                <div class="code-block">
+                    <h4>UDP/TCP Service Detection:</h4>
+<pre><code>async function testServices() {
+  const services = [
+    {port: 80, name: 'HTTP'},
+    {port: 443, name: 'HTTPS'},
+    {port: 53, name: 'DNS (UDP)'}
+  ];
+  
+  for (const svc of services) {
+    try {
+      const controller = new AbortController();
+      setTimeout(() => controller.abort(), 2000);
+      
+      const url = `https://httpbin.org/delay/1`;
+      await fetch(url, {signal: controller.signal});
+      console.log(`✅ ${svc.name} reachable (port ${svc.port})`);
+    } catch(e) {
+      console.log(`❌ ${svc.name} (port ${svc.port}): ${e.message}`);
+    }
+  }
+}
+testServices();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>TCP: SYN→SYN-ACK→ACK, reliable ordered delivery</li>
+                        <li>UDP: Fast, unreliable, connectionless</li>
+                        <li>Socket = IP:PORT</li>
+                        <li>HTTP=80, HTTPS=443, DNS=53</li>
+                        <li>TCP for files/web, UDP for video/gaming</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson4.html" class="nav-btn prev">← WiFi</a>
+                <a href="lesson6.html" class="nav-btn next">Routing →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

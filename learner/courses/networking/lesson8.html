@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: Troubleshooting - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge intermediate">Intermediate</span>
+            <h1>🛠️ Lesson 8: Troubleshooting</h1>
+            <p>Systematic network diagnosis: ping, traceroute, Wireshark, common fixes</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Troubleshooting Methodology</h2>
+                <ol>
+                    <li>Define symptoms</li>
+                    <li>Reproduce issue</li>
+                    <li>Bottom-up OSI testing</li>
+                    <li>Fix and verify</li>
+                </ol>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>80% issues: Cable/DNS/WiFi password.</p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Ping: Layer 3+ Test</h2>
+                <p>ICMP echo request/reply. Tests reachability.</p>
+                
+                <div class="code-block">
+                    <h4>Ping Examples:</h4>
+<pre><code>ping 8.8.8.8          # IP reachability
+ping google.com       # DNS + IP
+ping -c 4 127.0.0.1   # Loopback (Linux)
+ping -n 4 127.0.0.1   # Loopback (Windows)
+
+Results: time=10ms, packet loss</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Traceroute: Path Discovery</h2>
+                <p>Shows route hops + latency.</p>
+                
+                <div class="code-block">
+<pre><code>traceroute google.com (Linux/Mac)
+tracert google.com (Windows)
+
+1  192.168.1.1 (1ms)
+2  10.0.0.1 (8ms) 
+3  * * * (timeout)
+...</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Wireshark: Packet Capture</h2>
+                <p>Protocol analyzer. Capture/filter packets live.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Filter: ip.addr == 8.8.8.8</span>
+                    <span class="topic-tag">Follow TCP stream</span>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Common Issues & Fixes</h2>
+                
+                <div class="code-block">
+                    <h4>Issue Checklist:</h4>
+<pre><code>No Internet:
+• Check cables/WiFi
+• IP config: ipconfig / release & renew
+• DNS: 8.8.8.8 / 1.1.1.1
+
+Slow Network:
+• Channel interference
+• Duplex mismatch
+• MTU issues
+
+Intermittent:
+• ARP cache: arp -d *
+• Firewall blocks</code></pre>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Connectivity Tester</h2>
+                <div class="code-block">
+                    <h4>Network Diagnostic Tool:</h4>
+<pre><code>async function diagnoseNetwork() {
+  console.log('🩺 Network Diagnosis Starting...');
+  
+  // Test 1: Local
+  try {
+    await fetch('data:text/plain;base64,local');
+    console.log('✅ Local: OK');
+  } catch {
+    console.log('❌ Local: FAILED');
+    return;
+  }
+  
+  // Test 2: DNS
+  try {
+    await fetch('https://httpbin.org/ip');
+    console.log('✅ DNS + Internet: OK');
+  } catch(e) {
+    console.log('❌ DNS/Internet: ' + e.message);
+  }
+  
+  // Test 3: Latency
+  const start = performance.now();
+  await fetch('https://httpbin.org/delay/1');
+  console.log(`⏱️ Latency: ${(performance.now()-start).toFixed(0)}ms`);
+}
+diagnoseNetwork();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Ping tests reachability (ICMP)</li>
+                        <li>Traceroute shows path hops</li>
+                        <li>Wireshark captures packets</li>
+                        <li>Check physical → IP → DNS order</li>
+                        <li>ipconfig renew, change DNS common fixes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson7.html" class="nav-btn prev">← DNS</a>
+                <a href="lesson9.html" class="nav-btn next">Firewalls →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

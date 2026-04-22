@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: WiFi & Wireless - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge beginner">Beginner</span>
+            <h1>📡 Lesson 4: WiFi & Wireless</h1>
+            <p>Wireless networking standards, security, channels, interference - optimize your WiFi</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>WiFi Standards (IEEE 802.11)</h2>
+                <p>Evolution of wireless LAN technology.</p>
+                
+                <div class="code-block">
+                    <h4>WiFi Generations:</h4>
+<pre><code>802.11b: 11 Mbps (2.4GHz)
+802.11g: 54 Mbps (2.4GHz) 
+802.11n: 600 Mbps (2.4/5GHz)
+802.11ac: 6.9 Gbps (5GHz)
+802.11ax (WiFi6): 9.6 Gbps (2.4/5GHz)
+WiFi6E: +6GHz band</code></pre>
+                    <div class="code-explanation">
+                        <p>Higher = faster + more devices.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>WiFi Channels & Interference</h2>
+                <p>2.4GHz (14 channels, 1/6/11 non-overlap), 5GHz (more channels).</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p><strong>Pro Tip:</strong> Use WiFi analyzer apps to pick best channel.</p>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>Wireless Security</h2>
+                <div class="code-block">
+                    <h4>Security Evolution:</h4>
+<pre><code>WEP:  Cracked (avoid!)
+WPA:  TKIP (weak)
+WPA2: AES (standard)
+WPA3: Enhanced (latest)</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Access Points vs Routers</h2>
+                <p><strong>AP:</strong> Wireless extension only<br>
+                <strong>Router:</strong> AP + NAT + Firewall + Switch</p>
+                
+                <div class="topic-tags">
+                    <span class="topic-tag">Mesh: Whole-home coverage</span>
+                    <span class="topic-tag">MU-MIMO: Multiple devices</span>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Wireless Topologies</h2>
+                <p>Star (AP central), Mesh (self-healing), Point-to-Point bridges.</p>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: WiFi Scanner Simulation</h2>
+                <div class="code-block">
+                    <h4>Network Connection Test:</h4>
+<pre><code>async function testWiFiQuality() {
+  const tests = ['https://httpbin.org/delay/1', 'https://httpbin.org/ip'];
+  let success = 0;
+  
+  for (const url of tests) {
+    try {
+      const start = performance.now();
+      await fetch(url);
+      const latency = performance.now() - start;
+      console.log(`✅ ${url}: ${latency.toFixed(0)}ms`);
+      success++;
+    } catch(e) {
+      console.log(`❌ ${url}: Failed`);
+    }
+  }
+  
+  const score = (success / tests.length) * 100;
+  console.log(`WiFi Score: ${score}%`);
+}
+testWiFiQuality();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>WiFi6 (802.11ax) = fastest/current standard</li>
+                        <li>2.4GHz range, 5GHz speed</li>
+                        <li>WPA3 > WPA2 security</li>
+                        <li>Channels 1/6/11 non-overlapping (2.4GHz)</li>
+                        <li>Mesh for home coverage</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson3.html" class="nav-btn prev">← Ethernet</a>
+                <a href="lesson5.html" class="nav-btn next">TCP/UDP →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

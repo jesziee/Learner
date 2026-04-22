@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 12: Monitoring & Automation - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>📊 Lesson 12: Monitoring & Automation</h1>
+            <p>Network observability, SNMP, Prometheus, Ansible, NetFlow - enterprise operations</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Observability Pillars</h2>
+                <p>Metrics + Logs + Traces = Full picture.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Red: Errors/alerts</span>
+                    <span class="topic-tag">Yellow: Warnings/slow</span>
+                    <span class="topic-tag">Green: Healthy</span>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>SNMP (Simple Network Management)</h2>
+                <p>Standard protocol for device polling. OID tree.</p>
+                
+                <div class="code-block">
+                    <h4>SNMP Components:</h4>
+<pre><code>Manager: Nagios/Zabbix
+Agent:  Device software  
+OID:    .1.3.6.1.2.1.1.1.0 (sysDescr)
+
+v1: Community string
+v3: Authentication/encryption</code></pre>
+                    <div class="code-explanation">
+                        <p>Polling + traps (alerts).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>NetFlow/sFlow/IPFIX</h2>
+                <p>Traffic flow analysis (who, what, where, how much).</p>
+                <ul>
+                    <li>NetFlow v9: Cisco</li>
+                    <li>sFlow: Sampling</li>
+                    <li>Exporters → Collectors → Visualizers</li>
+                </ul>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>Modern Monitoring: Prometheus</h2>
+                <p>Pull model, time-series, alerting rules.</p>
+                <div class="code-block">
+<pre><code>metric: node_network_receive_bytes_total
+query: rate(http_requests_total[5m])
+alert: latency > 500ms</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Network Automation: Ansible</h2>
+                <p>Configuration management. Playbooks for routers/switches.</p>
+                
+                <div class="code-block">
+<pre><code>---
+- name: Configure router
+  hosts: routers  
+  tasks:
+    - ios_config:
+        lines: 
+          - ip route 0.0.0.0 0.0.0.0 8.8.8.8</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>SIEM & Observability Platforms</h2>
+                <p>ELK Stack, Splunk, Grafana, Datadog.</p>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Performance Monitor</h2>
+                <div class="code-block">
+                    <h4>Real-time Network Metrics:</h4>
+<pre><code>let startTime = performance.now();
+let requests = 0;
+
+async function monitorNetwork() {
+  console.log('📈 Network Monitor Started');
+  
+  setInterval(async () => {
+    const start = performance.now();
+    try {
+      await fetch('https://httpbin.org/delay/1');
+      requests++;
+      const rtt = performance.now() - start;
+      console.log(`Ping: ${rtt.toFixed(0)}ms | Total: ${requests}`);
+    } catch(e) {
+      console.log(`Error: ${e.message}`);
+    }
+  }, 1000);
+}
+
+monitorNetwork();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>SNMP: Device management (v3 secure)</li>
+                        <li>NetFlow: Traffic analytics</li>
+                        <li>Prometheus: Metrics/alerting</li>
+                        <li>Ansible: Infrastructure as code</li>
+                        <li>Observability > Monitoring</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson11.html" class="nav-btn prev">← Cloud</a>
+                <a href="index.html" class="nav-btn next">Course Complete 🎉</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>

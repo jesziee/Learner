@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: Firewalls & Security - Learner</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <span>Learner</span>
+        </a>
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Lesson Header -->
+        <div class="lesson-header">
+            <span class="lesson-badge pro">Pro</span>
+            <h1>🛡️ Lesson 9: Firewalls & Security</h1>
+            <p>Stateful firewalls, VPNs, IDS/IPS, zero trust - enterprise network protection</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content">
+            <!-- Section 1 -->
+            <section class="lesson-section">
+                <h2>Firewall Fundamentals</h2>
+                <p>Network security device filtering traffic by rules. Default deny.</p>
+                <div class="topic-tags">
+                    <span class="topic-tag">Packet Filter: Stateless</span>
+                    <span class="topic-tag">Stateful: Connection tracking</span>
+                    <span class="topic-tag">Proxy: Application layer</span>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="lesson-section">
+                <h2>Stateful Inspection</h2>
+                <p>Tracks connection state table. Allows return traffic automatically.</p>
+                
+                <div class="code-block">
+                    <h4>State Table:</h4>
+<pre><code>ConnID | Proto | SrcIP:Port | DstIP:Port | State
+1     | TCP  | 10.0.1.2:54321 | 8.8.8.8:53 | ESTABLISHED
+2     | UDP  | 192.168.1.10:123 | ntp.org:123 | RELATED</code></pre>
+                    <div class="code-explanation">
+                        <p>Sees SYN, SYN-ACK, tracks bidirectional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="lesson-section">
+                <h2>VPN Protocols</h2>
+                <p>Secure tunnels over untrusted networks.</p>
+                
+                <div class="code-block">
+<pre><code>IPsec: L3 encrypted tunnel
+OpenVPN: SSL/TLS based
+WireGuard: Modern, fast
+PPTP:  Obsolete (insecure)</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="lesson-section">
+                <h2>IDS vs IPS</h2>
+                <p><strong>IDS:</strong> Detects/alerts (passive)<br>
+                <strong>IPS:</strong> Detects/blocks (inline)</p>
+                
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <p>Snort/Suricata: Popular open source.</p>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="lesson-section">
+                <h2>Zero Trust Model</h2>
+                <p>Never trust, always verify. Perimeter is dead.</p>
+                <ul>
+                    <li>Verify explicitly</li>
+                    <li>Least privilege</li>
+                    <li>Assume breach</li>
+                </ul>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="lesson-section">
+                <h2>Common Rules</h2>
+                <div class="code-block">
+<pre><code># iptables example
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state ESTABLISHED -j ACCEPT  
+-A INPUT -j DROP
+
+# Allow SSH, established, drop rest</code></pre>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="lesson-section">
+                <h2>Practice: Security Headers Test</h2>
+                <div class="code-block">
+                    <h4>HTTPS Security Check:</h4>
+<pre><code>async function testSecurity() {
+  const sites = ['https://httpbin.org/headers', 'https://google.com'];
+  
+  for (const site of sites) {
+    try {
+      const res = await fetch(site, {method: 'HEAD'});
+      console.log(`✅ ${site.split('/')[2]}: HTTPS OK (${res.status})`);
+      
+      // Check common headers
+      if (res.headers.get('strict-transport-security')) {
+        console.log('  → HSTS enabled');
+      }
+    } catch(e) {
+      console.log(`❌ ${site}: ${e.message}`);
+    }
+  }
+}
+testSecurity();</code></pre>
+                </div>
+            </section>
+
+            <!-- Key Takeaways -->
+            <section class="lesson-section">
+                <h2>Key Takeaways</h2>
+                <div class="tip-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Stateful firewall tracks connections</li>
+                        <li>VPN: IPsec/OpenVPN/WireGuard</li>
+                        <li>IDS alerts, IPS blocks</li>
+                        <li>Zero Trust: Verify always</li>
+                        <li>Default deny policy essential</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <a href="lesson8.html" class="nav-btn prev">← Troubleshooting</a>
+                <a href="lesson10.html" class="nav-btn next">HTTP →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Learner. Built with ❤️ for aspiring developers.</p>
+    </footer>
+</body>
+</html>
